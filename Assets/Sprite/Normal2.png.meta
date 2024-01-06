@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 66ecee96fa005904ab98e2d786493db9
+guid: 45d3709cff9a7814395f718f79eeb26e
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 52
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -110,13 +110,286 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: CharacterPenguin_0
+      name: Attack2_1
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 774
+        width: 93
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4c954963599a927429623d1251babdba
+      internalID: 2028309350
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Attack2_2
+      rect:
+        serializedVersion: 2
+        x: 165
+        y: 774
+        width: 82
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 622e1382f9ca9d748aa91948134370d4
+      internalID: -568331232
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Attack2_3
+      rect:
+        serializedVersion: 2
+        x: 334
+        y: 774
+        width: 82
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cc129ba01d8a8c34c8efad36ac0c5b05
+      internalID: 1106411179
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Attack2_4
+      rect:
+        serializedVersion: 2
+        x: 481
+        y: 774
+        width: 83
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b410d2af59ebf9a49b3eb6d33e84ef0e
+      internalID: 1444118476
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Attack3_1
+      rect:
+        serializedVersion: 2
+        x: 30
+        y: 603
+        width: 69
+        height: 134
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 63a1df5e50c97364bb9848fa1451574f
+      internalID: -201606859
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Attack3_2
+      rect:
+        serializedVersion: 2
+        x: 170
+        y: 603
+        width: 75
+        height: 137
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 71062093d8817154195703a00bb4b8bc
+      internalID: -617018557
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Attack3_3
+      rect:
+        serializedVersion: 2
+        x: 317
+        y: 603
+        width: 81
+        height: 136
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f84e8f02177ba1f4591372e55ff94367
+      internalID: -1484656026
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Attack3_4
+      rect:
+        serializedVersion: 2
+        x: 463
+        y: 603
+        width: 113
+        height: 133
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 41edb33950cce4b45910da1c95adf787
+      internalID: -408024479
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Attack3_5
+      rect:
+        serializedVersion: 2
+        x: 601
+        y: 603
+        width: 81
+        height: 138
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 70ec478b779d4ac4186a248f8132b9cb
+      internalID: -1849601919
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Block1
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 423
+        width: 62
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8b3b408af2e7f3642a803cbef89de0a3
+      internalID: 507662362
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Block2
+      rect:
+        serializedVersion: 2
+        x: 179
+        y: 423
+        width: 54
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 30fbf29319ae7864bb34dc6c12e38d83
+      internalID: 1157149920
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Damaged1
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 258
+        width: 64
+        height: 130
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5433729e97352434dab1f101a3ef1f63
+      internalID: -794457461
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Damaged2
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 258
+        width: 65
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 815738f8e54295748a78ffe801335035
+      internalID: -621903394
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fainted1
       rect:
         serializedVersion: 2
         x: 10
-        y: 268
-        width: 49
-        height: 49
+        y: 93
+        width: 72
+        height: 124
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -124,20 +397,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2b4a5ef3a6fe39142982cb5abe27dbf5
-      internalID: 960772385
+      spriteID: 9c05fc0ba0230cf45820795d5311e195
+      internalID: 1514170379
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CharacterPenguin_1
+      name: Fainted2
       rect:
         serializedVersion: 2
-        x: 74
-        y: 268
-        width: 51
-        height: 49
+        x: 160
+        y: 93
+        width: 72
+        height: 108
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -145,20 +418,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 39281238e0fa3c846acd138f6928ee5d
-      internalID: 1869117873
+      spriteID: 309246e1728368642915d2d8d3d1d34f
+      internalID: -648034089
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CharacterPenguin_2
+      name: Fainted3
       rect:
         serializedVersion: 2
-        x: 135
-        y: 268
-        width: 52
-        height: 49
+        x: 304
+        y: 93
+        width: 137
+        height: 28
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -166,302 +439,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bbbeb0333b440eb439c4a66e23104956
-      internalID: -962794831
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: CharacterPenguin_3
-      rect:
-        serializedVersion: 2
-        x: 202
-        y: 268
-        width: 49
-        height: 49
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b302b1e7a88dd6a4d94e57a73e8388ec
-      internalID: -1135301217
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: CharacterPenguin_4
-      rect:
-        serializedVersion: 2
-        x: 10
-        y: 204
-        width: 51
-        height: 47
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d8b87037755454d46b7ca82c82827e2a
-      internalID: 165658168
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: CharacterPenguin_5
-      rect:
-        serializedVersion: 2
-        x: 74
-        y: 204
-        width: 49
-        height: 49
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c0c7d8a5367244c4a902b46bfc34e64b
-      internalID: 191724186
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: CharacterPenguin_6
-      rect:
-        serializedVersion: 2
-        x: 138
-        y: 204
-        width: 48
-        height: 49
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3cd7ec8fdd49d1445ad0be756d4b76a3
-      internalID: -332125251
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: CharacterPenguin_7
-      rect:
-        serializedVersion: 2
-        x: 202
-        y: 204
-        width: 48
-        height: 49
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a0a9e858e3351d54f854c604c36e7501
-      internalID: -1051415909
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: CharacterPenguin_8
-      rect:
-        serializedVersion: 2
-        x: 10
-        y: 140
-        width: 48
-        height: 49
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c2a938b9a0bcd21489fec9e89aab32e0
-      internalID: -368968889
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: CharacterPenguin_9
-      rect:
-        serializedVersion: 2
-        x: 74
-        y: 140
-        width: 48
-        height: 49
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ec6b392236ea7814caca4ed8877729a4
-      internalID: -1501304095
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: CharacterPenguin_10
-      rect:
-        serializedVersion: 2
-        x: 138
-        y: 140
-        width: 48
-        height: 49
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0f1ef75317727c34ea3ed9717ca78d60
-      internalID: 983403584
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: CharacterPenguin_11
-      rect:
-        serializedVersion: 2
-        x: 202
-        y: 140
-        width: 48
-        height: 49
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: bab9ebb87928e21499b92d02c8de0880
-      internalID: -776547647
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: CharacterPenguin_12
-      rect:
-        serializedVersion: 2
-        x: 10
-        y: 76
-        width: 49
-        height: 49
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4ff5eda8e076a264f9ccb04ccc3277a7
-      internalID: -895899243
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: CharacterPenguin_13
-      rect:
-        serializedVersion: 2
-        x: 74
-        y: 76
-        width: 49
-        height: 49
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d9819f632b88d8e42b4169e0d2615b6f
-      internalID: 1950762228
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: CharacterPenguin_14
-      rect:
-        serializedVersion: 2
-        x: 141
-        y: 73
-        width: 51
-        height: 54
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 20d10d0a7ca1d2a4a835fff5a54be48f
-      internalID: 761105997
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: CharacterPenguin_15
-      rect:
-        serializedVersion: 2
-        x: 205
-        y: 73
-        width: 51
-        height: 51
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1148790cac094824792abf3f7316d687
-      internalID: -378901317
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: CharacterPenguin_16
-      rect:
-        serializedVersion: 2
-        x: 13
-        y: 9
-        width: 51
-        height: 53
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: de547336ad3803c48bafb009fbffc394
-      internalID: 769892348
+      spriteID: febf2fd4bf99b6d458d9958c50c943be
+      internalID: 1377643868
       vertices: []
       indices: 
       edges: []
@@ -477,23 +456,23 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      CharacterPenguin_0: 960772385
-      CharacterPenguin_1: 1869117873
-      CharacterPenguin_10: 983403584
-      CharacterPenguin_11: -776547647
-      CharacterPenguin_12: -895899243
-      CharacterPenguin_13: 1950762228
-      CharacterPenguin_14: 761105997
-      CharacterPenguin_15: -378901317
-      CharacterPenguin_16: 769892348
-      CharacterPenguin_2: -962794831
-      CharacterPenguin_3: -1135301217
-      CharacterPenguin_4: 165658168
-      CharacterPenguin_5: 191724186
-      CharacterPenguin_6: -332125251
-      CharacterPenguin_7: -1051415909
-      CharacterPenguin_8: -368968889
-      CharacterPenguin_9: -1501304095
+      Attack2_1: 2028309350
+      Attack2_2: -568331232
+      Attack2_3: 1106411179
+      Attack2_4: 1444118476
+      Attack3_1: -201606859
+      Attack3_2: -617018557
+      Attack3_3: -1484656026
+      Attack3_4: -408024479
+      Attack3_5: -1849601919
+      Block1: 507662362
+      Block2: 1157149920
+      Damaged1: -794457461
+      Damaged2: -621903394
+      Fainted1: 1514170379
+      Fainted2: -648034089
+      Fainted3: 1377643868
+      Normal2_8: -922438289
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
