@@ -12,6 +12,9 @@ public class State : ScriptableObject
     public int defense;
     public float critical;
     public float moveSpeed;
+    public float jumpPower;
+    public int jumpCount;
+    public int maxJump;
     public float dashDamage;
     public int strong;
     public float criticalDamage;
