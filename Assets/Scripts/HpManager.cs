@@ -1,4 +1,3 @@
-using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,11 +14,22 @@ public class HpManager : MonoBehaviour
 
     void Start()
     {
-        Debug.Assert(state != null, "플레이어 상태를 찾을 수 없습니다.");
         Debug.Assert(currentHpText != null, "현재 체력을 확인할 수 있는 UI가 없습니다.");
         Debug.Assert(maxHpText != null, "최대 체력을 확인할 수 있는 UI가 없습니다.");
         Debug.Assert(hpSlider != null, "체력 슬라이더가 존재하지 않습니다.");
 
+        if (state != null)
+            SliderReset();
+    }
+
+    void Update()
+    {
+        
+    }
+
+    // 슬라이더 리셋
+    private void SliderReset()
+    {
         currentHp = state.currentHp;
         maxHp = state.maxHP;
 
@@ -29,9 +39,10 @@ public class HpManager : MonoBehaviour
         hpSlider.value = currentHp / (float)maxHp;
     }
 
-    void Update()
+    public void GetState(State state)
     {
-        
+        this.state = state;
+        SliderReset();
     }
 
     public void Damage(int damage)
@@ -47,4 +58,6 @@ public class HpManager : MonoBehaviour
 
         hpSlider.value = currentHp / (float)maxHp;
     }
+
+    
 }
