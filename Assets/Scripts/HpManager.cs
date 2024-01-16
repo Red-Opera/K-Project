@@ -58,6 +58,4 @@ public class HpManager : MonoBehaviour
 
         hpSlider.value = currentHp / (float)maxHp;
     }
-
-    
 }
