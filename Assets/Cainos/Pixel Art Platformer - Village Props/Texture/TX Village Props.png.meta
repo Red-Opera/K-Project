@@ -2987,12 +2987,12 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape:
-      - - {x: -13.5, y: 0.5}
-        - {x: -16.5, y: -1.5}
+      - - {x: -16.5, y: 0.5}
+        - {x: -16.5, y: -5.5}
         - {x: -16.5, y: -5.5}
         - {x: 16.5, y: -5.5}
-        - {x: 16.5, y: -2.5}
-        - {x: 13.5, y: 0.5}
+        - {x: 16.5, y: -5.5}
+        - {x: 16.5, y: 0.5}
       tessellationDetail: 0
       bones: []
       spriteID: cbc07a6962a24134f95807544e7b0e9c
