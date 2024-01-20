@@ -1,2 +1,3 @@
 체력바 위치 : https://www.1001freefonts.com/advanced-pixel-7.font
 현재 골드 및 배고픔 상태 숫자 폰트 : https://www.1001freefonts.com/advanced-pixel-7.font
+한글 픽셀 : https://github.com/hurss/fonts
