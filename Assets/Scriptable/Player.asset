@@ -21,7 +21,7 @@ MonoBehaviour:
   critical: 0.02
   moveSpeed: 3
   jumpPower: 5
-  jumpCount: 1
+  jumpCount: 0
   maxJump: 1
   dashDamage: 0.5
   strong: 0

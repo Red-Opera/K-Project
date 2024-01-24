@@ -35,17 +35,23 @@ public class PlayerMove : MonoBehaviour
             }else if(rigid.velocity.x <0){
                 spriteRenderer.flipX =true;
             }
-        }else{
-            anim.SetBool("isWalk",false);
         }
 
         if(Input.GetButtonUp("Horizontal")){
             rigid.velocity = new Vector2(0, rigid.velocity.y);
+            anim.SetBool("isWalk",false);
+            //anim.SetBool("isRun",false);
         }
 
         if(Input.GetKeyDown(KeyCode.LeftShift)){
             playerState.moveSpeed *= 1.5f;
-            anim.SetBool("isRun",true);
+        }
+        if(Input.GetKey(KeyCode.LeftShift)){
+            if(rigid.velocity.x != 0){
+                anim.SetBool("isRun",true);
+            }else{
+                anim.SetBool("isRun",false);
+            }
         }
         if(Input.GetKeyUp(KeyCode.LeftShift)){
             playerState.moveSpeed /= 1.5f;
