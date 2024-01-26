@@ -184,3 +184,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerState: {fileID: 11400000, guid: 19a7ddf3c46ba6f4d8d4813797140586, type: 2}
+  AtkObj: {fileID: 5110367784235527417, guid: af78aecfb14d7284997032f4f6633e3a, type: 3}

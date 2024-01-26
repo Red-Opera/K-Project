@@ -130,8 +130,8 @@ TextureImporter:
         y: 774
         width: 57
         height: 121
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.58, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -151,8 +151,8 @@ TextureImporter:
         y: 774
         width: 82
         height: 121
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.68, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -170,10 +170,10 @@ TextureImporter:
         serializedVersion: 2
         x: 326
         y: 774
-        width: 145
+        width: 85
         height: 121
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.53, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -193,8 +193,8 @@ TextureImporter:
         y: 774
         width: 87
         height: 121
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.52, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -233,7 +233,7 @@ TextureImporter:
         serializedVersion: 2
         x: 176
         y: 607
-        width: 190
+        width: 124
         height: 121
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -254,7 +254,7 @@ TextureImporter:
         serializedVersion: 2
         x: 388
         y: 603
-        width: 195
+        width: 125
         height: 121
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -275,7 +275,7 @@ TextureImporter:
         serializedVersion: 2
         x: 584
         y: 603
-        width: 190
+        width: 124
         height: 121
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -296,7 +296,7 @@ TextureImporter:
         serializedVersion: 2
         x: 777
         y: 603
-        width: 185
+        width: 124
         height: 121
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -317,7 +317,7 @@ TextureImporter:
         serializedVersion: 2
         x: 963
         y: 603
-        width: 180
+        width: 120
         height: 121
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -563,6 +563,132 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Effect
+      rect:
+        serializedVersion: 2
+        x: 422
+        y: 811
+        width: 49
+        height: 54
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4a5300ceb8aaf924fa332db350bd945c
+      internalID: -1100870071
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Magic1
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 659
+        width: 68
+        height: 25
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: da3f14679a8180f418fe024b1bd9d6f8
+      internalID: -2029039524
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Magic2
+      rect:
+        serializedVersion: 2
+        x: 514
+        y: 657
+        width: 68
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9c40405e9efa17b4c88d90f33a531229
+      internalID: -2014579197
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Magic3
+      rect:
+        serializedVersion: 2
+        x: 708
+        y: 659
+        width: 68
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 624b489c6da1f7a4aa116be3a704a9ef
+      internalID: 390664112
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wizard2_0
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 659
+        width: 68
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6a80219eccc6ab54f81668117755d585
+      internalID: 1027572934
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wizard2_1
+      rect:
+        serializedVersion: 2
+        x: 1080
+        y: 661
+        width: 68
+        height: 12
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 97a21cf69e0d3aa488cf474614e7bf48
+      internalID: 2069234181
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -591,10 +717,16 @@ TextureImporter:
       Block5: -1540721455
       Damaged1: 824391248
       Damaged2: 1930705659
+      Effect: -1100870071
       Fainted1: 1219823968
       Fainted2: 1106446268
       Fainted3: 1966188221
       Fainted4: 1791485440
+      Magic1: -2029039524
+      Magic2: -2014579197
+      Magic3: 390664112
+      Wizard2_0: 390664112
+      Wizard2_1: 390664112
       Wizard2_12: 81065493
       Wizard2_14: -38566971
       Wizard2_15: 587373535

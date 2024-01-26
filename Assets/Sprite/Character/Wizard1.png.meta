@@ -800,7 +800,7 @@ TextureImporter:
         serializedVersion: 2
         x: 336
         y: 93
-        width: 144
+        width: 125
         height: 121
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -821,7 +821,7 @@ TextureImporter:
         serializedVersion: 2
         x: 482
         y: 93
-        width: 153
+        width: 129
         height: 120
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -842,7 +842,7 @@ TextureImporter:
         serializedVersion: 2
         x: 639
         y: 93
-        width: 152
+        width: 128
         height: 120
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -863,7 +863,7 @@ TextureImporter:
         serializedVersion: 2
         x: 802
         y: 94
-        width: 142
+        width: 119
         height: 120
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -874,6 +874,90 @@ TextureImporter:
       bones: []
       spriteID: 03a0fb74baad8774893a502d971406bb
       internalID: 2104882594
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Magic1
+      rect:
+        serializedVersion: 2
+        x: 463
+        y: 150
+        width: 19
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3c99e3a73e6c8104aa44a11758dae9b1
+      internalID: -1792721405
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Magic2
+      rect:
+        serializedVersion: 2
+        x: 613
+        y: 145
+        width: 23
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f7c1ee1d288ded142b3678642cc1d087
+      internalID: 1331428609
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Magic3
+      rect:
+        serializedVersion: 2
+        x: 769
+        y: 146
+        width: 23
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a9968b44250222a41981cbaa9f4d0e3e
+      internalID: -22036572
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Magic4
+      rect:
+        serializedVersion: 2
+        x: 923
+        y: 146
+        width: 20
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6f355bd22b6a4e345830b18fd6ca0d3f
+      internalID: -670917144
       vertices: []
       indices: 
       edges: []
@@ -909,6 +993,10 @@ TextureImporter:
       Jump6: -210160252
       Jump7: 1005165406
       Jump8: 1708848548
+      Magic1: -1792721405
+      Magic2: 1331428609
+      Magic3: -22036572
+      Magic4: -670917144
       Run1: -1569805581
       Run2: 2143378229
       Run3: 1287405000

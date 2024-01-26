@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
@@ -10,6 +11,7 @@ public class PlayerMove : MonoBehaviour
     Animator anim;
 
     public State playerState;
+    public GameObject AtkObj;
 
     void Awake()
     {
@@ -23,6 +25,9 @@ public class PlayerMove : MonoBehaviour
     {
         Move();
         Jump();
+        if(Input.GetMouseButtonDown(0)){
+            Attack();
+        }
     }
 
     void Move(){
@@ -40,7 +45,6 @@ public class PlayerMove : MonoBehaviour
         if(Input.GetButtonUp("Horizontal")){
             rigid.velocity = new Vector2(0, rigid.velocity.y);
             anim.SetBool("isWalk",false);
-            //anim.SetBool("isRun",false);
         }
 
         if(Input.GetKeyDown(KeyCode.LeftShift)){
@@ -81,5 +85,10 @@ public class PlayerMove : MonoBehaviour
     void OnJumpAnim(){
         anim.SetBool("isJump",true);
         Debug.Log("setBool");
+    }
+
+    void Attack(){
+        Instantiate(AtkObj, rigid.position+ new Vector2(0.5f,0),quaternion.identity);
+        anim.SetTrigger("nAttack");
     }
 }
