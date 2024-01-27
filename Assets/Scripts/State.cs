@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Player", menuName = "Scriptable/Player", order = int.MaxValue)]
@@ -24,4 +26,14 @@ public class State : ScriptableObject
     public float avoidPersent;
     public float reloadTime;
     public float satiety;
+
+    public Dictionary<string, FieldInfo> datas;
+
+    public void Awake()
+    {
+        FieldInfo[] allField = GetType().GetFields(BindingFlags.Public);
+
+        foreach (FieldInfo field in allField)
+            datas.Add(nameof(field.Name), field);
+    }
 }
