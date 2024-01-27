@@ -140,7 +140,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1839735485 &18995449
 Tilemap:
   m_ObjectHideFlags: 0
@@ -358,9 +358,9 @@ GameObject:
   - component: {fileID: 56466340}
   - component: {fileID: 56466339}
   - component: {fileID: 56466341}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: DamagedObject
-  m_TagString: Untagged
+  m_TagString: DamagedObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5781,7 +5781,7 @@ GameObject:
   - component: {fileID: 198575781}
   m_Layer: 3
   m_Name: Tilemap
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -27054,7 +27054,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!156049354 &2058498020
 Grid:
   m_ObjectHideFlags: 0
@@ -27220,6 +27220,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6102569312967426584, guid: cac3aaad1d57b4d4bb0e0a1eee467256, type: 3}
+      propertyPath: m_SortingOrder
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 6987928644857812690, guid: cac3aaad1d57b4d4bb0e0a1eee467256, type: 3}
       propertyPath: m_LocalPosition.x
       value: -6.1470633
@@ -27586,7 +27590,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2127569547}
   - component: {fileID: 2127569548}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Grid
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -19,6 +19,7 @@ public class PlayerMove : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         PlayerCollider = GetComponent<CapsuleCollider2D>();
         anim = GetComponent<Animator>();
+        playerState.currentHp = playerState.maxHP;
     }
 
     void Update()
@@ -74,7 +75,7 @@ public class PlayerMove : MonoBehaviour
         }
         
         Vector2 PlayerPos = new Vector2(transform.position.x, transform.position.y);
-        var GroundHit = Physics2D.OverlapArea(PlayerPos - new Vector2(ColliderSizeX,ColliderSizeY),PlayerPos - new Vector2(-ColliderSizeX,ColliderSizeY),LayerMask.GetMask("Platform"));
+        var GroundHit = Physics2D.OverlapArea(PlayerPos - new Vector2(ColliderSizeX,ColliderSizeY),PlayerPos - new Vector2(-ColliderSizeX,ColliderSizeY),LayerMask.GetMask("Platform","DamagedObject"));
         if(GroundHit != null){
             anim.SetBool("isJump",false);
             if(playerState.jumpCount > 0){
@@ -90,5 +91,17 @@ public class PlayerMove : MonoBehaviour
     void Attack(){
         Instantiate(AtkObj, rigid.position+ new Vector2(0.5f,0),quaternion.identity);
         anim.SetTrigger("nAttack");
+    }
+
+    void OnCollisionEnter2D(Collision2D other) {
+        if(other.gameObject.layer == 6){
+            Damaged(5);
+            rigid.AddForce(new Vector2(rigid.velocity.x, 3),ForceMode2D.Impulse);
+            Debug.Log(playerState.currentHp);
+        }
+    }
+
+    public void Damaged(int Dmg){
+        playerState.currentHp -= Dmg;
     }
 }
