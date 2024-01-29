@@ -12,6 +12,7 @@ public class PlayerMove : MonoBehaviour
 
     public State playerState;
     public GameObject AtkObj;
+    public bool isAtk = false;
 
     void Awake()
     {
@@ -26,14 +27,15 @@ public class PlayerMove : MonoBehaviour
     {
         Move();
         Jump();
-        if(Input.GetMouseButtonDown(0)){
+        //if(Input.GetMouseButtonDown(0)&& isAtk == false){
+        if(Input.GetKeyDown(KeyCode.Z) && isAtk == false){
             Attack();
         }
     }
 
     void Move(){
         float Horiz = Input.GetAxisRaw("Horizontal");
-        if(Horiz != 0){
+        if(Horiz != 0 && isAtk == false){
             rigid.velocity = new Vector2(Horiz * playerState.moveSpeed, rigid.velocity.y);
             anim.SetBool("isWalk",true);
             if(rigid.velocity.x > 0){
@@ -89,7 +91,17 @@ public class PlayerMove : MonoBehaviour
     }
 
     void Attack(){
-        Instantiate(AtkObj, rigid.position+ new Vector2(0.5f,0),quaternion.identity);
+        isAtk = true;
+        Invoke("Cooldown",0.8f);
+        rigid.velocity = new Vector2(rigid.velocity.x * 0.2f, rigid.velocity.y);
+        int atkDir;
+        if(spriteRenderer.flipX == true){
+            atkDir =-1;
+        }
+        else{
+            atkDir =1;
+        }
+        Instantiate(AtkObj, rigid.position+ new Vector2(0.5f*atkDir,0),quaternion.identity);
         anim.SetTrigger("nAttack");
     }
 
@@ -103,5 +115,9 @@ public class PlayerMove : MonoBehaviour
 
     public void Damaged(int Dmg){
         playerState.currentHp -= Dmg;
+    }
+
+    void Cooldown(){
+        isAtk =false;
     }
 }

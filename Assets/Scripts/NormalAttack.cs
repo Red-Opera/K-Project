@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class NormalAttack : MonoBehaviour
@@ -19,5 +20,14 @@ public class NormalAttack : MonoBehaviour
 
     void Delete(){
         Destroy(Me);
+    }
+
+    void OnTriggerEnter2D(Collider2D col){
+        if(col.gameObject.layer == 7){
+            Scarecrow scarecrow = col.gameObject.GetComponent<Scarecrow>();
+            if(scarecrow != null){
+                scarecrow.Damaged(18);
+            }
+        }
     }
 }
