@@ -25,15 +25,26 @@ public class State : ScriptableObject
     public float defensePersent;
     public float avoidPersent;
     public float reloadTime;
-    public float satiety;
+    public static float satiety;
 
-    public Dictionary<string, FieldInfo> datas;
+    public static Dictionary<string, FieldInfo> datas = new Dictionary<string, FieldInfo>();
 
     public void Awake()
     {
-        FieldInfo[] allField = GetType().GetFields(BindingFlags.Public);
+        // 모든 멤버 변수를 가져옴
+        FieldInfo[] allField = GetType().GetFields(BindingFlags.Public | BindingFlags.Instance);
 
         foreach (FieldInfo field in allField)
-            datas.Add(nameof(field.Name), field);
+        {
+            // 필드 이름을 가져와 대문자로 바꿈
+            string fieldName = field.Name;
+            fieldName = char.ToUpper(fieldName[0]) + fieldName.Substring(1);
+
+            // 이미 데이터가 존재하는지 확인
+            if (datas.ContainsKey(fieldName))
+                continue;
+
+            datas.Add(fieldName, field);
+        }
     }
 }
