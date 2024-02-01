@@ -13,6 +13,7 @@ public class PlayerMove : MonoBehaviour
     public State playerState;
     public GameObject AtkObj;
     public bool isAtk = false;
+    public bool isJumping = false;
 
     void Awake()
     {
@@ -27,8 +28,8 @@ public class PlayerMove : MonoBehaviour
     {
         Move();
         Jump();
-        //if(Input.GetMouseButtonDown(0)&& isAtk == false){
-        if(Input.GetKeyDown(KeyCode.Z) && isAtk == false){
+        if(Input.GetMouseButtonDown(0)&& isAtk == false){
+        //if(Input.GetKeyDown(KeyCode.Z) && isAtk == false){
             Attack();
         }
     }
@@ -73,12 +74,13 @@ public class PlayerMove : MonoBehaviour
         if(Input.GetButtonDown("Jump") && playerState.jumpCount <playerState.maxJump){
             rigid.velocity = new Vector2(rigid.velocity.x, playerState.jumpPower);
             playerState.jumpCount++;
+            isJumping = true;
             Invoke("OnJumpAnim",0.03f);
         }
         
         Vector2 PlayerPos = new Vector2(transform.position.x, transform.position.y);
         var GroundHit = Physics2D.OverlapArea(PlayerPos - new Vector2(ColliderSizeX,ColliderSizeY),PlayerPos - new Vector2(-ColliderSizeX,ColliderSizeY),LayerMask.GetMask("Platform","DamagedObject"));
-        if(GroundHit != null){
+        if(GroundHit != null && isJumping == false){
             anim.SetBool("isJump",false);
             if(playerState.jumpCount > 0){
                 playerState.jumpCount =0;
@@ -86,14 +88,14 @@ public class PlayerMove : MonoBehaviour
         }
     }
     void OnJumpAnim(){
+        isJumping = false;
         anim.SetBool("isJump",true);
-        Debug.Log("setBool");
     }
 
     void Attack(){
         isAtk = true;
         Invoke("Cooldown",0.8f);
-        rigid.velocity = new Vector2(rigid.velocity.x * 0.2f, rigid.velocity.y);
+        rigid.velocity = new Vector2(rigid.velocity.x * 0.5f, rigid.velocity.y);
         int atkDir;
         if(spriteRenderer.flipX == true){
             atkDir =-1;
@@ -101,7 +103,8 @@ public class PlayerMove : MonoBehaviour
         else{
             atkDir =1;
         }
-        Instantiate(AtkObj, rigid.position+ new Vector2(0.5f*atkDir,0),quaternion.identity);
+        GameObject atkOb = Instantiate(AtkObj, rigid.position+ new Vector2(0.5f*atkDir,0),quaternion.identity);
+        atkOb.transform.SetParent(rigid.transform);
         anim.SetTrigger("nAttack");
     }
 
