@@ -11,7 +11,8 @@ public class PlayerMove : MonoBehaviour
     Animator anim;
 
     public State playerState;
-    public GameObject AtkObj;
+    public GameObject nAtkObj;
+    public GameObject mAtkObj;
     public bool isAtk = false;
     public bool isDash = false;
     public bool isJumping = false;
@@ -32,6 +33,9 @@ public class PlayerMove : MonoBehaviour
         if(Input.GetMouseButtonDown(0)&& isAtk == false){
         //if(Input.GetKeyDown(KeyCode.Z) && isAtk == false){
             Attack();
+        }
+        if(Input.GetKeyDown(KeyCode.LeftControl) && isAtk ==false){
+            MagicAttack();
         }
     }
 
@@ -119,9 +123,16 @@ public class PlayerMove : MonoBehaviour
         else{
             atkDir =1;
         }
-        GameObject atkOb = Instantiate(AtkObj, rigid.position+ new Vector2(0.5f*atkDir,0),quaternion.identity);
-        atkOb.transform.SetParent(rigid.transform);
+        GameObject nAtkOb = Instantiate(nAtkObj, rigid.position+ new Vector2(0.5f*atkDir,0),quaternion.identity);
+        nAtkOb.transform.SetParent(rigid.transform);
         anim.SetTrigger("nAttack");
+    }
+
+    void MagicAttack(){
+        isAtk = true;
+        Instantiate(mAtkObj, rigid.position + new Vector2(1,0), quaternion.identity);
+        anim.SetTrigger("mAttack");
+        Invoke("Cooldown", 0.75f);
     }
 
     void OnCollisionEnter2D(Collision2D other) {
