@@ -13,6 +13,7 @@ public class PlayerMove : MonoBehaviour
     public State playerState;
     public GameObject AtkObj;
     public bool isAtk = false;
+    public bool isDash = false;
     public bool isJumping = false;
 
     void Awake()
@@ -36,7 +37,7 @@ public class PlayerMove : MonoBehaviour
 
     void Move(){
         float Horiz = Input.GetAxisRaw("Horizontal");
-        if(Horiz != 0 && isAtk == false){
+        if(Horiz != 0 && isAtk == false && isDash == false){
             rigid.velocity = new Vector2(Horiz * playerState.moveSpeed, rigid.velocity.y);
             anim.SetBool("isWalk",true);
             if(rigid.velocity.x > 0){
@@ -50,6 +51,21 @@ public class PlayerMove : MonoBehaviour
             rigid.velocity = new Vector2(0, rigid.velocity.y);
             anim.SetBool("isWalk",false);
         }
+
+        
+        if(Input.GetMouseButtonDown(1) && isDash == false){
+            if(spriteRenderer.flipX == false){
+                rigid.AddForce(new Vector2(8,0.5f), ForceMode2D.Impulse);
+            }
+            else{
+                Debug.Log("??");
+                rigid.AddForce(new Vector2(-8,0.5f), ForceMode2D.Impulse);
+            }
+            isDash = true;
+            anim.SetBool("isJump",true);
+            Invoke("Cooldown", 0.5f);
+        }
+        
 
         if(Input.GetKeyDown(KeyCode.LeftShift)){
             playerState.moveSpeed *= 1.5f;
@@ -80,7 +96,7 @@ public class PlayerMove : MonoBehaviour
         
         Vector2 PlayerPos = new Vector2(transform.position.x, transform.position.y);
         var GroundHit = Physics2D.OverlapArea(PlayerPos - new Vector2(ColliderSizeX,ColliderSizeY),PlayerPos - new Vector2(-ColliderSizeX,ColliderSizeY),LayerMask.GetMask("Platform","DamagedObject"));
-        if(GroundHit != null && isJumping == false){
+        if(GroundHit != null && isJumping == false && isDash == false){
             anim.SetBool("isJump",false);
             if(playerState.jumpCount > 0){
                 playerState.jumpCount =0;
@@ -122,5 +138,6 @@ public class PlayerMove : MonoBehaviour
 
     void Cooldown(){
         isAtk =false;
+        isDash = false;
     }
 }
