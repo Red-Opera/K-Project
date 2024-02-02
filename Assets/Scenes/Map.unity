@@ -270,7 +270,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1839735485 &18995449
 Tilemap:
   m_ObjectHideFlags: 0
@@ -629,7 +629,7 @@ GameObject:
   - component: {fileID: 56466340}
   - component: {fileID: 56466339}
   - component: {fileID: 56466341}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: DamagedObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}

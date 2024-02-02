@@ -64,10 +64,10 @@ public class PlayerMove : MonoBehaviour
                 rigid.AddForce(new Vector2(8,0.5f), ForceMode2D.Impulse);
             }
             else{
-                Debug.Log("??");
                 rigid.AddForce(new Vector2(-8,0.5f), ForceMode2D.Impulse);
             }
             isDash = true;
+            gameObject.layer = 9;
             anim.SetBool("isJump",true);
             Invoke("Cooldown", 0.5f);
         }
@@ -147,6 +147,7 @@ public class PlayerMove : MonoBehaviour
         if(other.gameObject.layer == 6){
             Damaged(5);
             rigid.AddForce(new Vector2(rigid.velocity.x, 3),ForceMode2D.Impulse);
+            anim.SetTrigger("damaged");
             Debug.Log(playerState.currentHp);
         }
     }
@@ -158,5 +159,9 @@ public class PlayerMove : MonoBehaviour
     void Cooldown(){
         isAtk =false;
         isDash = false;
+        //마우스 방향을 대시 할 시 구현
+        if(gameObject.layer == 9){
+            gameObject.layer =8;
+        }
     }
 }
