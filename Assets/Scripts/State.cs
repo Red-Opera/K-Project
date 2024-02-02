@@ -5,27 +5,31 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Player", menuName = "Scriptable/Player", order = int.MaxValue)]
 public class State : ScriptableObject
 {
-    public string nickName;
-    public int level;
-    public int maxHP;
-    public int currentHp;
+    public string nickName;         // 플레이어 닉네임
+    public int level;               // 레벨
+    public int maxHP;               // 최대 체력
+    public int currentHp;           // 현재 체력
 
-    public int damage;
-    public int defense;
-    public float critical;
-    public float moveSpeed;
-    public float jumpPower;
-    public int jumpCount;
-    public int maxJump;
-    public float dashDamage;
-    public int strong;
-    public float criticalDamage;
-    public float attackSpeed;
-    public int fixedDamage;
-    public float defensePersent;
-    public float avoidPersent;
-    public float reloadTime;
+    public int damage;              // 데미지
+    public int defense;             // 방어력
+    public float critical;          // 크리티컬 확률
+    public float moveSpeed;         // 이동 속도
+    public float jumpPower;         // 점프력
+    public int jumpCount;           // 점프 횟수
+    public int maxJump;             // 최대 점프 회수
+    public float dashDamage;        // 대쉬 데미지
+    public int strong;              // 강인함
+    public float criticalDamage;    // 크리티컬 데미지
+    public float attackSpeed;       // 공격 속도
+    public int fixedDamage;         // 추가 고정 데미지
+    public float defensePersent;    // 방어 확률
+    public float avoidPersent;      // 회피 확률
+    public float reloadTime;        // 재장전 시간
     public static float satiety;
+
+    public int dashBarCount;        // 대쉬 바 개수
+    public int food;                // 허기 상태
+    public int money;               // 플레이어 돈
 
     public static Dictionary<string, FieldInfo> datas = new Dictionary<string, FieldInfo>();
 
