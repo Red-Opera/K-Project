@@ -41,6 +41,7 @@ public class PlayerMove : MonoBehaviour
 
     void Move(){
         float Horiz = Input.GetAxisRaw("Horizontal");
+        //공격 중이거나 대쉬 중일때 기동하지 않음, 공격 시 조작 여부는 논의할 필요가 있지만 대쉬 중일때 이 코드가 기동하지 않는 것은 유지가 필요해 보임
         if(Horiz != 0 && isAtk == false && isDash == false){
             rigid.velocity = new Vector2(Horiz * playerState.moveSpeed, rigid.velocity.y);
             anim.SetBool("isWalk",true);
@@ -56,7 +57,8 @@ public class PlayerMove : MonoBehaviour
             anim.SetBool("isWalk",false);
         }
 
-        
+        //flipX의 값에 따라 일정 속도 만큼 대쉬, 마우스 방향으로 대쉬할지 논의가 필요함
+        //현재 대쉬 애니메이션을 점프 애니메이션과 동일하게 설정하였는데 이에 대해 논의가 필요함
         if(Input.GetMouseButtonDown(1) && isDash == false){
             if(spriteRenderer.flipX == false){
                 rigid.AddForce(new Vector2(8,0.5f), ForceMode2D.Impulse);
@@ -91,6 +93,7 @@ public class PlayerMove : MonoBehaviour
         float ColliderSizeX = PlayerCollider.size.x/2;
         float ColliderSizeY = PlayerCollider.size.y/2 - PlayerCollider.offset.y;
         
+        //점프, 점프 애니메이션 점프 애니메이션을 0.03초 뒤에 출력하는 것으로 점프하자마자 jumpCount가 초기화 되는 것을 막음
         if(Input.GetButtonDown("Jump") && playerState.jumpCount <playerState.maxJump){
             rigid.velocity = new Vector2(rigid.velocity.x, playerState.jumpPower);
             playerState.jumpCount++;
@@ -113,24 +116,29 @@ public class PlayerMove : MonoBehaviour
     }
 
     void Attack(){
+        //모션 캔슬을 방지하기 위해 공격 자체가 cooldown을 줌 ,공격시 veloxit.x값을 제한 했지만 구현방식에 대해선 의논이 필요함
         isAtk = true;
         Invoke("Cooldown",0.8f);
         rigid.velocity = new Vector2(rigid.velocity.x * 0.5f, rigid.velocity.y);
-        int atkDir;
         if(spriteRenderer.flipX == true){
-            atkDir =-1;
+            GameObject nAtkOb = Instantiate(nAtkObj, rigid.position+ new Vector2(-0.5f,0),quaternion.identity);
+            nAtkOb.transform.SetParent(rigid.transform);
         }
         else{
-            atkDir =1;
+            GameObject nAtkOb = Instantiate(nAtkObj, rigid.position+ new Vector2(0.5f,0),quaternion.identity);
+            nAtkOb.transform.SetParent(rigid.transform);
         }
-        GameObject nAtkOb = Instantiate(nAtkObj, rigid.position+ new Vector2(0.5f*atkDir,0),quaternion.identity);
-        nAtkOb.transform.SetParent(rigid.transform);
         anim.SetTrigger("nAttack");
     }
 
     void MagicAttack(){
         isAtk = true;
-        Instantiate(mAtkObj, rigid.position + new Vector2(1,0), quaternion.identity);
+        if(spriteRenderer.flipX == true){
+            Instantiate(mAtkObj, rigid.position + new Vector2(-1,0), quaternion.identity);
+        }
+        else{
+            Instantiate(mAtkObj, rigid.position + new Vector2(1,0), quaternion.identity);
+        }
         anim.SetTrigger("mAttack");
         Invoke("Cooldown", 0.75f);
     }

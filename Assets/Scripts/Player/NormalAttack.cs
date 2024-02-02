@@ -7,6 +7,7 @@ using UnityEngine.UIElements;
 public class NormalAttack : MonoBehaviour
 {
     public GameObject Me;
+    public State Player;
     SpriteRenderer spriteRenderer;
     Rigidbody2D rigid;
     int Dir = 1;
@@ -32,7 +33,7 @@ public class NormalAttack : MonoBehaviour
         if(col.gameObject.layer == 7){
             Scarecrow scarecrow = col.gameObject.GetComponent<Scarecrow>();
             if(scarecrow != null){
-                scarecrow.Damaged(18);
+                scarecrow.Damaged(Player.damage);
             }
         }
     }
