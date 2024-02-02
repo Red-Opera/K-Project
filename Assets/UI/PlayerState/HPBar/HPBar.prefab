@@ -1083,6 +1083,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: {fileID: 11400000, guid: 19a7ddf3c46ba6f4d8d4813797140586, type: 2}
-  currentHpText: {fileID: 6477736506633874296}
   maxHpText: {fileID: 6359434558623125442}
+  currentHpText: {fileID: 6477736506633874296}
+  levelText: {fileID: 2215491122668504206}
   hpSlider: {fileID: 9169820197532829911}

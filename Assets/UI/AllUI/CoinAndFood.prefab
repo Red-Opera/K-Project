@@ -255,8 +255,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 142c3bba3197d6843b7582d4b80c9516, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  state: {fileID: 11400000, guid: 19a7ddf3c46ba6f4d8d4813797140586, type: 2}
   foodSlider: {fileID: 1836486461009555903}
   currentFoodText: {fileID: 8109449773300375081}
+  currentCoinText: {fileID: 3897805886177740888}
 --- !u!1 &4669407141674497499
 GameObject:
   m_ObjectHideFlags: 0
