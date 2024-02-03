@@ -121,12 +121,22 @@ public class PlayerMove : MonoBehaviour
         Invoke("Cooldown",0.8f);
         rigid.velocity = new Vector2(rigid.velocity.x * 0.5f, rigid.velocity.y);
         if(spriteRenderer.flipX == true){
-            GameObject nAtkOb = Instantiate(nAtkObj, rigid.position+ new Vector2(-0.5f,0),quaternion.identity);
-            nAtkOb.transform.SetParent(rigid.transform);
+            GameObject nAtkO = Instantiate(nAtkObj, rigid.position+ new Vector2(-0.5f,0),quaternion.identity);
+            nAtkO.transform.SetParent(rigid.transform);
+            NormalAttack nAtkS = nAtkO.GetComponent<NormalAttack>();
+            Debug.Log(nAtkS);
+            if(nAtkS != null){
+                nAtkS.setDamage(playerState.damage);
+            }
         }
         else{
-            GameObject nAtkOb = Instantiate(nAtkObj, rigid.position+ new Vector2(0.5f,0),quaternion.identity);
-            nAtkOb.transform.SetParent(rigid.transform);
+            GameObject nAtkO = Instantiate(nAtkObj, rigid.position+ new Vector2(0.5f,0),quaternion.identity);
+            nAtkO.transform.SetParent(rigid.transform);
+            NormalAttack nAtkS = nAtkO.GetComponent<NormalAttack>();
+            Debug.Log(nAtkS);
+            if(nAtkS != null){
+                nAtkS.setDamage(playerState.damage);
+            }
         }
         anim.SetTrigger("nAttack");
     }

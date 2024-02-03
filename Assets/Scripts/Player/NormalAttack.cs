@@ -11,6 +11,7 @@ public class NormalAttack : MonoBehaviour
     SpriteRenderer spriteRenderer;
     Rigidbody2D rigid;
     int Dir = 1;
+    public int Damage = 0;
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -33,7 +34,7 @@ public class NormalAttack : MonoBehaviour
         if(col.gameObject.layer == 7){
             Scarecrow scarecrow = col.gameObject.GetComponent<Scarecrow>();
             if(scarecrow != null){
-                scarecrow.Damaged(Player.damage);
+                scarecrow.Damaged(Damage);
             }
         }
     }
@@ -49,5 +50,9 @@ public class NormalAttack : MonoBehaviour
     void setPos(){
         Vector2 parentPos = rigid.transform.parent.position;
         rigid.position = parentPos + new Vector2(0.5f * Dir,0);
+    }
+    public void setDamage(int Dmg){
+        Damage = Dmg;
+        Debug.Log("Damage : " + Dmg);
     }
 }
