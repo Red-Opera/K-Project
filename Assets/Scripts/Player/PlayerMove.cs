@@ -118,36 +118,41 @@ public class PlayerMove : MonoBehaviour
     void Attack(){
         //모션 캔슬을 방지하기 위해 공격 자체가 cooldown을 줌 ,공격시 veloxit.x값을 제한 했지만 구현방식에 대해선 의논이 필요함
         isAtk = true;
-        Invoke("Cooldown",0.8f);
+        int Dir = 1;
+        
+        if(spriteRenderer.flipX == true)
+            Dir =- 1;
+        else
+            Dir = 1;
+
         rigid.velocity = new Vector2(rigid.velocity.x * 0.5f, rigid.velocity.y);
-        if(spriteRenderer.flipX == true){
-            GameObject nAtkO = Instantiate(nAtkObj, rigid.position+ new Vector2(-0.5f,0),quaternion.identity);
-            nAtkO.transform.SetParent(rigid.transform);
-            NormalAttack nAtkS = nAtkO.GetComponent<NormalAttack>();
-            Debug.Log(nAtkS);
-            if(nAtkS != null){
-                nAtkS.setDamage(playerState.damage);
-            }
+        
+        GameObject nAtk = Instantiate(nAtkObj, rigid.position+ new Vector2(0.5f * Dir,0),quaternion.identity);
+        nAtk.transform.SetParent(rigid.transform);
+        NormalAttack nAtkScript = nAtk.GetComponent<NormalAttack>();
+        
+        if(nAtkScript != null){
+            nAtkScript.setDamage(playerState.damage);
         }
-        else{
-            GameObject nAtkO = Instantiate(nAtkObj, rigid.position+ new Vector2(0.5f,0),quaternion.identity);
-            nAtkO.transform.SetParent(rigid.transform);
-            NormalAttack nAtkS = nAtkO.GetComponent<NormalAttack>();
-            Debug.Log(nAtkS);
-            if(nAtkS != null){
-                nAtkS.setDamage(playerState.damage);
-            }
-        }
+
+        Invoke("Cooldown",0.8f);
         anim.SetTrigger("nAttack");
     }
 
     void MagicAttack(){
         isAtk = true;
+        int Dir;
         if(spriteRenderer.flipX == true){
-            Instantiate(mAtkObj, rigid.position + new Vector2(-1,0), quaternion.identity);
+            Dir = -1;
         }
         else{
-            Instantiate(mAtkObj, rigid.position + new Vector2(1,0), quaternion.identity);
+            Dir = 1;
+        }
+        GameObject mAtk = Instantiate(mAtkObj, rigid.position + new Vector2(1 * Dir,0), quaternion.identity);
+        MagicAttack mAtkScript = mAtk.GetComponent<MagicAttack>();
+
+        if(mAtkScript != null){
+            mAtkScript.setDamage(playerState.damage);
         }
         anim.SetTrigger("mAttack");
         Invoke("Cooldown", 0.75f);

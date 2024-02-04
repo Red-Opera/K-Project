@@ -7,7 +7,6 @@ using UnityEngine.UIElements;
 public class NormalAttack : MonoBehaviour
 {
     public GameObject Me;
-    public State Player;
     SpriteRenderer spriteRenderer;
     Rigidbody2D rigid;
     int Dir = 1;
@@ -53,6 +52,5 @@ public class NormalAttack : MonoBehaviour
     }
     public void setDamage(int Dmg){
         Damage = Dmg;
-        Debug.Log("Damage : " + Dmg);
     }
 }

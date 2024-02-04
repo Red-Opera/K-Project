@@ -5,9 +5,9 @@ using UnityEngine;
 public class MagicAttack : MonoBehaviour
 {
     Rigidbody2D rigid;
-    public State Player;
     public GameObject Me;
     public int Dir =1;
+    public int damage =0;
     void Start()
     {
         rigid = GetComponent<Rigidbody2D>();
@@ -26,9 +26,11 @@ public class MagicAttack : MonoBehaviour
         if(col.gameObject.layer ==7){
             Scarecrow monster = col.gameObject.GetComponent<Scarecrow>();
             if(monster != null){
-                monster.Damaged(Player.damage);
+                monster.Damaged(damage);
                 Disappear();
             }
+        }else if(col.gameObject.layer == 3){
+            Disappear();
         }
     }
     void SetSpeed(){
@@ -47,5 +49,9 @@ public class MagicAttack : MonoBehaviour
         else{
             Dir = 1;
         }
+    }
+    public void setDamage(int dmg){
+        damage = dmg;
+        Debug.Log("damage : " + damage);
     }
 }
