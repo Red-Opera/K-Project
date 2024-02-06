@@ -31,6 +31,6 @@ MonoBehaviour:
   defensePersent: 0
   avoidPersent: 0
   reloadTime: 0
-  dashBarCount: 3
+  dashBarCount: 2
   food: 100
   money: 0
