@@ -5,6 +5,8 @@ using TMPro;
 
 public class InventroyPosition : MonoBehaviour
 {
+    public static bool isChange = true;                 // 자리를 교환했는지 여부
+
     [SerializeField] private GameObject slots;          // 전시할 수 있는 오브젝트를 담는 슬롯
     [SerializeField] private GameObject itemDisplay;    // 아이템을 전시하기 위한 오브젝트
 
@@ -23,14 +25,16 @@ public class InventroyPosition : MonoBehaviour
 
         displayData = new List<GameObject>();
 
-        for (int i = 0; i < displayData.Count; i++)
+        for (int i = 0; i < displayPos.Length; i++)
         {
+            if (displayPos[i].childCount == 0)
+                continue;
+
             // 아이템의 위치을 각각 오브젝트별로 알려줌
-            displayData[i].GetComponent<MoveInventory>().displayIndex = i;
+            displayPos[i].GetChild(0).GetComponent<MoveInventory>().displayIndex = i;
 
             // 오브젝트를 차례대로 인벤토리에 넣음
-            displayData[i].transform.SetParent(displayPos[i]);
-            displayData[i].transform.localPosition = Vector3.zero;
+            displayPos[i].GetChild(0).transform.localPosition = Vector3.zero;
         }
 
         sprites = new Dictionary<string, Sprite>();
@@ -48,8 +52,12 @@ public class InventroyPosition : MonoBehaviour
 
     public void ChangePos(int displayIndex, int dragIndex)
     {
-        // 같은 장소로 이동하는 경우 중지
-        if (displayIndex == dragIndex)
+        // 이동할 장비, 붙여 놓을 위치
+        EquipmentState displayEquipment = displayPos[displayIndex].GetChild(0).GetComponent<InventableEquipment>().inventableEquipment;
+        EquipmentState dragEquipment = displayPos[dragIndex].GetComponent<InventableEquipment>().inventableEquipment;
+
+        // 같은 장소로 이동하거나 이미 바꿨거나 해당 타입의 장비를 해당 위치에 둘 수 없을 경우
+        if (displayIndex == dragIndex || isChange || ((displayEquipment & dragEquipment) == 0))
             return;
 
         // 인벤토리의 범위를 넘긴 경우
@@ -88,8 +96,8 @@ public class InventroyPosition : MonoBehaviour
         }
 
         // 이동시킬 오브젝트와 밀러난 아이템 위치를 천천히 중앙으로 옮김
-        UpdateDisplayPositions(displayIndex);
         UpdateDisplayPositions(dragIndex);
+        UpdateDisplayPositions(displayIndex);
     }
 
     // 아이템 위치를 정상적인 위치로 천천히 이동시키는 메소드
@@ -99,6 +107,8 @@ public class InventroyPosition : MonoBehaviour
             return;
 
         displayPos[moveIndex].GetChild(0).localPosition = Vector3.zero;
+
+        isChange = true;
     }
 
     // 아이템을 추가하거나 생성하는 함수

@@ -46,7 +46,10 @@ public class MoveInventory : MonoBehaviour, IPointerDownHandler, IDragHandler, I
 
             // 이 스크립트를 달고 있는 모드 오브젝트가 ChangePos를 실행하도록 함
             if (displayIndex != dragIndex)
+            {
+                InventroyPosition.isChange = false;
                 OnInventoryPositionChanged(displayIndex, dragIndex);
+            }
         }
     }
 
