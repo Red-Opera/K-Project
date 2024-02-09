@@ -1,11 +1,11 @@
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.UI;
-using TMPro;
 
 public class InventroyPosition : MonoBehaviour
 {
     public static bool isChange = true;                 // 자리를 교환했는지 여부
+    public static bool isAddSucceed = false;            // 구매 성공 여부
 
     [SerializeField] private GameObject slots;          // 전시할 수 있는 오브젝트를 담는 슬롯
     [SerializeField] private GameObject itemDisplay;    // 아이템을 전시하기 위한 오브젝트
@@ -13,7 +13,7 @@ public class InventroyPosition : MonoBehaviour
     private List<GameObject> displayData;       // 현재 전시중인 아이템
     private Transform[] displayPos;             // 아이템을 전시할 수 있는 오브젝트
 
-    public static event System.Action<string, int> OnAddItem;   // 이 스크립트를 가지고 있는 모든 오브젝트가 실행할 이벤트
+    public static event System.Action<string> OnAddItem;        // 이 스크립트를 가지고 있는 모든 오브젝트가 실행할 이벤트
     public List<Sprite> spriteData = new List<Sprite>();        // 추가할 아이템 이미지
     private Dictionary<string, Sprite> sprites;                 // 추가할 아이템 이름과 이미지 배열
 
@@ -52,6 +52,9 @@ public class InventroyPosition : MonoBehaviour
 
     public void ChangePos(int displayIndex, int dragIndex)
     {
+        if (displayPos[displayIndex].childCount == 0)
+            return;
+
         // 이동할 장비, 붙여 놓을 위치
         EquipmentState displayEquipment = displayPos[displayIndex].GetChild(0).GetComponent<InventableEquipment>().inventableEquipment;
         EquipmentState dragEquipment = displayPos[dragIndex].GetComponent<InventableEquipment>().inventableEquipment;
@@ -112,65 +115,34 @@ public class InventroyPosition : MonoBehaviour
     }
 
     // 아이템을 추가하거나 생성하는 함수
-    public void AddItem(string name, int count)
+    public void AddItem(string name)
     {
-        List<string> hasImage = new List<string>();
+        Debug.Assert(sprites.ContainsKey(name), "해당 이름의 아이템은 존재하지 않습니다");
 
-        foreach (GameObject item in displayData)
-            hasImage.Add(item.transform.GetChild(0).GetComponent<Image>().sprite.name);
-
-        string replace = "";
-
-        if (name == "HPPotion")
-            replace = "512x_beaker_red";
-
-        else if (name == "ManaPotion")
-            replace = "512x_beaker_blue";
-
-        bool hasItem = false;
-        int whatIndex = 0, hasCount = 0;
-        for (int i = 0; i < hasImage.Count; i++)
+        for (int i = 8; i < displayPos.Length; i++)
         {
-            if (hasImage[i] == replace)
-            {
-                hasItem = true;
-                whatIndex = i;
-                hasCount = int.Parse(displayData[i].transform.GetChild(1).GetComponent<TextMeshProUGUI>().text);
+            Transform slot = displayPos[i];
 
-                break;
+            if (slot.childCount <= 0)
+            {
+                GameObject newItem = Instantiate(itemDisplay);
+                newItem.transform.GetChild(0).GetComponent<Image>().sprite = sprites[name];
+
+                newItem.transform.SetParent(slot);
+                newItem.transform.localPosition = Vector3.zero;
+
+                displayData.Add(newItem);
+                isAddSucceed = true;
+                return;
             }
         }
 
-        if (hasItem)
-        {
-            hasCount += count;
-            displayData[whatIndex].transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = hasCount.ToString();
-        }
-
-        else
-        {
-            foreach (Transform slot in displayPos)
-            {
-                if (slot.childCount <= 0)
-                {
-                    GameObject newItem = Instantiate(itemDisplay);
-                    newItem.transform.GetChild(0).GetComponent<Image>().sprite = sprites[replace];
-                    newItem.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = count.ToString();
-
-                    newItem.transform.SetParent(slot);
-                    newItem.transform.localPosition = Vector3.zero;
-
-                    displayData.Add(newItem);
-                    return;
-                }
-            }
-
-            Debug.Log("빈공간이 없습니다.");
-        }
+        // 빈공간이 없을 떄 처리
+        isAddSucceed = false;
     }
 
-    public static void CallAddItem(string name, int count)
+    public static void CallAddItem(string name)
     {
-        OnAddItem(name, count);
+        OnAddItem(name);
     }
 }

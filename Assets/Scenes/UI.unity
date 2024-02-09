@@ -308,6 +308,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4565430950343221254, guid: e4ccfcaea3fa1a648a9f02bf66eab781, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6258773169604641719, guid: e4ccfcaea3fa1a648a9f02bf66eab781, type: 3}
       propertyPath: m_Name
       value: EventSystem
@@ -320,6 +324,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6860621762307715883, guid: e4ccfcaea3fa1a648a9f02bf66eab781, type: 3}
+      propertyPath: dd
+      value: 
+      objectReference: {fileID: 31989597, guid: 39caf47f5ecdfc543bb636fb7afc82ed, type: 3}
     - target: {fileID: 7030477650807087990, guid: e4ccfcaea3fa1a648a9f02bf66eab781, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
