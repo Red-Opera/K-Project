@@ -648,7 +648,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Wizard2_0
+      name: Magic4
       rect:
         serializedVersion: 2
         x: 896
@@ -669,7 +669,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Wizard2_1
+      name: Magic5
       rect:
         serializedVersion: 2
         x: 1080
@@ -685,6 +685,111 @@ TextureImporter:
       bones: []
       spriteID: 97a21cf69e0d3aa488cf474614e7bf48
       internalID: 2069234181
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MBlock1
+      rect:
+        serializedVersion: 2
+        x: 122
+        y: 456
+        width: 27
+        height: 60
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e83e75c361022fe498c3e0593ed232d6
+      internalID: 1171570294
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MBlock2
+      rect:
+        serializedVersion: 2
+        x: 282
+        y: 444
+        width: 33
+        height: 82
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d2decea67b745e14c8873182f09a7109
+      internalID: 1988821997
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MBlock3
+      rect:
+        serializedVersion: 2
+        x: 450
+        y: 424
+        width: 31
+        height: 113
+      alignment: 9
+      pivot: {x: 0, y: 0.54}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 24c189e36c0ee2c4b9240b1dc059962c
+      internalID: -35813241
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MBlock4
+      rect:
+        serializedVersion: 2
+        x: 661
+        y: 423
+        width: 32
+        height: 118
+      alignment: 9
+      pivot: {x: 0, y: 0.535}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7d1a724864db63248bb7ab2e9afbc7d0
+      internalID: 1722888596
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MBlock5
+      rect:
+        serializedVersion: 2
+        x: 850
+        y: 422
+        width: 31
+        height: 123
+      alignment: 9
+      pivot: {x: 0, y: 0.52}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e17987bfab133034fb342cd2a11d43ad
+      internalID: 1800737421
       vertices: []
       indices: 
       edges: []
@@ -722,17 +827,21 @@ TextureImporter:
       Fainted2: 1106446268
       Fainted3: 1966188221
       Fainted4: 1791485440
+      MBlock1: 1171570294
+      MBlock2: -1491175322
+      MBlock3: -35813241
+      MBlock4: 1722888596
+      MBlock5: 1800737421
       Magic1: -2029039524
       Magic2: -2014579197
       Magic3: 390664112
-      Wizard2_0: 390664112
-      Wizard2_1: 390664112
+      Magic4: 1027572934
+      Magic5: 2069234181
       Wizard2_12: 81065493
       Wizard2_14: -38566971
       Wizard2_15: 587373535
       Wizard2_17: 982131585
       Wizard2_19: -1866140759
-      Wizard2_3: -1491175322
       Wizard2_7: -1256510440
       Wizard2_9: -419074837
   mipmapLimitGroupName: 
