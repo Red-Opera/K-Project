@@ -5,9 +5,10 @@ using UnityEngine;
 public class MagicAttack : MonoBehaviour
 {
     Rigidbody2D rigid;
-    public State Player;
     public GameObject Me;
     public int Dir =1;
+    public int damage =0;
+    public bool pre = true;
     void Start()
     {
         rigid = GetComponent<Rigidbody2D>();
@@ -19,20 +20,25 @@ public class MagicAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(pre == true){
+            setPos();
+        }
     }
 
-    void OnTriggerEnter2D(Collider2D col){
-        if(col.gameObject.layer ==7){
+    void OnTriggerStay2D(Collider2D col){
+        if(col.gameObject.layer ==7 && pre == false){
             Scarecrow monster = col.gameObject.GetComponent<Scarecrow>();
             if(monster != null){
-                monster.Damaged(Player.damage);
+                monster.Damaged(damage);
                 Disappear();
             }
+        }else if(col.gameObject.layer == 3){
+            Disappear();
         }
     }
     void SetSpeed(){
         rigid.velocity = new Vector2(1*Dir, rigid.velocity.y);
+        pre = false;
     }
 
     void Disappear(){
@@ -47,5 +53,13 @@ public class MagicAttack : MonoBehaviour
         else{
             Dir = 1;
         }
+    }
+    public void setDamage(int dmg){
+        damage = dmg;
+    }
+
+void setPos(){
+        var dectectP = Physics2D.OverlapArea(rigid.position - new Vector2(3,3), rigid.position + new Vector2(3,3), LayerMask.GetMask("Player"));
+        rigid.position = new Vector2(dectectP.transform.position.x + 1* Dir, dectectP.transform.position.y);
     }
 }
