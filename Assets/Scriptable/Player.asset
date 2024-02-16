@@ -33,4 +33,4 @@ MonoBehaviour:
   reloadTime: 0
   dashBarCount: 2
   food: 100
-  money: 0
+  money: 300

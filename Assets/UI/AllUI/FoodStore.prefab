@@ -800,7 +800,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1912692051485715937}
   m_HandleRect: {fileID: 2634694282489969890}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 1.0000006
   m_Size: 0.3869437
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -1097,11 +1097,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   foodList:
-  - {fileID: 2699319457434801304}
-  - {fileID: 69306843416820297}
-  - {fileID: 8278608773542179716}
-  - {fileID: 8705396073781204528}
   - {fileID: 6864286164978199030}
+  - {fileID: 2699319457434801304}
+  - {fileID: 8278608773542179716}
+  - {fileID: 69306843416820297}
+  - {fileID: 8705396073781204528}
   selectableList:
   - {fileID: 21300000, guid: 45800fe39a0a4a8478afd4ad1176d4b8, type: 3}
   - {fileID: 21300000, guid: ad2b8d85bda19844c8c6582e91166006, type: 3}
@@ -1256,6 +1256,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3410343969444586952}
   - component: {fileID: 8726481985823431556}
+  - component: {fileID: 8422913460954076017}
   m_Layer: 0
   m_Name: FoodPosition
   m_TagString: Untagged
@@ -1290,6 +1291,36 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5097814757115729121}
   m_CullTransparentMesh: 1
+--- !u!114 &8422913460954076017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5097814757115729121}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &5177925311132760789
 GameObject:
   m_ObjectHideFlags: 0
@@ -1900,11 +1931,11 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 3010380280564617359}
-  - {fileID: 884067135080005214}
-  - {fileID: 9102173444094523283}
-  - {fileID: 8393913452583293479}
   - {fileID: 6048399939182128609}
+  - {fileID: 3010380280564617359}
+  - {fileID: 9102173444094523283}
+  - {fileID: 884067135080005214}
+  - {fileID: 8393913452583293479}
   m_Father: {fileID: 5960229469811948126}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}

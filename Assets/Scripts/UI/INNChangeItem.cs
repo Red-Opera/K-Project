@@ -10,10 +10,15 @@ public class INNChangeItem : MonoBehaviour
 
     [SerializeField] private float range = 0.2f;        // 가격 및 효율 범위
 
+    private float addRange;
+
     void Start()
     {
         Debug.Assert(foodList.Length != 0, "음식을 선택할 수 있는 프레임이 없습니다.");
 
+        // 프레임 별로 자신이 몇번째인지 확인
+        for (int i = 0; i < foodList.Length; i++)
+            foodList[i].GetComponent<FoodItem>().index = i;
     }
 
     public void OnEnable()
@@ -46,7 +51,11 @@ public class INNChangeItem : MonoBehaviour
             int addStateCount = food.addState.Count;                // 추가 효과 개수를 가져옴
             Transform addList = foodList[i].transform.GetChild(3);  // 추가 정보를 표시할 위치
 
-            AddStateTurnOff(addList);
+            addRange = Random.Range(-range, range);     // 상품에 대한 가치를 구함
+            SetEfficiency(i);
+
+            
+            AddStateTurnOff(addList);                   // 모든 추가 상태를 끔
 
             // 추가 효과 개수 만큼 반복
             for (int j = 0; j < addStateCount; j++)
@@ -59,6 +68,20 @@ public class INNChangeItem : MonoBehaviour
                 addList.GetChild(1).GetChild(j).GetComponent<TextMeshProUGUI>().text = food.addState[j].stateName;
                 ShowValue(addList.GetChild(2).GetChild(j).GetComponent<TextMeshProUGUI>(), food.addState[j].value);
             }
+
+            // 기본 정보를 표시할 위치
+            Transform baseList = foodList[i].transform.GetChild(4); 
+
+            // 추가 효과 개수 만큼 반복
+            for (int j = 0; j < 3; j++)
+            {
+                // 추가 상태 이름과 가치를 UI에 출력함
+                if (j != 2)
+                    ShowValue(baseList.GetChild(1).GetChild(j).GetComponent<TextMeshProUGUI>(), food.baseState[j].value, true);
+
+                else
+                    ShowValue(baseList.GetChild(1).GetChild(j).GetComponent<TextMeshProUGUI>(), food.baseState[j].value, true, true);
+            }
         }
     }
 
@@ -69,10 +92,8 @@ public class INNChangeItem : MonoBehaviour
                 addList.GetChild(j).GetChild(i).gameObject.SetActive(false);
     }
 
-    private void ShowValue(TextMeshProUGUI outText, float value)
+    private void ShowValue(TextMeshProUGUI outText, float value, bool isBase = false, bool isMoney = false)
     {
-        float addRange = Random.Range(-range, range);
-
         value += addRange * value;
 
         if (value >= 0)
@@ -87,10 +108,35 @@ public class INNChangeItem : MonoBehaviour
             outText.text = "";
         }
 
-        if (Mathf.Abs(value) < 0.1f)
+        // 돈일 경우 돈을 가지고 있는 양에 따라 색깔을 바꾸고 무조건 음수로 변경
+        if (isMoney)
+        {
+            outText.color = (GameManager.info.playerState.money - (int)value >= 0) ? Color.green : Color.red;
+            outText.text = "-";
+        }
+
+        // 기본 정보일 경우 모두 정수형으로 표현
+        if (isBase)
+            outText.text += ((int)value).ToString();
+
+        else if (Mathf.Abs(value) < 0.1f)
             outText.text += value.ToString("#,##0.##");
 
         else
             outText.text += value.ToString("#,##0.#");
+    }
+
+    private void SetEfficiency(int i)
+    {
+        TextMeshProUGUI setText = foodList[i].transform.GetChild(5).GetChild(1).GetComponent<TextMeshProUGUI>();
+
+        if (addRange < 0)
+            setText.color = Color.red;
+
+        else
+            setText.color = Color.blue;
+
+
+        setText.text = (1 + addRange).ToString("#,##0.#%");
     }
 }
