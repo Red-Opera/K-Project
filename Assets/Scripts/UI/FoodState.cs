@@ -14,4 +14,5 @@ public class FoodState : ScriptableObject
     public string foodName;
     public List<Info> addState;
     public List<Info> baseState;
+    public bool isHotFood;
 }

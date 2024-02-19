@@ -17,12 +17,18 @@ public class UIOpen : MonoBehaviour
     void Update()
     {
         // 스탯창을 여는 키
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E) && !statusUI.activeSelf)
             statusUI.SetActive(true);
 
+        else if (Input.GetKeyDown(KeyCode.E) && statusUI.activeSelf)
+            statusUI.SetActive(false);
+
         // 인벤토리 창을 여는 키
-        if (Input.GetKeyDown(KeyCode.V))
+        if (Input.GetKeyDown(KeyCode.V) && !inventoryUI.activeSelf)
             inventoryUI.SetActive(true);
+
+        else if (Input.GetKeyDown(KeyCode.V) && inventoryUI.activeSelf)
+            inventoryUI.SetActive(false);
     }
 
     // 아이템 획득 창을 보여주는 메소드

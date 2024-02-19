@@ -23,3 +23,4 @@ MonoBehaviour:
     value: 30
   - stateName: "\uACE8\uB4DC"
     value: 250
+  isHotFood: 1

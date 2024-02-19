@@ -2370,9 +2370,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   index: 0
+  isHotFood: 0
   selectedImage: {fileID: 21300000, guid: 0a0404c07667681469e0021f88de8bfc, type: 3}
   unSelectedImage: {fileID: 21300000, guid: bcb4b772ae9fc374082a6469703c22ff, type: 3}
   costText: {fileID: 4440924607287654429}
+  buyEffect: {fileID: 5436269809698925216, guid: 7d678c08c61a3824f91946e8670adadc, type: 3}
+  buyEffectTransform: {fileID: 0}
+  remainCoinText: {fileID: 0}
+  remainFoodText: {fileID: 0}
+  remainMaxFoodText: {fileID: 0}
 --- !u!1 &8242255298727721397
 GameObject:
   m_ObjectHideFlags: 0

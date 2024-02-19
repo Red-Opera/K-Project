@@ -182,12 +182,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2627547093406406061, guid: 40ff3bfeb7a0ccf4c8a93c1d76319a87, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2627547093406406061, guid: 40ff3bfeb7a0ccf4c8a93c1d76319a87, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.00013904077
+      value: -0.00008281909
       objectReference: {fileID: 0}
     - target: {fileID: 2634694282489969890, guid: 40ff3bfeb7a0ccf4c8a93c1d76319a87, type: 3}
       propertyPath: m_AnchorMax.x
@@ -205,10 +201,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: FoodStore
       objectReference: {fileID: 0}
-    - target: {fileID: 4242007502961322689, guid: 40ff3bfeb7a0ccf4c8a93c1d76319a87, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5960229469811948126, guid: 40ff3bfeb7a0ccf4c8a93c1d76319a87, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -219,6 +211,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5960229469811948126, guid: 40ff3bfeb7a0ccf4c8a93c1d76319a87, type: 3}
       propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6106588132868152611, guid: 40ff3bfeb7a0ccf4c8a93c1d76319a87, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6106588132868152611, guid: 40ff3bfeb7a0ccf4c8a93c1d76319a87, type: 3}
+      propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6874354208554326509, guid: 40ff3bfeb7a0ccf4c8a93c1d76319a87, type: 3}

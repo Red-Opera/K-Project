@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -23,6 +24,19 @@ public class INNChangeItem : MonoBehaviour
 
     public void OnEnable()
     {
+        StartCoroutine(DefaultSetting());
+    }
+
+    private IEnumerator DefaultSetting()
+    {
+        // 게임 메니저가 없다면 잠시 대기
+        int failCount = 0;
+        while (GameManager.info == null && failCount < 100)
+        {
+            failCount++;
+            yield return null;
+        }
+
         for (int i = 0; i < foodList.Length; i++)
         {
             // 음식 이미지 중 랜덤으로 하나 뽑음
@@ -47,14 +61,17 @@ public class INNChangeItem : MonoBehaviour
                 if (j == foodList.Length - 1)
                     Debug.Assert(false, "해당 이름의 음식 정보가 존재하지 않습니다.");
             }
-            
+
+            // 해당 음식이 뜨거운 음식인지 알려줌
+            foodList[i].GetComponent<FoodItem>().isHotFood = food.isHotFood;
+
             int addStateCount = food.addState.Count;                // 추가 효과 개수를 가져옴
             Transform addList = foodList[i].transform.GetChild(3);  // 추가 정보를 표시할 위치
 
             addRange = Random.Range(-range, range);     // 상품에 대한 가치를 구함
             SetEfficiency(i);
 
-            
+
             AddStateTurnOff(addList);                   // 모든 추가 상태를 끔
 
             // 추가 효과 개수 만큼 반복
@@ -70,7 +87,7 @@ public class INNChangeItem : MonoBehaviour
             }
 
             // 기본 정보를 표시할 위치
-            Transform baseList = foodList[i].transform.GetChild(4); 
+            Transform baseList = foodList[i].transform.GetChild(4);
 
             // 추가 효과 개수 만큼 반복
             for (int j = 0; j < 3; j++)
