@@ -22,7 +22,7 @@ MonoBehaviour:
   - stateName: "\uCD5C\uB300\uCCB4\uB825"
     value: 20
   - stateName: "\uD5C8\uAE30"
-    value: 60
+    value: 30
   - stateName: "\uACE8\uB4DC"
     value: 500
   isHotFood: 1

@@ -3398,6 +3398,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8422392116102628183}
     - target: {fileID: 3932842104689869465, guid: dc6b8fa8ce43bbd4386071ac2d50e866, type: 3}
+      propertyPath: currentFoodSlider
+      value: 
+      objectReference: {fileID: 4254528338862223326}
+    - target: {fileID: 3932842104689869465, guid: dc6b8fa8ce43bbd4386071ac2d50e866, type: 3}
       propertyPath: remainMaxFoodText
       value: 
       objectReference: {fileID: 2147822361204354041}
@@ -3513,10 +3517,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 2627547093406406061}
     m_Modifications:
     - target: {fileID: 3932842104689869465, guid: dc6b8fa8ce43bbd4386071ac2d50e866, type: 3}
-      propertyPath: buyEffect
-      value: 
-      objectReference: {fileID: 5436269809698925216, guid: 7d678c08c61a3824f91946e8670adadc, type: 3}
-    - target: {fileID: 3932842104689869465, guid: dc6b8fa8ce43bbd4386071ac2d50e866, type: 3}
       propertyPath: remainCoinText
       value: 
       objectReference: {fileID: 2900919296518792270}
@@ -3524,6 +3524,10 @@ PrefabInstance:
       propertyPath: remainFoodText
       value: 
       objectReference: {fileID: 8422392116102628183}
+    - target: {fileID: 3932842104689869465, guid: dc6b8fa8ce43bbd4386071ac2d50e866, type: 3}
+      propertyPath: currentFoodSlider
+      value: 
+      objectReference: {fileID: 4254528338862223326}
     - target: {fileID: 3932842104689869465, guid: dc6b8fa8ce43bbd4386071ac2d50e866, type: 3}
       propertyPath: remainMaxFoodText
       value: 
@@ -3648,6 +3652,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8422392116102628183}
     - target: {fileID: 3932842104689869465, guid: dc6b8fa8ce43bbd4386071ac2d50e866, type: 3}
+      propertyPath: currentFoodSlider
+      value: 
+      objectReference: {fileID: 4254528338862223326}
+    - target: {fileID: 3932842104689869465, guid: dc6b8fa8ce43bbd4386071ac2d50e866, type: 3}
       propertyPath: remainMaxFoodText
       value: 
       objectReference: {fileID: 2147822361204354041}
@@ -3763,10 +3771,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 2627547093406406061}
     m_Modifications:
     - target: {fileID: 3932842104689869465, guid: dc6b8fa8ce43bbd4386071ac2d50e866, type: 3}
-      propertyPath: buyEffect
-      value: 
-      objectReference: {fileID: 5436269809698925216, guid: 7d678c08c61a3824f91946e8670adadc, type: 3}
-    - target: {fileID: 3932842104689869465, guid: dc6b8fa8ce43bbd4386071ac2d50e866, type: 3}
       propertyPath: remainCoinText
       value: 
       objectReference: {fileID: 2900919296518792270}
@@ -3774,6 +3778,10 @@ PrefabInstance:
       propertyPath: remainFoodText
       value: 
       objectReference: {fileID: 8422392116102628183}
+    - target: {fileID: 3932842104689869465, guid: dc6b8fa8ce43bbd4386071ac2d50e866, type: 3}
+      propertyPath: currentFoodSlider
+      value: 
+      objectReference: {fileID: 4254528338862223326}
     - target: {fileID: 3932842104689869465, guid: dc6b8fa8ce43bbd4386071ac2d50e866, type: 3}
       propertyPath: remainMaxFoodText
       value: 
@@ -3901,6 +3909,10 @@ PrefabInstance:
       propertyPath: remainFoodText
       value: 
       objectReference: {fileID: 8422392116102628183}
+    - target: {fileID: 3932842104689869465, guid: dc6b8fa8ce43bbd4386071ac2d50e866, type: 3}
+      propertyPath: currentFoodSlider
+      value: 
+      objectReference: {fileID: 4254528338862223326}
     - target: {fileID: 3932842104689869465, guid: dc6b8fa8ce43bbd4386071ac2d50e866, type: 3}
       propertyPath: remainMaxFoodText
       value: 

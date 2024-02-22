@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -16,7 +17,12 @@ public class FoodItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     private static Image displayFoodImage;              // 마우스에 올라간 음식 이미지를 표시할 UI 
     private static GameObject foodStreamImage;          // 음식 수증기를 표시할 UI
 
-    [SerializeField] private TextMeshProUGUI costText;  // 가격을 표시하는 UI
+    [SerializeField] private TextMeshProUGUI costText;          // 가격을 표시하는 UI
+    [SerializeField] private TextMeshProUGUI addFoodText;       // 추가 허기를 표시하는 UI
+    [SerializeField] private TextMeshProUGUI addHPText;         // 추가 체력을 표시하는 UI
+
+    [SerializeField] private GameObject addStatName;            // 추가 스탯 증가하는 값의 이름을 저장하는 오브젝트
+    [SerializeField] private GameObject addStatValue;           // 추가 스텟 증가하는 값을 저장하는 오브젝트
 
     private static int selectedIndex = -1;
 
@@ -28,6 +34,9 @@ public class FoodItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     [SerializeField] private TextMeshProUGUI remainCoinText;    // 현재 남은 골드를 표시하는 UI
     [SerializeField] private TextMeshProUGUI remainFoodText;    // 현재 남은 허기를 표시하는 UI
     [SerializeField] private TextMeshProUGUI remainMaxFoodText; // 최대 허기를 표시하는 UI
+    [SerializeField] private Slider currentFoodSlider;          // 현재 허기량을 나타내는 슬라이더
+
+    [SerializeField] private List<KoreaToEng> koreaToEng;       // 추가 스탯의 한국어를 영어로 바꿔주는 배열
 
     public void Start()
     {
@@ -52,6 +61,8 @@ public class FoodItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         Debug.Assert(remainMaxFoodText != null, "최대 허기를 표시하는 UI가 없습니다.");
 
         remainCoinText.text = GameManager.info.playerState.money.ToString("#,##0G");
+        remainFoodText.text = GameManager.info.playerState.food.ToString();
+        currentFoodSlider.value = GameManager.info.playerState.food / 100.0f;
 
         foodStreamImage.SetActive(false);
     }
@@ -75,26 +86,64 @@ public class FoodItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             return;
         }
 
-        if (GameManager.info.playerState.food > 100)
-        {
+        int food = GameManager.info.playerState.food + int.Parse(addFoodText.text);
 
+        if (food > 100)
+        {
+            // 허기가 꽉찼을 경우 처리
+
+            return;
         }
 
+        if (food < 0)
+        {
+            // 허기가 -가 된 경우
+
+            return;
+        }
+
+        // 구매 효과 생성
         GameObject newBuyEffect = Instantiate(buyEffect, buyEffectTransform);
         newBuyEffect.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = costText.text + "G";
 
+        // 구매된 비용 반영
         GameManager.info.playerState.money += cost;
         remainCoinText.text = GameManager.info.playerState.money.ToString("#,##0G");
 
+        // 허기 반영
+        GameManager.info.playerState.food = food;
+        remainFoodText.text = GameManager.info.playerState.food.ToString();
+        currentFoodSlider.value = GameManager.info.playerState.food / 100.0f;
+
+        // 스탯 반영
+        SetStat();
+
+        // 초기화
         selectedIndex = -1;
         displayFoodImage.sprite = null;
         displayFoodImage.color = new Vector4(0.0f, 0.0f, 0.0f, 0.0f);
         foodStreamImage.SetActive(false);
     }
 
+    private void SetStat()
+    {
+        GameManager.info.addFoodState.maxHP += int.Parse(addHPText.text); 
+
+        for (int i = 0; i < addStatName.transform.childCount; i++)
+        {
+            if (!addStatName.transform.GetChild(i).gameObject.activeSelf)
+                break;
+
+            string name = addStatName.transform.GetChild(i).GetComponent<TextMeshProUGUI>().text;
+            double value = double.Parse(addStatValue.transform.GetChild(i).GetComponent<TextMeshProUGUI>().text);
+
+            //GameManager.info.AddFoodState(koreaToEng[name], value);
+        }
+    }
+
     private IEnumerator SettingFood()
     {
-        // x축으로 -1000만큼 이동
+        // x축으로 -300만큼 이동
         Vector3 targetFoodImagePos = foodImagePos + new Vector3(-300, 0, 0);
         Vector3 targetFoodStreamPos = foodStreamPos + new Vector3(-300, 0, 0);
 
@@ -138,4 +187,11 @@ public class FoodItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
         foodStreamImage.SetActive(false);
     }
+}
+
+[SerializeField]
+class KoreaToEng
+{
+    string korea;
+    string eng;
 }
