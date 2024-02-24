@@ -24,6 +24,18 @@ public class INNChangeItem : MonoBehaviour
 
     public void OnEnable()
     {
+        // 모든 정보를 키고 감사 텍스트는 끔
+        for (int i = 0; i < foodList.Length; i++)
+        {
+            int childCount = foodList[i].transform.childCount;
+
+            for (int j = 0; j < childCount; j++)
+                foodList[i].transform.GetChild(j).gameObject.SetActive(true);
+
+            foodList[i].transform.GetChild(childCount - 1).gameObject.SetActive(false);
+            foodList[i].GetComponent<FoodItem>().isEnable = true;
+        }
+
         StartCoroutine(DefaultSetting());
     }
 
@@ -71,7 +83,6 @@ public class INNChangeItem : MonoBehaviour
             addRange = Random.Range(-range, range);     // 상품에 대한 가치를 구함
             SetEfficiency(i);
 
-
             AddStateTurnOff(addList);                   // 모든 추가 상태를 끔
 
             // 추가 효과 개수 만큼 반복
@@ -112,6 +123,8 @@ public class INNChangeItem : MonoBehaviour
     private void ShowValue(TextMeshProUGUI outText, float value, bool isBase = false, bool isMoney = false)
     {
         value += addRange * value;
+
+
 
         if (value >= 0)
         {

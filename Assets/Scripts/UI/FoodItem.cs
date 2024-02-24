@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -7,6 +6,7 @@ using UnityEngine.UI;
 
 public class FoodItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
+    public bool isEnable = true;
     public int index = 0;                               // 자신이 위치한 인덱스
     public bool isHotFood = false;                      // 해당 음식이 뜨거운 음식인지 여부          
 
@@ -36,7 +36,9 @@ public class FoodItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     [SerializeField] private TextMeshProUGUI remainMaxFoodText; // 최대 허기를 표시하는 UI
     [SerializeField] private Slider currentFoodSlider;          // 현재 허기량을 나타내는 슬라이더
 
-    [SerializeField] private List<KoreaToEng> koreaToEng;       // 추가 스탯의 한국어를 영어로 바꿔주는 배열
+    [SerializeField] private SerializableDictionary<string, string> stateKoreaToEng;       // 추가 스탯의 한국어를 영어로 바꿔주는 배열
+
+    
 
     public void Start()
     {
@@ -75,7 +77,7 @@ public class FoodItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     private void BuyItem()
     {
-        if (selectedIndex == -1 || selectedIndex != index)
+        if (selectedIndex == -1 || selectedIndex != index || !isEnable)
             return;
 
         int cost = int.Parse(costText.text);
@@ -123,6 +125,13 @@ public class FoodItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         displayFoodImage.sprite = null;
         displayFoodImage.color = new Vector4(0.0f, 0.0f, 0.0f, 0.0f);
         foodStreamImage.SetActive(false);
+
+        // 다시 구매 할 수 없도록 설정
+        for (int i = 0; i < transform.childCount; i++)
+            transform.GetChild(i).gameObject.SetActive(false);
+        transform.GetChild(transform.childCount - 1).gameObject.SetActive(true);
+
+        isEnable = false;
     }
 
     private void SetStat()
@@ -137,7 +146,7 @@ public class FoodItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             string name = addStatName.transform.GetChild(i).GetComponent<TextMeshProUGUI>().text;
             double value = double.Parse(addStatValue.transform.GetChild(i).GetComponent<TextMeshProUGUI>().text);
 
-            //GameManager.info.AddFoodState(koreaToEng[name], value);
+            GameManager.info.AddFoodState(stateKoreaToEng[name], value);
         }
     }
 
@@ -166,6 +175,10 @@ public class FoodItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     // 마우스가 해당 오브젝트 위에 있을 때
     void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
     {
+        // 이미 산적이 있을 경우 중지
+        if (!isEnable)
+            return;
+
         if (displayFoodImage.color.a < 0.1f)
             displayFoodImage.color = Color.white;
 
@@ -187,11 +200,4 @@ public class FoodItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
         foodStreamImage.SetActive(false);
     }
-}
-
-[SerializeField]
-class KoreaToEng
-{
-    string korea;
-    string eng;
 }

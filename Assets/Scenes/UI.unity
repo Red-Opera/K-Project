@@ -153,7 +153,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerState: {fileID: 11400000, guid: 19a7ddf3c46ba6f4d8d4813797140586, type: 2}
-  addState: {fileID: 0}
+  addFoodState: {fileID: 0}
+  addWaphonState: {fileID: 0}
+  addStatState: {fileID: 0}
 --- !u!4 &1330479072
 Transform:
   m_ObjectHideFlags: 0
@@ -328,7 +330,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2722122139515114973, guid: e4ccfcaea3fa1a648a9f02bf66eab781, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.000043779226
+      value: -0.0003131556
       objectReference: {fileID: 0}
     - target: {fileID: 3340444089296912120, guid: e4ccfcaea3fa1a648a9f02bf66eab781, type: 3}
       propertyPath: m_AnchorMax.y

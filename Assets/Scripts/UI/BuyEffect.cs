@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class BuyEffect : MonoBehaviour
 {
-    Image image; 
+    Image image;        // 구매 효과 오브젝트의 이미지
 
     public void Start()
     {
@@ -13,6 +13,7 @@ public class BuyEffect : MonoBehaviour
 
     public void Update()
     {
+        // 흐릿하게 보일 경우 없앰
         if (image.color.a < 0.05f)
             Destroy(gameObject);
     }

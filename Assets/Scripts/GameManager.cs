@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -10,8 +11,9 @@ public class GameManager : MonoBehaviour
     public State addFoodState;                  // 음식 추가 능력치가 있을 경우 추가
     public State addWaphonState;                // 무기 추가 능력치가 있을 경우 추가
     public State addStatState;                  // 스탯 추가 능력치가 있을 경우 추가
+    public State allPlayerState;                // 총 플레이어 능력치
 
-    public State currentPlayerState { get { return playerState; } }    // 총 플레이어 스탯을 반환하는 변수
+    public State currentPlayerState { get { return allPlayerState; } }    // 총 플레이어 스탯을 반환하는 변수
 
     void Awake()
     {
@@ -27,11 +29,36 @@ public class GameManager : MonoBehaviour
         addFoodState = ScriptableObject.CreateInstance<State>();
         addWaphonState = ScriptableObject.CreateInstance<State>();
         addStatState = ScriptableObject.CreateInstance<State>();
+        allPlayerState = ScriptableObject.CreateInstance<State>();
     }
 
     void Update()
     {
-        
+
+    }
+
+    private void UpdatePlayerState()
+    {
+        foreach (string state in State.datas.Keys)
+        {
+            if (state == "NickName")
+                continue;
+
+            // 해당 능력치의 타입
+            Type type = State.datas[state].GetValue(addFoodState).GetType();
+
+            // 모든 능력치를 가져옴
+            double defualtState = Convert.ToDouble(State.datas[state].GetValue(playerState));
+            double food = Convert.ToDouble(State.datas[state].GetValue(addFoodState));
+            double waphon = Convert.ToDouble(State.datas[state].GetValue(addWaphonState));
+            double stat = Convert.ToDouble(State.datas[state].GetValue(addStatState));
+
+            // 모두 더함
+            object returnValue = Convert.ChangeType(defualtState + food + waphon + stat, Type.GetTypeCode(type));
+
+            // 합계를 저장함
+            State.datas[state].SetValue(allPlayerState, returnValue);
+        }
     }
 
     public void AddFoodState(string stateName, double value)
@@ -48,20 +75,16 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        // 값을 더함
-        try 
-        {
-            // 숫자로 바꿀 수 있는 경우 숫자로 바꾸고 값을 더함
-            double resultValue = (double)fieldValue + value;
+        // 숫자로 바꿀 수 있는 경우 숫자로 바꾸고 값을 더함
+        double resultValue = Convert.ToDouble(fieldValue) + value;
+        
+        // 해당 능력치가 어떤 타입인지 알아낸 후 추가할 값을 더함
+        Type type = State.datas[stateName].GetValue(addFoodState).GetType();
+        object returnValue = Convert.ChangeType(resultValue, Type.GetTypeCode(type));
 
-            // 다시 해당 타입으로 변환되어 저장함
-            State.datas[stateName].SetValue(addFoodState, resultValue);
-        }
+        // 다시 해당 타입으로 변환되어 저장함
+        State.datas[stateName].SetValue(addFoodState, returnValue);
 
-        catch 
-        {
-            Debug.Assert(false, "해당 값은 더할 수 없습니다.");
-            return;
-        }
+        UpdatePlayerState();
     }
 }

@@ -16,7 +16,7 @@ MonoBehaviour:
   addState:
   - stateName: "\uACF5\uACA9\uB825"
     value: 10
-  - stateName: "\uD06C\uB9AC\uD2F0\uCEEC"
+  - stateName: "\uCE58\uBA85\uD0C0 \uD655\uB960"
     value: 0.1
   baseState:
   - stateName: "\uCD5C\uB300\uCCB4\uB825"
