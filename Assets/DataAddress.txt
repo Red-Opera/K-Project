@@ -5,7 +5,7 @@
 아이템 획득 UI : https://opengameart.org/content/fantasy-ui-box
 음식 상점 음식 : https://ghostpixxells.itch.io/pixelfood
 음식 상점 UI : https://karwisch.itch.io/pxui-basic
-음식 상점 타이틀 : https://opengameart.org/content/gui-elements
+음식 상점 타이틀, 스탯 프레임 UI : https://opengameart.org/content/gui-elements
 음식 상점 BGM : http://www.piano-midi.de/mozart.htm
 음식 상점 타이틀 이미지 : https://gallery.yopriceville.com/Free-Clipart-Pictures/Oktoberfest-Clipart-PNG/Wooden_Beer_Mug_PNG_Clip_Art_Image
 X버튼 : https://egordorichev.itch.io/key-set
@@ -14,3 +14,4 @@ X버튼 : https://egordorichev.itch.io/key-set
 코인 UI 이미지 : https://iconduck.com/icons/313561/gold-coin
 음식 상점 하트 이미지 : https://www.pngegg.com/en/png-nymsb
 음식 상점 구매 코인 이미지 : https://opengameart.org/content/rotating-coin
+스탯 상점 폰트 : https://www.1001freefonts.com/adine-kirnberg.font
