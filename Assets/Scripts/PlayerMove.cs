@@ -76,4 +76,9 @@ public class PlayerMove : MonoBehaviour
         anim.SetBool("isJump",true);
         Debug.Log("setBool");
     }
+    //부를때 움직이지 않게
+    public void VelocityZero()
+    {
+        rigid.velocity = Vector2.zero;
+    }
 }
