@@ -38,8 +38,6 @@ public class FoodItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     [SerializeField] private SerializableDictionary<string, string> stateKoreaToEng;       // 추가 스탯의 한국어를 영어로 바꿔주는 배열
 
-    
-
     public void Start()
     {
         displayImage = GetComponent<Image>();

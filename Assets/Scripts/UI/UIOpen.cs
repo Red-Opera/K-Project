@@ -5,6 +5,9 @@ public class UIOpen : MonoBehaviour
     [SerializeField] private GameObject statusUI;
     [SerializeField] private GameObject inventoryUI;
     [SerializeField] private GameObject getItemUI;
+    [SerializeField] private GameObject statUI;
+
+    private bool isDefualtOpen = true;
 
     void Start()
     {
@@ -29,6 +32,13 @@ public class UIOpen : MonoBehaviour
 
         else if (Input.GetKeyDown(KeyCode.V) && inventoryUI.activeSelf)
             inventoryUI.SetActive(false);
+
+        if (statUI.activeSelf && isDefualtOpen)
+            ClostDefultUI();
+
+        else if (!statUI.activeSelf && !isDefualtOpen)
+            OpenDefaultUI();
+            
     }
 
     // 아이템 획득 창을 보여주는 메소드
@@ -39,5 +49,21 @@ public class UIOpen : MonoBehaviour
 
         if (!GetItemUI.isShowUI)
             StartCoroutine(itemUI.ShowItemUI(sprite, itemName, color));
+    }
+
+    private void ClostDefultUI()
+    {
+        for (int i = 0; i < 3; i++)
+            transform.GetChild(i).gameObject.SetActive(false);
+
+        isDefualtOpen = false;
+    }
+
+    private void OpenDefaultUI()
+    {
+        for (int i = 0; i < 3; i++)
+            transform.GetChild(i).gameObject.SetActive(true);
+
+        isDefualtOpen = true;
     }
 }

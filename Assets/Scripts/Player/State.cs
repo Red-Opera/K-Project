@@ -12,7 +12,7 @@ public class State : ScriptableObject
 
     public int damage = 0;              // 데미지
     public int defense = 0;             // 방어력
-    public float critical = 0;          // 크리티컬 확률
+    public float critical = 0;          // 치명타 확률
     public float moveSpeed = 0;         // 이동 속도
     public float jumpPower = 0;         // 점프력
     public int jumpCount = 0;           // 점프 횟수
@@ -28,7 +28,7 @@ public class State : ScriptableObject
     public static float satiety = 0;
 
     public int dashBarCount = 0;        // 대쉬 바 개수
-    public int food = 0;                // 허기 상태
+    public int food = 0;                // 허기
     public int money = 0;               // 플레이어 돈
 
     public static Dictionary<string, FieldInfo> datas = new Dictionary<string, FieldInfo>();
