@@ -8,6 +8,12 @@ public class StageManager : MonoBehaviour
     public GameObject[] Stages;
     public GameObject BossStage;
     public GameObject player;
+
+    void Start()
+    {
+        // 오브젝트가 활성화될 때마다 위치를 (0,0,0)으로 설정
+        transform.position = Vector3.zero;
+    }
     public void NextStage()
     {
         //Change Stage

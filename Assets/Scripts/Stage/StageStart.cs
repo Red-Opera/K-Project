@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -9,6 +10,13 @@ public class StageStart : MonoBehaviour
     public GameObject portal;
     public float interactDistance = 3f; // 상호작용 가능한 거리
 
+    private void Start()
+    {
+        if (SceneManager.GetActiveScene().name == "Stage1")
+        {
+            transform.position = Vector3.zero;
+        }
+    }
     void Update()
     {
         // 태그가 "Player"인 오브젝트와 포털 사이의 거리 계산
@@ -21,9 +29,9 @@ public class StageStart : MonoBehaviour
         // 포털에 가까워지면서 f를 눌렀을 때
         if (distanceToPortal < interactDistance && Input.GetKeyDown(KeyCode.F))
         {
-            Debug.Log("이동할수있는 거리입니다.");
             SceneManager.LoadScene("Stage1");
         }
+        
     }
 }
 
