@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5179995287774074411}
   - component: {fileID: -3424574616249225943}
   - component: {fileID: 8336428364605903419}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: MagicAttack
   m_TagString: Untagged
   m_Icon: {fileID: 0}

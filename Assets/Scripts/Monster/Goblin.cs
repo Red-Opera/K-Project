@@ -7,13 +7,18 @@ public class Goblin : MonoBehaviour
     Rigidbody2D rigid;
     SpriteRenderer spriteRenderer;
     Animator anim;
+    public State state;
     public int xSpeed;
+    private float moveSpeed;
+    public int Hp;
+    
     // Start is called before the first frame update
     void Start()
     {
         rigid = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
+        SetState();
         SetSpeed();
     }
 
@@ -24,7 +29,7 @@ public class Goblin : MonoBehaviour
     }
 
     void Idle(){
-        rigid.velocity = new Vector2(xSpeed, rigid.velocity.y);
+        rigid.velocity = new Vector2(xSpeed * moveSpeed, rigid.velocity.y);
         if(xSpeed > 0){
             spriteRenderer.flipX = false;
         }
@@ -38,12 +43,20 @@ public class Goblin : MonoBehaviour
         Invoke("SetSpeed", 1.5f);
         if(xSpeed == 0 ){
             anim.SetBool("isWalk",false);
-            Debug.Log("is Stop");
         }
         else{
             anim.SetBool("isWalk",true);
-            Debug.Log("is Walking");
-        }
+        }   
+    }
+
+    void SetState(){
+        moveSpeed = state.moveSpeed;
+        Hp = state.maxHP;
         
+    }
+
+    public void Damaged(int dmg){
+        Hp -= dmg;
+        Debug.Log("Monster Danaged " + dmg + "dmg");
     }
 }

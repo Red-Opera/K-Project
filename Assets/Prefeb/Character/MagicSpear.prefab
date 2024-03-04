@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8758471141251410823}
   - component: {fileID: 2607040199657878553}
   - component: {fileID: 3236620730567270318}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: MagicSpear
   m_TagString: Untagged
   m_Icon: {fileID: 0}

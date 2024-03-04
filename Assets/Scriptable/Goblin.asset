@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: Goblin
   m_EditorClassIdentifier: 
   nickName: 
-  level: 0
-  maxHP: 0
-  currentHp: 0
-  damage: 0
-  defense: 0
+  level: 1
+  maxHP: 40
+  currentHp: 40
+  damage: 5
+  defense: 2
   critical: 0
-  moveSpeed: 0
+  moveSpeed: 1
   jumpPower: 0
   jumpCount: 0
   maxJump: 0
@@ -33,4 +33,4 @@ MonoBehaviour:
   reloadTime: 0
   dashBarCount: 0
   food: 0
-  money: 0
+  money: 15
