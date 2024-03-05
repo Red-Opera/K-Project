@@ -142,4 +142,78 @@ public class GameManager : MonoBehaviour
 
         UpdatePlayerState();
     }
+
+    public void SetFoodState(string stateName, double value)
+    {
+        // 그 상태가 존재하는지 찾아봄
+        object fieldValue = null;
+        try { fieldValue = State.datas[stateName].GetValue(addFoodState); }
+
+        catch { return; }
+
+        if (fieldValue == null)
+        {
+            Debug.Assert(false, "해당 이름의 상태 이름이 존재하지 않습니다.");
+            return;
+        }
+
+        // 해당 능력치가 어떤 타입인지 알아낸 후 추가할 값을 더함
+        Type type = State.datas[stateName].GetValue(addFoodState).GetType();
+        object returnValue = Convert.ChangeType(value, Type.GetTypeCode(type));
+
+        // 다시 해당 타입으로 변환되어 저장함
+        State.datas[stateName].SetValue(addFoodState, returnValue);
+
+        UpdatePlayerState();
+    }
+
+    // 무기로 인한 스탯 값을 구하는 메소드
+    public void SetWaphonState(string stateName, double value)
+    {
+        // 그 상태가 존재하는지 찾아봄
+        object fieldValue = null;
+        try { fieldValue = State.datas[stateName].GetValue(addWaphonState); }
+
+        catch { return; }
+
+        if (fieldValue == null)
+        {
+            Debug.Assert(false, "해당 이름의 상태 이름이 존재하지 않습니다.");
+            return;
+        }
+
+        // 해당 능력치가 어떤 타입인지 알아낸 후 추가할 값을 더함
+        Type type = State.datas[stateName].GetValue(addWaphonState).GetType();
+        object returnValue = Convert.ChangeType(value, Type.GetTypeCode(type));
+
+        // 다시 해당 타입으로 변환되어 저장함
+        State.datas[stateName].SetValue(addWaphonState, returnValue);
+
+        UpdatePlayerState();
+    }
+
+    // 능력치 업그레이드에 따른 스탯 상승을 구하는 메소드
+    public void SetStatState(string stateName, double value)
+    {
+        // 그 상태가 존재하는지 찾아봄
+        object fieldValue = null;
+        try { fieldValue = State.datas[stateName].GetValue(addStatState); }
+
+        catch { return; }
+
+        if (fieldValue == null)
+        {
+            Debug.Assert(false, "해당 이름의 상태 이름이 존재하지 않습니다.");
+            return;
+        }
+
+        // 해당 능력치가 어떤 타입인지 알아낸 후 추가할 값을 더함
+        Type type = State.datas[stateName].GetValue(addStatState).GetType();
+        object returnValue = Convert.ChangeType(value, Type.GetTypeCode(type));
+
+        // 다시 해당 타입으로 변환되어 저장함
+        State.datas[stateName].SetValue(addStatState, returnValue);
+
+        UpdatePlayerState();
+    }
 }
