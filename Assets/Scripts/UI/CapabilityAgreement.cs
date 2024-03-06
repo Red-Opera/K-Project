@@ -18,7 +18,7 @@ public class CapabilityAgreement : MonoBehaviour
     private List<ParticleSystem> buyEffect;                     // 구매 효과
     private List<Ani2DRun> signEffect;                          // 사인하는 효과를 내는 스크립트
 
-    private AudioSource audioSource;             // 오디오 소스
+    private AudioSource audioSource;                            // 오디오 소스
 
     private int ableRemain;
 
