@@ -7,7 +7,7 @@ public class Goblin : MonoBehaviour
     Rigidbody2D rigid;
     SpriteRenderer spriteRenderer;
     Animator anim;
-    public State state;
+    public MonsterState state;
     public int xSpeed;
     private float moveSpeed;
     public int Hp;
