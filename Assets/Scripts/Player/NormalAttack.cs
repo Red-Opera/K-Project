@@ -31,9 +31,10 @@ public class NormalAttack : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D col){
         if(col.gameObject.layer == 7){
-            Scarecrow scarecrow = col.gameObject.GetComponent<Scarecrow>();
-            if(scarecrow != null){
-                scarecrow.Damaged(Damage);
+            //Scarecrow scarecrow = col.gameObject.GetComponent<Scarecrow>();
+            Goblin monster = col.gameObject.GetComponent<Goblin>();
+            if(monster != null){
+                monster.Damaged(Damage);
             }
         }
     }
