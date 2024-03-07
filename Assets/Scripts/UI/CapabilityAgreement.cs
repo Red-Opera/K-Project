@@ -8,6 +8,7 @@ public class CapabilityAgreement : MonoBehaviour
     [SerializeField] private TextMeshProUGUI remainText;    // 남은 능력치 업그레이드 양을 확인할 수 있는 텍스트
     [SerializeField] private GameObject signType;           // 능력치 종류를 담는 오브젝트
     [SerializeField] private AudioClip signSound;           // 사인 소리
+    [SerializeField] private HpLevelManager hpLevelManager; // 체력 레벨 관련 컴포넌트
 
     [SerializeField] private SerializableDictionary<string, string> stateKoreaToEng;        // 추가 스탯의 한국어를 영어로 바꿔주는 배열
     [SerializeField] private List<AddAbilityKey> addAbilityKey;                             // 추가 능력치를 저장하는 리스트 Key
@@ -29,6 +30,7 @@ public class CapabilityAgreement : MonoBehaviour
     {
         Debug.Assert(remainText != null, "남은 비용 텍스트 UI가 없습니다.");
         Debug.Assert(signType != null, "능력치 종류를 담는 오브젝트가 없습니다.");
+        Debug.Assert(hpLevelManager != null, "체력, 레벨바 관련 컴포넌트가 존재하지 않습니다.");
         
         abilityText = new List<TextMeshProUGUI>();
         buyEffect = new List<ParticleSystem>();
@@ -128,5 +130,9 @@ public class CapabilityAgreement : MonoBehaviour
             // 추가 능력치를 반영함
             GameManager.info.SetStatState(stateKoreaToEng[key[i]], resultValue);
         }
+
+        // 체력바 업데이트
+        GameManager.info.allPlayerState.currentHp = GameManager.info.allPlayerState.maxHP;
+        hpLevelManager.GetState(GameManager.info.allPlayerState);
     }
 }
