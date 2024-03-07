@@ -10,13 +10,6 @@ public class StageStart : MonoBehaviour
     public GameObject portal;
     public float interactDistance = 3f; // 상호작용 가능한 거리
 
-    private void Start()
-    {
-        if (SceneManager.GetActiveScene().name == "Stage1")
-        {
-            transform.position = Vector3.zero;
-        }
-    }
     void Update()
     {
         // 태그가 "Player"인 오브젝트와 포털 사이의 거리 계산
