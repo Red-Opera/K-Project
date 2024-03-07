@@ -179,4 +179,7 @@ public class PlayerMove : MonoBehaviour
             gameObject.layer =8;
         }
     }
+    public void VelocityZero(){
+        rigid.velocity = Vector2.zero;
+    }
 }
