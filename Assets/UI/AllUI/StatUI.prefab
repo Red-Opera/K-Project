@@ -188,9 +188,9 @@ Canvas:
   m_GameObject: {fileID: 1182975234980320947}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_Camera: {fileID: 0}
-  m_PlaneDistance: 100
+  m_PlaneDistance: 500
   m_PixelPerfect: 1
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
@@ -257,6 +257,80 @@ MonoBehaviour:
   remainText: {fileID: 2139251791249873523}
   signType: {fileID: 6334505965761010866}
   signSound: {fileID: 8300000, guid: cc110749be9a64949afd1bf898b1fb79, type: 3}
+  stateKoreaToEng:
+    array:
+    - Key: "\uB2C9\uB124\uC784"
+      Value: NickName
+    - Key: "\uB808\uBCA8"
+      Value: Level
+    - Key: "\uCD5C\uB300 \uCCB4\uB825"
+      Value: MaxHP
+    - Key: "\uD604\uC7AC \uCCB4\uB825"
+      Value: CurrentHp
+    - Key: "\uACF5\uACA9\uB825"
+      Value: Damage
+    - Key: "\uBC29\uC5B4\uB825"
+      Value: Defence
+    - Key: "\uCE58\uBA85\uD0C0 \uD655\uB960"
+      Value: Critical
+    - Key: "\uC774\uB3D9 \uC18D\uB3C4"
+      Value: MoveSpeed
+    - Key: "\uC810\uD504\uB825"
+      Value: JumpPower
+    - Key: "\uC810\uD504 \uD69F\uC218"
+      Value: MoveCount
+    - Key: "\uCD5C\uB300 \uC810\uD504 \uD69F\uC218"
+      Value: MaxJump
+    - Key: "\uB300\uC26C \uB370\uBBF8\uC9C0"
+      Value: DashDamage
+    - Key: "\uAC15\uC778\uD568"
+      Value: Strong
+    - Key: "\uD06C\uB9AC\uD2F0\uCEEC \uB370\uBBF8\uC9C0"
+      Value: CriticalDamage
+    - Key: "\uACF5\uACA9 \uC18D\uB3C4"
+      Value: AttackSpeed
+    - Key: "\uCD94\uAC00 \uACF5\uACA9\uB825"
+      Value: FixedDamage
+    - Key: "\uBC29\uC5B4 \uD655\uB960"
+      Value: DefensePersent
+    - Key: "\uD68C\uD53C \uD655\uB960"
+      Value: AvoidPersent
+    - Key: "\uB300\uC26C \uBC14"
+      Value: DashBarCount
+    - Key: "\uD5C8\uAE30"
+      Value: Food
+    - Key: "\uB3C8"
+      Value: Money
+  addAbilityKey:
+  - key:
+    - "\uACF5\uACA9\uB825"
+  - key:
+    - "\uC774\uB3D9 \uC18D\uB3C4"
+    - "\uACF5\uACA9 \uC18D\uB3C4"
+  - key:
+    - "\uBC29\uC5B4\uB825"
+  - key:
+    - "\uCE58\uBA85\uD0C0 \uD655\uB960"
+    - "\uD68C\uD53C \uD655\uB960"
+  - key:
+    - "\uCD5C\uB300 \uCCB4\uB825"
+  - key:
+    - "\uAC15\uC778\uD568"
+  addAbilityValue:
+  - value:
+    - 2
+  - value:
+    - 0.5
+    - 0.5
+  - value:
+    - 1.5
+  - value:
+    - 0.5
+    - 0.5
+  - value:
+    - 10
+  - value:
+    - 1
 --- !u!82 &8561006370078096745
 AudioSource:
   m_ObjectHideFlags: 0
@@ -822,7 +896,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -150, y: 65}
+  m_AnchoredPosition: {x: -150, y: 62.69995}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2679508517374209700
