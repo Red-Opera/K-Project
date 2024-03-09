@@ -257,6 +257,7 @@ MonoBehaviour:
   remainText: {fileID: 2139251791249873523}
   signType: {fileID: 6334505965761010866}
   signSound: {fileID: 8300000, guid: cc110749be9a64949afd1bf898b1fb79, type: 3}
+  hpLevelManager: {fileID: 0}
   stateKoreaToEng:
     array:
     - Key: "\uB2C9\uB124\uC784"
