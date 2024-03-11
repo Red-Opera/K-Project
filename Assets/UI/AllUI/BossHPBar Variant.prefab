@@ -92,6 +92,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: BossHPBar Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 4977911723987851410, guid: 2cd92e1b67f2ccc4ebc35725b3de68bf, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4977911723987851410, guid: 2cd92e1b67f2ccc4ebc35725b3de68bf, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8515734847026626751, guid: 2cd92e1b67f2ccc4ebc35725b3de68bf, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0

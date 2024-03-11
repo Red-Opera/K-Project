@@ -153,8 +153,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: {fileID: 0}
-  currentHpText: {fileID: 3007184142442796387}
   maxHpText: {fileID: 4744720227901134140}
+  currentHpText: {fileID: 3007184142442796387}
+  levelText: {fileID: 0}
   hpSlider: {fileID: 8855150996546724536}
 --- !u!1 &3737688925410860289
 GameObject:
@@ -612,7 +613,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 53, y: -480}
+  m_AnchoredPosition: {x: 53, y: 60}
   m_SizeDelta: {x: 1290, y: 125}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &8855150996546724536
