@@ -20,3 +20,4 @@ X버튼 : https://egordorichev.itch.io/key-set
 능력치 증가 사인 소리 : https://freesound.org/people/waldram/sounds/257518/
 게임 타이틀 BGM : https://gongu.copyright.or.kr/gongu/wrt/wrt/view.do?wrtSn=13072830&menuNo=200020
 대화 창 UI : https://opengameart.org/content/retro-pixel-art-guihud-elements-including-dialogue-box
+인벤토리 틀 UI : https://opengameart.org/content/golden-ui-bigger-than-ever-edition
