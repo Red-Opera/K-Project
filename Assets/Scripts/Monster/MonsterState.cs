@@ -14,5 +14,4 @@ public class MonsterState : ScriptableObject
     public int moveSpeed;
     public int flyingSpeed;
     public int Money;
-    public static Dictionary<string, FieldInfo> datas = new Dictionary<string, FieldInfo>();
 }
