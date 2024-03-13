@@ -27,7 +27,8 @@ public class MagicAttack : MonoBehaviour
 
     void OnTriggerStay2D(Collider2D col){
         if(col.gameObject.layer ==7 && pre == false){
-            Scarecrow monster = col.gameObject.GetComponent<Scarecrow>();
+            //Scarecrow monster = col.gameObject.GetComponent<Scarecrow>();
+            Goblin monster = col.gameObject.GetComponent<Goblin>();
             if(monster != null){
                 monster.Damaged(damage);
                 Disappear();
