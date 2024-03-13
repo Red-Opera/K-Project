@@ -28,7 +28,7 @@ public class PMove : MonoBehaviour
     }
 
     void Move(){
-        float Horiz = Input.GetAxisRaw("Horizonal");
+        float Horiz = Input.GetAxisRaw("Horizontal");
         if(Horiz != 0){
             rigid.velocity = new Vector2(Horiz * playerState.moveSpeed, rigid.velocity.y);
             if(rigid.velocity.x>0){
@@ -60,7 +60,7 @@ public class PMove : MonoBehaviour
     }
     void Jump(){
         float ColliderSizeX = PlayerCollider.size.x/2;
-        float ColliderSizeY = PlayerCollider.size.y/2 -PlayerCollider.offset.y;
+        float ColliderSizeY = PlayerCollider.size.y/2 -PlayerCollider.offset.y + 1;
 
         if(Input.GetButtonDown("Jump")){
             rigid.velocity = new Vector2(rigid.velocity.x, playerState.jumpPower);
@@ -70,7 +70,7 @@ public class PMove : MonoBehaviour
 
             Vector2 PlayerPos = new Vector2(transform.position.x, transform.position.y);
             var GroundHit = Physics2D.OverlapArea(PlayerPos - new Vector2(ColliderSizeX,ColliderSizeY), PlayerPos - new Vector2(-ColliderSizeX,ColliderSizeY),LayerMask.GetMask("Platform","DamagedObject"));
-            if(GroundHit != null && isJumping == false){
+            if(GroundHit != null || isJumping == false){
                 anim.SetBool("isjump",false);
                 if(playerState.jumpCount > 0){
                     playerState.jumpCount = 0;
