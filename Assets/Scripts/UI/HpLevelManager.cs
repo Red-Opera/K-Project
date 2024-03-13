@@ -24,6 +24,11 @@ public class HpLevelManager : MonoBehaviour
         SetLevel();
     }
 
+    public void Update()
+    {
+        
+    }
+
     // 슬라이더 리셋
     private void SliderReset()
     {
