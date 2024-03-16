@@ -323,16 +323,91 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 634403331232065511, guid: e4ccfcaea3fa1a648a9f02bf66eab781, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
+    - target: {fileID: 1261122938925179374, guid: e4ccfcaea3fa1a648a9f02bf66eab781, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 2900529878058060524, guid: e4ccfcaea3fa1a648a9f02bf66eab781, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
+    - target: {fileID: 1729059009197324781, guid: e4ccfcaea3fa1a648a9f02bf66eab781, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 2900529878058060524, guid: e4ccfcaea3fa1a648a9f02bf66eab781, type: 3}
-      propertyPath: m_AnchorMax.y
+    - target: {fileID: 2220320429091115391, guid: e4ccfcaea3fa1a648a9f02bf66eab781, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -200
+      objectReference: {fileID: 0}
+    - target: {fileID: 2445110882169709531, guid: e4ccfcaea3fa1a648a9f02bf66eab781, type: 3}
+      propertyPath: selecteables.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2445110882169709531, guid: e4ccfcaea3fa1a648a9f02bf66eab781, type: 3}
+      propertyPath: selecteables.Array.data[0].cost
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 2445110882169709531, guid: e4ccfcaea3fa1a648a9f02bf66eab781, type: 3}
+      propertyPath: selecteables.Array.data[1].cost
+      value: 75
+      objectReference: {fileID: 0}
+    - target: {fileID: 2445110882169709531, guid: e4ccfcaea3fa1a648a9f02bf66eab781, type: 3}
+      propertyPath: selecteables.Array.data[2].cost
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 2445110882169709531, guid: e4ccfcaea3fa1a648a9f02bf66eab781, type: 3}
+      propertyPath: selecteables.Array.data[3].cost
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 2445110882169709531, guid: e4ccfcaea3fa1a648a9f02bf66eab781, type: 3}
+      propertyPath: selecteables.Array.data[0].sprite
+      value: 
+      objectReference: {fileID: -825459737, guid: 39caf47f5ecdfc543bb636fb7afc82ed, type: 3}
+    - target: {fileID: 2445110882169709531, guid: e4ccfcaea3fa1a648a9f02bf66eab781, type: 3}
+      propertyPath: selecteables.Array.data[1].sprite
+      value: 
+      objectReference: {fileID: 400821093, guid: 39caf47f5ecdfc543bb636fb7afc82ed, type: 3}
+    - target: {fileID: 2445110882169709531, guid: e4ccfcaea3fa1a648a9f02bf66eab781, type: 3}
+      propertyPath: selecteables.Array.data[2].sprite
+      value: 
+      objectReference: {fileID: 1551794085, guid: 39caf47f5ecdfc543bb636fb7afc82ed, type: 3}
+    - target: {fileID: 2445110882169709531, guid: e4ccfcaea3fa1a648a9f02bf66eab781, type: 3}
+      propertyPath: selecteables.Array.data[3].sprite
+      value: 
+      objectReference: {fileID: 1015998936, guid: 39caf47f5ecdfc543bb636fb7afc82ed, type: 3}
+    - target: {fileID: 2445110882169709531, guid: e4ccfcaea3fa1a648a9f02bf66eab781, type: 3}
+      propertyPath: selecteables.Array.data[0].content
+      value: 'A simple yet sturdy one-handed sword, crafted for novice adventurers. '
+      objectReference: {fileID: 0}
+    - target: {fileID: 2445110882169709531, guid: e4ccfcaea3fa1a648a9f02bf66eab781, type: 3}
+      propertyPath: selecteables.Array.data[1].content
+      value: 'The kunai is a versatile double-edged blade, optimized for rapid strikes
+        in close combat. '
+      objectReference: {fileID: 0}
+    - target: {fileID: 2445110882169709531, guid: e4ccfcaea3fa1a648a9f02bf66eab781, type: 3}
+      propertyPath: selecteables.Array.data[2].content
+      value: 'The basic magic staff is a simple yet potent instrument imbued with
+        mystical energies. '
+      objectReference: {fileID: 0}
+    - target: {fileID: 2445110882169709531, guid: e4ccfcaea3fa1a648a9f02bf66eab781, type: 3}
+      propertyPath: selecteables.Array.data[3].content
+      value: Sturdy and reliable, this bow offers precision and power without unnecessary
+        frills.
+      objectReference: {fileID: 0}
+    - target: {fileID: 2445110882169709531, guid: e4ccfcaea3fa1a648a9f02bf66eab781, type: 3}
+      propertyPath: selecteables.Array.data[0].equipmentType
+      value: 4026531840
+      objectReference: {fileID: 0}
+    - target: {fileID: 2445110882169709531, guid: e4ccfcaea3fa1a648a9f02bf66eab781, type: 3}
+      propertyPath: selecteables.Array.data[1].equipmentType
+      value: 4026531840
+      objectReference: {fileID: 0}
+    - target: {fileID: 2445110882169709531, guid: e4ccfcaea3fa1a648a9f02bf66eab781, type: 3}
+      propertyPath: selecteables.Array.data[2].equipmentType
+      value: 251658240
+      objectReference: {fileID: 0}
+    - target: {fileID: 2445110882169709531, guid: e4ccfcaea3fa1a648a9f02bf66eab781, type: 3}
+      propertyPath: selecteables.Array.data[3].equipmentType
+      value: 251658240
+      objectReference: {fileID: 0}
+    - target: {fileID: 3793330864493448482, guid: e4ccfcaea3fa1a648a9f02bf66eab781, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4482608772065175837, guid: e4ccfcaea3fa1a648a9f02bf66eab781, type: 3}
@@ -387,6 +462,14 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6300480356368454904, guid: e4ccfcaea3fa1a648a9f02bf66eab781, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7016911846150277390, guid: e4ccfcaea3fa1a648a9f02bf66eab781, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -200
+      objectReference: {fileID: 0}
     - target: {fileID: 7030477650807087990, guid: e4ccfcaea3fa1a648a9f02bf66eab781, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -395,6 +478,14 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8088622197820306230, guid: e4ccfcaea3fa1a648a9f02bf66eab781, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8220566378174925776, guid: e4ccfcaea3fa1a648a9f02bf66eab781, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -190
+      objectReference: {fileID: 0}
     - target: {fileID: 8666521314751362877, guid: e4ccfcaea3fa1a648a9f02bf66eab781, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -402,6 +493,10 @@ PrefabInstance:
     - target: {fileID: 8666521314751362877, guid: e4ccfcaea3fa1a648a9f02bf66eab781, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8884366038024096037, guid: e4ccfcaea3fa1a648a9f02bf66eab781, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -200
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

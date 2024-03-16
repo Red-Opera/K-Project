@@ -22,9 +22,10 @@ public class FoodManager : MonoBehaviour
 
     private void Update()
     {
-        foodSlider.value = int.Parse(currentFoodText.text);
+        // 플레이어 상태에서 플레이어 돈 및 허기량을 받은 후 텍스트로 출력하고 허기 슬라이더 값도 변경함
         currentFoodText.text = state.food.ToString();
         currentCoinText.text = state.money.ToString();
+        foodSlider.value = int.Parse(currentFoodText.text) / 100f;
     }
 
     // 일정량의 허기를 감소시키는 메소드

@@ -122,7 +122,7 @@ public class GameManager : MonoBehaviour
     }
 
     // 모든 상태를 더하여 전체 상태를 업데이트하는 메소드
-    private void UpdatePlayerState()
+    public void UpdatePlayerState()
     {
         foreach (string state in State.datas.Keys)
         {

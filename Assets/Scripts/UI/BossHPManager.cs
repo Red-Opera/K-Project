@@ -12,7 +12,10 @@ public class BossHPManager : MonoBehaviour
     private void Start()
     {
         Debug.Assert(playerState != null, "플레이어 스텟이 없습니다.");
+
+        coin = GameObject.Find("RemainCoinText").GetComponent<TextMeshProUGUI>();
         Debug.Assert(coin != null, "플레이어 골드를 표시하는 텍스트가 없습니다.");
+
     }
 
     public void Drap(int cost)
