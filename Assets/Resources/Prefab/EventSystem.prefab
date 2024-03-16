@@ -140,6 +140,7 @@ GameObject:
   - component: {fileID: 3325494092406911818}
   - component: {fileID: 1537317030761545799}
   - component: {fileID: 6860621762307715883}
+  - component: {fileID: 6868218097808560833}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -226,6 +227,18 @@ MonoBehaviour:
   inventoryUI: {fileID: 8088622197820306230}
   getItemUI: {fileID: 4565430950343221254}
   statUI: {fileID: 180404260704039832}
+--- !u!114 &6868218097808560833
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6258773169604641719}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac66d5abf54d74e459d742da4732f2f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &121605441177190512
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -318,18 +331,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -0.0003131556
       objectReference: {fileID: 0}
-    - target: {fileID: 2634694282489969890, guid: 40ff3bfeb7a0ccf4c8a93c1d76319a87, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2634694282489969890, guid: 40ff3bfeb7a0ccf4c8a93c1d76319a87, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2634694282489969890, guid: 40ff3bfeb7a0ccf4c8a93c1d76319a87, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0.6130563
-      objectReference: {fileID: 0}
     - target: {fileID: 4242007502961322689, guid: 40ff3bfeb7a0ccf4c8a93c1d76319a87, type: 3}
       propertyPath: m_Name
       value: FoodStore
@@ -337,26 +338,6 @@ PrefabInstance:
     - target: {fileID: 4242007502961322689, guid: 40ff3bfeb7a0ccf4c8a93c1d76319a87, type: 3}
       propertyPath: m_IsActive
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5960229469811948126, guid: 40ff3bfeb7a0ccf4c8a93c1d76319a87, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5960229469811948126, guid: 40ff3bfeb7a0ccf4c8a93c1d76319a87, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5960229469811948126, guid: 40ff3bfeb7a0ccf4c8a93c1d76319a87, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: -27
-      objectReference: {fileID: 0}
-    - target: {fileID: 6106588132868152611, guid: 40ff3bfeb7a0ccf4c8a93c1d76319a87, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0.75
-      objectReference: {fileID: 0}
-    - target: {fileID: 6106588132868152611, guid: 40ff3bfeb7a0ccf4c8a93c1d76319a87, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6874354208554326509, guid: 40ff3bfeb7a0ccf4c8a93c1d76319a87, type: 3}
       propertyPath: m_Size
@@ -473,18 +454,6 @@ PrefabInstance:
       propertyPath: m_Size.y
       value: 45
       objectReference: {fileID: 0}
-    - target: {fileID: 4525974569161488475, guid: f22243f5cbdbd5a449eebcd02dec10d0, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4525974569161488475, guid: f22243f5cbdbd5a449eebcd02dec10d0, type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4525974569161488475, guid: f22243f5cbdbd5a449eebcd02dec10d0, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -447.5
-      objectReference: {fileID: 0}
     - target: {fileID: 8068049331900389890, guid: f22243f5cbdbd5a449eebcd02dec10d0, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -571,13 +540,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9173971611708185172, guid: f22243f5cbdbd5a449eebcd02dec10d0, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f22243f5cbdbd5a449eebcd02dec10d0, type: 3}
+--- !u!1 &6731808131638525580 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5943870041764075502, guid: f22243f5cbdbd5a449eebcd02dec10d0, type: 3}
+  m_PrefabInstance: {fileID: 1085633160903485794}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &6982700953099662176 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8068049331900389890, guid: f22243f5cbdbd5a449eebcd02dec10d0, type: 3}
@@ -853,14 +827,6 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 361408813795559289}
-    - target: {fileID: 7197799979884268321, guid: eef5b38dd5a8fe54bad467ebfe01f9d0, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 7197799979884268321, guid: eef5b38dd5a8fe54bad467ebfe01f9d0, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8052022211296967316, guid: eef5b38dd5a8fe54bad467ebfe01f9d0, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -1078,10 +1044,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: BossHPBar
       objectReference: {fileID: 0}
-    - target: {fileID: 6598734779992136484, guid: 33eb438bf87d3374aba877755c83c1b1, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7741880293733161634, guid: 33eb438bf87d3374aba877755c83c1b1, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -1180,6 +1142,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4482608772065175837}
     m_Modifications:
+    - target: {fileID: 2012229073801385240, guid: 976840595b0bc45458bf844818631b7c, type: 3}
+      propertyPath: inventslot
+      value: 
+      objectReference: {fileID: 6731808131638525580}
     - target: {fileID: 2658042381133772421, guid: 976840595b0bc45458bf844818631b7c, type: 3}
       propertyPath: m_Pivot.x
       value: 0

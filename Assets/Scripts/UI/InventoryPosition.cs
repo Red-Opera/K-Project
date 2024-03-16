@@ -13,9 +13,9 @@ public class InventroyPosition : MonoBehaviour
     private List<GameObject> displayData;       // 현재 전시중인 아이템
     private Transform[] displayPos;             // 아이템을 전시할 수 있는 오브젝트
 
-    public static event System.Action<string> OnAddItem;        // 이 스크립트를 가지고 있는 모든 오브젝트가 실행할 이벤트
-    public List<Sprite> spriteData = new List<Sprite>();        // 추가할 아이템 이미지
-    private Dictionary<string, Sprite> sprites;                 // 추가할 아이템 이름과 이미지 배열
+    public static event System.Action<string, EquipmentState> OnAddItem;        // 이 스크립트를 가지고 있는 모든 오브젝트가 실행할 이벤트
+    public List<Sprite> spriteData = new List<Sprite>();                        // 추가할 아이템 이미지
+    private Dictionary<string, Sprite> sprites;                                 // 추가할 아이템 이름과 이미지 배열
 
     public void Awake()
     {
@@ -115,7 +115,7 @@ public class InventroyPosition : MonoBehaviour
     }
 
     // 아이템을 추가하거나 생성하는 함수
-    public void AddItem(string name)
+    public void AddItem(string name, EquipmentState equipmentState)
     {
         Debug.Assert(sprites.ContainsKey(name), "해당 이름의 아이템은 존재하지 않습니다");
 
@@ -126,6 +126,8 @@ public class InventroyPosition : MonoBehaviour
             if (slot.childCount <= 0)
             {
                 GameObject newItem = Instantiate(itemDisplay);
+                newItem.GetComponent<InventableEquipment>().inventableEquipment = equipmentState;
+                newItem.GetComponent<MoveInventory>().displayIndex = i;
                 newItem.transform.GetChild(0).GetComponent<Image>().sprite = sprites[name];
 
                 newItem.transform.SetParent(slot);
@@ -141,8 +143,8 @@ public class InventroyPosition : MonoBehaviour
         isAddSucceed = false;
     }
 
-    public static void CallAddItem(string name)
+    public static void CallAddItem(string name, EquipmentState equipmentState)
     {
-        OnAddItem(name);
+        OnAddItem(name, equipmentState);
     }
 }
