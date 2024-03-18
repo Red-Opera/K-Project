@@ -327,10 +327,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2627547093406406061, guid: 40ff3bfeb7a0ccf4c8a93c1d76319a87, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -0.0003131556
-      objectReference: {fileID: 0}
     - target: {fileID: 4242007502961322689, guid: 40ff3bfeb7a0ccf4c8a93c1d76319a87, type: 3}
       propertyPath: m_Name
       value: FoodStore

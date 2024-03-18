@@ -11,6 +11,8 @@ public class EquidStore : MonoBehaviour
     [SerializeField] private GameObject slots;                      // 슬롯을 저장하는 오브젝트
     [SerializeField] private GameObject details;                    // 해당 아이템의 세부 정보들을 저장하는 오브젝트
     [SerializeField] private GameObject item;                       // 전시할 때 사용되는 프레임
+    [SerializeField] private GameObject buyEffect;                  // 구매 효과 오브젝트
+    [SerializeField] private Transform buyEffectTransform;          // 구매 효과 시작 위치
     [SerializeField] private Button buyButton;                      // 구매 버튼
     [SerializeField] private List<SelectableItem> selectables;      // 전시할 수 있는 아이템
     [SerializeField] int contentprintPerSec;                        // 1초당 출력되는 글자 수
@@ -64,7 +66,7 @@ public class EquidStore : MonoBehaviour
             newItem.AddComponent<EquidStoreItem>().thisIndex = i;
 
             // 새로 생성한 아이템을 랜덤으로 생성함
-                SelectedRandomItem(newItem, i);
+            SelectedRandomItem(newItem, i);
         }
     }
 
@@ -142,11 +144,13 @@ public class EquidStore : MonoBehaviour
         
         int cost = int.Parse(selectItem.GetChild(1).GetComponent<TextMeshProUGUI>().text.Replace(",", ""));
 
-        if (GameManager.info.allPlayerState.money < cost)
+        // 선택한 프레임을 가져오고 비용이 부족하거나 아이템을 구매한 적이 있다면 반영 안함
+        Transform selectFrame = slots.transform.GetChild(selectedIndex);
+        if (GameManager.info.allPlayerState.money < cost || selectFrame.childCount == 0)
             return;
 
         // 선택한 아이템을 가져옴
-        GameObject getItem = slots.transform.GetChild(selectedIndex).GetChild(0).gameObject;
+        GameObject getItem = selectFrame.GetChild(0).gameObject;
 
         // 해당 아이템을 인벤토라에 추가
         InventroyPosition.CallAddItem(
@@ -156,6 +160,12 @@ public class EquidStore : MonoBehaviour
         // 현재돈 동기화
         GameManager.info.playerState.money -= cost;
         GameManager.info.UpdatePlayerState();
+
+        // 구매 효과
+        GameObject newBuyEffect = Instantiate(buyEffect, buyEffectTransform);
+        newBuyEffect.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = cost + "G";
+
+        Destroy(getItem);
     }
 
     public void OnEnable()
