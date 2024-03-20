@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data.Common;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class PMove : MonoBehaviour
 {
@@ -60,23 +61,23 @@ public class PMove : MonoBehaviour
     }
     void Jump(){
         float ColliderSizeX = PlayerCollider.size.x/2;
-        float ColliderSizeY = PlayerCollider.size.y/2 -PlayerCollider.offset.y + 1;
+        float ColliderSizeY = PlayerCollider.size.y/2 -PlayerCollider.offset.y;
 
         if(Input.GetButtonDown("Jump")){
             rigid.velocity = new Vector2(rigid.velocity.x, playerState.jumpPower);
             playerState.jumpCount ++;
             isJumping = true;
             Invoke("OnJump", 0.03f);
-
-            Vector2 PlayerPos = new Vector2(transform.position.x, transform.position.y);
-            var GroundHit = Physics2D.OverlapArea(PlayerPos - new Vector2(ColliderSizeX,ColliderSizeY), PlayerPos - new Vector2(-ColliderSizeX,ColliderSizeY),LayerMask.GetMask("Platform","DamagedObject"));
-            if(GroundHit != null || isJumping == false){
-                anim.SetBool("isjump",false);
-                if(playerState.jumpCount > 0){
-                    playerState.jumpCount = 0;
-                }
+        }
+        Vector2 PlayerPos = new Vector2(transform.position.x, transform.position.y);
+        var GroundHit = Physics2D.OverlapArea(PlayerPos - new Vector2(ColliderSizeX,ColliderSizeY), PlayerPos - new Vector2(-ColliderSizeX,ColliderSizeY),LayerMask.GetMask("Platform","DamagedObject"));
+        if(GroundHit != null && isJumping == false){
+            anim.SetBool("isJump",false);
+            if(playerState.jumpCount > 0){
+                playerState.jumpCount = 0;
             }
         }
+        
     }
     void OnJump(){
         isJumping = false;
