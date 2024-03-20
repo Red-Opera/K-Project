@@ -26,6 +26,7 @@ public class StageStart : MonoBehaviour
         // f키 누르면 씬전환
         if (distanceToPortal < interactDistance && Input.GetKeyDown(KeyCode.F))
         {
+            player.transform.position = new Vector3(0,0,0); 
             StartCoroutine(TransitionToScene());
         }
     }
