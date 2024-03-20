@@ -10,8 +10,8 @@ public class InventroyPosition : MonoBehaviour
     [SerializeField] private GameObject slots;          // 전시할 수 있는 오브젝트를 담는 슬롯
     [SerializeField] private GameObject itemDisplay;    // 아이템을 전시하기 위한 오브젝트
 
-    private List<GameObject> displayData;       // 현재 전시중인 아이템
-    private Transform[] displayPos;             // 아이템을 전시할 수 있는 오브젝트
+    private List<GameObject> displayData;               // 현재 전시중인 아이템
+    private Transform[] displayPos;                     // 아이템을 전시할 수 있는 오브젝트
 
     public static event System.Action<string, EquipmentState> OnAddItem;        // 이 스크립트를 가지고 있는 모든 오브젝트가 실행할 이벤트
     public List<Sprite> spriteData = new List<Sprite>();                        // 추가할 아이템 이미지
@@ -50,6 +50,7 @@ public class InventroyPosition : MonoBehaviour
 
     }
 
+    // 아이템의 위치를 조정하는 메소드
     public void ChangePos(int displayIndex, int dragIndex)
     {
         if (displayPos[displayIndex].childCount == 0)
@@ -121,15 +122,19 @@ public class InventroyPosition : MonoBehaviour
 
         for (int i = 8; i < displayPos.Length; i++)
         {
+            // 슬롯을 찾음
             Transform slot = displayPos[i];
 
+            // 해당 슬롯에 아이템을 넣을 수 있는지 확인
             if (slot.childCount <= 0)
             {
+                // 해당 아이템을 생성 후 인벤토리에 맞게 조정
                 GameObject newItem = Instantiate(itemDisplay);
                 newItem.GetComponent<InventableEquipment>().inventableEquipment = equipmentState;
                 newItem.GetComponent<MoveInventory>().displayIndex = i;
                 newItem.transform.GetChild(0).GetComponent<Image>().sprite = sprites[name];
 
+                // 해당 아이템을 원위치 시킴
                 newItem.transform.SetParent(slot);
                 newItem.transform.localPosition = Vector3.zero;
 
@@ -143,6 +148,7 @@ public class InventroyPosition : MonoBehaviour
         isAddSucceed = false;
     }
 
+    // 다른 스크립트에서 AddItem을 호출하기 위해 사용되는 메소드
     public static void CallAddItem(string name, EquipmentState equipmentState)
     {
         OnAddItem(name, equipmentState);

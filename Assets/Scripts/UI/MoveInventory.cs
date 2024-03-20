@@ -38,6 +38,7 @@ public class MoveInventory : MonoBehaviour, IPointerDownHandler, IDragHandler, I
         transform.localPosition = Vector3.zero;
     }
 
+    // 다른 슬롯과 충돌했을 경우 처리하는 메소드
     public void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.name.StartsWith("Slot"))
