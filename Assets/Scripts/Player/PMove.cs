@@ -37,6 +37,9 @@ public class PMove : MonoBehaviour
         if(Input.GetMouseButton(0) && isAttack == false){
             Attack();
         }
+        if(Input.GetKeyDown(KeyCode.LeftControl)){
+            MagicAttack();
+        }
     }
 
     void Move(){
@@ -121,16 +124,17 @@ public class PMove : MonoBehaviour
     void MagicAttack(){
         isAttack =true;
         int Dir = 1;
-
+        //공격 방향 설정
         if(spriteRenderer.flipX){
             Dir = -1;
         }else{
             Dir = 1;
         }
-
+        //공격 시 X축 속도 큰폭으로 감소
         rigid.velocity = new Vector2(rigid.velocity.x *0.2f, rigid.velocity.y);
 
-        GameObject mAtk = Instantiate(mAtkObject, rigid.position + new Vector2(0.8f*Dir,0),quaternion.identity);
+        GameObject mAtk = Instantiate(mAtkObject, rigid.position + new Vector2(1.7f*Dir,0),quaternion.identity);
+        //애니메이션 실행
         anim.SetTrigger("mAttack");
         Invoke("Cooldown",0.75f);
     }
