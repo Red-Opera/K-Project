@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using System.Reflection;
 
 public class InventroyPosition : MonoBehaviour
 {
@@ -13,7 +14,7 @@ public class InventroyPosition : MonoBehaviour
     private List<GameObject> displayData;               // 현재 전시중인 아이템
     private Transform[] displayPos;                     // 아이템을 전시할 수 있는 오브젝트
 
-    public static event System.Action<string, EquipmentState> OnAddItem;        // 이 스크립트를 가지고 있는 모든 오브젝트가 실행할 이벤트
+    public static event System.Action<string, EquipmentState, EquidState> OnAddItem;        // 이 스크립트를 가지고 있는 모든 오브젝트가 실행할 이벤트
     public List<Sprite> spriteData = new List<Sprite>();                        // 추가할 아이템 이미지
     private Dictionary<string, Sprite> sprites;                                 // 추가할 아이템 이름과 이미지 배열
 
@@ -116,7 +117,7 @@ public class InventroyPosition : MonoBehaviour
     }
 
     // 아이템을 추가하거나 생성하는 함수
-    public void AddItem(string name, EquipmentState equipmentState)
+    public void AddItem(string name, EquipmentState equipmentState, EquidState state = null)
     {
         Debug.Assert(sprites.ContainsKey(name), "해당 이름의 아이템은 존재하지 않습니다");
 
@@ -138,6 +139,18 @@ public class InventroyPosition : MonoBehaviour
                 newItem.transform.SetParent(slot);
                 newItem.transform.localPosition = Vector3.zero;
 
+                if (state != null)
+                {
+                    // 모든 필드를 가져와서 복사함.
+                    FieldInfo[] allFields = typeof(State).GetFields(BindingFlags.Public | BindingFlags.Instance);
+                    EquidState newItemState = newItem.GetComponent<EquidState>();
+                    newItemState.state = ScriptableObject.CreateInstance<State>();
+
+                    // 모든 필드 값을 상점에 있는 값을 인벤토리로 가져옴
+                    foreach (FieldInfo field in allFields)
+                        field.SetValue(newItemState.state, field.GetValue(state.state));
+                }
+
                 displayData.Add(newItem);
                 isAddSucceed = true;
                 return;
@@ -149,8 +162,8 @@ public class InventroyPosition : MonoBehaviour
     }
 
     // 다른 스크립트에서 AddItem을 호출하기 위해 사용되는 메소드
-    public static void CallAddItem(string name, EquipmentState equipmentState)
+    public static void CallAddItem(string name, EquipmentState equipmentState, EquidState state = null)
     {
-        OnAddItem(name, equipmentState);
+        OnAddItem(name, equipmentState, state);
     }
 }

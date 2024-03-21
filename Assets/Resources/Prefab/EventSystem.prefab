@@ -1139,6 +1139,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 4482608772065175837}
     m_Modifications:
     - target: {fileID: 2012229073801385240, guid: 976840595b0bc45458bf844818631b7c, type: 3}
+      propertyPath: inventory
+      value: 
+      objectReference: {fileID: 8088622197820306230}
+    - target: {fileID: 2012229073801385240, guid: 976840595b0bc45458bf844818631b7c, type: 3}
       propertyPath: inventslot
       value: 
       objectReference: {fileID: 6731808131638525580}
@@ -1222,6 +1226,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7259227629018016370, guid: 976840595b0bc45458bf844818631b7c, type: 3}
+      propertyPath: inventorySlot
+      value: 
+      objectReference: {fileID: 6731808131638525580}
     - target: {fileID: 7885193037962601019, guid: 976840595b0bc45458bf844818631b7c, type: 3}
       propertyPath: m_Name
       value: EquidStore

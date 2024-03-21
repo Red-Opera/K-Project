@@ -3,9 +3,10 @@ using UnityEngine.EventSystems;
 
 public class MoveInventory : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointerUpHandler
 {
+    [HideInInspector] public int dragIndex = -1;
+    [HideInInspector] public int displayIndex;
+
     private Canvas canvas;
-    public int displayIndex;
-    public int dragIndex = -1;
 
     // 이 스크립트를 가지고 있는 모든 오브젝트가 실행할 이벤트
     public static event System.Action<int, int> OnInventoryPositionChanged;
