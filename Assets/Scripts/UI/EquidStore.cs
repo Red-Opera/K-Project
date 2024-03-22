@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -7,12 +8,17 @@ using UnityEngine.UI;
 
 public class EquidStore : MonoBehaviour
 {
+    [SerializeField] public List<SelectableItem> selectables;       // 전시할 수 있는 아이템
+
+    [SerializeField] private GameObject inventory;                  // 인벤토리 오브젝트
     [SerializeField] private GameObject inventslot;                 // 인벤토리 슬롯들을 저장하는 오브젝드
     [SerializeField] private GameObject slots;                      // 슬롯을 저장하는 오브젝트
     [SerializeField] private GameObject details;                    // 해당 아이템의 세부 정보들을 저장하는 오브젝트
     [SerializeField] private GameObject item;                       // 전시할 때 사용되는 프레임
+    [SerializeField] private GameObject buyEffect;                  // 구매 효과 오브젝트
+    [SerializeField] private Transform buyEffectTransform;          // 구매 효과 시작 위치
     [SerializeField] private Button buyButton;                      // 구매 버튼
-    [SerializeField] private List<SelectableItem> selectables;      // 전시할 수 있는 아이템
+    [SerializeField] private GameObject saleUI;                     // 판매 UI
     [SerializeField] int contentprintPerSec;                        // 1초당 출력되는 글자 수
 
     private TextMeshProUGUI outText;// 세부내용을 출력할 위치
@@ -22,11 +28,13 @@ public class EquidStore : MonoBehaviour
 
     public void Start()
     {
-        Debug.Assert(inventslot != null, "인벤토라 슬롯이 없습니다.");
+        Debug.Assert(inventory != null, "인벤토리가 없습니다.");
+        Debug.Assert(inventslot != null, "인벤토리 슬롯이 없습니다.");
         Debug.Assert(slots != null, "장비 상점의 전시할 슬롯이 없습니다.");
         Debug.Assert(details != null, "세부적인 내용을 보여주는 프레임이 없습니다.");
         Debug.Assert(item != null, "전시할 때 사용되는 프레임이 없습니다.");
         Debug.Assert(buyButton != null, "구매 버튼이 없습니다.");
+        Debug.Assert(saleUI != null, "판매 UI가 없습니다.");
 
         buyButton.onClick.AddListener(() => EquidStoreItem.BuyItem());
     }
@@ -44,6 +52,15 @@ public class EquidStore : MonoBehaviour
                 isType = false;
             }
         }
+
+        if (saleUI.activeSelf && Input.GetKeyDown(KeyCode.Escape))
+            saleUI.SetActive(false);
+
+        else if (!saleUI.activeSelf && Input.GetKeyDown(KeyCode.Escape))
+            gameObject.SetActive(false);
+
+        if (!inventory.activeSelf)
+            inventory.SetActive(true);
     }
 
     // 아이템 전시 공간을 업데이트하는 메소드
@@ -64,7 +81,7 @@ public class EquidStore : MonoBehaviour
             newItem.AddComponent<EquidStoreItem>().thisIndex = i;
 
             // 새로 생성한 아이템을 랜덤으로 생성함
-                SelectedRandomItem(newItem, i);
+            SelectedRandomItem(newItem, i);
         }
     }
 
@@ -77,6 +94,15 @@ public class EquidStore : MonoBehaviour
         // 선택한 이미지와 타입으로 바꿈
         newItem.GetComponent<InventableEquipment>().inventableEquipment = selectables[itemIndex].equipmentType;
         newItem.transform.GetChild(0).GetComponent<Image>().sprite = selectables[itemIndex].sprite;
+
+        // 장비 정보를 새로 생성함
+        EquidState equidState = newItem.GetComponent<EquidState>();
+        equidState.state = ScriptableObject.CreateInstance<State>();
+
+        // 모든 필드를 가져와서 복사함.
+        FieldInfo[] allFields = typeof(State).GetFields(BindingFlags.Public | BindingFlags.Instance);
+        foreach (FieldInfo field in allFields)
+            field.SetValue(equidState.state, field.GetValue(selectables[itemIndex].state));
 
         // 선택한 세부정보 위치를 가져오고 모두 수정
         Transform changeDetail = details.transform.GetChild(selectedIndex);
@@ -142,26 +168,38 @@ public class EquidStore : MonoBehaviour
         
         int cost = int.Parse(selectItem.GetChild(1).GetComponent<TextMeshProUGUI>().text.Replace(",", ""));
 
-        if (GameManager.info.allPlayerState.money < cost)
+        // 선택한 프레임을 가져오고 비용이 부족하거나 아이템을 구매한 적이 있다면 반영 안함
+        Transform selectFrame = slots.transform.GetChild(selectedIndex);
+        if (GameManager.info.allPlayerState.money < cost || selectFrame.childCount == 0)
             return;
 
         // 선택한 아이템을 가져옴
-        GameObject getItem = slots.transform.GetChild(selectedIndex).GetChild(0).gameObject;
+        GameObject getItem = selectFrame.GetChild(0).gameObject;
 
-        // 해당 아이템을 인벤토라에 추가
+        // 해당 아이템을 인벤토리에 추가
         InventroyPosition.CallAddItem(
             getItem.transform.GetChild(0).GetComponent<Image>().sprite.name, 
-            getItem.GetComponent<InventableEquipment>().inventableEquipment);
+            getItem.GetComponent<InventableEquipment>().inventableEquipment,
+            getItem.GetComponent<EquidState>());
 
         // 현재돈 동기화
         GameManager.info.playerState.money -= cost;
         GameManager.info.UpdatePlayerState();
+
+        // 구매 효과
+        GameObject newBuyEffect = Instantiate(buyEffect, buyEffectTransform);
+        newBuyEffect.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = cost + "G";
+
+        Destroy(getItem);
     }
 
     public void OnEnable()
     {
         // 현재 씬을 가져옴
         string currentScene = SceneManager.GetActiveScene().name;
+
+        inventory.SetActive(true);
+        saleUI.SetActive(false);
 
         // 씬이 바뀌었을 경우에만 상점이 업데이트되도록 설정
         if (currentScene != sceneName)
@@ -170,6 +208,12 @@ public class EquidStore : MonoBehaviour
 
             ItemUpdate();
         }
+    }
+
+    public void OnDisable()
+    {
+        inventory.SetActive(false);
+        saleUI.SetActive(false);
     }
 }
 
@@ -181,4 +225,6 @@ public class SelectableItem
     public string content;                  // 내용
     public int cost;                        // 비용
     public EquipmentState equipmentType;    // 무기 타입
+
+    public State state;                     // 무기 정보
 }
