@@ -227,6 +227,7 @@ MonoBehaviour:
   inventoryUI: {fileID: 8088622197820306230}
   getItemUI: {fileID: 4565430950343221254}
   statUI: {fileID: 180404260704039832}
+  equidUI: {fileID: 6300480356368454904}
 --- !u!114 &6868218097808560833
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1146,6 +1147,10 @@ PrefabInstance:
       propertyPath: inventslot
       value: 
       objectReference: {fileID: 6731808131638525580}
+    - target: {fileID: 2379831536781660746, guid: 976840595b0bc45458bf844818631b7c, type: 3}
+      propertyPath: m_fontSize
+      value: 27.65
+      objectReference: {fileID: 0}
     - target: {fileID: 2658042381133772421, guid: 976840595b0bc45458bf844818631b7c, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -1242,6 +1247,11 @@ PrefabInstance:
 --- !u!224 &2225160556525289542 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2658042381133772421, guid: 976840595b0bc45458bf844818631b7c, type: 3}
+  m_PrefabInstance: {fileID: 4179930664018114243}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6300480356368454904 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7885193037962601019, guid: 976840595b0bc45458bf844818631b7c, type: 3}
   m_PrefabInstance: {fileID: 4179930664018114243}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6798644022676140412

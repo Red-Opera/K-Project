@@ -2,10 +2,11 @@ using UnityEngine;
 
 public class UIOpen : MonoBehaviour
 {
-    [SerializeField] private GameObject statusUI;
-    [SerializeField] private GameObject inventoryUI;
-    [SerializeField] private GameObject getItemUI;
-    [SerializeField] private GameObject statUI;
+    public GameObject statusUI;
+    public GameObject inventoryUI;
+    public GameObject getItemUI;
+    public GameObject statUI;
+    public GameObject equidUI;
 
     private bool isDefualtOpen = true;
 

@@ -18,43 +18,6 @@ public class SaleItem : MonoBehaviour, IPointerClickHandler
     private EquidState state;                       // 장비 능력치
     private MoveInventory moveInventory;            // 장비 이동관련 스크립트
 
-    public void Start()
-    {
-        if (equidStore == null)
-        {
-            equidStore = GameObject.Find("EquidStore");
-            Debug.Assert(equidStore != null, "장비 상점 UI가 없습니다.");
-
-            equidStoreCompo = equidStore.GetComponent<EquidStore>();
-            Debug.Assert(equidStoreCompo != null, "장비 상점 컴포넌트가 없습니다.");
-
-            saleAlert = equidStore.transform.Find("Alert").gameObject;
-            Debug.Assert(saleAlert != null, "장비 판매 UI가 없습니다.");
-
-            Transform infoFrame = saleAlert.transform.Find("InfoFrame");
-
-            infoText = infoFrame.Find("Ability").gameObject;
-            Debug.Assert(infoText != null, "장비 정보를 담는 오브젝트가 없습니다.");
-
-            equidName = infoFrame.Find("EquidNameLabel").GetChild(0).GetComponent<TextMeshProUGUI>();
-            Debug.Assert(equidName != null, "장비 이름을 넣는 텍스트가 없습니다.");
-
-            saleItemIamge = infoFrame.Find("ItemFrame").GetChild(0).GetComponent<Image>();
-            Debug.Assert(saleItemIamge != null, "판매할 이미지 프레임이 없습니다.");
-
-            saleItemFrame = saleAlert.GetComponent<SaleItemFrame>();
-            Debug.Assert(saleItemFrame != null, "장비 UI 스크립트가 없습니다.");
-
-            saleCostText = infoFrame.Find("CostLabel").GetChild(0).GetComponent<TextMeshProUGUI>();
-            Debug.Assert(saleCostText != null, "판매 금액 텍스트가 없습니다.");
-
-            equidStore.SetActive(false);
-        }
-
-        state = GetComponent<EquidState>();             // 현재 상태를 가져옴
-        moveInventory = GetComponent<MoveInventory>();  // 장비 이동관련 컴포넌트를 가져옴
-    }
-
     // 해당 아이템을 오른쪽 마우스로 클릭할 경우
     public void OnPointerClick(PointerEventData eventData)
     {
@@ -116,6 +79,48 @@ public class SaleItem : MonoBehaviour, IPointerClickHandler
                 
                 infoCount++;
             }
+        }
+    }
+
+    public void OnEnable()
+    {
+        if (equidStore == null)
+        {
+            equidStore = GameObject.Find("EventSystem").GetComponent<UIOpen>().equidUI;
+            Debug.Assert(equidStore != null, "장비 상점 UI가 없습니다.");
+
+            equidStore.SetActive(true);
+
+            equidStoreCompo = equidStore.GetComponent<EquidStore>();
+            Debug.Assert(equidStoreCompo != null, "장비 상점 컴포넌트가 없습니다.");
+
+            saleAlert = equidStore.transform.Find("Alert").gameObject;
+            Debug.Assert(saleAlert != null, "장비 판매 UI가 없습니다.");
+
+            Transform infoFrame = saleAlert.transform.Find("InfoFrame");
+
+            infoText = infoFrame.Find("Ability").gameObject;
+            Debug.Assert(infoText != null, "장비 정보를 담는 오브젝트가 없습니다.");
+
+            equidName = infoFrame.Find("EquidNameLabel").GetChild(0).GetComponent<TextMeshProUGUI>();
+            Debug.Assert(equidName != null, "장비 이름을 넣는 텍스트가 없습니다.");
+
+            saleItemIamge = infoFrame.Find("ItemFrame").GetChild(0).GetComponent<Image>();
+            Debug.Assert(saleItemIamge != null, "판매할 이미지 프레임이 없습니다.");
+
+            saleItemFrame = saleAlert.GetComponent<SaleItemFrame>();
+            Debug.Assert(saleItemFrame != null, "장비 UI 스크립트가 없습니다.");
+
+            saleCostText = infoFrame.Find("CostLabel").GetChild(0).GetComponent<TextMeshProUGUI>();
+            Debug.Assert(saleCostText != null, "판매 금액 텍스트가 없습니다.");
+
+            equidStore.SetActive(false);
+        }
+
+        if (state == null)
+        {
+            state = GetComponent<EquidState>();             // 현재 상태를 가져옴
+            moveInventory = GetComponent<MoveInventory>();  // 장비 이동관련 컴포넌트를 가져옴
         }
     }
 }
