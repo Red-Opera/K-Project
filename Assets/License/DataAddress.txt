@@ -1,0 +1,25 @@
+체력바 위치 : https://www.1001freefonts.com/advanced-pixel-7.font
+현재 골드 및 배고픔 상태 숫자 폰트 : https://www.1001freefonts.com/advanced-pixel-7.font
+한글 픽셀 : https://github.com/hurss/fonts
+마나 바 이미지 : https://www.vecteezy.com/vector-art/10826102-lightning-pixel-art
+아이템 획득 UI : https://opengameart.org/content/fantasy-ui-box
+음식 상점 음식 : https://ghostpixxells.itch.io/pixelfood
+음식 상점 UI : https://karwisch.itch.io/pxui-basic
+음식 상점 타이틀, 스탯 프레임 UI : https://opengameart.org/content/gui-elements
+음식 상점 BGM : http://www.piano-midi.de/mozart.htm
+음식 상점 타이틀 이미지 : https://gallery.yopriceville.com/Free-Clipart-Pictures/Oktoberfest-Clipart-PNG/Wooden_Beer_Mug_PNG_Clip_Art_Image
+X버튼 : https://egordorichev.itch.io/key-set
+음식 상점 테이블 : https://www.vectorstock.com/royalty-free-vector/editable-pixel-art-wooden-table-vector-42213251
+게임 아이콘 : https://www.flaticon.com/free-icon/shield_970739
+코인 UI 이미지 : https://iconduck.com/icons/313561/gold-coin
+음식 상점 하트 이미지 : https://www.pngegg.com/en/png-nymsb
+음식 상점 구매 코인 이미지 : https://opengameart.org/content/rotating-coin
+스탯 상점 폰트 : https://www.1001freefonts.com/adine-kirnberg.font
+깃털 이미지 : https://gallery.yopriceville.com/Free-Clipart-Pictures/Decorative-Elements-PNG/White_Feather_PNG_Clip_Art_Image#.XJitMigzZPY
+사인 이미지 : https://webartdevelopers.com/blog/animated-svg-signature/
+능력치 증가 사인 소리 : https://freesound.org/people/waldram/sounds/257518/
+게임 타이틀 BGM : https://gongu.copyright.or.kr/gongu/wrt/wrt/view.do?wrtSn=13072830&menuNo=200020
+대화 창 UI : https://opengameart.org/content/retro-pixel-art-guihud-elements-including-dialogue-box
+인벤토리 틀 UI : https://opengameart.org/content/golden-ui-bigger-than-ever-edition
+타이틀 폰트 : https://www.dafont.com/digital-disco.font
+타이틀 배경 : https://craftpix.net/freebies/free-summer-pixel-art-backgrounds/
