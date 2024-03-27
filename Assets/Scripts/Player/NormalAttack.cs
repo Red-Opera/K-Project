@@ -6,7 +6,6 @@ using UnityEngine.UIElements;
 
 public class NormalAttack : MonoBehaviour
 {
-    public GameObject Me;
     SpriteRenderer spriteRenderer;
     Rigidbody2D rigid;
     int Dir = 1;
@@ -19,27 +18,17 @@ public class NormalAttack : MonoBehaviour
         Invoke("Delete", 0.5f);
     }
 
-    // Update is called once per frame
     void Update()
     {
         setPos();
     }
 
     void Delete(){
-        Destroy(Me);
-    }
-
-    void OnTriggerEnter2D(Collider2D col){
-        if(col.gameObject.layer == 7){
-            //Scarecrow scarecrow = col.gameObject.GetComponent<Scarecrow>();
-            Goblin monster = col.gameObject.GetComponent<Goblin>();
-            if(monster != null){
-                monster.Damaged(Damage);
-            }
-        }
+        Destroy(gameObject);
     }
 
     void SelecteDirection(){
+        // 플레이어 위치를 감지하여 공격 방향 설정
         var setDir = Physics2D.OverlapArea(transform.position - new Vector3(-5,5,0), transform.position - new Vector3(0,-5,0), LayerMask.GetMask("Player"));
         if(setDir != null){
             spriteRenderer.flipX =true;
@@ -48,8 +37,17 @@ public class NormalAttack : MonoBehaviour
     }
 
     void setPos(){
+        //부모 객체의 위치 값을 받아와서 공격이 플레이어를 계속 따라가도록 함
         Vector2 parentPos = rigid.transform.parent.position;
-        rigid.position = parentPos + new Vector2(0.5f * Dir,0);
+        rigid.position = parentPos + new Vector2(0.8f * Dir,0);
+    }
+    void OnTriggerEnter2D(Collider2D col){
+        if(col.gameObject.layer == 7){
+            Goblin monster = col.gameObject.GetComponent<Goblin>();
+            if(monster != null){
+                monster.Damaged(Damage);
+            }
+        }
     }
     public void setDamage(int Dmg){
         Damage = Dmg;
