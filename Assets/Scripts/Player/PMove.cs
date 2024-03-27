@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Data.Common;
+using System.Globalization;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
@@ -13,20 +14,22 @@ public class PMove : MonoBehaviour
     SpriteRenderer spriteRenderer;
     Animator anim;
     public GameObject nAtkObject;
-    public GameObject mAtkObject;
+    public GameObject mAttkObject;
+    public GameObject mSpearObject;
+    public GameObject mBallObject;
 
     public State playerState;
     public bool isJumping;
     public bool isAttack = false;
+    float atkSpeed=1;
+    float cooltime=1;
+    string animName;
     void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
         PlayerCollider = GetComponent<CapsuleCollider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
-        //공격 시 생성할 오브젝트 초기값 설정
-        nAtkObject = Resources.Load<GameObject>("Prefab/Character/PhysicAttack");
-        mAtkObject = Resources.Load<GameObject>("Prefab/Character/MagicSpear");
     }
 
 
@@ -34,12 +37,8 @@ public class PMove : MonoBehaviour
     {
         Move();
         Jump();
-        if(Input.GetMouseButton(0) && isAttack == false){
-            Attack();
-        }
-        if(Input.GetKeyDown(KeyCode.LeftControl)){
-            MagicAttack();
-        }
+        Attack();
+        Dash();
     }
 
     void Move(){
@@ -99,30 +98,33 @@ public class PMove : MonoBehaviour
     }
 
     void Attack(){
-        isAttack = true;
-        int Dir = 1;
-
-        //flipX의 값에 따라 공격 생성 방향 지정
-        if(spriteRenderer.flipX){
-            Dir = -1;
-        }else{
-            Dir = 1;
+        // 입력된 키에 따라 공격 변수 지정 및 공격 오브젝트 불러오기
+        if(Input.GetKeyDown(KeyCode.LeftControl)){
+            mAttkObject = Resources.Load<GameObject>("Prefab/Character/MagicSpear");
+            isAttack =true;
+            atkSpeed =0.2f;
+            cooltime = 0.75f;
+            animName = "mAttack";
+            CreateObj();
         }
-
-        //공격 시 X축 이동 속도 감소
-        rigid.velocity = new Vector2(rigid.velocity.x *.5f, rigid.velocity.y);
-
-        //방향을 반영하여 공격 오브젝트 생성, 생성된 오브젝트가 플레이어를 따라가도록 설정
-        GameObject nAtk = Instantiate(nAtkObject, rigid.position + new Vector2(0.8f * Dir,0), quaternion.identity);
-        nAtk.transform.SetParent(rigid.transform);
-
-        //공격 속도로 지정된 시간이후로 재공격 가능하도록 함수 호출
-        Invoke("Cooldown", 0.8f);
-        anim.SetTrigger("nAttack");
+        else if(Input.GetKeyDown(KeyCode.Z)){
+            mAttkObject = Resources.Load<GameObject>("Prefab/Character/MagicBall");
+            isAttack =true;
+            atkSpeed =0.2f;
+            cooltime = 0.75f;
+            animName = "mBall";
+            CreateObj();
+        }
+        else if(Input.GetMouseButtonDown(0)){
+            mAttkObject = Resources.Load<GameObject>("Prefab/Character/PhysicAttack");
+            isAttack =true;
+            atkSpeed =0.5f;
+            cooltime = 0.8f;
+            animName = "nAttack";
+            CreateObj();
+        }
     }
-
-    void MagicAttack(){
-        isAttack =true;
+    void CreateObj(){
         int Dir = 1;
         //공격 방향 설정
         if(spriteRenderer.flipX){
@@ -130,16 +132,45 @@ public class PMove : MonoBehaviour
         }else{
             Dir = 1;
         }
-        //공격 시 X축 속도 큰폭으로 감소
-        rigid.velocity = new Vector2(rigid.velocity.x *0.2f, rigid.velocity.y);
+        rigid.velocity = new Vector2(rigid.velocity.x * atkSpeed, rigid.velocity.y);
 
-        GameObject mAtk = Instantiate(mAtkObject, rigid.position + new Vector2(1.7f*Dir,0),quaternion.identity);
+        GameObject mAtk = Instantiate(mAttkObject, rigid.position + new Vector2(1.7f*Dir,0),quaternion.identity);
+        if(atkSpeed ==0.5f){
+            mAtk.transform.SetParent(rigid.transform);
+        }
         //애니메이션 실행
-        anim.SetTrigger("mAttack");
-        Invoke("Cooldown",0.75f);
+        anim.SetTrigger(animName);
+        Invoke("Cooldown",cooltime);
     }
 
     void Cooldown(){
         isAttack = false;
+    }
+
+    void Dash(){
+        if(Input.GetMouseButtonDown(1)){
+            //화면 내 마우스의 위치를 받아옴
+            Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            //마우스의 위치와 현재 위치를 빼서 이동할 방향을 정함
+            Vector2 dashDir = mousePos - rigid.position;
+            //velocity값을 정해놓은 속도의 값을 지정하여 이동
+            rigid.velocity += dashDir.normalized* 8;
+
+            if(dashDir.x >0){
+                spriteRenderer.flipX = false;
+            }
+            else if(dashDir.x <0){
+                spriteRenderer.flipX = true;
+            }
+
+            Invoke("OnJump", 0.03f); // 점프와 같은 애니메이션 사용
+
+            //플레이어의 레이어를 dashAttack으로 바꾸고 지정한 시간뒤 다시 Player로 변경
+            gameObject.layer = 9;
+            Invoke("DashEnd",0.4f);
+        }
+    }
+    void DashEnd(){
+        gameObject.layer = 8;
     }
 }
