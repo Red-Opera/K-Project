@@ -12,7 +12,7 @@ public class GetItemUI : MonoBehaviour
     [SerializeField] private Image showItemImageTarget;     // 획득 UI 이미지를 보여주는 위치
     [SerializeField] private TextMeshProUGUI itemNameText;  // 획득한 아이템의 이름을 알려줄 Text
 
-    public IEnumerator ShowItemUI(Sprite sprite, string itemName, Color color)
+    public IEnumerator ShowItemUI(Sprite sprite, string itemName, EquipmentState equipmentState, Color color)
     {
         // 현재 아이템 획득 UI가 열려 있는지 알려줌
         isShowUI = true;
@@ -21,6 +21,8 @@ public class GetItemUI : MonoBehaviour
         showItemImageTarget.sprite = sprite;
         itemNameText.text = itemName;
         itemNameText.color = color;
+
+        InventroyPosition.CallAddItem(itemName, equipmentState);
 
         yield return new WaitForSeconds(waitTime);
 

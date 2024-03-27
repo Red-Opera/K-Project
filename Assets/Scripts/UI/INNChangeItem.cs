@@ -113,6 +113,7 @@ public class INNChangeItem : MonoBehaviour
         }
     }
 
+    // 세부 사항을 모두 끄는 메소드
     private void AddStateTurnOff(Transform addList)
     {
         for (int i = 0; i < 3; i++)
@@ -123,8 +124,6 @@ public class INNChangeItem : MonoBehaviour
     private void ShowValue(TextMeshProUGUI outText, float value, bool isBase = false, bool isMoney = false)
     {
         value += addRange * value;
-
-
 
         if (value >= 0)
         {

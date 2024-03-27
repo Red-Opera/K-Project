@@ -535,10 +535,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Inventory
       objectReference: {fileID: 0}
-    - target: {fileID: 9173971611708185172, guid: f22243f5cbdbd5a449eebcd02dec10d0, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -702,10 +698,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: CoinAndFood
       objectReference: {fileID: 0}
-    - target: {fileID: 926320923068945051, guid: 53ff45f5f67c2014b90b54dbd352c464, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4891711017369542124, guid: 53ff45f5f67c2014b90b54dbd352c464, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -815,10 +807,6 @@ PrefabInstance:
     - target: {fileID: 731407660430171634, guid: eef5b38dd5a8fe54bad467ebfe01f9d0, type: 3}
       propertyPath: m_Name
       value: DashBar
-      objectReference: {fileID: 0}
-    - target: {fileID: 731407660430171634, guid: eef5b38dd5a8fe54bad467ebfe01f9d0, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7193213806381185264, guid: eef5b38dd5a8fe54bad467ebfe01f9d0, type: 3}
       propertyPath: m_Camera

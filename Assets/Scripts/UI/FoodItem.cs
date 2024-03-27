@@ -35,6 +35,8 @@ public class FoodItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     [SerializeField] private TextMeshProUGUI remainFoodText;    // 현재 남은 허기를 표시하는 UI
     [SerializeField] private TextMeshProUGUI remainMaxFoodText; // 최대 허기를 표시하는 UI
     [SerializeField] private Slider currentFoodSlider;          // 현재 허기량을 나타내는 슬라이더
+    [SerializeField] private AudioSource audiosource;           // 구매할 소리를 출력할 컴포넌트
+    [SerializeField] private AudioClip buySound;                // 구매하는 소리
 
     [SerializeField] private SerializableDictionary<string, string> stateKoreaToEng;       // 추가 스탯의 한국어를 영어로 바꿔주는 배열
 
@@ -59,6 +61,7 @@ public class FoodItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         Debug.Assert(remainCoinText != null, "남은 골드를 표시하는 UI가 없습니다.");
         Debug.Assert(remainFoodText != null, "남은 허기를 표시하는 UI가 없습니다.");
         Debug.Assert(remainMaxFoodText != null, "최대 허기를 표시하는 UI가 없습니다.");
+        Debug.Assert(audiosource != null, "소리를 출력할 컴포넌트가 없습니다.");
 
         remainCoinText.text = GameManager.info.playerState.money.ToString("#,##0G");
         remainFoodText.text = GameManager.info.playerState.food.ToString();
@@ -101,6 +104,8 @@ public class FoodItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
             return;
         }
+
+        audiosource.PlayOneShot(buySound);
 
         // 구매 효과 생성
         GameObject newBuyEffect = Instantiate(buyEffect, buyEffectTransform);
