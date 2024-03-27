@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using System.Reflection;
 
 public class InventroyPosition : MonoBehaviour
 {
@@ -10,10 +11,10 @@ public class InventroyPosition : MonoBehaviour
     [SerializeField] private GameObject slots;          // 전시할 수 있는 오브젝트를 담는 슬롯
     [SerializeField] private GameObject itemDisplay;    // 아이템을 전시하기 위한 오브젝트
 
-    private List<GameObject> displayData;       // 현재 전시중인 아이템
-    private Transform[] displayPos;             // 아이템을 전시할 수 있는 오브젝트
+    private List<GameObject> displayData;               // 현재 전시중인 아이템
+    private Transform[] displayPos;                     // 아이템을 전시할 수 있는 오브젝트
 
-    public static event System.Action<string, EquipmentState> OnAddItem;        // 이 스크립트를 가지고 있는 모든 오브젝트가 실행할 이벤트
+    public static event System.Action<string, EquipmentState, EquidState> OnAddItem;        // 이 스크립트를 가지고 있는 모든 오브젝트가 실행할 이벤트
     public List<Sprite> spriteData = new List<Sprite>();                        // 추가할 아이템 이미지
     private Dictionary<string, Sprite> sprites;                                 // 추가할 아이템 이름과 이미지 배열
 
@@ -50,6 +51,7 @@ public class InventroyPosition : MonoBehaviour
 
     }
 
+    // 아이템의 위치를 조정하는 메소드
     public void ChangePos(int displayIndex, int dragIndex)
     {
         if (displayPos[displayIndex].childCount == 0)
@@ -115,23 +117,39 @@ public class InventroyPosition : MonoBehaviour
     }
 
     // 아이템을 추가하거나 생성하는 함수
-    public void AddItem(string name, EquipmentState equipmentState)
+    public void AddItem(string name, EquipmentState equipmentState, EquidState state = null)
     {
         Debug.Assert(sprites.ContainsKey(name), "해당 이름의 아이템은 존재하지 않습니다");
 
         for (int i = 8; i < displayPos.Length; i++)
         {
+            // 슬롯을 찾음
             Transform slot = displayPos[i];
 
+            // 해당 슬롯에 아이템을 넣을 수 있는지 확인
             if (slot.childCount <= 0)
             {
+                // 해당 아이템을 생성 후 인벤토리에 맞게 조정
                 GameObject newItem = Instantiate(itemDisplay);
                 newItem.GetComponent<InventableEquipment>().inventableEquipment = equipmentState;
                 newItem.GetComponent<MoveInventory>().displayIndex = i;
                 newItem.transform.GetChild(0).GetComponent<Image>().sprite = sprites[name];
 
+                // 해당 아이템을 원위치 시킴
                 newItem.transform.SetParent(slot);
                 newItem.transform.localPosition = Vector3.zero;
+
+                if (state != null)
+                {
+                    // 모든 필드를 가져와서 복사함.
+                    FieldInfo[] allFields = typeof(State).GetFields(BindingFlags.Public | BindingFlags.Instance);
+                    EquidState newItemState = newItem.GetComponent<EquidState>();
+                    newItemState.state = ScriptableObject.CreateInstance<State>();
+
+                    // 모든 필드 값을 상점에 있는 값을 인벤토리로 가져옴
+                    foreach (FieldInfo field in allFields)
+                        field.SetValue(newItemState.state, field.GetValue(state.state));
+                }
 
                 displayData.Add(newItem);
                 isAddSucceed = true;
@@ -143,8 +161,9 @@ public class InventroyPosition : MonoBehaviour
         isAddSucceed = false;
     }
 
-    public static void CallAddItem(string name, EquipmentState equipmentState)
+    // 다른 스크립트에서 AddItem을 호출하기 위해 사용되는 메소드
+    public static void CallAddItem(string name, EquipmentState equipmentState, EquidState state = null)
     {
-        OnAddItem(name, equipmentState);
+        OnAddItem(name, equipmentState, state);
     }
 }
