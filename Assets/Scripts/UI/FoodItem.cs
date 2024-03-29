@@ -35,6 +35,10 @@ public class FoodItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     [SerializeField] private TextMeshProUGUI remainFoodText;    // 현재 남은 허기를 표시하는 UI
     [SerializeField] private TextMeshProUGUI remainMaxFoodText; // 최대 허기를 표시하는 UI
     [SerializeField] private Slider currentFoodSlider;          // 현재 허기량을 나타내는 슬라이더
+    [SerializeField] private AudioSource audiosource;           // 구매할 소리를 출력할 컴포넌트
+    [SerializeField] private AudioClip buySound;                // 구매하는 소리
+    [SerializeField] private AudioClip noSound;                 // 구매 실패 소리
+    [SerializeField] private AudioClip mouseOver;               // 마우스 올라갈 때 소리
 
     [SerializeField] private SerializableDictionary<string, string> stateKoreaToEng;       // 추가 스탯의 한국어를 영어로 바꿔주는 배열
 
@@ -59,6 +63,7 @@ public class FoodItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         Debug.Assert(remainCoinText != null, "남은 골드를 표시하는 UI가 없습니다.");
         Debug.Assert(remainFoodText != null, "남은 허기를 표시하는 UI가 없습니다.");
         Debug.Assert(remainMaxFoodText != null, "최대 허기를 표시하는 UI가 없습니다.");
+        Debug.Assert(audiosource != null, "소리를 출력할 컴포넌트가 없습니다.");
 
         remainCoinText.text = GameManager.info.playerState.money.ToString("#,##0G");
         remainFoodText.text = GameManager.info.playerState.food.ToString();
@@ -83,6 +88,8 @@ public class FoodItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         if (GameManager.info.playerState.money < -cost)
         {
             // 돈이 부족할 경우 처리
+            audiosource.PlayOneShot(noSound);
+
             return;
         }
 
@@ -91,6 +98,7 @@ public class FoodItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         if (food > 100)
         {
             // 허기가 꽉찼을 경우 처리
+            audiosource.PlayOneShot(noSound);
 
             return;
         }
@@ -98,9 +106,12 @@ public class FoodItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         if (food < 0)
         {
             // 허기가 -가 된 경우
+            audiosource.PlayOneShot(noSound);
 
             return;
         }
+
+        audiosource.PlayOneShot(buySound);
 
         // 구매 효과 생성
         GameObject newBuyEffect = Instantiate(buyEffect, buyEffectTransform);
@@ -187,6 +198,8 @@ public class FoodItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             foodStreamImage.SetActive(true);
 
         selectedIndex = index;
+
+        audiosource.PlayOneShot(mouseOver);
 
         StartCoroutine(SettingFood());
     }

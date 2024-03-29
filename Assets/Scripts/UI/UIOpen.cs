@@ -43,13 +43,13 @@ public class UIOpen : MonoBehaviour
     }
 
     // 아이템 획득 창을 보여주는 메소드
-    public void ShowGetItemUI(Sprite sprite, string itemName, Color color)
+    public void ShowGetItemUI(Sprite sprite, string itemName, EquipmentState euqidState, Color color)
     {
         getItemUI.SetActive(true);
         GetItemUI itemUI = getItemUI.GetComponent<GetItemUI>();
 
         if (!GetItemUI.isShowUI)
-            StartCoroutine(itemUI.ShowItemUI(sprite, itemName, color));
+            StartCoroutine(itemUI.ShowItemUI(sprite, itemName,euqidState,  color));
     }
 
     private void ClostDefultUI()
