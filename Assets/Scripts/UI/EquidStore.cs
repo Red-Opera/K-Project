@@ -19,9 +19,12 @@ public class EquidStore : MonoBehaviour
     [SerializeField] private Transform buyEffectTransform;          // 구매 효과 시작 위치
     [SerializeField] private Button buyButton;                      // 구매 버튼
     [SerializeField] private GameObject saleUI;                     // 판매 UI
+    [SerializeField] private AudioClip openSound;                   // 열릴 때 나는 소리
+    [SerializeField] private AudioClip buySound;                    // 구매할 때 나는 소리
     [SerializeField] int contentprintPerSec;                        // 1초당 출력되는 글자 수
 
     private TextMeshProUGUI outText;// 세부내용을 출력할 위치
+    private AudioSource audio;      // 소리 출력 컴포넌트
     private string sceneName;       // 현재 씬 이름
     private string typeContent;     // 세부내용에 입력할 내용
     private bool isType = false;    // 현재 내용을 쓰고 있는지 여부
@@ -37,6 +40,9 @@ public class EquidStore : MonoBehaviour
         Debug.Assert(saleUI != null, "판매 UI가 없습니다.");
 
         buyButton.onClick.AddListener(() => EquidStoreItem.BuyItem());
+
+        audio = GetComponent<AudioSource>();
+        Debug.Assert(audio != null, "소리 컴포넌트가 없습니다.");
     }
 
     public void Update()
@@ -190,11 +196,15 @@ public class EquidStore : MonoBehaviour
         GameObject newBuyEffect = Instantiate(buyEffect, buyEffectTransform);
         newBuyEffect.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = cost + "G";
 
+        audio.PlayOneShot(buySound);
+
         Destroy(getItem);
     }
 
     public void OnEnable()
     {
+        audio.PlayOneShot(openSound);
+
         // 현재 씬을 가져옴
         string currentScene = SceneManager.GetActiveScene().name;
 

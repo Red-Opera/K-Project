@@ -1509,6 +1509,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ac5140f1c9076884b89640ddc532ef3a, type: 2}
   - {fileID: 11400000, guid: bdca4743f941e5647896bdc7115cceef, type: 2}
   - {fileID: 11400000, guid: cd3c2960714b45a428b06c9410164cd2, type: 2}
+  openSound: {fileID: 8300000, guid: 5d52380a297386148af819a4e287cdae, type: 3}
   range: 0.2
 --- !u!1 &4479056856612378074
 GameObject:

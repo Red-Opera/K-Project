@@ -37,6 +37,8 @@ public class FoodItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     [SerializeField] private Slider currentFoodSlider;          // 현재 허기량을 나타내는 슬라이더
     [SerializeField] private AudioSource audiosource;           // 구매할 소리를 출력할 컴포넌트
     [SerializeField] private AudioClip buySound;                // 구매하는 소리
+    [SerializeField] private AudioClip noSound;                 // 구매 실패 소리
+    [SerializeField] private AudioClip mouseOver;               // 마우스 올라갈 때 소리
 
     [SerializeField] private SerializableDictionary<string, string> stateKoreaToEng;       // 추가 스탯의 한국어를 영어로 바꿔주는 배열
 
@@ -86,6 +88,8 @@ public class FoodItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         if (GameManager.info.playerState.money < -cost)
         {
             // 돈이 부족할 경우 처리
+            audiosource.PlayOneShot(noSound);
+
             return;
         }
 
@@ -94,6 +98,7 @@ public class FoodItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         if (food > 100)
         {
             // 허기가 꽉찼을 경우 처리
+            audiosource.PlayOneShot(noSound);
 
             return;
         }
@@ -101,6 +106,7 @@ public class FoodItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         if (food < 0)
         {
             // 허기가 -가 된 경우
+            audiosource.PlayOneShot(noSound);
 
             return;
         }
@@ -192,6 +198,8 @@ public class FoodItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             foodStreamImage.SetActive(true);
 
         selectedIndex = index;
+
+        audiosource.PlayOneShot(mouseOver);
 
         StartCoroutine(SettingFood());
     }

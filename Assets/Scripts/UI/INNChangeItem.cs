@@ -8,9 +8,11 @@ public class INNChangeItem : MonoBehaviour
     [SerializeField] private GameObject[] foodList;     // 음식을 선택할 수 있는 리스트
     [SerializeField] private Sprite[] selectableList;   // 선택 가능한 음식 리스트
     [SerializeField] private FoodState[] foodInfo;      // 음식 선택 리스트
+    [SerializeField] private AudioClip openSound;       // 상점 열릴 때 소리     
 
     [SerializeField] private float range = 0.2f;        // 가격 및 효율 범위
 
+    private AudioSource audio;      // 소리를 출력하는 컴포넌트
     private float addRange;
 
     void Start()
@@ -20,10 +22,18 @@ public class INNChangeItem : MonoBehaviour
         // 프레임 별로 자신이 몇번째인지 확인
         for (int i = 0; i < foodList.Length; i++)
             foodList[i].GetComponent<FoodItem>().index = i;
+
+        if (audio == null)
+        {
+            audio = GetComponent<AudioSource>();
+            Debug.Assert(audio, "오디오 컴포넌트가 없습니다.");
+        }
     }
 
     public void OnEnable()
     {
+        audio.PlayOneShot(openSound);
+
         // 모든 정보를 키고 감사 텍스트는 끔
         for (int i = 0; i < foodList.Length; i++)
         {

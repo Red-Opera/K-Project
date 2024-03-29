@@ -2540,6 +2540,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f74a8c05c375a9444835cb11e3a62f9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isEnable: 1
   index: 0
   isHotFood: 0
   selectedImage: {fileID: 21300000, guid: 0a0404c07667681469e0021f88de8bfc, type: 3}
@@ -2555,6 +2556,10 @@ MonoBehaviour:
   remainFoodText: {fileID: 0}
   remainMaxFoodText: {fileID: 0}
   currentFoodSlider: {fileID: 0}
+  audiosource: {fileID: 0}
+  buySound: {fileID: 8300000, guid: 401671ddd7d566b4cae446aeeafae695, type: 3}
+  noSound: {fileID: 8300000, guid: be949c76b6e2b4e46a9a96fc09908a21, type: 3}
+  mouseOver: {fileID: 8300000, guid: 5fa28749408138844bf89cb8d974aad4, type: 3}
   stateKoreaToEng:
     array:
     - Key: "\uB2C9\uB124\uC784"
