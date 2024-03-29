@@ -15,23 +15,20 @@ public class INNChangeItem : MonoBehaviour
     private AudioSource audio;      // 소리를 출력하는 컴포넌트
     private float addRange;
 
-    void Start()
+    public void OnEnable()
     {
-        Debug.Assert(foodList.Length != 0, "음식을 선택할 수 있는 프레임이 없습니다.");
-
-        // 프레임 별로 자신이 몇번째인지 확인
-        for (int i = 0; i < foodList.Length; i++)
-            foodList[i].GetComponent<FoodItem>().index = i;
-
         if (audio == null)
         {
+            Debug.Assert(foodList.Length != 0, "음식을 선택할 수 있는 프레임이 없습니다.");
+
+            // 프레임 별로 자신이 몇번째인지 확인
+            for (int i = 0; i < foodList.Length; i++)
+                foodList[i].GetComponent<FoodItem>().index = i;
+
             audio = GetComponent<AudioSource>();
             Debug.Assert(audio, "오디오 컴포넌트가 없습니다.");
         }
-    }
 
-    public void OnEnable()
-    {
         audio.PlayOneShot(openSound);
 
         // 모든 정보를 키고 감사 텍스트는 끔
