@@ -41,8 +41,7 @@ public class EquidStore : MonoBehaviour
 
         buyButton.onClick.AddListener(() => EquidStoreItem.BuyItem());
 
-        audio = GetComponent<AudioSource>();
-        Debug.Assert(audio != null, "소리 컴포넌트가 없습니다.");
+        
     }
 
     public void Update()
@@ -203,6 +202,12 @@ public class EquidStore : MonoBehaviour
 
     public void OnEnable()
     {
+        if (audio == null)
+        {
+            audio = GetComponent<AudioSource>();
+            Debug.Assert(audio != null, "소리 컴포넌트가 없습니다.");
+        }
+
         audio.PlayOneShot(openSound);
 
         // 현재 씬을 가져옴

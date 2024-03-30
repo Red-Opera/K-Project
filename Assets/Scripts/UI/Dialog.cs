@@ -16,6 +16,12 @@ public class Dialog : MonoBehaviour
     void Start()
     {
         Debug.Assert(contentText != null, "내용을 표시할 텍스트가 존재하지 않습니다.");
+    }
+
+    public void OnEnable()
+    {
+        currentLineIndex = 0;
+
         StartCoroutine(PrintLine(printList[currentLineIndex]));
     }
 
