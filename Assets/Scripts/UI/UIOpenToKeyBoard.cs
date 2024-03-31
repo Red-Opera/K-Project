@@ -27,6 +27,8 @@ public class UIOpenToKeyBoard : MonoBehaviour
         // 올라가는 중이면
         if (isRising)
         {
+            pressedKeyImage.SetActive(true);
+
             if (reverseTime < 0)
                 reverseTime = 0.0f;
 
@@ -56,6 +58,7 @@ public class UIOpenToKeyBoard : MonoBehaviour
             if (pressedKeyImage.transform.position.y <= targetHeight)
             {
                 isFalling = false;
+                pressedKeyImage.SetActive(false);
                 pressedKeyImage.transform.position = originalPosition; // 원래 위치로 이동
             }
         }
