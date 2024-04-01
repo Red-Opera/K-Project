@@ -10,6 +10,8 @@ public class Dialog : MonoBehaviour
 
     public float typingDelay = 0.1f;
 
+    [HideInInspector] public bool isChat = false;
+
     private int currentLineIndex = 0;       // 현재 출력 중인 대화의 인덱스
     private bool isPrinting = false;        // 대화 출력 중인지 여부
 
@@ -21,6 +23,7 @@ public class Dialog : MonoBehaviour
     public void OnEnable()
     {
         currentLineIndex = 0;
+        isChat = true;
 
         StartCoroutine(PrintLine(printList[currentLineIndex]));
     }
@@ -49,12 +52,15 @@ public class Dialog : MonoBehaviour
 
             // 모든 대화가 출력됨, 필요에 따라 여기에 추가 로직을 추가할 수 있음
             else
+            {
+                isChat = false;
                 gameObject.SetActive(false);
+            }
         }
     }
 
     // 대화를 지연과 함께 출력하는 코루틴
-    IEnumerator PrintLine(string line)
+    private IEnumerator PrintLine(string line)
     {
         isPrinting = true;
         contentText.text = ""; // 기존 텍스트 지우기
@@ -72,12 +78,5 @@ public class Dialog : MonoBehaviour
 
         // 사용자 입력을 기다리지 않고 자동으로 다음 줄로 이동하려면 아래 주석 해제
         // UpdateContent();
-    }
-
-    // 현재 줄로 콘텐츠 텍스트 업데이트
-    void UpdateContent()
-    {
-        if (currentLineIndex < printList.Count)
-            contentText.text = printList[currentLineIndex];
     }
 }

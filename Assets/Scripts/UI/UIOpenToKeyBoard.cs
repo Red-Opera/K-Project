@@ -1,4 +1,4 @@
-using System.Security.Cryptography;
+using System.Collections;
 using UnityEngine;
 
 public class UIOpenToKeyBoard : MonoBehaviour
@@ -7,6 +7,8 @@ public class UIOpenToKeyBoard : MonoBehaviour
     [SerializeField] private AnimationCurve speedCurve;     // 시간에 따른 추가로 이동한 위치를 나타내는 AnimationCurve
     [SerializeField] private Vector3 originalPosition;      // 이미지의 원래 위치
     [SerializeField] private GameObject openUI;             // UI 킬 대상
+
+    private ChatNPC chatNPC;        // NPC와 대화하기 위한 컴포넌트
 
     private bool isRising = false;  // 올라가는 중인지 여부
     private bool isFalling = false; // 내려가는 중인지 여부
@@ -20,6 +22,8 @@ public class UIOpenToKeyBoard : MonoBehaviour
         Debug.Assert(pressedKeyImage != null, "눌러야 하는 키 UI가 없습니다.");
         originalPosition = pressedKeyImage.transform.position;              // 원래 위치 저장
         pressedKeyImage.SetActive(false);                                   // 시작 시 이미지 비활성화
+
+        chatNPC = GetComponent<ChatNPC>();
     }
 
     public void Update()
@@ -64,7 +68,25 @@ public class UIOpenToKeyBoard : MonoBehaviour
         }
 
         if (isEnter && !openUI.activeSelf && Input.GetKeyDown(KeyCode.P))
-            openUI.SetActive(true);
+        {
+            if (chatNPC != null && !chatNPC.dialog.isChat)
+            {
+                chatNPC.Chat("BlackSmith");
+                StartCoroutine(WaitChat());
+            }
+
+            else
+                openUI.SetActive(true);
+        }
+    }
+
+    private IEnumerator WaitChat()
+    {
+        while (chatNPC.dialog.isChat)
+            yield return null;
+
+        openUI.SetActive(true);
+        openUI.SetActive(true);
     }
 
     public void OnTriggerEnter2D(Collider2D other)
