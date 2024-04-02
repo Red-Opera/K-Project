@@ -134,10 +134,17 @@ public class PMove : MonoBehaviour
         }
         rigid.velocity = new Vector2(rigid.velocity.x * atkSpeed, rigid.velocity.y);
 
-        GameObject mAtk = Instantiate(mAttkObject, rigid.position + new Vector2(1.7f*Dir,0),quaternion.identity);
+        GameObject Atk = Instantiate(mAttkObject, rigid.position + new Vector2(1.7f*Dir,0),quaternion.identity);
         if(atkSpeed ==0.5f){
-            mAtk.transform.SetParent(rigid.transform);
+            Atk.transform.SetParent(rigid.transform);
+            NormalAttack AtkSc = Atk.GetComponent<NormalAttack>();
+            AtkSc.setDamage(playerState.damage);
         }
+        else{
+            MagicAttack AtkSc = Atk.GetComponent<MagicAttack>();
+            AtkSc.setDamage(playerState.damage);
+        }
+        
         //애니메이션 실행
         anim.SetTrigger(animName);
         Invoke("Cooldown",cooltime);
