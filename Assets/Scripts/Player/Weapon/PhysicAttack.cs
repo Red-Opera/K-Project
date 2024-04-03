@@ -14,5 +14,6 @@ public class PhysicAttack : MyWeapon
         Weapon.disapearTime = 0.5f;    
         Weapon.folloewTime = 0.5f;
         Weapon.fowardSpeed = 1;
+        Weapon.animName = "nAttack";
     }
 }

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8607566109270209542}
   - component: {fileID: 2843764122085399443}
   - component: {fileID: 4266000843356121013}
+  - component: {fileID: 4173260377919006355}
   m_Layer: 0
   m_Name: MagicBall
   m_TagString: Untagged
@@ -188,7 +189,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5501518578580866794}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dcf9aff9f13015144b2e59ab739355b5, type: 3}
   m_Name: 
@@ -196,3 +197,15 @@ MonoBehaviour:
   Dir: 1
   damage: 0
   pre: 1
+--- !u!114 &4173260377919006355
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5501518578580866794}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a276396269447414c83d395600240e13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -2,42 +2,53 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class AtkOb : MonoBehaviour
 {
     Rigidbody2D rigid;
     WeaponSetting weapon;
+    SpriteRenderer spriteRenderer;
     bool isFollow = true;
+    int dir = 1;
     void Start()
     {
         rigid = GetComponent<Rigidbody2D>(); 
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        SetDir();
         Destroy(gameObject, weapon.disapearTime);
         Invoke("endFollow", weapon.folloewTime);
     }
     void Update()
     {
         Attack();
-        Debug.Log("11");
     }
     void Attack(){
         Vector3 parentPos = transform.parent.position;
         if(isFollow == true){
-            rigid.position = parentPos + weapon.pos;
+            rigid.position = parentPos + weapon.pos *dir;
         }
         else{
-            rigid.velocity = new Vector2(weapon.fowardSpeed,0);
+            rigid.velocity = new Vector2(weapon.fowardSpeed * weapon.dir,0);
         }
     }
-    // void OnTriggerEnter2D(Collider2D other)
-    // {
-    //     if(other.gameObject.layer == 7){
-    //         Goblin monster = other.gameObject.GetComponent<Goblin>();
-    //         if(monster != null){
-    //             monster.Damaged(weapon.damage);
-    //         }
-    //     }
-    // }
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if(other.gameObject.layer == 7){
+            Goblin monster = other.gameObject.GetComponent<Goblin>();
+            if(monster != null){
+                monster.Damaged(weapon.damage);
+            }
+        }
+    }
+    void SetDir(){
+        var setDir = Physics2D.OverlapArea(transform.position - new Vector3(-5,5,0), transform.position - new Vector3(0,-5,0), LayerMask.GetMask("Player"));
+        if(setDir != null){
+            spriteRenderer.flipX = true;
+            dir = -1;
+        }
+    }
     void endFollow(){
         isFollow = false;
     }
