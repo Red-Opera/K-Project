@@ -37,7 +37,7 @@ public class PMove : MonoBehaviour
     {
         Move();
         Jump();
-        Attack();
+        // Attack();
         Dash();
     }
 
@@ -97,51 +97,58 @@ public class PMove : MonoBehaviour
         anim.SetBool("isJump",true);
     }
 
-    void Attack(){
-        // 입력된 키에 따라 공격 변수 지정 및 공격 오브젝트 불러오기
-        if(Input.GetKeyDown(KeyCode.LeftControl)){
-            mAttkObject = Resources.Load<GameObject>("Prefab/Character/MagicSpear");
-            isAttack =true;
-            atkSpeed =0.2f;
-            cooltime = 0.75f;
-            animName = "mAttack";
-            CreateObj();
-        }
-        else if(Input.GetKeyDown(KeyCode.Z)){
-            mAttkObject = Resources.Load<GameObject>("Prefab/Character/MagicBall");
-            isAttack =true;
-            atkSpeed =0.2f;
-            cooltime = 0.75f;
-            animName = "mBall";
-            CreateObj();
-        }
-        else if(Input.GetMouseButtonDown(0)){
-            mAttkObject = Resources.Load<GameObject>("Prefab/Character/PhysicAttack");
-            isAttack =true;
-            atkSpeed =0.5f;
-            cooltime = 0.8f;
-            animName = "nAttack";
-            CreateObj();
-        }
-    }
-    void CreateObj(){
-        int Dir = 1;
-        //공격 방향 설정
-        if(spriteRenderer.flipX){
-            Dir = -1;
-        }else{
-            Dir = 1;
-        }
-        rigid.velocity = new Vector2(rigid.velocity.x * atkSpeed, rigid.velocity.y);
+    // void Attack(){
+    //     // 입력된 키에 따라 공격 변수 지정 및 공격 오브젝트 불러오기
+    //     if(Input.GetKeyDown(KeyCode.LeftControl)){
+    //         mAttkObject = Resources.Load<GameObject>("Prefab/Character/MagicSpear");
+    //         isAttack =true;
+    //         atkSpeed =0.2f;
+    //         cooltime = 0.75f;
+    //         animName = "mAttack";
+    //         CreateObj();
+    //     }
+    //     else if(Input.GetKeyDown(KeyCode.Z)){
+    //         mAttkObject = Resources.Load<GameObject>("Prefab/Character/MagicBall");
+    //         isAttack =true;
+    //         atkSpeed =0.2f;
+    //         cooltime = 0.75f;
+    //         animName = "mBall";
+    //         CreateObj();
+    //     }
+    //     else if(Input.GetMouseButtonDown(0)){
+    //         mAttkObject = Resources.Load<GameObject>("Prefab/Character/PhysicAttack");
+    //         isAttack =true;
+    //         atkSpeed =0.5f;
+    //         cooltime = 0.8f;
+    //         animName = "nAttack";
+    //         CreateObj();
+    //     }
+    // }
+    // void CreateObj(){
+    //     int Dir = 1;
+    //     //공격 방향 설정
+    //     if(spriteRenderer.flipX){
+    //         Dir = -1;
+    //     }else{
+    //         Dir = 1;
+    //     }
+    //     rigid.velocity = new Vector2(rigid.velocity.x * atkSpeed, rigid.velocity.y);
 
-        GameObject mAtk = Instantiate(mAttkObject, rigid.position + new Vector2(1.7f*Dir,0),quaternion.identity);
-        if(atkSpeed ==0.5f){
-            mAtk.transform.SetParent(rigid.transform);
-        }
-        //애니메이션 실행
-        anim.SetTrigger(animName);
-        Invoke("Cooldown",cooltime);
-    }
+    //     GameObject Atk = Instantiate(mAttkObject, rigid.position + new Vector2(1.7f*Dir,0),quaternion.identity);
+    //     if(atkSpeed ==0.5f){
+    //         Atk.transform.SetParent(rigid.transform);
+    //         NormalAttack AtkSc = Atk.GetComponent<NormalAttack>();
+    //         AtkSc.setDamage(playerState.damage);
+    //     }
+    //     else{
+    //         MagicAttack AtkSc = Atk.GetComponent<MagicAttack>();
+    //         AtkSc.setDamage(playerState.damage);
+    //     }
+        
+    //     //애니메이션 실행
+    //     anim.SetTrigger(animName);
+    //     Invoke("Cooldown",cooltime);
+    // }
 
     void Cooldown(){
         isAttack = false;
