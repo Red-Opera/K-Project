@@ -1419,7 +1419,7 @@ GameObject:
   - component: {fileID: 2386402903112390663}
   - component: {fileID: 9004626203660873045}
   m_Layer: 5
-  m_Name: ???
+  m_Name: ???1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2863,7 +2863,7 @@ GameObject:
   - component: {fileID: 4666230909636065028}
   - component: {fileID: 2136347055609013789}
   m_Layer: 5
-  m_Name: ??? (1)
+  m_Name: ???2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5938,7 +5938,7 @@ GameObject:
   - component: {fileID: 1037488453446844128}
   - component: {fileID: 1250688903883830058}
   m_Layer: 5
-  m_Name: ???
+  m_Name: ???1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6538,7 +6538,7 @@ GameObject:
   - component: {fileID: 8066007457833813810}
   - component: {fileID: 7343448921745660063}
   m_Layer: 5
-  m_Name: Box
+  m_Name: BoxStage1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8113,7 +8113,7 @@ GameObject:
   - component: {fileID: 686843508894376376}
   - component: {fileID: 2668824229639091595}
   m_Layer: 5
-  m_Name: ??? (1)
+  m_Name: ???2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10760,6 +10760,7 @@ MonoBehaviour:
   getItemUI: {fileID: 4565430950343221254}
   statUI: {fileID: 180404260704039832}
   equidUI: {fileID: 6300480356368454904}
+  mapUI: {fileID: 8636336405813964958}
 --- !u!114 &6868218097808560833
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12968,7 +12969,7 @@ GameObject:
   - component: {fileID: 4022117038394576840}
   - component: {fileID: 4274581395853236159}
   m_Layer: 5
-  m_Name: ???
+  m_Name: ???1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13175,6 +13176,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3219185683381892631}
+  - component: {fileID: 4229665340245719256}
   m_Layer: 0
   m_Name: MapUI
   m_TagString: Untagged
@@ -13198,6 +13200,18 @@ Transform:
   - {fileID: 6544032457017515794}
   m_Father: {fileID: 4482608772065175837}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4229665340245719256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8636336405813964958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19c904075f688ce4186fffdd5b918582, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8718436287925536479
 GameObject:
   m_ObjectHideFlags: 0

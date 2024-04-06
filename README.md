@@ -4,12 +4,10 @@
         <h3>Game Genre</h3>
         2D RPG 슈팅 게임
     </li> 
-
     <li>
         <h3>Remake</h3>
         던그리드
     </li>
-
     <li>
         <h3>Development Stack</h3>
         <p>개발 도구 : <img src="https://img.shields.io/badge/VisualStudio-5C2D91?style=flat&logo=VisualStudio&logoColor=white"/> <img src="https://img.shields.io/badge/Visual Studio Code-007ACC?style=flat&logo=visualstudiocode&logoColor=white"/> <img src="https://img.shields.io/badge/Unity-000000?style=flat&logo=unity&logoColor=white"/></p>

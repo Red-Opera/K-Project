@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class UIOpen : MonoBehaviour
 {
@@ -7,6 +8,7 @@ public class UIOpen : MonoBehaviour
     public GameObject getItemUI;
     public GameObject statUI;
     public GameObject equidUI;
+    public GameObject mapUI;
 
     private bool isDefualtOpen = true;
 
@@ -16,6 +18,11 @@ public class UIOpen : MonoBehaviour
 
         Debug.Assert(statusUI != null, "스테이터스 창이 없습니다.");
         Debug.Assert(inventoryUI != null, "인벤토리 창이 없습니다.");
+        Debug.Assert(getItemUI != null, "획득 UI가 없습니다.");
+        Debug.Assert(statUI != null, "스탯 창 UI가 없습니다.");
+        Debug.Assert(mapUI != null, "맵 UI가 없습니다.");
+
+        SceneManager.sceneLoaded += NonEssentialUI;
     }
 
     void Update()
@@ -34,12 +41,19 @@ public class UIOpen : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.V) && inventoryUI.activeSelf)
             inventoryUI.SetActive(false);
 
+        // 맵 UI 창을 여는 키
+        if (Input.GetKeyDown(KeyCode.I) && !mapUI.activeSelf)
+            mapUI.SetActive(true);
+
+        else if (Input.GetKeyDown(KeyCode.I) && mapUI.activeSelf)
+            mapUI.SetActive(false);
+
         if (statUI.activeSelf && isDefualtOpen)
             ClostDefultUI();
 
         else if (!statUI.activeSelf && !isDefualtOpen)
             OpenDefaultUI();
-            
+
     }
 
     // 아이템 획득 창을 보여주는 메소드
@@ -49,7 +63,7 @@ public class UIOpen : MonoBehaviour
         GetItemUI itemUI = getItemUI.GetComponent<GetItemUI>();
 
         if (!GetItemUI.isShowUI)
-            StartCoroutine(itemUI.ShowItemUI(sprite, itemName,euqidState,  color));
+            StartCoroutine(itemUI.ShowItemUI(sprite, itemName, euqidState, color));
     }
 
     private void ClostDefultUI()
@@ -66,5 +80,15 @@ public class UIOpen : MonoBehaviour
             transform.GetChild(i).gameObject.SetActive(true);
 
         isDefualtOpen = true;
+    }
+
+    private void NonEssentialUI(Scene scene, LoadSceneMode scneeMode)
+    {
+        statusUI.SetActive(false);
+        inventoryUI.SetActive(false);
+        getItemUI.SetActive(false);
+        statUI.SetActive(false);
+        equidUI.SetActive(false);
+        mapUI.SetActive(false);
     }
 }
