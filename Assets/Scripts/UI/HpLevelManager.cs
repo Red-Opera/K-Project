@@ -56,17 +56,8 @@ public class HpLevelManager : MonoBehaviour
     }
 
     // 데미지를 처리하는 메소드
-    public void Damage(int damage)
+    public void Damage()
     {
-        if (currentHp >= damage)
-            currentHp -= damage;
-
-        else
-            currentHp = 0;
-
-        state.currentHp = currentHp;
-        currentHpText.SetText(currentHp.ToString());
-
-        hpSlider.value = currentHp / (float)maxHp;
+        SliderReset();
     }
 }

@@ -13,23 +13,19 @@ public class PMove : MonoBehaviour
     CapsuleCollider2D PlayerCollider;
     SpriteRenderer spriteRenderer;
     Animator anim;
-    public GameObject nAtkObject;
-    public GameObject mAttkObject;
-    public GameObject mSpearObject;
-    public GameObject mBallObject;
 
     public State playerState;
+    public GameManager gameManager;
     public bool isJumping;
     public bool isAttack = false;
-    float atkSpeed=1;
-    float cooltime=1;
-    string animName;
     void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
         PlayerCollider = GetComponent<CapsuleCollider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
+        gameManager = FindAnyObjectByType<GameManager>();
+        playerState = gameManager.playerState;
     }
 
 
@@ -97,59 +93,6 @@ public class PMove : MonoBehaviour
         anim.SetBool("isJump",true);
     }
 
-    // void Attack(){
-    //     // 입력된 키에 따라 공격 변수 지정 및 공격 오브젝트 불러오기
-    //     if(Input.GetKeyDown(KeyCode.LeftControl)){
-    //         mAttkObject = Resources.Load<GameObject>("Prefab/Character/MagicSpear");
-    //         isAttack =true;
-    //         atkSpeed =0.2f;
-    //         cooltime = 0.75f;
-    //         animName = "mAttack";
-    //         CreateObj();
-    //     }
-    //     else if(Input.GetKeyDown(KeyCode.Z)){
-    //         mAttkObject = Resources.Load<GameObject>("Prefab/Character/MagicBall");
-    //         isAttack =true;
-    //         atkSpeed =0.2f;
-    //         cooltime = 0.75f;
-    //         animName = "mBall";
-    //         CreateObj();
-    //     }
-    //     else if(Input.GetMouseButtonDown(0)){
-    //         mAttkObject = Resources.Load<GameObject>("Prefab/Character/PhysicAttack");
-    //         isAttack =true;
-    //         atkSpeed =0.5f;
-    //         cooltime = 0.8f;
-    //         animName = "nAttack";
-    //         CreateObj();
-    //     }
-    // }
-    // void CreateObj(){
-    //     int Dir = 1;
-    //     //공격 방향 설정
-    //     if(spriteRenderer.flipX){
-    //         Dir = -1;
-    //     }else{
-    //         Dir = 1;
-    //     }
-    //     rigid.velocity = new Vector2(rigid.velocity.x * atkSpeed, rigid.velocity.y);
-
-    //     GameObject Atk = Instantiate(mAttkObject, rigid.position + new Vector2(1.7f*Dir,0),quaternion.identity);
-    //     if(atkSpeed ==0.5f){
-    //         Atk.transform.SetParent(rigid.transform);
-    //         NormalAttack AtkSc = Atk.GetComponent<NormalAttack>();
-    //         AtkSc.setDamage(playerState.damage);
-    //     }
-    //     else{
-    //         MagicAttack AtkSc = Atk.GetComponent<MagicAttack>();
-    //         AtkSc.setDamage(playerState.damage);
-    //     }
-        
-    //     //애니메이션 실행
-    //     anim.SetTrigger(animName);
-    //     Invoke("Cooldown",cooltime);
-    // }
-
     void Cooldown(){
         isAttack = false;
     }
@@ -174,7 +117,7 @@ public class PMove : MonoBehaviour
 
             //플레이어의 레이어를 dashAttack으로 바꾸고 지정한 시간뒤 다시 Player로 변경
             gameObject.layer = 9;
-            Invoke("DashEnd",0.4f);
+            Invoke("DashEnd",0.8f);
         }
     }
     void DashEnd(){
