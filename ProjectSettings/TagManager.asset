@@ -6,6 +6,10 @@ TagManager:
   tags:
   - DamagedObject
   - Ground
+  - NextStageTrigger
+  - PreviousStageTrigger
+  - Boss
+  - Portal
   layers:
   - Default
   - TransparentFX
@@ -18,7 +22,7 @@ TagManager:
   - Player
   - DashAttack
   - UICamera
-  - 
+  - PreviousStage
   - 
   - 
   - 

@@ -4,44 +4,56 @@ using UnityEngine.SceneManagement;
 
 public class StageManager : MonoBehaviour
 {
-    public int stageIndex;
     public GameObject[] Stages;
     public GameObject BossStage;
-    public GameObject player;
+    private int currentStageIndex;
 
     void Start()
     {
-        // ¿ÀºêÁ§Æ®°¡ È°¼ºÈ­µÉ ¶§¸¶´Ù À§Ä¡¸¦ (0,0,0)À¸·Î ¼³Á¤
-        transform.position = Vector3.zero;
+        // ì´ˆê¸° ìŠ¤í…Œì´ì§€ ì„¤ì •
+        currentStageIndex = 0;
+        SetActiveStage(currentStageIndex);
     }
-    public void NextStage()
+
+    
+   
+    public void ChangeStage(int direction)
     {
-        //Change Stage
-        if (stageIndex < Stages.Length - 1)
+         GameObject player = GameObject.FindGameObjectWithTag("Player");
+
+        // Player ì˜¤ë¸Œì íŠ¸ë¥¼ ì°¾ì€ ê²½ìš°
+        if (player != null)
         {
-            Stages[stageIndex].SetActive(false);
-            stageIndex++;
-            Stages[stageIndex].SetActive(true);
-        }
-        else
-        {
-            Stages[stageIndex].SetActive(false);
-            BossStage.SetActive(true); 
+            // Player ì˜¤ë¸Œì íŠ¸ì˜ ìœ„ì¹˜ë¥¼ (0, 0, 0)ìœ¼ë¡œ ì„¤ì •
+            player.transform.position = Vector3.zero;
         }
 
-        
+        int newStageIndex = currentStageIndex + direction;
+
+        // ìœ íš¨í•œ ìŠ¤í…Œì´ì§€ ì¸ë±ìŠ¤ì¸ì§€ í™•ì¸
+        if (newStageIndex >= 0 && newStageIndex < Stages.Length)
+        {
+            // í˜„ì¬ ìŠ¤í…Œì´ì§€ ë¹„í™œì„±í™”
+            Stages[currentStageIndex].SetActive(false);
+
+            // ìƒˆë¡œìš´ ìŠ¤í…Œì´ì§€ í™œì„±í™”
+            currentStageIndex = newStageIndex;
+            SetActiveStage(currentStageIndex);
+        }
     }
-    void PlayerReposition()
+
+    void SetActiveStage(int index)
     {
-        player.transform.position = new Vector3(0, 0, 0);
-        player.GetComponent<PlayerMove>().VelocityZero();
+        Stages[index].SetActive(true);
     }
+
     public void PlayerDied()
     {
-        Debug.Log("Player died. Returning to Town.");
+        Debug.Log("ã…‹ã…‹ì£½ìŒ");
 
-        // Town ¾ÀÀ¸·Î µ¹¾Æ°¡±â
         SceneManager.LoadScene("Map");
     }
+
+   
 }
 

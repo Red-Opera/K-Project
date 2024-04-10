@@ -7,7 +7,7 @@ public class StageStart : MonoBehaviour
 {
     public GameObject portal;
     public float interactDistance = 3f; // 작용 가능한 거리
-    public float fadeDuration = 1.0f; // 화면 페이드 인/아웃 지속 시간
+    public float fadeDuration = 0.1f; // 화면 페이드 인/아웃 지속 시간
 
     private bool isTransitioning = false; // 전환 중인지 여부를 나타내는 플래그
 
