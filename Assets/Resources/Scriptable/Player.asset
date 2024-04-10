@@ -15,7 +15,7 @@ MonoBehaviour:
   nickName: 
   level: 5
   maxHP: 80
-  currentHp: 80
+  currentHp: 30
   damage: 18
   defense: 0
   critical: 0.02

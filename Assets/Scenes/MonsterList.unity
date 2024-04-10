@@ -322,9 +322,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameManager: {fileID: 0}
   hpLevelManager: {fileID: 0}
+  childSpriterenderer: []
   state: {fileID: 11400000, guid: 957382a1165f0304f8f9947557defad4, type: 2}
   xSpeed: 0
   Hp: 0
+  dir: 0
 --- !u!1 &382677300
 GameObject:
   m_ObjectHideFlags: 0
@@ -793,6 +795,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1261122938925179374, guid: e4ccfcaea3fa1a648a9f02bf66eab781, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4482608772065175837, guid: e4ccfcaea3fa1a648a9f02bf66eab781, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -838,6 +844,14 @@ PrefabInstance:
       value: EventSystem
       objectReference: {fileID: 0}
     - target: {fileID: 6261542404581744780, guid: e4ccfcaea3fa1a648a9f02bf66eab781, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8666521314751362877, guid: e4ccfcaea3fa1a648a9f02bf66eab781, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8666521314751362877, guid: e4ccfcaea3fa1a648a9f02bf66eab781, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}

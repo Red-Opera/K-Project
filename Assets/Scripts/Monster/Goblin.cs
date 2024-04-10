@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Goblin : MonoBehaviour
 {
@@ -9,18 +11,20 @@ public class Goblin : MonoBehaviour
     Transform trans;
     public GameManager gameManager;
     public HpLevelManager hpLevelManager;
+    public SpriteRenderer[] childSpriterenderer;
     //Animator anim;
     public MonsterState state;
     public int xSpeed;
     private float moveSpeed;
     public int Hp;
+    public int dir;
     
     // Start is called before the first frame update
     void Start()
     {
         gameManager = FindObjectOfType<GameManager>();
         hpLevelManager = FindObjectOfType<HpLevelManager>();
-        // hpLevelManager = GetComponentInChildren<HpLevelManager>();
+        childSpriterenderer = GetComponentsInChildren<SpriteRenderer>();
         rigid = GetComponent<Rigidbody2D>();
         trans = GetComponent<Transform>();
         // anim = GetComponent<Animator>();
@@ -32,15 +36,18 @@ public class Goblin : MonoBehaviour
     void Update()
     {
         Idle();
+        Detect();
     }
 
     void Idle(){
         rigid.velocity = new Vector2(xSpeed * moveSpeed, rigid.velocity.y);
         if(xSpeed > 0){
             trans.localScale = new Vector3(-1.5f, 1.7f, 1); 
+            dir = 1;
         }
         else if(xSpeed < 0){
-            trans.localScale = new Vector3(1.5f, 1.7f, 1); 
+            trans.localScale = new Vector3(1.5f, 1.7f, 1);
+            dir = -1; 
         }
     }
      
@@ -58,7 +65,7 @@ public class Goblin : MonoBehaviour
     public void Damaged(int dmg){
         Hp -= dmg;
         Debug.Log("Monster Damaged " + dmg + "dmg");
-        setColor();
+        StartCoroutine(setColor());
     }
 
     void OnCollisionEnter2D(Collision2D other){
@@ -67,15 +74,24 @@ public class Goblin : MonoBehaviour
             hpLevelManager.Damage();
         }
     }
-    void setColor(){
-        Debug.Log("isOn");
-        foreach (Transform child in transform)
+    IEnumerator setColor(){
+        foreach (SpriteRenderer renderer in childSpriterenderer)
         {
-            SpriteRenderer childRenderer = child.GetComponent<SpriteRenderer>();
-            if (childRenderer != null)
-            {
-                childRenderer.color = Color.red;
-            }
+            Color originalColor = renderer.color;
+            renderer.color = new Color(originalColor.r, originalColor.g, originalColor.b, 0.5f);
+        }
+        yield return new WaitForSeconds(0.1f);
+        foreach (SpriteRenderer renderer in childSpriterenderer)
+        {
+            Color originalColor = renderer.color;
+            renderer.color = new Color(originalColor.r, originalColor.g, originalColor.b, 1);
+        }
+    }
+    void Detect(){
+        Vector2 detectRange = new Vector2(10*dir,5);
+        var detectP = Physics2D.OverlapArea(rigid.position, rigid.position + detectRange, LayerMask.GetMask("Player"));
+        if(detectP != null){
+            Debug.Log("Find Player");
         }
     }
 }

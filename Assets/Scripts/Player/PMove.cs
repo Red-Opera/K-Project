@@ -13,7 +13,6 @@ public class PMove : MonoBehaviour
     CapsuleCollider2D PlayerCollider;
     SpriteRenderer spriteRenderer;
     Animator anim;
-
     public State playerState;
     public GameManager gameManager;
     public bool isJumping;
@@ -33,7 +32,6 @@ public class PMove : MonoBehaviour
     {
         Move();
         Jump();
-        // Attack();
         Dash();
     }
 
@@ -98,13 +96,11 @@ public class PMove : MonoBehaviour
     }
 
     void Dash(){
-        if(Input.GetMouseButtonDown(1)){
-            //화면 내 마우스의 위치를 받아옴
+        if(Input.GetMouseButtonDown(1) && playerState.dashBarCount > 0){
             Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            //마우스의 위치와 현재 위치를 빼서 이동할 방향을 정함
             Vector2 dashDir = mousePos - rigid.position;
-            //velocity값을 정해놓은 속도의 값을 지정하여 이동
             rigid.velocity += dashDir.normalized* 8;
+            playerState.dashBarCount--;
 
             if(dashDir.x >0){
                 spriteRenderer.flipX = false;
@@ -112,11 +108,9 @@ public class PMove : MonoBehaviour
             else if(dashDir.x <0){
                 spriteRenderer.flipX = true;
             }
-
-            Invoke("OnJump", 0.03f); // 점프와 같은 애니메이션 사용
-
-            //플레이어의 레이어를 dashAttack으로 바꾸고 지정한 시간뒤 다시 Player로 변경
+ 
             gameObject.layer = 9;
+            Invoke("OnJump", 0.03f);
             Invoke("DashEnd",0.8f);
         }
     }
