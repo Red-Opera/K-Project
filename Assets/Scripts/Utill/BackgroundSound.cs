@@ -13,12 +13,16 @@ public class BackgroundSound : MonoBehaviour
         Debug.Assert(audioSource != null, "오디오가 없습니다.");
 
         // 맨 처음에 배경음악의 처음 부분을 들려주고 반복 음악을 재생함
-        audioSource.PlayOneShot(startClip);
-        Invoke("BackgroundLoop", startClip.length - 0.75f);
+        audioSource.clip = startClip;
+        audioSource.Play();
     }
 
-    private void BackgroundLoop()
+    public void Update()
     {
-        audioSource.PlayOneShot(whileClip);
+        if (!audioSource.isPlaying)
+        {
+            audioSource.clip = whileClip;
+            audioSource.Play();
+        }
     }
 }

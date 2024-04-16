@@ -9,6 +9,7 @@ public class State : ScriptableObject
     public int level = 0;               // 레벨
     public int maxHP = 0;               // 최대 체력
     public int currentHp = 0;           // 현재 체력
+    public int currentExp = 0;          // 현재 경험치
 
     public int damage = 0;              // 데미지
     public int defense = 0;             // 방어력
