@@ -11,7 +11,7 @@ public class ResultUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI currentLevelText;
     [SerializeField] private TextMeshProUGUI resultGoldText;
     [SerializeField] private TextMeshProUGUI resultEXPText;
-    [SerializeField] private TextMeshProUGUI currentLevel;
+    [SerializeField] private TextMeshProUGUI currentPlayerLevelText;
     [SerializeField] private TextMeshProUGUI currentEXPText;
     [SerializeField] private TextMeshProUGUI nextEXPText;
     [SerializeField] private TextMeshProUGUI currentEXPPersentText;
@@ -56,7 +56,7 @@ public class ResultUI : MonoBehaviour
 
         resultGoldText.text = getGold.ToString("#,##0");
         resultEXPText.text = getEXP.ToString("#,##0");
-        currentLevel.text = playerState.level.ToString("#,##0");
+        currentPlayerLevelText.text = playerState.level.ToString("#,##0");
         currentEXPText.text = playerState.currentExp.ToString("#,##0");
         nextEXPText.text = ((level1PerEXPUp * (playerState.level - 1)) + startEXP).ToString("#,##0");
         currentEXPPersentSlider.value = currentEXPPersent;
@@ -127,6 +127,51 @@ public class ResultUI : MonoBehaviour
         int second = (int)(playTime % 60);
 
         timeText.text = hour.ToString("#0") + "시간 " + minute.ToString("00") + "분 " + second.ToString("00") + "초";
+
+        StartCoroutine(ResultEXP());
+    }
+
+    private IEnumerator ResultEXP()
+    {
+        float nowTime = Time.time;
+        int initExp = int.Parse(currentEXPText.text.Replace(",", "")), addExp, nextExp = int.Parse(nextEXPText.text.Replace(",", ""));
+
+        while (Time.time - nowTime <= 2.0f)
+        {
+            addExp = (int)Mathf.Lerp(0, getEXP, (Time.time - nowTime) / 2);
+            int currentEXP = initExp + addExp;
+
+            if (currentEXP >= nextExp)
+            {
+                GameManager.info.playerState.level++;
+                currentEXP -= nextExp;
+                initExp -= nextExp;
+
+                nextEXPText.text = ((level1PerEXPUp * (GameManager.info.playerState.level - 1)) + startEXP).ToString("#,##0");
+                currentPlayerLevelText.text = GameManager.info.playerState.level.ToString("#,##0");
+            }
+
+            float currentEXPPersent = (float)currentEXP / ((level1PerEXPUp * (GameManager.info.playerState.level - 1)) + startEXP);
+
+            currentEXPPersentSlider.value = currentEXPPersent;
+            currentEXPPersentText.text = currentEXPPersent.ToString("#0.0%");
+            
+            GameManager.info.playerState.currentExp = currentEXP;
+            currentEXPText.text = currentEXP.ToString("#,##0");
+
+            GameManager.info.UpdatePlayerState();
+
+            yield return null;
+        }
+
+        float finalEXPPersent = (float)(initExp + getEXP) / ((level1PerEXPUp * (GameManager.info.playerState.level - 1)) + startEXP); 
+        currentEXPPersentSlider.value = finalEXPPersent;
+        currentEXPPersentText.text = finalEXPPersent.ToString("#0.0%");
+
+        currentEXPText.text = (initExp + getEXP).ToString("#,##0");
+        GameManager.info.playerState.currentExp = int.Parse(currentEXPText.text.Replace(",", ""));
+
+        getEXP = 0;
     }
 
     private void OnSceceLoaded(Scene scene, LoadSceneMode sceneMode)

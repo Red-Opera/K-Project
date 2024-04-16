@@ -1865,7 +1865,7 @@ MonoBehaviour:
   currentLevelText: {fileID: 485094361026687288}
   resultGoldText: {fileID: 3410971239641002079}
   resultEXPText: {fileID: 2303823284154206836}
-  currentLevel: {fileID: 7368164773180393934}
+  currentPlayerLevelText: {fileID: 7368164773180393934}
   currentEXPText: {fileID: 3652164519584757544}
   nextEXPText: {fileID: 7303192595993938932}
   currentEXPPersentText: {fileID: 8509347691390927292}
