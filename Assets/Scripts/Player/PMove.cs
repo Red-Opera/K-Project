@@ -14,7 +14,6 @@ public class PMove : MonoBehaviour
     SpriteRenderer spriteRenderer;
     Animator anim;
     public State playerState;
-    public GameManager gameManager;
     public bool isJumping;
     public bool isAttack = false;
     void Awake()
@@ -23,8 +22,9 @@ public class PMove : MonoBehaviour
         PlayerCollider = GetComponent<CapsuleCollider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
-        gameManager = FindAnyObjectByType<GameManager>();
-        playerState = gameManager.playerState;
+    }
+    void Start(){
+        playerState = GameManager.info.playerState;
     }
 
 
@@ -33,6 +33,9 @@ public class PMove : MonoBehaviour
         Move();
         Jump();
         Dash();
+        if(playerState.currentHp <= 0 &&gameObject.layer != 12){
+            Die();
+        }
     }
 
     void Move(){
@@ -116,5 +119,9 @@ public class PMove : MonoBehaviour
     }
     void DashEnd(){
         gameObject.layer = 8;
+    }
+    void Die(){
+        anim.SetTrigger("Die");
+        gameObject.layer = 12;
     }
 }

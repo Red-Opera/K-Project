@@ -18,7 +18,7 @@ public class Goblin : MonoBehaviour
     private float moveSpeed;
     public int Hp;
     public int dir;
-    
+    GameObject Coin;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,6 +27,7 @@ public class Goblin : MonoBehaviour
         childSpriterenderer = GetComponentsInChildren<SpriteRenderer>();
         rigid = GetComponent<Rigidbody2D>();
         trans = GetComponent<Transform>();
+        Coin = Resources.Load<GameObject>("Prefab/Object/Coin");
         // anim = GetComponent<Animator>();
         SetState();
         SetSpeed();
@@ -66,6 +67,10 @@ public class Goblin : MonoBehaviour
         Hp -= dmg;
         Debug.Log("Monster Damaged " + dmg + "dmg");
         StartCoroutine(setColor());
+        if(Hp <= 0){
+            Instantiate(Coin,transform.position + new Vector3(0, trans.localScale.y*.5f,0), Quaternion.identity);
+            Destroy(gameObject);
+        }
     }
 
     void OnCollisionEnter2D(Collision2D other){
