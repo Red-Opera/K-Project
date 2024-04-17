@@ -233,7 +233,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8848580322200247863, guid: 205952a6697ea2d479563ee6ed66a11b, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1290,16 +1290,17 @@ GameObject:
   - component: {fileID: 2026856246}
   - component: {fileID: 2026856245}
   - component: {fileID: 2026856244}
-  - component: {fileID: 2026856247}
   - component: {fileID: 2026856249}
   - component: {fileID: 2026856248}
+  - component: {fileID: 2026856251}
+  - component: {fileID: 2026856250}
   m_Layer: 11
   m_Name: WareWolf
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!95 &2026856244
 Animator:
   serializedVersion: 5
@@ -1382,25 +1383,12 @@ Transform:
   m_GameObject: {fileID: 2026856243}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.02, y: -0.38, z: 0}
+  m_LocalPosition: {x: 1, y: -0.26, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2026856247
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2026856243}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1622086ba28c3cd4b9edcc2864a912b9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  state: {fileID: 0}
 --- !u!70 &2026856248
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -1463,6 +1451,33 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &2026856250
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2026856243}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba74d3e06bbe04e4f9fb85770ad06970, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2026856251
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2026856243}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55fbff530d90c0746ad5659ba5d35580, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Boss: {fileID: 2026856250}
+  state: {fileID: 0}
+  isAtk: 0
 --- !u!1 &2072915636
 GameObject:
   m_ObjectHideFlags: 0
