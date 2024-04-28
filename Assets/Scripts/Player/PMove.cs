@@ -24,6 +24,7 @@ public class PMove : MonoBehaviour
     float atkSpeed=1;
     float cooltime=1;
     string animName;
+    
     void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
@@ -37,6 +38,7 @@ public class PMove : MonoBehaviour
     {
         Move();
         Jump();
+
         // Attack();
         Dash();
     }
@@ -70,6 +72,15 @@ public class PMove : MonoBehaviour
         if(Input.GetKeyUp(KeyCode.LeftShift)){
             playerState.moveSpeed /= 1.5f;
             anim.SetBool("isRun",false);
+        }
+         //공중에 있을때 platform레이어 무시
+        if (rigid.velocity.y > 0)
+        {
+            Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Platform"), true);
+        }
+        else
+        {
+            Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Platform"), false);
         }
     }
     void Jump(){

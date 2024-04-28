@@ -1,22 +1,25 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+
 
 public class StageManager : MonoBehaviour
 {
+
     public GameObject[] Stages;
     public GameObject BossStage;
     private int currentStageIndex;
+    public float fadeDuration = 1f; // 페이드 인/아웃에 걸리는 시간
 
     void Start()
     {
         // 초기 스테이지 설정
         currentStageIndex = 0;
         SetActiveStage(currentStageIndex);
+
     }
 
-    
-   
     public void ChangeStage(int direction)
     {
          GameObject player = GameObject.FindGameObjectWithTag("Player");
@@ -46,14 +49,13 @@ public class StageManager : MonoBehaviour
     {
         Stages[index].SetActive(true);
     }
-
-    public void PlayerDied()
+    //Map으로 이동
+    public void LoadMap()
     {
-        Debug.Log("ㅋㅋ죽음");
+        Debug.Log("마을로 돌아갑니다.");
 
         SceneManager.LoadScene("Map");
     }
-
-   
+    
 }
 
