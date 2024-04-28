@@ -6,6 +6,9 @@ TagManager:
   tags:
   - DamagedObject
   - Ground
+  - NextStageTrigger
+  - PreviousStageTrigger
+  - Boss
   layers:
   - Default
   - TransparentFX

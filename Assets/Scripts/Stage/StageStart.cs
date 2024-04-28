@@ -7,7 +7,7 @@ public class StageStart : MonoBehaviour
 {
     public GameObject portal;
     public float interactDistance = 3f; // 작용 가능한 거리
-    public float fadeDuration = 1.0f; // 화면 페이드 인/아웃 지속 시간
+    public float fadeDuration = 0.1f; // 화면 페이드 인/아웃 지속 시간
 
     private bool isTransitioning = false; // 전환 중인지 여부를 나타내는 플래그
 
@@ -41,9 +41,6 @@ public class StageStart : MonoBehaviour
         {
             timer += Time.deltaTime;
             float alpha = Mathf.Lerp(0f, 1f, timer / fadeDuration);
-            // 화면을 어둡게 만듭니다. 여기서는 화면 전체를 가리는 판넬이나 이미지를 사용할 수 있습니다.
-            // 판넬의 알파 값을 조절하여 어두운 효과를 만듭니다.
-            // 판넬이나 이미지의 알파 값 조절 방법은 적절히 수정해야 합니다.
             yield return null;
         }
 
@@ -64,4 +61,5 @@ public class StageStart : MonoBehaviour
 
         isTransitioning = false;
     }
+    
 }
