@@ -10,14 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 122c419616f961d4ea369c09b9e4c4f1, type: 3}
-  m_Name: DefaultRing
+  m_Name: "\uAE30\uBCF8\uAC80"
   m_EditorClassIdentifier: 
-  nickName: "\uAE30\uBCF8 \uBC18\uC9C0"
+  nickName: "\uAE30\uBCF8 \uAC80"
   level: 0
   maxHP: 0
   currentHp: 0
-  damage: 0
-  defense: 5
+  currentExp: 0
+  damage: 30
+  defense: 0
   critical: 0
   moveSpeed: 0
   jumpPower: 0
@@ -33,4 +34,4 @@ MonoBehaviour:
   reloadTime: 0
   dashBarCount: 0
   food: 0
-  money: 0
+  money: 100

@@ -10,15 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 122c419616f961d4ea369c09b9e4c4f1, type: 3}
-  m_Name: DefualtDoubleAXE
+  m_Name: "\uAE30\uBCF8\uD65C"
   m_EditorClassIdentifier: 
-  nickName: "\uC591\uC190 \uB3C4\uB07C"
+  nickName: "\uAE30\uBCF8 \uD65C"
   level: 0
   maxHP: 0
   currentHp: 0
-  damage: 15
+  currentExp: 0
+  damage: 20
   defense: 0
-  critical: 0
+  critical: 0.1
   moveSpeed: 0
   jumpPower: 0
   jumpCount: 0
@@ -33,4 +34,4 @@ MonoBehaviour:
   reloadTime: 0
   dashBarCount: 0
   food: 0
-  money: 0
+  money: 150

@@ -10,13 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 122c419616f961d4ea369c09b9e4c4f1, type: 3}
-  m_Name: DefaultSword
+  m_Name: "\uB2E8\uAC80"
   m_EditorClassIdentifier: 
-  nickName: "\uAE30\uBCF8 \uAC80"
+  nickName: "\uB2E8\uAC80"
   level: 0
   maxHP: 0
   currentHp: 0
-  damage: 30
+  currentExp: 0
+  damage: 10
   defense: 0
   critical: 0
   moveSpeed: 0
@@ -26,11 +27,11 @@ MonoBehaviour:
   dashDamage: 0
   strong: 0
   criticalDamage: 0
-  attackSpeed: 0
+  attackSpeed: 0.2
   fixedDamage: 0
   defensePersent: 0
   avoidPersent: 0
   reloadTime: 0
   dashBarCount: 0
   food: 0
-  money: 0
+  money: 75
