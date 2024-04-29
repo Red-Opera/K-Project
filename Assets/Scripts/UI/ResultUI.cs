@@ -54,7 +54,7 @@ public class ResultUI : MonoBehaviour
         GetItem("단검");
         GetItem("양손도끼");
 
-        Invoke("GameIsEnd", 2.0f);
+        //Invoke("GameIsEnd", 2.0f);
     }
 
     public void Update()
