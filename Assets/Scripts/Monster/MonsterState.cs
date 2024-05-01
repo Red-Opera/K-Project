@@ -15,6 +15,6 @@ public class MonsterState : ScriptableObject
     public int moveSpeed;
     public float dashcoaf;
     public float jumpPower;
-    public int flyingSpeed;
+    public float flyingSpeed;
     public int Money;
 }
