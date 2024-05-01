@@ -48,6 +48,8 @@ public class StageManager : MonoBehaviour
     void SetActiveStage(int index)
     {
         Stages[index].SetActive(true);
+
+        CurrentSceneNameUI.StartSceneNameAnimation();
     }
     //Map으로 이동
     public void LoadMap()
