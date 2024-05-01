@@ -15,8 +15,11 @@ MonoBehaviour:
   level: 10
   maxHP: 300
   currentHp: 300
+  Stage: 1
   damage: 0
   defense: 0
-  moveSpeed: 2
+  moveSpeed: 3
+  dashcoaf: 1
+  jumpPower: 5
   flyingSpeed: 0
   Money: 1000

@@ -12,6 +12,7 @@ public class BossController : MonoBehaviour
     int moveSpeed = 0;
     bool findP = false;
     public bool isAtk = false;
+    public int attackType = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +22,7 @@ public class BossController : MonoBehaviour
         rigid = GetComponent<Rigidbody2D>();
         state = Resources.Load<MonsterState>("Scriptable/Boss/WareWolf");
         SetSpeed();
+        AttackEnd();
     }
 
     // Update is called once per frame
@@ -34,7 +36,7 @@ public class BossController : MonoBehaviour
     }
 
     void Idle(){
-        rigid.velocity = new Vector2 (moveSpeed *state.moveSpeed,rigid.velocity.y);
+        rigid.velocity = new Vector2 (moveSpeed *state.moveSpeed * state.dashcoaf,rigid.velocity.y);
         if(rigid.velocity.x>0){
             spriteRenderer.flipX = false;
             anim.SetBool("isWalk",true);
@@ -49,8 +51,13 @@ public class BossController : MonoBehaviour
     }
 
     void SetSpeed(){
-        moveSpeed = Random.Range (-1, 2);
-        Invoke("SetSpeed",1.5f);
+        if(findP){
+            moveSpeed = Boss.boss.dir;
+            Invoke("SetSpeed", 0.5f);
+        }else{
+            moveSpeed = Random.Range (-1, 2);
+            Invoke("SetSpeed",1.5f);
+        }
     }
     
     void DetectP(){
@@ -64,19 +71,40 @@ public class BossController : MonoBehaviour
     }
 
     void Attack(){
-        if(moveSpeed ==1){
+        if(attackType ==0){
             Boss.Attack1();
-            isAtk = true;
+            Invoke("IsAttack",Boss.boss.ainmterm);
             Invoke("AttackEnd",1);
-            anim.SetTrigger("attack1");
-        }else{
+        }else if(attackType ==1){
             Boss.Attack2();
-            isAtk = true;
+            Invoke("IsAttack",Boss.boss.ainmterm);
             Invoke("AttackEnd",1);
-            anim.SetTrigger("attack2");
+        }else if(attackType ==2){
+            Boss.SpecialAttack1();
+            Invoke("IsAttack",Boss.boss.ainmterm);
         }
+        else if(attackType ==3){
+            if(Boss.boss.bossState.Stage == 1){
+                AttackEnd();
+            }else{
+                Boss.SpecialAttack2();
+                isAtk = true;
+                Invoke("AttackEnd",1);
+            }
+        }
+    }
+    void OnCollisionEnter2D(Collision2D other) {
+        if(other.gameObject.layer == 3 && isAtk == true){
+            anim.SetBool("isJump",false);
+            isAtk = false;
+            attackType = Random.Range(0, 3);
+        }
+    }
+    void IsAttack(){
+        isAtk = true;
     }
     void AttackEnd(){
         isAtk =false;
+        attackType = Random.Range(0,3);
     }
 }
