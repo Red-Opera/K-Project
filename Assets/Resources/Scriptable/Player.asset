@@ -15,7 +15,7 @@ MonoBehaviour:
   nickName: 
   level: 5
   maxHP: 80
-  currentHp: 80
+  currentHp: 33
   currentExp: 0
   damage: 18
   defense: 0
@@ -32,6 +32,6 @@ MonoBehaviour:
   defensePersent: 0
   avoidPersent: 0
   reloadTime: -0.3
-  dashBarCount: 2
+  dashBarCount: 0
   food: 47
   money: 50000
