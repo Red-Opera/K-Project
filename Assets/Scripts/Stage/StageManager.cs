@@ -8,7 +8,9 @@ public class StageManager : MonoBehaviour
 {
 
     public GameObject[] Stages;
+    public GameObject[] EventStage;
     public GameObject BossStage;
+    public GameObject EventPortal;
     private int currentStageIndex;
     public float fadeDuration = 1f; // 페이드 인/아웃에 걸리는 시간
 

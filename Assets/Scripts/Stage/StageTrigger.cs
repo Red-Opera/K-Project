@@ -26,13 +26,6 @@ public class StageTrigger : MonoBehaviour
             {
                 StageManager.ChangeStage(1);
             }
-            // 이벤트 스테이지로 이동
-            else if (gameObject.CompareTag("EventStageTrigger"))
-            {
-                // 이벤트 처리를 수행하는 코드 작성
-                // 예: 보상 지급, 특정 상태 변경 등
-                Debug.Log("EventStage로 이동!");
-            }
         }
     }
 }
