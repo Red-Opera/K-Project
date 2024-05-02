@@ -17,7 +17,7 @@ MonoBehaviour:
   maxHP: 0
   currentHp: 0
   currentExp: 0
-  damage: 30
+  damage: 25
   defense: 0
   critical: 0
   moveSpeed: 0

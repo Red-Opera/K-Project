@@ -33,9 +33,9 @@ RectTransform:
   - {fileID: 8646069259434533213}
   m_Father: {fileID: 4944554152423368751}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -40, y: -10}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: 91, y: -10}
   m_SizeDelta: {x: 17.5, y: 19.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7098126152914278536
@@ -249,10 +249,10 @@ RectTransform:
   - {fileID: 5878425475686920978}
   m_Father: {fileID: 1649447363479787310}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 20, y: 0}
+  m_SizeDelta: {x: -152, y: -150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &262965332888660544
 CanvasRenderer:
@@ -519,9 +519,9 @@ RectTransform:
   - {fileID: 6652416707138574038}
   m_Father: {fileID: 1649447363479787310}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -139.44447, y: -66.66668}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 50, y: 35}
   m_SizeDelta: {x: 70, y: 35}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7925988906060984206
@@ -785,9 +785,9 @@ RectTransform:
   - {fileID: 5463707103486709092}
   m_Father: {fileID: 4944554152423368751}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -40, y: -40}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: 91, y: -40}
   m_SizeDelta: {x: 17.5, y: 19.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6137821511763013742
@@ -1464,9 +1464,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 515832549897658804}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0.5}
-  m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 140, y: 0}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: 140, y: 10}
   m_SizeDelta: {x: 25, y: 25}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1929557787386318903
@@ -1599,7 +1599,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 21.35
+  m_fontSize: 18
   m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1708,9 +1708,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 515832549897658804}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.5}
-  m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 164, y: 0}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: 75, y: 10}
   m_SizeDelta: {x: 100, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1476997849751374654
@@ -2910,8 +2910,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -56, y: 50}
-  m_SizeDelta: {x: -312, y: -180}
+  m_AnchoredPosition: {x: -58.5, y: 50}
+  m_SizeDelta: {x: -307, y: -180}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5352165540903125763
 CanvasRenderer:
@@ -3165,6 +3165,48 @@ MonoBehaviour:
     cost: 250
     equipmentType: 61440
     state: {fileID: 11400000, guid: 015636297db2d0e43924deef637c3945, type: 2}
+  - sprite: {fileID: 21300000, guid: ee2996aac3a499d49bee1be50be65765, type: 3}
+    content: The metal ring, a timeless piece of jewelry, embodies both elegance
+      and durability.
+    cost: 350
+    equipmentType: 61440
+    state: {fileID: 11400000, guid: c89a8a7f9ba676547abb6eabfb703a72, type: 2}
+  - sprite: {fileID: 21300000, guid: e02277e112cba2f42853e0f942c5fae6, type: 3}
+    content: Crafted from the cherished precious metal renowned for its radiant beauty
+      and timeless allure, the gold ring stands as a symbol of both opulence and
+      lasting value.
+    cost: 400
+    equipmentType: 61440
+    state: {fileID: 11400000, guid: 9707c289ac999d34fa4bf74bdfedfa1f, type: 2}
+  - sprite: {fileID: 21300000, guid: 420c5226571944b4b82f2bbb750c2148, type: 3}
+    content: ' Crafted to resemble the jagged path of a lightning bolt, this ring
+      embodies power, energy, and unpredictability. '
+    cost: 400
+    equipmentType: 61440
+    state: {fileID: 11400000, guid: 942bbe8f59eff0744b3c78d8b420db7e, type: 2}
+  - sprite: {fileID: 21300000, guid: 03e720976307bd14aa07515bc3a1df38, type: 3}
+    content: Thunder Rings are crafted with supernatural forces, imbued with the
+      power of thunder itself. These mystical artifacts are believed to harness the
+      raw energy of storms, resonating with the primal forces of nature.
+    cost: 650
+    equipmentType: 61440
+    state: {fileID: 11400000, guid: a822860e611281d4288e3954e928189d, type: 2}
+  - sprite: {fileID: 21300000, guid: 1bfa32e17f4bb224b9087771fb651801, type: 3}
+    content: 'Forged from the fiery breath of legendary creatures, the Dragon Ring
+      epitomizes strength, power, and mystique. Crafted from metals infused with
+      ancient dragon scales or tempered by dragonfire, these rings are symbols of
+      courage and resilience. '
+    cost: 500
+    equipmentType: 61440
+    state: {fileID: 11400000, guid: 4eafd456bc1b3fc44b33d5b54ff662b1, type: 2}
+  - sprite: {fileID: 21300000, guid: 3971d05e546fe3047bbeee3724067589, type: 3}
+    content: The Hellfire Ring embodies the infernal fury of the underworld, a manifestation
+      of darkness and power. Crafted from metals forged in the depths of the abyss
+      and infused with the essence of hellfire, these rings exude an ominous energy
+      that captivates and intimidates.
+    cost: 850
+    equipmentType: 61440
+    state: {fileID: 11400000, guid: 0aa8d10bbd4a1154aad3a33b3cbe4c9c, type: 2}
   inventory: {fileID: 0}
   inventslot: {fileID: 0}
   slots: {fileID: 2738860659071217140}
@@ -3515,9 +3557,9 @@ RectTransform:
   - {fileID: 2009724751032569208}
   m_Father: {fileID: 4944554152423368751}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -40, y: 17.5}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: 91, y: 17.5}
   m_SizeDelta: {x: 17.5, y: 19.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7136561418450206544
@@ -3971,6 +4013,10 @@ PrefabInstance:
     - target: {fileID: 5783988624886461838, guid: 27655960389620f4f9343840047c1386, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6661668775593769983, guid: 27655960389620f4f9343840047c1386, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

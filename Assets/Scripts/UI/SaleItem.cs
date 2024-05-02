@@ -49,6 +49,9 @@ public class SaleItem : MonoBehaviour, IPointerClickHandler
             FieldInfo[] allFields = typeof(State).GetFields(BindingFlags.Public | BindingFlags.Instance);
             foreach (FieldInfo field in allFields)
             {
+                if (field.Name == "money")
+                    continue;
+
                 if (field.Name == "nickName")
                 {
                     equidName.text = (string)field.GetValue(state.state);
