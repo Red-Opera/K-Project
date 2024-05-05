@@ -1,13 +1,14 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class StageStart : MonoBehaviour
 {
     public GameObject portal;
     public float interactDistance = 3f; // 작용 가능한 거리
-    public float fadeDuration = 0.1f; // 화면 페이드 인/아웃 지속 시간
+    public float fadeDuration = 0.5f; // 페이드 인/아웃 지속 시간
+    public Image fadeImage; // 페이드 인/아웃에 사용할 이미지
 
     private bool isTransitioning = false; // 전환 중인지 여부를 나타내는 플래그
 
@@ -16,17 +17,18 @@ public class StageStart : MonoBehaviour
         if (isTransitioning)
             return;
 
-        // "Player"테그 찾고 오브젝트 사이의 거리를 계산
+        // "Player" 태그 찾고 오브젝트 사이의 거리를 계산
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (player == null)
             return;
 
         float distanceToPortal = Vector3.Distance(player.transform.position, portal.transform.position);
 
-        // f키 누르면 씬전환
+        // F 키를 누르면 씬 전환
         if (distanceToPortal < interactDistance && Input.GetKeyDown(KeyCode.F))
         {
-            player.transform.position = new Vector3(0,0,0); 
+            player.transform.position = new Vector3(0, 0, 0);
+            // 코루틴을 사용하여 페이드 인/아웃 효과를 적용하여 씬 전환
             StartCoroutine(TransitionToScene());
         }
     }
@@ -35,31 +37,29 @@ public class StageStart : MonoBehaviour
     {
         isTransitioning = true;
 
-        // 화면 어두워지기
+        // 페이드 아웃 효과
         float timer = 0f;
         while (timer < fadeDuration)
         {
             timer += Time.deltaTime;
             float alpha = Mathf.Lerp(0f, 1f, timer / fadeDuration);
+            fadeImage.color = new Color(0f, 0f, 0f, alpha);
             yield return null;
         }
 
         // 씬 전환
         SceneManager.LoadScene("Stage1");
 
-        // 화면 밝아지기
+        // 페이드 인 효과
         timer = 0f;
         while (timer < fadeDuration)
         {
             timer += Time.deltaTime;
             float alpha = Mathf.Lerp(1f, 0f, timer / fadeDuration);
-            // 화면을 밝게 만듭니다. 화면이 어두워졌던 것을 되돌립니다.
-            // 판넬이나 이미지의 알파 값을 조절하여 밝은 효과를 만듭니다.
-            // 판넬이나 이미지의 알파 값 조절 방법은 적절히 수정해야 합니다.
+            fadeImage.color = new Color(0f, 0f, 0f, alpha);
             yield return null;
         }
 
         isTransitioning = false;
     }
-    
 }

@@ -8,6 +8,7 @@ public class StageManager : MonoBehaviour
 {
 
     public GameObject[] Stages;
+    public GameObject[] EventStage;
     public GameObject BossStage;
     private int currentStageIndex;
     public float fadeDuration = 1f; // 페이드 인/아웃에 걸리는 시간
@@ -23,13 +24,6 @@ public class StageManager : MonoBehaviour
     public void ChangeStage(int direction)
     {
          GameObject player = GameObject.FindGameObjectWithTag("Player");
-
-        // Player 오브젝트를 찾은 경우
-        if (player != null)
-        {
-            // Player 오브젝트의 위치를 (0, 0, 0)으로 설정
-            player.transform.position = Vector3.zero;
-        }
 
         int newStageIndex = currentStageIndex + direction;
 
@@ -48,7 +42,6 @@ public class StageManager : MonoBehaviour
     void SetActiveStage(int index)
     {
         Stages[index].SetActive(true);
-
         CurrentSceneNameUI.StartSceneNameAnimation();
     }
     //Map으로 이동
