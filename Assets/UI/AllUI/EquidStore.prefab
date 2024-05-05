@@ -3130,41 +3130,43 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectables:
-  - sprite: {fileID: -664377214, guid: 39caf47f5ecdfc543bb636fb7afc82ed, type: 3}
-    content: 'A simple yet sturdy one-handed sword, crafted for novice adventurers. '
-    cost: 100
-    equipmentType: 4026531840
-    state: {fileID: 11400000, guid: 6e314594b023651438af965a21d950d8, type: 2}
   - sprite: {fileID: 1998334570, guid: 39caf47f5ecdfc543bb636fb7afc82ed, type: 3}
     content: The kunai is a versatile double-edged blade, optimized for rapid strikes
       in close combat.
     cost: 75
     equipmentType: 15728640
     state: {fileID: 11400000, guid: 31a0671780712e74ab3bd3c8a94da06c, type: 2}
-  - sprite: {fileID: -1726069512, guid: 39caf47f5ecdfc543bb636fb7afc82ed, type: 3}
-    content: Sturdy and reliable, this bow offers precision and power without unnecessary
-      frills.
-    cost: 150
-    equipmentType: 251658240
-    state: {fileID: 11400000, guid: 84770be3b9d691a4bb6eb04946d95f03, type: 2}
   - sprite: {fileID: 400821093, guid: 39caf47f5ecdfc543bb636fb7afc82ed, type: 3}
     content: The basic two-handed axe is a sturdy, double-bladed weapon designed
       for powerful strikes.
-    cost: 125
+    cost: 0
     equipmentType: 15728640
     state: {fileID: 11400000, guid: 2e257d6c117f2754ea530ca48dbf5b2c, type: 2}
-  - sprite: {fileID: 1551794085, guid: 39caf47f5ecdfc543bb636fb7afc82ed, type: 3}
-    content: The basic magic staff is a simple yet potent instrument imbued with
-      mystical energies.
-    cost: 200
+  - sprite: {fileID: -664377214, guid: 39caf47f5ecdfc543bb636fb7afc82ed, type: 3}
+    content: 'A simple yet sturdy one-handed sword, crafted for novice adventurers. '
+    cost: 100
+    equipmentType: 4026531840
+    state: {fileID: 11400000, guid: 5b32b9b5bc8d67a41b56e0caa065b180, type: 2}
+  - sprite: {fileID: 21300000, guid: f93133752960a0f4fa1e6936fc91f05c, type: 3}
+    content: serjsejsrtjs
+    cost: 150
     equipmentType: 251658240
-    state: {fileID: 11400000, guid: 06d0916f5e6e0b2429e42e4a14b49cbc, type: 2}
-  - sprite: {fileID: 1015998936, guid: 39caf47f5ecdfc543bb636fb7afc82ed, type: 3}
-    content: 'The basic ring is a modest yet essential accessory, typically crafted
-      from durable metals such as silver or gold. '
-    cost: 250
-    equipmentType: 61440
-    state: {fileID: 11400000, guid: 015636297db2d0e43924deef637c3945, type: 2}
+    state: {fileID: 11400000, guid: 3e577c80889550241aab666a4c0f4f63, type: 2}
+  - sprite: {fileID: 21300000, guid: 6986b84c218fa48408103e9310a603fc, type: 3}
+    content: seryseryery
+    cost: 0
+    equipmentType: 4026531840
+    state: {fileID: 11400000, guid: 4bf9ce1152326e74eae19a04d7f3ec5e, type: 2}
+  - sprite: {fileID: 21300000, guid: 0b70528981d17b54bbd2df7b38153975, type: 3}
+    content: fgjdrjdrksryks
+    cost: 0
+    equipmentType: 4026531840
+    state: {fileID: 11400000, guid: 0665a62960ca9c444b9f64dcf602263f, type: 2}
+  - sprite: {fileID: 21300000, guid: c8da7a9697c3bc2408d540df27d29cdd, type: 3}
+    content: hdfhsdh
+    cost: 200
+    equipmentType: 4026531840
+    state: {fileID: 11400000, guid: d12816b5423f0b94fb9389f531afbd75, type: 2}
   - sprite: {fileID: 21300000, guid: ee2996aac3a499d49bee1be50be65765, type: 3}
     content: The metal ring, a timeless piece of jewelry, embodies both elegance
       and durability.

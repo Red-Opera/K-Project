@@ -238,7 +238,7 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 0
+  orthographic: 1
   orthographic size: 5
   m_Depth: -1
   m_CullingMask:
@@ -439,6 +439,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EventSystem
       objectReference: {fileID: 0}
+    - target: {fileID: 6261542404581744780, guid: e4ccfcaea3fa1a648a9f02bf66eab781, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6531777597069221880, guid: e4ccfcaea3fa1a648a9f02bf66eab781, type: 3}
       propertyPath: m_AnchorMax.x
       value: 1
@@ -446,6 +450,22 @@ PrefabInstance:
     - target: {fileID: 6531777597069221880, guid: e4ccfcaea3fa1a648a9f02bf66eab781, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7030477650807087990, guid: e4ccfcaea3fa1a648a9f02bf66eab781, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7030477650807087990, guid: e4ccfcaea3fa1a648a9f02bf66eab781, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8666521314751362877, guid: e4ccfcaea3fa1a648a9f02bf66eab781, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8666521314751362877, guid: e4ccfcaea3fa1a648a9f02bf66eab781, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9208799892627916032, guid: e4ccfcaea3fa1a648a9f02bf66eab781, type: 3}
       propertyPath: m_AnchorMax.x
