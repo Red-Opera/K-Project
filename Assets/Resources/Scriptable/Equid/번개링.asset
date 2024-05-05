@@ -20,18 +20,18 @@ MonoBehaviour:
   damage: 10
   defense: 15
   critical: 0
-  moveSpeed: 0
+  moveSpeed: 1
   jumpPower: 0
   jumpCount: 0
   maxJump: 0
   dashDamage: 0
   strong: 0
   criticalDamage: 0
-  attackSpeed: 0
+  attackSpeed: 0.1
   fixedDamage: 0
   defensePersent: 0
   avoidPersent: 0
   reloadTime: 0
   dashBarCount: 0
   food: 0
-  money: 400
+  money: 2000
