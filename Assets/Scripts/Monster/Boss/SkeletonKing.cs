@@ -8,7 +8,7 @@ public class SkeletonKing : BossMonster
     public override void InitSetting()
     {
         boss.range = Resources.Load<GameObject>("Prefab/Boss/AttackRange");
-            boss.bossState = Resources.Load<MonsterState>("Scriptable/Boss/SkeletonKing");
+        boss.bossState = Resources.Load<MonsterState>("Scriptable/Boss/SkeletonKing");
         boss.pos = new Vector3(2,0,0);
         boss.damage = 10;
         boss.disapearTime = .3f;

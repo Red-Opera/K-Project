@@ -17,7 +17,7 @@ MonoBehaviour:
   maxHP: 0
   currentHp: 0
   currentExp: 0
-  damage: 10
+  damage: 8
   defense: 0
   critical: 0
   moveSpeed: 0
@@ -27,11 +27,11 @@ MonoBehaviour:
   dashDamage: 0
   strong: 0
   criticalDamage: 0
-  attackSpeed: -0.2
+  attackSpeed: 0.2
   fixedDamage: 0
   defensePersent: 0
   avoidPersent: 0
   reloadTime: 0
   dashBarCount: 0
   food: 0
-  money: 100
+  money: 75
