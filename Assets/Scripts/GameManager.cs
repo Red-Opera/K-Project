@@ -7,13 +7,13 @@ public class GameManager : MonoBehaviour
 
     private static GameManager instance;
 
-    [SerializeField] public State playerState;  // ÇÃ·¹ÀÌ¾î ±âº» ½ºÅÈ ¹× Á¤º¸            ÂüÁ¶¹ı (GameManager.info.playerState)
-    public State addFoodState;                  // À½½Ä Ãß°¡ ´É·ÂÄ¡°¡ ÀÖÀ» °æ¿ì Ãß°¡      ÂüÁ¶¹ı (GameManager.info.addFoodState)
-    public State addWaphonState;                // ¹«±â Ãß°¡ ´É·ÂÄ¡°¡ ÀÖÀ» °æ¿ì Ãß°¡      ÂüÁ¶¹ı (GameManager.info.addWaphonState)
-    public State addStatState;                  // ½ºÅÈ Ãß°¡ ´É·ÂÄ¡°¡ ÀÖÀ» °æ¿ì Ãß°¡      ÂüÁ¶¹ı (GameManager.info.addStatState)
-    public State allPlayerState;                // ÃÑ ÇÃ·¹ÀÌ¾î ´É·ÂÄ¡                   ÂüÁ¶¹ı (GameManager.info.allPlayerState)
+    [SerializeField] public State playerState;  // í”Œë ˆì´ì–´ ê¸°ë³¸ ìŠ¤íƒ¯ ë° ì •ë³´            ì°¸ì¡°ë²• (GameManager.info.playerState)
+    public State addFoodState;                  // ìŒì‹ ì¶”ê°€ ëŠ¥ë ¥ì¹˜ê°€ ìˆì„ ê²½ìš° ì¶”ê°€      ì°¸ì¡°ë²• (GameManager.info.addFoodState)
+    public State addWaphonState;                // ë¬´ê¸° ì¶”ê°€ ëŠ¥ë ¥ì¹˜ê°€ ìˆì„ ê²½ìš° ì¶”ê°€      ì°¸ì¡°ë²• (GameManager.info.addWaphonState)
+    public State addStatState;                  // ìŠ¤íƒ¯ ì¶”ê°€ ëŠ¥ë ¥ì¹˜ê°€ ìˆì„ ê²½ìš° ì¶”ê°€      ì°¸ì¡°ë²• (GameManager.info.addStatState)
+    public State allPlayerState;                // ì´ í”Œë ˆì´ì–´ ëŠ¥ë ¥ì¹˜                   ì°¸ì¡°ë²• (GameManager.info.allPlayerState)
 
-    public State currentPlayerState { get { return allPlayerState; } }    // ÃÑ ÇÃ·¹ÀÌ¾î ½ºÅÈÀ» ¹İÈ¯ÇÏ´Â º¯¼ö
+    public State currentPlayerState { get { return allPlayerState; } }    // ì´ í”Œë ˆì´ì–´ ìŠ¤íƒ¯ì„ ë°˜í™˜í•˜ëŠ” ë³€ìˆ˜
 
     public void Awake()
     {
@@ -34,37 +34,37 @@ public class GameManager : MonoBehaviour
         UpdatePlayerState();
     }
 
-    // À½½ÄÀ¸·Î ÀÎÇÑ ½ºÅÈ »ó½ÂÀ» ±¸ÇÏ´Â ¸Ş¼Òµå
+    // ìŒì‹ìœ¼ë¡œ ì¸í•œ ìŠ¤íƒ¯ ìƒìŠ¹ì„ êµ¬í•˜ëŠ” ë©”ì†Œë“œ
     public void AddFoodState(string stateName, double value)
     {
         AddState(stateName, value, addFoodState);
     }
 
-    // ¹«±â·Î ÀÎÇÑ ½ºÅÈ »ó½ÂÀ» ±¸ÇÏ´Â ¸Ş¼Òµå
+    // ë¬´ê¸°ë¡œ ì¸í•œ ìŠ¤íƒ¯ ìƒìŠ¹ì„ êµ¬í•˜ëŠ” ë©”ì†Œë“œ
     public void AddWaphonState(string stateName, double value)
     {
         AddState(stateName, value, addWaphonState);
     }
 
-    // ´É·ÂÄ¡ ¾÷±×·¹ÀÌµå¿¡ µû¸¥ ½ºÅÈ »ó½ÂÀ» ±¸ÇÏ´Â ¸Ş¼Òµå
+    // ëŠ¥ë ¥ì¹˜ ì—…ê·¸ë ˆì´ë“œì— ë”°ë¥¸ ìŠ¤íƒ¯ ìƒìŠ¹ì„ êµ¬í•˜ëŠ” ë©”ì†Œë“œ
     public void AddStatState(string stateName, double value)
     {
         AddState(stateName, value, addStatState);
     }
 
-    // À½½ÄÀ¸·Î ÀÎÇÑ ½ºÅÈ °ªÀ» ±¸ÇÏ´Â ¸Ş¼Òµå
+    // ìŒì‹ìœ¼ë¡œ ì¸í•œ ìŠ¤íƒ¯ ê°’ì„ êµ¬í•˜ëŠ” ë©”ì†Œë“œ
     public void SetFoodState(string stateName, double value)
     {
         SetState(stateName, value, addFoodState);
     }
 
-    // ¹«±â·Î ÀÎÇÑ ½ºÅÈ °ªÀ» ±¸ÇÏ´Â ¸Ş¼Òµå
+    // ë¬´ê¸°ë¡œ ì¸í•œ ìŠ¤íƒ¯ ê°’ì„ êµ¬í•˜ëŠ” ë©”ì†Œë“œ
     public void SetWaphonState(string stateName, double value)
     {
         SetState(stateName, value, addWaphonState);
     }
 
-    // ´É·ÂÄ¡ ¾÷±×·¹ÀÌµå¿¡ µû¸¥ ½ºÅÈ »ó½ÂÀ» ±¸ÇÏ´Â ¸Ş¼Òµå
+    // ëŠ¥ë ¥ì¹˜ ì—…ê·¸ë ˆì´ë“œì— ë”°ë¥¸ ìŠ¤íƒ¯ ìƒìŠ¹ì„ êµ¬í•˜ëŠ” ë©”ì†Œë“œ
     public void SetStatState(string stateName, double value)
     {
         SetState(stateName, value, addStatState);
@@ -72,7 +72,7 @@ public class GameManager : MonoBehaviour
 
     private void AddState(string stateName, double value, State state)
     {
-        // ±× »óÅÂ°¡ Á¸ÀçÇÏ´ÂÁö Ã£¾Æº½
+        // ê·¸ ìƒíƒœê°€ ì¡´ì¬í•˜ëŠ”ì§€ ì°¾ì•„ë´„
         object fieldValue = null;
         try { fieldValue = State.datas[stateName].GetValue(state); }
 
@@ -80,18 +80,18 @@ public class GameManager : MonoBehaviour
 
         if (fieldValue == null)
         {
-            Debug.Assert(false, "ÇØ´ç ÀÌ¸§ÀÇ »óÅÂ ÀÌ¸§ÀÌ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù.");
+            Debug.Assert(false, "í•´ë‹¹ ì´ë¦„ì˜ ìƒíƒœ ì´ë¦„ì´ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.");
             return;
         }
 
-        // ¼ıÀÚ·Î ¹Ù²Ü ¼ö ÀÖ´Â °æ¿ì ¼ıÀÚ·Î ¹Ù²Ù°í °ªÀ» ´õÇÔ
+        // ìˆ«ìë¡œ ë°”ê¿€ ìˆ˜ ìˆëŠ” ê²½ìš° ìˆ«ìë¡œ ë°”ê¾¸ê³  ê°’ì„ ë”í•¨
         double resultValue = Convert.ToDouble(fieldValue) + value;
 
-        // ÇØ´ç ´É·ÂÄ¡°¡ ¾î¶² Å¸ÀÔÀÎÁö ¾Ë¾Æ³½ ÈÄ Ãß°¡ÇÒ °ªÀ» ´õÇÔ
+        // í•´ë‹¹ ëŠ¥ë ¥ì¹˜ê°€ ì–´ë–¤ íƒ€ì…ì¸ì§€ ì•Œì•„ë‚¸ í›„ ì¶”ê°€í•  ê°’ì„ ë”í•¨
         Type type = State.datas[stateName].GetValue(state).GetType();
         object returnValue = Convert.ChangeType(resultValue, Type.GetTypeCode(type));
 
-        // ´Ù½Ã ÇØ´ç Å¸ÀÔÀ¸·Î º¯È¯µÇ¾î ÀúÀåÇÔ
+        // ë‹¤ì‹œ í•´ë‹¹ íƒ€ì…ìœ¼ë¡œ ë³€í™˜ë˜ì–´ ì €ì¥í•¨
         State.datas[stateName].SetValue(state, returnValue);
 
         UpdatePlayerState();
@@ -99,7 +99,7 @@ public class GameManager : MonoBehaviour
 
     private void SetState(string stateName, double value, State state)
     {
-        // ±× »óÅÂ°¡ Á¸ÀçÇÏ´ÂÁö Ã£¾Æº½
+        // ê·¸ ìƒíƒœê°€ ì¡´ì¬í•˜ëŠ”ì§€ ì°¾ì•„ë´„
         object fieldValue = null;
         try { fieldValue = State.datas[stateName].GetValue(state); }
 
@@ -107,21 +107,21 @@ public class GameManager : MonoBehaviour
 
         if (fieldValue == null)
         {
-            Debug.Assert(false, "ÇØ´ç ÀÌ¸§ÀÇ »óÅÂ ÀÌ¸§ÀÌ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù.");
+            Debug.Assert(false, "í•´ë‹¹ ì´ë¦„ì˜ ìƒíƒœ ì´ë¦„ì´ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.");
             return;
         }
 
-        // ÇØ´ç ´É·ÂÄ¡°¡ ¾î¶² Å¸ÀÔÀÎÁö ¾Ë¾Æ³½ ÈÄ Ãß°¡ÇÒ °ªÀ» ´õÇÔ
+        // í•´ë‹¹ ëŠ¥ë ¥ì¹˜ê°€ ì–´ë–¤ íƒ€ì…ì¸ì§€ ì•Œì•„ë‚¸ í›„ ì¶”ê°€í•  ê°’ì„ ë”í•¨
         Type type = State.datas[stateName].GetValue(state).GetType();
         object returnValue = Convert.ChangeType(value, Type.GetTypeCode(type));
 
-        // ´Ù½Ã ÇØ´ç Å¸ÀÔÀ¸·Î º¯È¯µÇ¾î ÀúÀåÇÔ
+        // ë‹¤ì‹œ í•´ë‹¹ íƒ€ì…ìœ¼ë¡œ ë³€í™˜ë˜ì–´ ì €ì¥í•¨
         State.datas[stateName].SetValue(state, returnValue);
 
         UpdatePlayerState();
     }
 
-    // ¸ğµç »óÅÂ¸¦ ´õÇÏ¿© ÀüÃ¼ »óÅÂ¸¦ ¾÷µ¥ÀÌÆ®ÇÏ´Â ¸Ş¼Òµå
+    // ëª¨ë“  ìƒíƒœë¥¼ ë”í•˜ì—¬ ì „ì²´ ìƒíƒœë¥¼ ì—…ë°ì´íŠ¸í•˜ëŠ” ë©”ì†Œë“œ
     public void UpdatePlayerState()
     {
         foreach (string state in State.datas.Keys)
@@ -129,20 +129,21 @@ public class GameManager : MonoBehaviour
             if (state == "NickName")
                 continue;
 
-            // ÇØ´ç ´É·ÂÄ¡ÀÇ Å¸ÀÔ
+            // í•´ë‹¹ ëŠ¥ë ¥ì¹˜ì˜ íƒ€ì…
             Type type = State.datas[state].GetValue(addFoodState).GetType();
 
-            // ¸ğµç ´É·ÂÄ¡¸¦ °¡Á®¿È
+            // ëª¨ë“  ëŠ¥ë ¥ì¹˜ë¥¼ ê°€ì ¸ì˜´
             double defualtState = Convert.ToDouble(State.datas[state].GetValue(playerState));
             double food = Convert.ToDouble(State.datas[state].GetValue(addFoodState));
             double waphon = Convert.ToDouble(State.datas[state].GetValue(addWaphonState));
             double stat = Convert.ToDouble(State.datas[state].GetValue(addStatState));
 
-            // ¸ğµÎ ´õÇÔ
+            // ëª¨ë‘ ë”í•¨
             object returnValue = Convert.ChangeType(defualtState + food + waphon + stat, Type.GetTypeCode(type));
 
-            // ÇÕ°è¸¦ ÀúÀåÇÔ
+            // í•©ê³„ë¥¼ ì €ì¥í•¨
             State.datas[state].SetValue(allPlayerState, returnValue);
         }
     }
+
 }

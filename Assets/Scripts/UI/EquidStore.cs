@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 public class EquidStore : MonoBehaviour
 {
-    [SerializeField] public List<SelectableItem> selectables;       // 전시할 수 있는 아이템
+    [SerializeField] public List<SelectableItem> selectables;                   // 전시할 수 있는 아이템
 
     [SerializeField] private GameObject inventory;                  // 인벤토리 오브젝트
     [SerializeField] private GameObject inventslot;                 // 인벤토리 슬롯들을 저장하는 오브젝드
@@ -40,7 +40,6 @@ public class EquidStore : MonoBehaviour
         Debug.Assert(saleUI != null, "판매 UI가 없습니다.");
 
         buyButton.onClick.AddListener(() => EquidStoreItem.BuyItem());
-
         
     }
 
