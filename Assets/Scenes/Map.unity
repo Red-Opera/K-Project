@@ -32192,6 +32192,7 @@ GameObject:
   - component: {fileID: 1132674482}
   - component: {fileID: 1132674481}
   - component: {fileID: 1132674480}
+  - component: {fileID: 1132674483}
   m_Layer: 5
   m_Name: Fade
   m_TagString: Untagged
@@ -32248,7 +32249,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
@@ -32282,6 +32283,19 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &1132674483
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1132674478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7ff438d0af478d478d99f2c7d97256a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadeTime: 5
 --- !u!1 &1138648554
 GameObject:
   m_ObjectHideFlags: 0
@@ -62269,15 +62283,15 @@ RectTransform:
   m_GameObject: {fileID: 1895354098}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 11.923201, y: 4.202799, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1132674479}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -4, y: 4}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1895354101
 MonoBehaviour:
@@ -62329,6 +62343,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7ff438d0af478d478d99f2c7d97256a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fadeTime: 2.2
 --- !u!4 &1896609299 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8110126698356207188, guid: 924118ea6eca18f459f67d54f8640858, type: 3}
