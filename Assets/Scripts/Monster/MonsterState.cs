@@ -8,10 +8,13 @@ public class MonsterState : ScriptableObject
     public int level;
     public int maxHP;
     public int currentHp;
+    public int Stage;
 
     public int damage;
     public int defense;
     public int moveSpeed;
-    public int flyingSpeed;
+    public float dashcoaf;
+    public float jumpPower;
+    public float flyingSpeed;
     public int Money;
 }

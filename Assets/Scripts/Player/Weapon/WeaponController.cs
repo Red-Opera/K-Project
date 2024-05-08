@@ -1,5 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.WebSockets;
+using System.Threading.Tasks;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class WeaponController : MonoBehaviour
@@ -9,6 +12,7 @@ public class WeaponController : MonoBehaviour
     public State playerState;
     SpriteRenderer spriteRenderer;
     Animator anim;
+    public Rigidbody2D rigid;
     bool isAtk = false;
     void Start()
     {
@@ -17,6 +21,7 @@ public class WeaponController : MonoBehaviour
         playerState = Resources.Load<State>("Scriptable/Player");
         anim = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        rigid = GetComponent<Rigidbody2D>();
     }
     void Update()
     {
@@ -34,6 +39,7 @@ public class WeaponController : MonoBehaviour
                 }else{
                     myWeapon.Weapon.dir = 1;
                 }
+                CheckMousePos();
                 isAtk = true;
                 myWeapon.Using();
                 Invoke("CoolTime",myWeapon.Weapon.coolTime);
@@ -44,5 +50,20 @@ public class WeaponController : MonoBehaviour
 
     void CoolTime(){
         isAtk = false;
+    }
+    void CheckMousePos(){
+        Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        bool isMouse = false;
+        if(myWeapon.Weapon.dir ==1){
+            isMouse = (mousePos.x > rigid.position.x);
+        } else{
+            isMouse = (mousePos.x < rigid.position.x);
+        }
+        Debug.Log("mouse Pos : " + mousePos.x + ", Player Pos : " + rigid.position.x);
+        if(isMouse){
+            Vector2 attackSpeed = mousePos - rigid.position;
+            myWeapon.Weapon.fowardSpeed = attackSpeed.normalized;
+            Debug.Log(myWeapon.Weapon.fowardSpeed);
+        }
     }
 }

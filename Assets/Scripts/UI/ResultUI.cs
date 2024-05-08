@@ -47,12 +47,12 @@ public class ResultUI : MonoBehaviour
         for (int i = 0; i < equidStore.selectables.Count; i++)
             weaphonInfoEx.Add(equidStore.selectables[i].state.name, equidStore.selectables[i]);
 
-        GetItem("기본링");
-        GetItem("단검");
-        GetItem("기본지팡이");
-        GetItem("기본활");
-        GetItem("단검");
-        GetItem("양손도끼");
+        //GetItem("기본링");
+        //GetItem("단검");
+        //GetItem("기본지팡이");
+        //GetItem("기본활");
+        //GetItem("단검");
+        //GetItem("양손도끼");
 
         //Invoke("GameIsEnd", 2.0f);
     }
@@ -130,7 +130,7 @@ public class ResultUI : MonoBehaviour
                     string stageName = stages.GetChild(i).name;
 
                     // 일반 스테이지인 경우
-                    if (stageName.StartsWith("stage"))
+                    if (stageName.StartsWith("stage") || stageName.StartsWith("Stage"))
                         currentLevelText.text += stageName[stageName.Length - 1].ToString() + "스테이지";
 
                     // 보스 스테이지인 경우

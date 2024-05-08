@@ -31,11 +31,16 @@ public class InventroyPosition : MonoBehaviour
             if (displayPos[i].childCount == 0)
                 continue;
 
+            Transform item = displayPos[i].GetChild(0);
+
+            if (item.GetComponent<MoveInventory>() == null)
+                continue;
+
             // 아이템의 위치을 각각 오브젝트별로 알려줌
-            displayPos[i].GetChild(0).GetComponent<MoveInventory>().displayIndex = i;
+            item.GetComponent<MoveInventory>().displayIndex = i;
 
             // 오브젝트를 차례대로 인벤토리에 넣음
-            displayPos[i].GetChild(0).transform.localPosition = Vector3.zero;
+            item.transform.localPosition = Vector3.zero;
         }
 
         sprites = new Dictionary<string, Sprite>();
@@ -89,6 +94,9 @@ public class InventroyPosition : MonoBehaviour
 
             MoveInventory aMoveInventory = displayPos[displayIndex].GetChild(0).GetComponent<MoveInventory>();
             MoveInventory bMoveInventory = displayPos[dragIndex].GetChild(0).GetComponent<MoveInventory>();
+
+            if (aMoveInventory == null || bMoveInventory == null)
+                return;
 
             int a = aMoveInventory.displayIndex;
             int b = bMoveInventory.displayIndex;

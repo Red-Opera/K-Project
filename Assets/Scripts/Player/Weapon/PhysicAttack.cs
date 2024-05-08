@@ -13,7 +13,7 @@ public class PhysicAttack : MyWeapon
         Weapon.damage = 5;
         Weapon.disapearTime = 0.5f;    
         Weapon.folloewTime = 0.5f;
-        Weapon.fowardSpeed = 1;
+        Weapon.fowardSpeed = new Vector2(0,0);
         Weapon.animName = "nAttack";
     }
 }
