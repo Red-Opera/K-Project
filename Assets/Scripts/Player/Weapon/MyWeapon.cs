@@ -12,7 +12,7 @@ public struct WeaponSetting{
     public int damage;
     public float disapearTime;
     public float folloewTime;
-    public float fowardSpeed;
+    public Vector2 fowardSpeed;
     public string animName;
     public int dir;
 }

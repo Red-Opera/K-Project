@@ -640,6 +640,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e57cbb9237210a40a668c971d38c04a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1125691697 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4582293565559528343, guid: c556abd764f36af48a94d3b7a70af465, type: 3}
+  m_PrefabInstance: {fileID: 5855075274904586574}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 057c73b6ca418234fa1479c9addb0bd7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1163623318
 GameObject:
   m_ObjectHideFlags: 0
@@ -979,6 +990,10 @@ PrefabInstance:
     - target: {fileID: 8357597898675405363, guid: a9f91ea7f8eb03e4daa6214f0981cb9a, type: 3}
       propertyPath: m_Name
       value: SkeletonKing
+      objectReference: {fileID: 0}
+    - target: {fileID: 8357597898675405363, guid: a9f91ea7f8eb03e4daa6214f0981cb9a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1683,21 +1698,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3116848391682589060, guid: c556abd764f36af48a94d3b7a70af465, type: 3}
-      propertyPath: m_CollisionDetection
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3277226748042234503, guid: c556abd764f36af48a94d3b7a70af465, type: 3}
-      propertyPath: playerState
+    - target: {fileID: 7555247546261187526, guid: c556abd764f36af48a94d3b7a70af465, type: 3}
+      propertyPath: myWeapon
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1125691697}
     - target: {fileID: 9094955460031638816, guid: c556abd764f36af48a94d3b7a70af465, type: 3}
       propertyPath: m_Name
       value: Enchantress
       objectReference: {fileID: 0}
     - target: {fileID: 9094955460031638816, guid: c556abd764f36af48a94d3b7a70af465, type: 3}
-      propertyPath: m_IsActive
-      value: 1
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

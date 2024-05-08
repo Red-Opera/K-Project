@@ -24,7 +24,7 @@ public class PMove : MonoBehaviour
         anim = GetComponent<Animator>();
     }
     void Start(){
-        playerState = GameManager.info.playerState;
+        playerState = GameManager.info.allPlayerState;
     }
 
 
@@ -41,33 +41,35 @@ public class PMove : MonoBehaviour
     void Move(){
         float Horiz = Input.GetAxisRaw("Horizontal");
         if(Horiz != 0){
-            rigid.velocity = new Vector2(Horiz * playerState.moveSpeed, rigid.velocity.y);
             if(rigid.velocity.x>0){
                 spriteRenderer.flipX = false;
             }else if(rigid.velocity.x<0){
                 spriteRenderer.flipX = true;
             }
             anim.SetBool("isWalk",true);
-        }
-        if(Input.GetButtonUp("Horizontal")){
-            rigid.velocity =new Vector2(0, rigid.velocity.y);
-            anim.SetBool("isWalk", false);
-        }
-
-        if(Input.GetKeyDown(KeyCode.LeftShift)){
-            playerState.moveSpeed *=1.5f;
-        }
-        if(Input.GetKey(KeyCode.LeftShift)){
-            if(rigid.velocity.x != 0){
-                anim.SetBool("isRun",true);
+            if(Input.GetKey(KeyCode.LeftShift)){
+                rigid.velocity = new Vector2(Horiz * playerState.moveSpeed * 1.5f, rigid.velocity.y);
+                if(rigid.velocity.x != 0){
+                    anim.SetBool("isRun",true);
+                }else{
+                    anim.SetBool("isRun",false);
+                }if(rigid.velocity.x>0){
+                    spriteRenderer.flipX = false;
+                }else if(rigid.velocity.x<0){
+                    spriteRenderer.flipX = true;
+                }
             }else{
                 anim.SetBool("isRun",false);
+                rigid.velocity = new Vector2(Horiz * playerState.moveSpeed, rigid.velocity.y);
+            
             }
         }
-        if(Input.GetKeyUp(KeyCode.LeftShift)){
-            playerState.moveSpeed /= 1.5f;
+        if(Horiz ==0){
+            rigid.velocity =new Vector2(0, rigid.velocity.y);
+            anim.SetBool("isWalk", false);
             anim.SetBool("isRun",false);
         }
+        
     }
     void Jump(){
         float ColliderSizeX = PlayerCollider.size.x/2;
@@ -99,11 +101,12 @@ public class PMove : MonoBehaviour
     }
 
     void Dash(){
-        if(Input.GetMouseButtonDown(1) && playerState.dashBarCount > 0){
+        DashUI dashUI = FindObjectOfType<DashUI>();
+        if(Input.GetMouseButtonDown(1) && dashUI.dashBarSlider.value >= 0.2){
             Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector2 dashDir = mousePos - rigid.position;
             rigid.velocity += dashDir.normalized* 8;
-            playerState.dashBarCount--;
+            dashUI.DashUIApply();
 
             if(dashDir.x >0){
                 spriteRenderer.flipX = false;

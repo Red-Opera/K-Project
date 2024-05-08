@@ -21,6 +21,7 @@ MonoBehaviour:
   defense: 0
   critical: 0.05
   moveSpeed: 5
+  runCoaf: 1.5
   jumpPower: 5
   jumpCount: 0
   maxJump: 2
@@ -32,6 +33,6 @@ MonoBehaviour:
   defensePersent: 0
   avoidPersent: 0
   reloadTime: -0.3
-  dashBarCount: 0
+  dashBarCount: 2
   food: 47
   money: 50000
