@@ -24,6 +24,7 @@ public class PMove : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
         result = FindObjectOfType<ResultUI>();
+        DontDestroyOnLoad(gameObject);
     }
     void Start(){
         playerState = GameManager.info.allPlayerState;
