@@ -272,7 +272,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_TargetDisplay: 0
 --- !u!114 &9217333991274436926
 MonoBehaviour:
@@ -335,6 +335,7 @@ MonoBehaviour:
   - Ludwig van Beethoven's Variations and Fugue in E-flat major, Op. 35, also known
     as 'Eroica Variations,' was composed in 1802 and consists of 15 variations.
   typingDelay: 0.1
+  isChat: 0
 --- !u!1 &6724389147972407576
 GameObject:
   m_ObjectHideFlags: 0

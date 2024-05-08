@@ -1,4 +1,5 @@
 using System;
+using System.Reflection;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -7,11 +8,11 @@ public class GameManager : MonoBehaviour
 
     private static GameManager instance;
 
-    [SerializeField] public State playerState;  // 플레이어 기본 스탯 및 정보            참조법 (GameManager.info.playerState)
-    public State addFoodState;                  // 음식 추가 능력치가 있을 경우 추가      참조법 (GameManager.info.addFoodState)
-    public State addWaphonState;                // 무기 추가 능력치가 있을 경우 추가      참조법 (GameManager.info.addWaphonState)
-    public State addStatState;                  // 스탯 추가 능력치가 있을 경우 추가      참조법 (GameManager.info.addStatState)
-    public State allPlayerState;                // 총 플레이어 능력치                   참조법 (GameManager.info.allPlayerState)
+    [SerializeField] public State playerState;      // 플레이어 기본 스탯 및 정보            참조법 (GameManager.info.playerState)
+    [HideInInspector] public State addFoodState;    // 음식 추가 능력치가 있을 경우 추가      참조법 (GameManager.info.addFoodState)
+    [HideInInspector] public State addWaphonState;  // 무기 추가 능력치가 있을 경우 추가      참조법 (GameManager.info.addWaphonState)
+    [HideInInspector] public State addStatState;    // 스탯 추가 능력치가 있을 경우 추가      참조법 (GameManager.info.addStatState)
+    [HideInInspector] public State allPlayerState;  // 총 플레이어 능력치                   참조법 (GameManager.info.allPlayerState)
 
     public State currentPlayerState { get { return allPlayerState; } }    // 총 플레이어 스탯을 반환하는 변수
 
@@ -121,6 +122,26 @@ public class GameManager : MonoBehaviour
         UpdatePlayerState();
     }
 
+    public static void AddStates(State currentState, State otherState)
+    {
+        FieldInfo[] allFields = typeof(State).GetFields(BindingFlags.Public | BindingFlags.Instance);
+
+        foreach (FieldInfo field in allFields)
+        {
+            if (field.Name == "nickName" || field.Name == "money")
+                continue;
+
+            object currentValue = field.GetValue(currentState);
+            object otherValue = field.GetValue(otherState);
+
+            if (currentValue is int)
+                field.SetValue(currentState, Convert.ToInt32(currentValue) + Convert.ToInt32(otherValue));
+
+            else if (currentValue is float)
+                field.SetValue(currentState, Convert.ToSingle(currentValue) + Convert.ToSingle(otherValue));
+        }
+    }
+
     // 모든 상태를 더하여 전체 상태를 업데이트하는 메소드
     public void UpdatePlayerState()
     {
@@ -145,5 +166,4 @@ public class GameManager : MonoBehaviour
             State.datas[state].SetValue(allPlayerState, returnValue);
         }
     }
-
 }

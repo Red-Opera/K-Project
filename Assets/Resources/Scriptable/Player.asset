@@ -22,7 +22,7 @@ MonoBehaviour:
   critical: 0.05
   moveSpeed: 5
   jumpPower: 5
-  jumpCount: 0
+  jumpCount: 7
   maxJump: 2
   dashDamage: 0.5
   strong: 0
@@ -33,5 +33,5 @@ MonoBehaviour:
   avoidPersent: 0
   reloadTime: -0.3
   dashBarCount: 0
-  food: 47
+  food: 95
   money: 50000

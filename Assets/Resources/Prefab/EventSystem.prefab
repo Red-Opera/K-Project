@@ -5997,7 +5997,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_TargetDisplay: 0
 --- !u!114 &3596773452730388750
 MonoBehaviour:
@@ -6689,7 +6689,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!114 &3878128719089047938
 MonoBehaviour:
@@ -16129,7 +16129,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!114 &3593559043586924870
 MonoBehaviour:
@@ -18801,10 +18801,6 @@ PrefabInstance:
       propertyPath: m_Size.y
       value: 45
       objectReference: {fileID: 0}
-    - target: {fileID: 6985421519025364838, guid: f22243f5cbdbd5a449eebcd02dec10d0, type: 3}
-      propertyPath: spriteData.Array.data[25]
-      value: 
-      objectReference: {fileID: 400821093, guid: 39caf47f5ecdfc543bb636fb7afc82ed, type: 3}
     - target: {fileID: 8068049331900389890, guid: f22243f5cbdbd5a449eebcd02dec10d0, type: 3}
       propertyPath: m_Pivot.x
       value: 0

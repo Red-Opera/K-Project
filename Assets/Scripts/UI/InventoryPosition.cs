@@ -51,11 +51,6 @@ public class InventroyPosition : MonoBehaviour
         OnAddItem += AddItem;
     }
 
-    public void Update()
-    {
-
-    }
-
     // 아이템의 위치를 조정하는 메소드
     public void ChangePos(int displayIndex, int dragIndex)
     {
@@ -90,6 +85,18 @@ public class InventroyPosition : MonoBehaviour
         else
         {
             if (displayPos[displayIndex].childCount <= 0 || displayPos[dragIndex].childCount <= 0)
+                return;
+
+            // 슬롯의 장비에 넣을 수 있는 목록을 가져옴
+            EquipmentState displaySlotEquidState = displayPos[displayIndex].GetComponent<InventableEquipment>().inventableEquipment;
+            EquipmentState dragSlotEquidState = displayPos[dragIndex].GetComponent<InventableEquipment>().inventableEquipment;
+
+            // 장비 종류를 가져옴
+            EquipmentState displayState = displayPos[displayIndex].GetChild(0).GetComponent<InventableEquipment>().inventableEquipment;
+            EquipmentState dragState = displayPos[dragIndex].GetChild(0).GetComponent<InventableEquipment>().inventableEquipment;
+
+            // 옮겼을 때 장비 위치를 바꿀 수 없는 경우 중지
+            if ((displaySlotEquidState & dragState) == 0 || (dragSlotEquidState & displayState) == 0)
                 return;
 
             MoveInventory aMoveInventory = displayPos[displayIndex].GetChild(0).GetComponent<MoveInventory>();
