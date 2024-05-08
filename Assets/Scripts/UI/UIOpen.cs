@@ -3,16 +3,19 @@ using UnityEngine.SceneManagement;
 
 public class UIOpen : MonoBehaviour
 {
+    public static bool isUIOpen { get; private set; } = false;
+
     public GameObject statusUI;
     public GameObject inventoryUI;
     public GameObject getItemUI;
     public GameObject statUI;
     public GameObject equidUI;
     public GameObject mapUI;
+    public GameObject resultUI;
 
     private bool isDefualtOpen = true;
 
-    void Start()
+    private void Start()
     {
         ScriptableObject.CreateInstance<State>();
 
@@ -25,7 +28,7 @@ public class UIOpen : MonoBehaviour
         SceneManager.sceneLoaded += NonEssentialUI;
     }
 
-    void Update()
+    private void Update()
     {
         // 스탯창을 여는 키
         if (Input.GetKeyDown(KeyCode.E) && !statusUI.activeSelf)
@@ -54,6 +57,13 @@ public class UIOpen : MonoBehaviour
         else if (!statUI.activeSelf && !isDefualtOpen)
             OpenDefaultUI();
 
+        if (!statusUI.activeSelf && !inventoryUI.activeSelf || !getItemUI.activeSelf || 
+            !statUI.activeSelf || !equidUI.activeSelf || !mapUI.activeSelf || 
+            !resultUI.activeSelf)
+            isUIOpen = false;
+
+        else
+            isUIOpen = true;
     }
 
     // 아이템 획득 창을 보여주는 메소드
@@ -90,5 +100,6 @@ public class UIOpen : MonoBehaviour
         statUI.SetActive(false);
         equidUI.SetActive(false);
         mapUI.SetActive(false);
+        resultUI.SetActive(false);
     }
 }
