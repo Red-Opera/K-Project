@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22ef592623af3c2478673889028aeb39, type: 3}
   m_Name: SkeletonKing
   m_EditorClassIdentifier: 
-  level: 10
-  maxHP: 500
-  currentHp: 500
+  level: 30
+  maxHP: 1800
+  currentHp: 1800
   Stage: 3
-  damage: 20
-  defense: 10
+  damage: 60
+  defense: 20
   moveSpeed: 2
-  dashcoaf: 2.5
+  dashcoaf: 2
   jumpPower: 0
   flyingSpeed: 0
   Money: 0

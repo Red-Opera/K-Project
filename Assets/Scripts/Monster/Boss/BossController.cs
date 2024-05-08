@@ -68,26 +68,22 @@ public class BossController : MonoBehaviour
         if(attackType ==0){
             Boss.Attack1();
             isAtk = true;
-            Invoke("AttackEnd",1.5f);
+            Invoke("AttackEnd",3);
         }else if(attackType ==1){
             Boss.Attack2();
             isAtk = true;
-            Invoke("AttackEnd",1.5f);
+            Invoke("AttackEnd",3);
         }else if(attackType ==2){
             Boss.SpecialAttack1();
             Invoke("IsAttack",Boss.boss.ainmterm);
             if(Boss.boss.bossState.Stage ==2){
-                Invoke("AttackEnd",1.5f);
+                Invoke("AttackEnd",3);
             }
         }
         else if(attackType ==3){
-            if(Boss.boss.bossState.Stage == 1){
-                AttackEnd();
-            }else{
-                Boss.SpecialAttack2();
-                isAtk = true;
-                Invoke("AttackEnd",1.5f);
-            }
+            Boss.SpecialAttack2();
+            isAtk = true;
+            Invoke("AttackEnd",3);
         }
     }
     void OnCollisionEnter2D(Collision2D other) {
@@ -102,6 +98,6 @@ public class BossController : MonoBehaviour
     }
     void AttackEnd(){
         isAtk =false;
-        attackType = Random.Range(0,4);
+        attackType = Random.Range(0,Boss.boss.attackCount);
     }
 }

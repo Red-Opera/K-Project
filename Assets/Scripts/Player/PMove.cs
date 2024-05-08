@@ -13,6 +13,7 @@ public class PMove : MonoBehaviour
     CapsuleCollider2D PlayerCollider;
     SpriteRenderer spriteRenderer;
     Animator anim;
+    public ResultUI result;
     public State playerState;
     public bool isJumping;
     public bool isAttack = false;
@@ -22,6 +23,7 @@ public class PMove : MonoBehaviour
         PlayerCollider = GetComponent<CapsuleCollider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
+        result = FindObjectOfType<ResultUI>();
     }
     void Start(){
         playerState = GameManager.info.allPlayerState;
@@ -64,8 +66,8 @@ public class PMove : MonoBehaviour
             
             }
         }
-        if(Horiz ==0){
-            rigid.velocity =new Vector2(0, rigid.velocity.y);
+        if(Input.GetButtonUp("Horizontal")){
+            rigid.velocity = new Vector2(0, rigid.velocity.y);
             anim.SetBool("isWalk", false);
             anim.SetBool("isRun",false);
         }
@@ -75,7 +77,7 @@ public class PMove : MonoBehaviour
         float ColliderSizeX = PlayerCollider.size.x/2;
         float ColliderSizeY = PlayerCollider.size.y/2 -PlayerCollider.offset.y;
 
-        if(Input.GetButtonDown("Jump")){
+        if(Input.GetButtonDown("Jump") && playerState.jumpCount < playerState.maxJump){
             rigid.velocity = new Vector2(rigid.velocity.x, playerState.jumpPower);
             playerState.jumpCount ++;
             isJumping = true;
@@ -126,5 +128,7 @@ public class PMove : MonoBehaviour
     void Die(){
         anim.SetTrigger("Die");
         gameObject.layer = 12;
+        // ResultUI result = FindObjectOfType<ResultUI>();
+        result.GameIsEnd();
     }
 }

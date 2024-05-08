@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 22ef592623af3c2478673889028aeb39, type: 3}
-  m_Name: Riffer
+  m_Name: 1SMonster
   m_EditorClassIdentifier: 
-  level: 20
-  maxHP: 1500
-  currentHp: 1500
-  Stage: 2
-  damage: 40
-  defense: 5
+  level: 1
+  maxHP: 150
+  currentHp: 150
+  Stage: 1
+  damage: 30
+  defense: 10
   moveSpeed: 2
   dashcoaf: 1
   jumpPower: 0
-  flyingSpeed: 0.5
-  Money: 0
+  flyingSpeed: 0
+  Money: 4

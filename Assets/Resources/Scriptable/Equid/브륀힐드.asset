@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 122c419616f961d4ea369c09b9e4c4f1, type: 3}
-  m_Name: "\uB2E8\uAC80"
+  m_Name: "\uBE0C\uB940\uD790\uB4DC"
   m_EditorClassIdentifier: 
-  nickName: "\uB2E8\uAC80"
+  nickName: "\uBE0C\uB940\uD790\uB4DC"
   level: 0
   maxHP: 0
   currentHp: 0
   currentExp: 0
-  damage: 5
+  damage: 18
   defense: 0
-  critical: 0.05
+  critical: 0.11
   moveSpeed: 0
   jumpPower: 0
   jumpCount: 0
@@ -27,11 +27,11 @@ MonoBehaviour:
   dashDamage: 0
   strong: 0
   criticalDamage: 0
-  attackSpeed: -0.15
+  attackSpeed: -0.2
   fixedDamage: 0
   defensePersent: 0
   avoidPersent: 0
   reloadTime: 0
   dashBarCount: 0
   food: 0
-  money: 500
+  money: 12000

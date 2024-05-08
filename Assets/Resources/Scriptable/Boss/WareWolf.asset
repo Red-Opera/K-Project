@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: WareWolf
   m_EditorClassIdentifier: 
   level: 10
-  maxHP: 300
-  currentHp: 300
+  maxHP: 1000
+  currentHp: 1000
   Stage: 1
-  damage: 0
-  defense: 0
+  damage: 35
+  defense: 15
   moveSpeed: 3
-  dashcoaf: 1
+  dashcoaf: 2
   jumpPower: 5
   flyingSpeed: 0
-  Money: 1000
+  Money: 0

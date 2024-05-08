@@ -18,11 +18,10 @@ MonoBehaviour:
   currentHp: 100
   currentExp: 0
   damage: 15
-  defense: 0
+  defense: 10
   critical: 0.05
   moveSpeed: 5
-  runCoaf: 1.5
-  jumpPower: 5
+  jumpPower: 8
   jumpCount: 0
   maxJump: 2
   dashDamage: 0.5

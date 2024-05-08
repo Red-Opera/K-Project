@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 122c419616f961d4ea369c09b9e4c4f1, type: 3}
-  m_Name: "\uC591\uC190\uB3C4\uB07C"
+  m_Name: "\uB3C4\uB07C"
   m_EditorClassIdentifier: 
-  nickName: "\uC591\uC190 \uB3C4\uB07C"
+  nickName: "\uB3C4\uB07C"
   level: 0
   maxHP: 0
   currentHp: 0
   currentExp: 0
-  damage: 12
-  defense: 0
-  critical: 0
+  damage: 15
+  defense: 1
+  critical: -0.1
   moveSpeed: 0
   jumpPower: 0
   jumpCount: 0

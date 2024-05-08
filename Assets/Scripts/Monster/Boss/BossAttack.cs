@@ -21,11 +21,7 @@ public class BossAttack : MonoBehaviour
     void Update()
     {
         /*
-        1. 보스 공격 간격 조정
         2. 보스 공격 전 공격 범위 생성
-        5. 원거리 공격 마우스 위치로 발사
-        6. 죽으면 결과 Ui 생성
-        7. 피격 효과음
         */
     }
     void setDir(){
