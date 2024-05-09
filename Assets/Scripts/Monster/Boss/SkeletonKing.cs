@@ -11,43 +11,47 @@ public class SkeletonKing : BossMonster
         boss.bossState = Resources.Load<MonsterState>("Scriptable/Boss/SkeletonKing");
         boss.pos = new Vector3(2,0,0);
         boss.damage = 10;
-        boss.disapearTime = .3f;
+        boss.disapearTime = .8f;
         boss.attackCount = 4;
         anim = GetComponent<Animator>();
     }
     public override void Attack1()
     {
+        boss.pos = new Vector3(0.7f,0,0);
+        boss.range.transform.localScale = new Vector3(6.7f,4.4f,1);
         GameObject Atk = Instantiate(boss.range, transform.position + boss.pos*boss.dir,Quaternion.identity );
         BossAttack atkSc = Atk.GetComponent<BossAttack>();
         atkSc.setState(boss);
-        anim.SetTrigger("Attack");
+        StartCoroutine(DelayedTrigger("Attack", 0.5f));
     }
 
     public override void Attack2()
     {
-        boss.ainmterm = 0;
+        boss.pos = new Vector3(2.8f,0.1f,0);
+        boss.range.transform.localScale = new Vector3(7.6f,3.6f,1);
         boss.bossState.dashcoaf =2;
         Invoke("ResetSpeed", 0.5f);
         GameObject Atk = Instantiate(boss.range, transform.position + boss.pos*boss.dir, Quaternion.identity);
         BossAttack atkSc = Atk.GetComponent<BossAttack>();
         atkSc.setState(boss);
-        anim.SetTrigger("Dash");
+        StartCoroutine(DelayedTrigger("Dash", 0.5f));
     }
 
     public override void SpecialAttack1()
     {
-        GameObject Atk = Instantiate(boss.range, transform.position + boss.pos*boss.dir, Quaternion.identity);
+        boss.pos = new Vector3(0,0,0);
+        boss.range.transform.localScale = new Vector3(1.5f,2,1);
+        Rigidbody2D rigid = GetComponent<Rigidbody2D> ();
+        var findP = Physics2D.OverlapArea(rigid.position + new Vector2(10,5), rigid.position + new Vector2(-10,-5), LayerMask.GetMask("Player"));
+        GameObject Atk = Instantiate(boss.range, findP.transform.position + boss.pos * boss.dir, Quaternion.identity);
         BossAttack atkSc = Atk.GetComponent<BossAttack>();
         atkSc.setState(boss);
-        anim.SetTrigger("mAttack");
+        StartCoroutine(DelayedTrigger("mAttack", 0.5f));
     }
 
     public override void SpecialAttack2()
     {
-        GameObject Atk = Instantiate(boss.range, transform.position + boss.pos*boss.dir,Quaternion.identity );
-        BossAttack atkSc = Atk.GetComponent<BossAttack>();
-        atkSc.setState(boss);
-        anim.SetTrigger("Summon");
+        StartCoroutine(DelayedTrigger("Summon", 0.5f));   
     }
 
     void ResetSpeed(){

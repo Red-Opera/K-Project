@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class BossAttack : MonoBehaviour
@@ -8,6 +9,7 @@ public class BossAttack : MonoBehaviour
     BossSetting boss;
     SpriteRenderer spriteRenderer;
     public HpLevelManager hpLevelManager;
+    public bool isAtk = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,14 +17,12 @@ public class BossAttack : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         hpLevelManager = FindObjectOfType<HpLevelManager>();
         Destroy(gameObject, boss.disapearTime);
+        Invoke("OnAttack", 0.5f);
     }
 
     // Update is called once per frame
     void Update()
     {
-        /*
-        2. 보스 공격 전 공격 범위 생성
-        */
     }
     void setDir(){
         var setD = Physics2D.OverlapArea(rigid.position - new Vector2(-5,5),rigid.position + new Vector2(0,-5), LayerMask.GetMask("Boss"));
@@ -34,10 +34,15 @@ public class BossAttack : MonoBehaviour
         boss = setting;
     }
 
-    private void OnTriggerEnter(Collider other) {
-        if(other.gameObject.layer == 9){
+    private void OnTriggerStay2D(Collider2D other) {
+        if(other.gameObject.layer == 8 && isAtk == true){
+            Debug.Log("12");
             GameManager.info.playerState.currentHp -= boss.damage;
             hpLevelManager.Damage();
+            Destroy(gameObject);
         }
+    }
+    void OnAttack(){
+        isAtk = true;
     }
 }
