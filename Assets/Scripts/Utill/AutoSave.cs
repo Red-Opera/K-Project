@@ -11,13 +11,9 @@ public class AutoSave : MonoBehaviour
 
     private static void SaveCurrentScene(PlayModeStateChange state)
     {
-        Debug.Log("state : " + state
-            + "/ isPlaying : " + EditorApplication.isPlaying
-            + "/ isPlayingOrWillChangePlaymode : " + EditorApplication.isPlayingOrWillChangePlaymode);
+        Debug.Log(EditorSceneManager.GetActiveScene().name + " 씬 자동 저장 완료!");
 
-        if (EditorApplication.isPlaying == false
-                    && EditorApplication.isPlayingOrWillChangePlaymode == true)
+        if (EditorApplication.isPlaying == false && EditorApplication.isPlayingOrWillChangePlaymode == true)
             EditorSceneManager.SaveScene(EditorSceneManager.GetActiveScene());
-
     }
 }

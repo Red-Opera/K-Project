@@ -906,7 +906,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: P
+  m_text: F
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: bb7cbcc602626624a8e0fa834765f733, type: 2}
   m_sharedMaterial: {fileID: -6447158183229246994, guid: bb7cbcc602626624a8e0fa834765f733, type: 2}
@@ -33407,7 +33407,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: P
+  m_text: F
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: bb7cbcc602626624a8e0fa834765f733, type: 2}
   m_sharedMaterial: {fileID: -6447158183229246994, guid: bb7cbcc602626624a8e0fa834765f733, type: 2}
@@ -62513,7 +62513,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: P
+  m_text: F
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: bb7cbcc602626624a8e0fa834765f733, type: 2}
   m_sharedMaterial: {fileID: -6447158183229246994, guid: bb7cbcc602626624a8e0fa834765f733, type: 2}
@@ -63157,6 +63157,10 @@ PrefabInstance:
     - target: {fileID: 6792545032227116850, guid: c556abd764f36af48a94d3b7a70af465, type: 3}
       propertyPath: m_SortingOrder
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8222405733559147191, guid: c556abd764f36af48a94d3b7a70af465, type: 3}
+      propertyPath: m_RenderPostProcessing
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9094955460031638816, guid: c556abd764f36af48a94d3b7a70af465, type: 3}
       propertyPath: m_Name

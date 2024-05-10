@@ -33,5 +33,5 @@ MonoBehaviour:
   avoidPersent: 0
   reloadTime: -0.3
   dashBarCount: 0
-  food: 95
+  food: 100
   money: 50000

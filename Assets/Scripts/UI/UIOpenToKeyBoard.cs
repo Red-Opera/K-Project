@@ -67,7 +67,7 @@ public class UIOpenToKeyBoard : MonoBehaviour
             }
         }
 
-        if (isEnter && !openUI.activeSelf && Input.GetKeyDown(KeyCode.P))
+        if (isEnter && !openUI.activeSelf && Input.GetKeyDown(KeyCode.F))
         {
             if (chatNPC != null && !chatNPC.dialog.isChat)
             {
