@@ -2,38 +2,32 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 
-
 public class FadeEffect : MonoBehaviour
-{  
-    [SerializeField]
-    [Range(0.01f, 10f)]
-    private float  fadeTime;
-    private Image image;
-   
-    private void Awake() 
-    {
-        image = GetComponent<Image>();
-        StartCoroutine(Fade(1,0));
-    }
-    private IEnumerator Fade(float start,float end)
-    {
-        float currentTime = 0.0f;
-        float percent = 0.0f;
-        Color color = image.color;
+{
+    public Image imageToFade;
+    public float fadeDuration = 1f;
 
-        while (currentTime / fadeTime < 1)
+    
+
+    public IEnumerator FadeIn()
+    {
+        float alpha = 0f;
+        while (alpha < 1f)
         {
-            currentTime += Time.deltaTime;
-            percent = currentTime / fadeTime;
-
-            color.a =Mathf.Lerp(start, end, percent);
-            image.color = color;
-
+            alpha -= Time.deltaTime / fadeDuration;
+            imageToFade.color = new Color(imageToFade.color.r, imageToFade.color.g, imageToFade.color.b, alpha);
             yield return null;
-
         }
+    }
 
-        color = new Color(1.0f, 1.0f, 1.0f, 0.0f);
-
+    public IEnumerator FadeOut()
+    {
+        float alpha = 1f;
+        while (alpha > 0f)
+        {
+            alpha += Time.deltaTime / fadeDuration;
+            imageToFade.color = new Color(imageToFade.color.r, imageToFade.color.g, imageToFade.color.b, alpha);
+            yield return null;
+        }
     }
 }
