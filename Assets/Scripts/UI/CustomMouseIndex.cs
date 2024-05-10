@@ -18,7 +18,7 @@ public class CustomMouseIndex : MonoBehaviour, IPointerEnterHandler, IPointerExi
     private int thisIndex = 0;          // 이 프레임의 인덱스
     private bool isChange = false;      // 현재 선택된 프레임이 변경 중인 여부
 
-    public void Start()
+    private void Start()
     {
         // 해당 객체의 오브젝트를 가져옴
         Transform parent = transform.parent;
@@ -36,7 +36,7 @@ public class CustomMouseIndex : MonoBehaviour, IPointerEnterHandler, IPointerExi
             contents = GameObject.Find("Contents");
     }
 
-    public void Update()
+    private void Update()
     {
         // 현재 선택한 프레임이 이 프레임이고 아직 선택하지 않은 프레임일 경우 이 프레임을 활성화
         if (selectedIndex == thisIndex && selectImageCompo.color.a <= 0.1 && !isChange) 
@@ -57,6 +57,8 @@ public class CustomMouseIndex : MonoBehaviour, IPointerEnterHandler, IPointerExi
 
         // 이 프레임의 직업 세부 내용을 낌
         contents.transform.GetChild(thisIndex).gameObject.SetActive(true);
+
+        CharacterAnimation();
     }
 
     // 해당 이미지가 마우스 포인터로 가리키고 있는 경우
@@ -81,6 +83,8 @@ public class CustomMouseIndex : MonoBehaviour, IPointerEnterHandler, IPointerExi
         float targetAlpha = isOn ? 1f : 0f;
         float elapsedTime = 0f;
 
+        CharacterAnimationWalk(isOn);
+
         // 점점 활성화/비활성화되도록 설정
         while (elapsedTime < duration)
         {
@@ -92,5 +96,27 @@ public class CustomMouseIndex : MonoBehaviour, IPointerEnterHandler, IPointerExi
         selectImageCompo.color = new Color(targetColor.r, targetColor.g, targetColor.b, targetAlpha);
         
         isChange = false;
+    }
+
+    private void CharacterAnimation()
+    {
+        if (transform.childCount <= 2)
+            return;
+
+        Transform character = transform.GetChild(2);
+        Animator animator = character.GetComponent<Animator>();
+
+        animator.SetTrigger("nAttack");
+    }
+
+    private void CharacterAnimationWalk(bool isOn)
+    {
+        if (transform.childCount <= 2)
+            return;
+
+        Transform character = transform.GetChild(2);
+        Animator animator = character.GetComponent<Animator>();
+
+        animator.SetBool("isWalk", isOn);
     }
 }

@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -8,6 +9,7 @@ public class UIOpen : MonoBehaviour
     public GameObject statusUI;
     public GameObject inventoryUI;
     public GameObject getItemUI;
+    public GameObject customUI;
     public GameObject statUI;
     public GameObject equidUI;
     public GameObject mapUI;
@@ -15,17 +17,20 @@ public class UIOpen : MonoBehaviour
 
     private bool isDefualtOpen = true;
 
-    private void Start()
+    private void OnEnable()
     {
         ScriptableObject.CreateInstance<State>();
 
         Debug.Assert(statusUI != null, "스테이터스 창이 없습니다.");
         Debug.Assert(inventoryUI != null, "인벤토리 창이 없습니다.");
+        Debug.Assert(customUI != null, "커스텀 UI가 없습니다.");
         Debug.Assert(getItemUI != null, "획득 UI가 없습니다.");
         Debug.Assert(statUI != null, "스탯 창 UI가 없습니다.");
         Debug.Assert(mapUI != null, "맵 UI가 없습니다.");
 
         SceneManager.sceneLoaded += NonEssentialUI;
+
+        customUI.transform.GetChild(1).GetChild(6).GetComponent<OverlayCamera>().AddCamera();
     }
 
     private void Update()
@@ -57,9 +62,15 @@ public class UIOpen : MonoBehaviour
         else if (!statUI.activeSelf && !isDefualtOpen)
             OpenDefaultUI();
 
+        if (customUI.activeSelf && isDefualtOpen)
+            ClostDefultUI();
+
+        else if (!statUI.activeSelf && !isDefualtOpen)
+            OpenDefaultUI();
+
         if (!statusUI.activeSelf && !inventoryUI.activeSelf || !getItemUI.activeSelf || 
             !statUI.activeSelf || !equidUI.activeSelf || !mapUI.activeSelf || 
-            !resultUI.activeSelf)
+            !resultUI.activeSelf || !customUI.activeSelf)
             isUIOpen = false;
 
         else
@@ -101,5 +112,6 @@ public class UIOpen : MonoBehaviour
         equidUI.SetActive(false);
         mapUI.SetActive(false);
         resultUI.SetActive(false);
+        customUI.SetActive(false);
     }
 }
