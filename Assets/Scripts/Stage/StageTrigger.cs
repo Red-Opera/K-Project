@@ -33,6 +33,7 @@ public class StageTrigger : MonoBehaviour
 
             if (gameObject.CompareTag("PreviousStageTrigger"))
             {   
+                Debug.Log("tlqkf");
                 StageManager.ChangeStage(-1);
             }
             // 다음 스테이지로 이동
