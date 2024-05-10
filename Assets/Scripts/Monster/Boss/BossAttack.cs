@@ -36,7 +36,6 @@ public class BossAttack : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D other) {
         if(other.gameObject.layer == 8 && isAtk == true){
-            Debug.Log("12");
             GameManager.info.playerState.currentHp -= boss.damage;
             hpLevelManager.Damage();
             Destroy(gameObject);

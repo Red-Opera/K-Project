@@ -99,10 +99,6 @@ public class PMove : MonoBehaviour
         anim.SetBool("isJump",true);
     }
 
-    void Cooldown(){
-        isAttack = false;
-    }
-
     void Dash(){
         DashUI dashUI = FindObjectOfType<DashUI>();
         if(Input.GetMouseButtonDown(1) && dashUI.dashBarSlider.value >= 0.2){
@@ -129,7 +125,7 @@ public class PMove : MonoBehaviour
     void Die(){
         anim.SetTrigger("Die");
         gameObject.layer = 12;
-        // ResultUI result = FindObjectOfType<ResultUI>();
+        ResultUI result = FindObjectOfType<ResultUI>();
         result.GameIsEnd();
     }
 }
