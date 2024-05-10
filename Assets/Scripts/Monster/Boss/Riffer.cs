@@ -13,6 +13,7 @@ public class Riffer : BossMonster
         boss.pos = new Vector3(2,0,0);
         boss.damage = 10;
         boss.disapearTime = .3f;
+        boss.attackCount = 4;
         anim = GetComponent<Animator>();
     }
     public override void Attack1()
@@ -61,6 +62,11 @@ public class Riffer : BossMonster
 
     void CastE(){
         anim.SetBool("isCast",false);
+    }
+    IEnumerator DelayedTrigger(string triggerName, float delay)
+    {   
+        yield return new WaitForSeconds(delay);
+        anim.SetTrigger(triggerName);
     }
 
 }

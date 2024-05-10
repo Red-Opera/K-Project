@@ -10,6 +10,7 @@ public struct BossSetting{
     public float disapearTime;
     public int dir;
     public float ainmterm;
+    public int attackCount;
 }
 public abstract class BossMonster : MonoBehaviour
 {

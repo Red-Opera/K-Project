@@ -1,26 +1,41 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 
 public class FadeEffect : MonoBehaviour
 {
-    private Image image;
+    public Image imageToFade;
+    public float fadeDuration = 1f;
 
-    private void Awake()
-    {
-        image = GetComponent<Image>();   
-    }
-    private void Update()
-    {
-        Color color = image.color;
+    public bool isFadeOut = false;
 
-        if (color.a > 0)
+    public IEnumerator FadeOut()
+    {
+        isFadeOut = true;
+
+        float alpha = 0f;
+        while (alpha < 1f)
         {
-            color.a -= Time.deltaTime; 
-
+            alpha += Time.deltaTime / fadeDuration;
+            imageToFade.color = new Color(imageToFade.color.r, imageToFade.color.g, imageToFade.color.b, alpha);
+            yield return null;
         }
-        image.color = color;
 
+        isFadeOut = false;
+    }
+
+    public IEnumerator FadeIn()
+    {
+        isFadeOut = true;
+        float alpha = 1f;
+        while (alpha > 0f)
+        {
+            alpha -= Time.deltaTime / fadeDuration;
+            imageToFade.color = new Color(imageToFade.color.r, imageToFade.color.g, imageToFade.color.b, alpha);
+
+            yield return null;
+        }
+        
+        isFadeOut = false;
     }
 }

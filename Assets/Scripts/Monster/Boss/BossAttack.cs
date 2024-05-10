@@ -20,7 +20,9 @@ public class BossAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        /*
+        2. 보스 공격 전 공격 범위 생성
+        */
     }
     void setDir(){
         var setD = Physics2D.OverlapArea(rigid.position - new Vector2(-5,5),rigid.position + new Vector2(0,-5), LayerMask.GetMask("Boss"));

@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22ef592623af3c2478673889028aeb39, type: 3}
   m_Name: Riffer
   m_EditorClassIdentifier: 
-  level: 10
-  maxHP: 300
-  currentHp: 300
+  level: 20
+  maxHP: 1500
+  currentHp: 1500
   Stage: 2
-  damage: 10
+  damage: 40
   defense: 5
   moveSpeed: 2
   dashcoaf: 1

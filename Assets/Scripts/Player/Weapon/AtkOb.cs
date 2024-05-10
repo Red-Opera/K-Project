@@ -30,7 +30,9 @@ public class AtkOb : MonoBehaviour
             rigid.position = parentPos + weapon.pos *dir;
         }
         else{
-            rigid.velocity = new Vector2(weapon.fowardSpeed * weapon.dir,0);
+            rigid.velocity = weapon.fowardSpeed;
+            float angle = Mathf.Atan2(weapon.fowardSpeed.y, weapon.fowardSpeed.x) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.Euler(0, 0,angle);
         }
     }
     void OnTriggerEnter2D(Collider2D other)

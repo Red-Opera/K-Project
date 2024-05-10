@@ -7,7 +7,7 @@ public class DashUI : MonoBehaviour
     public float fillSpeed = 0.5f;                  // 1초당 회복하는 속도
 
     [SerializeField] private State state;           // 플레이어 상태
-    [SerializeField] private Slider dashBarSlider;  // 현재 허기량을 표시하는 UI
+    [SerializeField] public Slider dashBarSlider;  // 현재 허기량을 표시하는 UI
     [SerializeField] private Image dashBar;         // 대시 바을 표시하는 UI
     [SerializeField] private List<Sprite> sprites;  // 대시바 스프라이트
 

@@ -4,21 +4,36 @@ using UnityEngine;
 
 public class StageTrigger : MonoBehaviour
 {
-   private StageManager StageManager;
+    private StageManager StageManager;
+    FadeEffect fadeEffect;
 
     void Start()
     {
+        fadeEffect = GameObject.Find("Fade").GetComponent<FadeEffect>();
+
         // StageManager 스크립트 가져오기
         StageManager = GameObject.FindObjectOfType<StageManager>();
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        // 플레이어와 충돌했을 때
+         StartCoroutine(StageM(other));
+    }
+
+    private IEnumerator StageM(Collider2D other)
+    {
+
         if (other.CompareTag("Player"))
         {
-            if (gameObject.CompareTag("PreviousStageTrigger"))
+            StartCoroutine(fadeEffect.FadeOut());
+            while (fadeEffect.isFadeOut)
             {
+                yield return null;
+            }
+
+            if (gameObject.CompareTag("PreviousStageTrigger"))
+            {   
+                Debug.Log("tlqkf");
                 StageManager.ChangeStage(-1);
             }
             // 다음 스테이지로 이동
@@ -28,4 +43,14 @@ public class StageTrigger : MonoBehaviour
             }
         }
     }
+    private void OnEnable()
+    {
+        fadeEffect = GameObject.Find("Fade").GetComponent<FadeEffect>();
+
+        // StageManager 스크립트 가져오기
+        StageManager = GameObject.FindObjectOfType<StageManager>();
+
+        StartCoroutine(fadeEffect.FadeIn());
+    }
+    
 }

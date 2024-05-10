@@ -8,10 +8,11 @@ public class SkeletonKing : BossMonster
     public override void InitSetting()
     {
         boss.range = Resources.Load<GameObject>("Prefab/Boss/AttackRange");
-            boss.bossState = Resources.Load<MonsterState>("Scriptable/Boss/SkeletonKing");
+        boss.bossState = Resources.Load<MonsterState>("Scriptable/Boss/SkeletonKing");
         boss.pos = new Vector3(2,0,0);
         boss.damage = 10;
         boss.disapearTime = .3f;
+        boss.attackCount = 4;
         anim = GetComponent<Animator>();
     }
     public override void Attack1()
@@ -51,5 +52,10 @@ public class SkeletonKing : BossMonster
 
     void ResetSpeed(){
         boss.bossState.dashcoaf =1;
+    }
+    IEnumerator DelayedTrigger(string triggerName, float delay)
+    {   
+        yield return new WaitForSeconds(delay);
+        anim.SetTrigger(triggerName);
     }
 }

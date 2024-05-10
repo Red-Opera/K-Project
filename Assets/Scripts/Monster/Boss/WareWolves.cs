@@ -12,6 +12,7 @@ public class WareWolves : BossMonster
         boss.pos = new Vector3(2, 0, 0);
         boss.damage = 10;
         boss.disapearTime = 0.3f;
+        boss.attackCount = 3;
         anim = GetComponent<Animator>();
     }
     public override void Attack1()
@@ -20,7 +21,7 @@ public class WareWolves : BossMonster
         GameObject Atk = Instantiate(boss.range, transform.position + boss.pos*boss.dir, Quaternion.identity);
         BossAttack atkSc = Atk.GetComponent<BossAttack>();
         atkSc.setState(boss); 
-        anim.SetTrigger("attack1");
+        StartCoroutine(DelayedTrigger("attack1", 1));
     }
 
     public override void Attack2()
@@ -32,7 +33,7 @@ public class WareWolves : BossMonster
         GameObject Atk = Instantiate(boss.range, transform.position + boss.pos*boss.dir, Quaternion.identity);
         BossAttack atkSc = Atk.GetComponent<BossAttack>();
         atkSc.setState(boss);
-        anim.SetTrigger("attack2");
+        StartCoroutine(DelayedTrigger("attack2", 1));
     }
 
     public override void SpecialAttack1()
@@ -41,8 +42,7 @@ public class WareWolves : BossMonster
         boss.ainmterm = 0.1f;
         Rigidbody2D rigid = GetComponent<Rigidbody2D>();
         rigid.velocity = Vector2.up * boss.bossState.jumpPower;
-        anim.SetTrigger("jump");
-        Invoke("Jump", boss.ainmterm);
+        StartCoroutine(DelayedTrigger("jump", 1));
     }
 
     public override void SpecialAttack2()
@@ -54,5 +54,10 @@ public class WareWolves : BossMonster
     }
     void ResetSpeed(){
         boss.bossState.dashcoaf =1;
+    }
+    IEnumerator DelayedTrigger(string triggerName, float delay)
+    {   
+        yield return new WaitForSeconds(delay);
+        anim.SetTrigger(triggerName);
     }
 }

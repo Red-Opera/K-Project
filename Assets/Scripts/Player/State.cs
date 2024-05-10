@@ -5,47 +5,47 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Player", menuName = "Scriptable/Player", order = int.MaxValue)]
 public class State : ScriptableObject
 {
-    public string nickName;             // ÇÃ·¹ÀÌ¾î ´Ð³×ÀÓ
-    public int level = 0;               // ·¹º§
-    public int maxHP = 0;               // ÃÖ´ë Ã¼·Â
-    public int currentHp = 0;           // ÇöÀç Ã¼·Â
-    public int currentExp = 0;          // ÇöÀç °æÇèÄ¡
+    public string nickName;             // ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½Ð³ï¿½ï¿½ï¿½
+    public int level = 0;               // ï¿½ï¿½ï¿½ï¿½
+    public int maxHP = 0;               // ï¿½Ö´ï¿½ Ã¼ï¿½ï¿½
+    public int currentHp = 0;           // ï¿½ï¿½ï¿½ï¿½ Ã¼ï¿½ï¿½
+    public int currentExp = 0;          // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ä¡
 
-    public int damage = 0;              // µ¥¹ÌÁö
-    public int defense = 0;             // ¹æ¾î·Â
-    public float critical = 0;          // Ä¡¸íÅ¸ È®·ü
-    public float moveSpeed = 0;         // ÀÌµ¿ ¼Óµµ
-    public float jumpPower = 0;         // Á¡ÇÁ·Â
-    public int jumpCount = 0;           // Á¡ÇÁ È½¼ö
-    public int maxJump = 0;             // ÃÖ´ë Á¡ÇÁ È¸¼ö
-    public float dashDamage = 0;        // ´ë½¬ µ¥¹ÌÁö
-    public int strong = 0;              // °­ÀÎÇÔ
-    public float criticalDamage = 0;    // Å©¸®Æ¼ÄÃ µ¥¹ÌÁö
-    public float attackSpeed = 0;       // °ø°Ý ¼Óµµ
-    public int fixedDamage = 0;         // Ãß°¡ °íÁ¤ µ¥¹ÌÁö
-    public float defensePersent = 0;    // ¹æ¾î È®·ü
-    public float avoidPersent = 0;      // È¸ÇÇ È®·ü
-    public float reloadTime = 0;        // ÀçÀåÀü ½Ã°£
+    public int damage = 0;              // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    public int defense = 0;             // ï¿½ï¿½ï¿½ï¿½
+    public float critical = 0;          // Ä¡ï¿½ï¿½Å¸ È®ï¿½ï¿½
+    public float moveSpeed = 0;         // ï¿½Ìµï¿½ ï¿½Óµï¿½
+    public float jumpPower = 0;         // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    public int jumpCount = 0;           // ï¿½ï¿½ï¿½ï¿½ È½ï¿½ï¿½
+    public int maxJump = 0;             // ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ È¸ï¿½ï¿½
+    public float dashDamage = 0;        // ï¿½ë½¬ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    public int strong = 0;              // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    public float criticalDamage = 0;    // Å©ï¿½ï¿½Æ¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    public float attackSpeed = 0;       // ï¿½ï¿½ï¿½ï¿½ ï¿½Óµï¿½
+    public int fixedDamage = 0;         // ï¿½ß°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    public float defensePersent = 0;    // ï¿½ï¿½ï¿½ È®ï¿½ï¿½
+    public float avoidPersent = 0;      // È¸ï¿½ï¿½ È®ï¿½ï¿½
+    public float reloadTime = 0;        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½
     public static float satiety = 0;
 
-    public int dashBarCount = 0;        // ´ë½¬ ¹Ù °³¼ö
-    public int food = 0;                // Çã±â
-    public int money = 0;               // ÇÃ·¹ÀÌ¾î µ·
+    public int dashBarCount = 0;        // ï¿½ë½¬ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+    public int food = 0;                // ï¿½ï¿½ï¿½
+    public int money = 0;               // ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½
 
     public static Dictionary<string, FieldInfo> datas = new Dictionary<string, FieldInfo>();
 
     public void Awake()
     {
-        // ¸ðµç ¸â¹ö º¯¼ö¸¦ °¡Á®¿È
+        // ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         FieldInfo[] allField = GetType().GetFields(BindingFlags.Public | BindingFlags.Instance);
 
         foreach (FieldInfo field in allField)
         {
-            // ÇÊµå ÀÌ¸§À» °¡Á®¿Í ´ë¹®ÀÚ·Î ¹Ù²Þ
+            // ï¿½Êµï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ë¹®ï¿½Ú·ï¿½ ï¿½Ù²ï¿½
             string fieldName = field.Name;
             fieldName = char.ToUpper(fieldName[0]) + fieldName.Substring(1);
 
-            // ÀÌ¹Ì µ¥ÀÌÅÍ°¡ Á¸ÀçÇÏ´ÂÁö È®ÀÎ
+            // ï¿½Ì¹ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ï¿½ï¿½ È®ï¿½ï¿½
             if (datas.ContainsKey(fieldName))
                 continue;
 

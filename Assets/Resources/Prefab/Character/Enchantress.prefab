@@ -218,7 +218,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 99
   m_Sprite: {fileID: 1337866304, guid: 4836c5d3eefd5344998d645bc77ff3e6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -263,11 +263,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea90129d386ef394c84c61fcff29fcf4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nAtkObject: {fileID: 0}
-  mAttkObject: {fileID: 0}
-  mSpearObject: {fileID: 0}
-  mBallObject: {fileID: 0}
-  playerState: {fileID: 11400000, guid: 19a7ddf3c46ba6f4d8d4813797140586, type: 2}
+  playerState: {fileID: 0}
   isJumping: 0
   isAttack: 0
 --- !u!70 &1702832230963721077
@@ -330,7 +326,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!114 &7555247546261187526
 MonoBehaviour:
