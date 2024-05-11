@@ -43,6 +43,7 @@ public class StageManager : MonoBehaviour
     {
         Stages[index].SetActive(true);
         CurrentSceneNameUI.StartSceneNameAnimation();
+        FoodManager.ReduceFoodState(5);
     }
     //Map으로 이동
     public void LoadMap()

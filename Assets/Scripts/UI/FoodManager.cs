@@ -9,7 +9,8 @@ public class FoodManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI currentFoodText;   // 현재 허기량을 표시하는 텍스트
     [SerializeField] private TextMeshProUGUI currentCoinText;   // 현재 코인을 표시하는 텍스트
 
-    private static TextMeshProUGUI currentStaticFoodText;       // 현재 허기량을 표시하는 텍스트 (Static 버전)
+    private static State staticState;   // 플레이어 상태 (Static 버전)
+
 
     private void Start()
     {
@@ -21,7 +22,7 @@ public class FoodManager : MonoBehaviour
         currentFoodText.text = state.food.ToString();
         currentCoinText.text = state.money.ToString();
 
-        currentStaticFoodText = currentFoodText;
+        staticState = state;
     }
 
     private void Update()
@@ -35,8 +36,11 @@ public class FoodManager : MonoBehaviour
     // 일정량의 허기를 감소시키는 메소드
     public static void ReduceFoodState(int value)
     {
-        int nextFood = int.Parse(currentStaticFoodText.text) - value;
+        int nextFood = staticState.food - value;
 
-        currentStaticFoodText.SetText(nextFood.ToString());
+        if (nextFood < 0)
+            nextFood = 0;
+
+        staticState.food = nextFood;
     }
 }

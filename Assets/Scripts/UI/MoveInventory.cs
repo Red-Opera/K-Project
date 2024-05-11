@@ -37,6 +37,9 @@ public class MoveInventory : MonoBehaviour, IPointerDownHandler, IDragHandler, I
         canvas.sortingOrder = 2;
 
         transform.localPosition = Vector3.zero;
+
+        // 장비 위치에 따른 능력치 업데이트
+        Inventory.EquidSlotStateUpdate();
     }
 
     // 다른 슬롯과 충돌했을 경우 처리하는 메소드

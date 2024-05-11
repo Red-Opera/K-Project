@@ -4275,7 +4275,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_TargetDisplay: 0
 --- !u!114 &8606016826675311184
 MonoBehaviour:
@@ -4330,6 +4330,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinText: {fileID: 2391581140761013960}
+  slots: {fileID: 877950755586478807}
 --- !u!114 &6985421519025364838
 MonoBehaviour:
   m_ObjectHideFlags: 0
