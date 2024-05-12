@@ -8,8 +8,9 @@ public class StageManager : MonoBehaviour
 {
 
     public GameObject[] Stages;
-    public GameObject[] EventStage;
+    public GameObject BossStageC;
     public GameObject BossStage;
+    public GameObject Boss;
     private int currentStageIndex;
     public float fadeDuration = 1f; // 페이드 인/아웃에 걸리는 시간
 
@@ -21,8 +22,14 @@ public class StageManager : MonoBehaviour
 
     }
 
+    void Update()
+    {
+        BossClear();
+    }
+
     public void ChangeStage(int direction)
     {
+        
          GameObject player = GameObject.FindGameObjectWithTag("Player");
 
         int newStageIndex = currentStageIndex + direction;
@@ -52,6 +59,22 @@ public class StageManager : MonoBehaviour
 
         SceneManager.LoadScene("Map");
     }
-    
+
+    //보스를 잡으면 상자와 다음 레벨로 넘어가는 포탈이 나옴
+    public void BossClear()
+    {
+        GameObject boss = GameObject.FindGameObjectWithTag("Boss");
+
+        if (boss == null)
+        {
+            if(BossStage.activeSelf)
+            {
+                BossStage.SetActive(false);
+
+                BossStageC.SetActive(true);
+            }
+        }
+    }
+
 }
 

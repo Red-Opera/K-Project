@@ -13,6 +13,8 @@ public class StageTrigger : MonoBehaviour
 
         // StageManager 스크립트 가져오기
         StageManager = GameObject.FindObjectOfType<StageManager>();
+
+        CheckForMonsters();
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -43,6 +45,7 @@ public class StageTrigger : MonoBehaviour
             }
         }
     }
+    
     private void OnEnable()
     {
         fadeEffect = GameObject.Find("Fade").GetComponent<FadeEffect>();
@@ -51,6 +54,18 @@ public class StageTrigger : MonoBehaviour
         StageManager = GameObject.FindObjectOfType<StageManager>();
 
         StartCoroutine(fadeEffect.FadeIn());
+    }
+
+    private void CheckForMonsters()
+    {
+        // 몬스터를 찾습니다.
+        GameObject[] monsters = GameObject.FindGameObjectsWithTag("Monster");
+
+        // 몬스터가 없으면 활성화합니다.
+        if (monsters.Length == 0)
+        {
+            gameObject.SetActive(true);
+        }
     }
     
 }

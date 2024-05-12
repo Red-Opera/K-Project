@@ -9,6 +9,7 @@ TagManager:
   - NextStageTrigger
   - PreviousStageTrigger
   - Boss
+  - Monster
   layers:
   - Default
   - TransparentFX

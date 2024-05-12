@@ -28,7 +28,7 @@ public class StartFade : MonoBehaviour
             currentTime += Time.deltaTime;
             percent = currentTime / fadeTime;
 
-            Color color =image.color;
+            Color color = image.color;
             color.a = Mathf.Lerp(start,end,percent);
             image.color = color;
 
