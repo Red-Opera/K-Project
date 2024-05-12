@@ -11,6 +11,7 @@ public class BossController : MonoBehaviour
     int moveSpeed = 0;
     bool findP = false;
     public bool isAtk = false;
+    public bool isJump = false;
     public int attackType = 0;
     // Start is called before the first frame update
     void Start()
@@ -65,39 +66,35 @@ public class BossController : MonoBehaviour
     }
 
     void Attack(){
+        isAtk =true;
         if(attackType ==0){
             Boss.Attack1();
-            isAtk = true;
             Invoke("AttackEnd",3);
         }else if(attackType ==1){
             Boss.Attack2();
-            isAtk = true;
             Invoke("AttackEnd",3);
         }else if(attackType ==2){
             Boss.SpecialAttack1();
-            Invoke("IsAttack",Boss.boss.ainmterm);
-            if(Boss.boss.bossState.Stage ==2){
-                Invoke("AttackEnd",3);
-            }
+            Invoke("IsJump", 0.6f);
+            Invoke("AttackEnd",3);
         }
         else if(attackType ==3){
             Boss.SpecialAttack2();
-            isAtk = true;
             Invoke("AttackEnd",3);
         }
     }
     void OnCollisionEnter2D(Collision2D other) {
-        if(other.gameObject.layer == 3 && isAtk == true){
+        if(other.gameObject.layer == 3 && isJump == true){
             anim.SetBool("isJump",false);
-            isAtk = false;
-            attackType = Random.Range(0, 4);
+            
         }
     }
-    void IsAttack(){
-        isAtk = true;
+    void IsJump(){
+        isJump = true;
     }
     void AttackEnd(){
         isAtk =false;
+        Boss.boss.bossState.dashcoaf = 1;
         attackType = Random.Range(0,Boss.boss.attackCount);
     }
 }

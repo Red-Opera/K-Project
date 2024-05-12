@@ -19,7 +19,7 @@ MonoBehaviour:
   damage: 35
   defense: 15
   moveSpeed: 3
-  dashcoaf: 2
+  dashcoaf: 1
   jumpPower: 5
   flyingSpeed: 0
   Money: 0

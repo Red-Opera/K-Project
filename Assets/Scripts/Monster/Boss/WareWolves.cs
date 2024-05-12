@@ -11,38 +11,45 @@ public class WareWolves : BossMonster
         boss.bossState = Resources.Load<MonsterState>("Scriptable/Boss/WareWolf");
         boss.pos = new Vector3(2, 0, 0);
         boss.damage = 10;
-        boss.disapearTime = 0.3f;
+        boss.disapearTime = 0.8f;
         boss.attackCount = 3;
         anim = GetComponent<Animator>();
     }
     public override void Attack1()
     {
-        boss.ainmterm = 0;
+        boss.pos = new Vector3(1.5f,-0.6f,0);
+        boss.range.transform.localScale = new Vector3(2,2,1);
         GameObject Atk = Instantiate(boss.range, transform.position + boss.pos*boss.dir, Quaternion.identity);
         BossAttack atkSc = Atk.GetComponent<BossAttack>();
         atkSc.setState(boss); 
-        StartCoroutine(DelayedTrigger("attack1", 1));
+        StartCoroutine(DelayedTrigger("attack1", 0.5f));
     }
 
     public override void Attack2()
     {
         //DashAttack
-        boss.ainmterm = 0;
         boss.bossState.dashcoaf =2;
         Invoke("ResetSpeed", 0.5f);
+        boss.pos = new Vector3(2,-0.5f,0);
+        boss.range.transform.localScale = new Vector3(3,2.2f,1);
         GameObject Atk = Instantiate(boss.range, transform.position + boss.pos*boss.dir, Quaternion.identity);
         BossAttack atkSc = Atk.GetComponent<BossAttack>();
         atkSc.setState(boss);
-        StartCoroutine(DelayedTrigger("attack2", 1));
+        StartCoroutine(DelayedTrigger("attack2", 0.5f));
     }
 
     public override void SpecialAttack1()
     {
         //jump Attack
-        boss.ainmterm = 0.1f;
         Rigidbody2D rigid = GetComponent<Rigidbody2D>();
+        boss.pos = new Vector3(0,-1.5f,0);
+        boss.range.transform.localScale = new Vector3(14,1,1);
+        GameObject Atk = Instantiate(boss.range, transform.position + boss.pos*boss.dir, Quaternion.identity);
+        BossAttack atkSc = Atk.GetComponent<BossAttack>();
+        atkSc.setState(boss);
         rigid.velocity = Vector2.up * boss.bossState.jumpPower;
-        StartCoroutine(DelayedTrigger("jump", 1));
+        StartCoroutine(DelayedTrigger("jump", 0.5f));
+        Invoke("Jump", 0.6f);
     }
 
     public override void SpecialAttack2()
