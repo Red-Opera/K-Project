@@ -19622,6 +19622,86 @@ PrefabInstance:
       propertyPath: inventslot
       value: 
       objectReference: {fileID: 6731808131638525580}
+    - target: {fileID: 2012229073801385240, guid: 976840595b0bc45458bf844818631b7c, type: 3}
+      propertyPath: selectables.Array.data[23].cost
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2012229073801385240, guid: 976840595b0bc45458bf844818631b7c, type: 3}
+      propertyPath: selectables.Array.data[24].cost
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 2012229073801385240, guid: 976840595b0bc45458bf844818631b7c, type: 3}
+      propertyPath: selectables.Array.data[25].cost
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2012229073801385240, guid: 976840595b0bc45458bf844818631b7c, type: 3}
+      propertyPath: selectables.Array.data[26].cost
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 2012229073801385240, guid: 976840595b0bc45458bf844818631b7c, type: 3}
+      propertyPath: selectables.Array.data[23].state
+      value: 
+      objectReference: {fileID: 11400000, guid: 4bf9ce1152326e74eae19a04d7f3ec5e, type: 2}
+    - target: {fileID: 2012229073801385240, guid: 976840595b0bc45458bf844818631b7c, type: 3}
+      propertyPath: selectables.Array.data[24].state
+      value: 
+      objectReference: {fileID: 11400000, guid: 19a7ddf3c46ba6f4d8d4813797140586, type: 2}
+    - target: {fileID: 2012229073801385240, guid: 976840595b0bc45458bf844818631b7c, type: 3}
+      propertyPath: selectables.Array.data[25].state
+      value: 
+      objectReference: {fileID: 11400000, guid: 9707c289ac999d34fa4bf74bdfedfa1f, type: 2}
+    - target: {fileID: 2012229073801385240, guid: 976840595b0bc45458bf844818631b7c, type: 3}
+      propertyPath: selectables.Array.data[26].state
+      value: 
+      objectReference: {fileID: 11400000, guid: 2e257d6c117f2754ea530ca48dbf5b2c, type: 2}
+    - target: {fileID: 2012229073801385240, guid: 976840595b0bc45458bf844818631b7c, type: 3}
+      propertyPath: selectables.Array.data[23].sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 6986b84c218fa48408103e9310a603fc, type: 3}
+    - target: {fileID: 2012229073801385240, guid: 976840595b0bc45458bf844818631b7c, type: 3}
+      propertyPath: selectables.Array.data[24].sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: c8da7a9697c3bc2408d540df27d29cdd, type: 3}
+    - target: {fileID: 2012229073801385240, guid: 976840595b0bc45458bf844818631b7c, type: 3}
+      propertyPath: selectables.Array.data[25].sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 0b70528981d17b54bbd2df7b38153975, type: 3}
+    - target: {fileID: 2012229073801385240, guid: 976840595b0bc45458bf844818631b7c, type: 3}
+      propertyPath: selectables.Array.data[26].sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: f93133752960a0f4fa1e6936fc91f05c, type: 3}
+    - target: {fileID: 2012229073801385240, guid: 976840595b0bc45458bf844818631b7c, type: 3}
+      propertyPath: selectables.Array.data[23].content
+      value: Unspecified
+      objectReference: {fileID: 0}
+    - target: {fileID: 2012229073801385240, guid: 976840595b0bc45458bf844818631b7c, type: 3}
+      propertyPath: selectables.Array.data[24].content
+      value: hdfhsdh
+      objectReference: {fileID: 0}
+    - target: {fileID: 2012229073801385240, guid: 976840595b0bc45458bf844818631b7c, type: 3}
+      propertyPath: selectables.Array.data[25].content
+      value: fgjdrjdrksryks
+      objectReference: {fileID: 0}
+    - target: {fileID: 2012229073801385240, guid: 976840595b0bc45458bf844818631b7c, type: 3}
+      propertyPath: selectables.Array.data[26].content
+      value: serjsejsrtjs
+      objectReference: {fileID: 0}
+    - target: {fileID: 2012229073801385240, guid: 976840595b0bc45458bf844818631b7c, type: 3}
+      propertyPath: selectables.Array.data[23].equipmentType
+      value: 4026531840
+      objectReference: {fileID: 0}
+    - target: {fileID: 2012229073801385240, guid: 976840595b0bc45458bf844818631b7c, type: 3}
+      propertyPath: selectables.Array.data[24].equipmentType
+      value: 4026531840
+      objectReference: {fileID: 0}
+    - target: {fileID: 2012229073801385240, guid: 976840595b0bc45458bf844818631b7c, type: 3}
+      propertyPath: selectables.Array.data[25].equipmentType
+      value: 4026531840
+      objectReference: {fileID: 0}
+    - target: {fileID: 2012229073801385240, guid: 976840595b0bc45458bf844818631b7c, type: 3}
+      propertyPath: selectables.Array.data[26].equipmentType
+      value: 251658240
+      objectReference: {fileID: 0}
     - target: {fileID: 2379831536781660746, guid: 976840595b0bc45458bf844818631b7c, type: 3}
       propertyPath: m_fontSize
       value: 21.15

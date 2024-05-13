@@ -34,7 +34,7 @@ public class BossHPManager : MonoBehaviour
 
     private void DrapMoney(int cost)
     {
-        playerState.money += cost;
+        ResultUI.GetGold(cost);
 
         coin.text = playerState.money.ToString("#,##0");
     }

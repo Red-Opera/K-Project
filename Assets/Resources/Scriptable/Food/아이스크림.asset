@@ -15,14 +15,16 @@ MonoBehaviour:
   foodName: "\uC544\uC774\uC2A4\uD06C\uB9BC"
   addState:
   - stateName: "\uD68C\uD53C \uD655\uB960"
-    value: 0.05
-  - stateName: "\uAC15\uC778\uD568"
-    value: -1
+    value: 0.1
+  - stateName: "\uC774\uB3D9 \uC18D\uB3C4"
+    value: 0.5
+  - stateName: "\uD604\uC7AC \uCCB4\uB825"
+    value: 10
   baseState:
   - stateName: "\uCD5C\uB300 \uCCB4\uB825"
-    value: 10
+    value: 0
   - stateName: "\uD5C8\uAE30"
-    value: -35
+    value: 40
   - stateName: "\uACE8\uB4DC"
     value: 300
   isHotFood: 0
