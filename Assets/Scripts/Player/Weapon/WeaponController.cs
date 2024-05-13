@@ -29,9 +29,6 @@ public class WeaponController : MonoBehaviour
             lastWeapon = myWeapon;
             myWeapon.InitSetting();
         }
-        if(Input.GetKeyDown(KeyCode.L)){
-            Debug.Log(myWeapon.Weapon.coolTime);
-        }
         if(Input.GetMouseButtonDown(0)||Input.GetKeyDown(KeyCode.LeftControl)){
             if(isAtk == false){
                 if(spriteRenderer.flipX){
@@ -59,11 +56,12 @@ public class WeaponController : MonoBehaviour
         } else{
             isMouse = (mousePos.x < rigid.position.x);
         }
-        Debug.Log("mouse Pos : " + mousePos.x + ", Player Pos : " + rigid.position.x);
         if(isMouse){
             Vector2 attackSpeed = mousePos - rigid.position;
-            myWeapon.Weapon.fowardSpeed = attackSpeed.normalized;
-            Debug.Log(myWeapon.Weapon.fowardSpeed);
+            myWeapon.Weapon.fowardSpeed = attackSpeed.normalized *2;
+        }
+        else{
+            myWeapon.Weapon.fowardSpeed = new Vector2(myWeapon.Weapon.dir * 2,0);
         }
     }
 }

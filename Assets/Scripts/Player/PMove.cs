@@ -36,7 +36,7 @@ public class PMove : MonoBehaviour
         Move();
         Jump();
         Dash();
-        if(playerState.currentHp <= 0 &&gameObject.layer != 12){
+        if(playerState.currentHp <= 0 && gameObject.layer != 12){
             Die();
         }
     }

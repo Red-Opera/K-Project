@@ -71,7 +71,7 @@ TextureImporter:
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
     resizeAlgorithm: 0
-    textureFormat: -1
+    textureFormat: 4
     textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
@@ -181,7 +181,7 @@ TextureImporter:
         width: 47
         height: 87
       alignment: 9
-      pivot: {x: 0.71, y: 0.48}
+      pivot: {x: 0.71, y: 0.47}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -223,7 +223,7 @@ TextureImporter:
         width: 45
         height: 85
       alignment: 9
-      pivot: {x: 0.7, y: 0.46}
+      pivot: {x: 0.7, y: 0.47}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
