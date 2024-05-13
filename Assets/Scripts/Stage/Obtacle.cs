@@ -4,17 +4,18 @@ using UnityEngine;
 
 /*public class Obtacle : MonoBehaviour
 {
-    HpLevelManager HpLevelManager;
-    State playerState = currentHP;
+    HpLevelManager hpLevelManager;
+    State state;
+
     public int damage = 20;
     
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
-            currentHP -= damage;
-            HPLevelManager.Damage();
+            GameManager.info.playerState.currentHp -= damage;
+            //hpLevelManager.Damage();
         }
     }
-}
-*/
+}*/
+
