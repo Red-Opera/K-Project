@@ -3315,7 +3315,7 @@ GameObject:
   - component: {fileID: 3790982329745309077}
   m_Layer: 5
   m_Name: TeamSkeleton7
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
