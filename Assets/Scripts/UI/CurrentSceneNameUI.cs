@@ -94,6 +94,17 @@ public class CurrentSceneNameUI : MonoBehaviour
                         BackgroundSound.NoBossClip();
                     }
 
+                    else if (stageName.StartsWith("EventStage"))
+                    {
+                        char num = stageName[stageName.Length - 1];
+
+                        if (num == '1')
+                            nameText.text += "INN Store";
+
+                        else if (num == '2')
+                            nameText.text += "Equid Store";
+                    }    
+
                     // 보스 스테이지인 경우
                     else
                     {

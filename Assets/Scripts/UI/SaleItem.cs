@@ -37,7 +37,7 @@ public class SaleItem : MonoBehaviour, IPointerClickHandler
             for (int i = 0; i < equidStoreCompo.selectables.Count; i++)
             {
                 if (saleItemIamge.sprite == equidStoreCompo.selectables[i].sprite)
-                    saleCostText.text = (equidStoreCompo.selectables[i].cost * 0.8f).ToString("#,##0");
+                    saleCostText.text = (equidStoreCompo.selectables[i].state.money * 0.5f).ToString("#,##0");
             }
 
             // Àåºñ Á¤º¸ »óÅÂ ¼û±è

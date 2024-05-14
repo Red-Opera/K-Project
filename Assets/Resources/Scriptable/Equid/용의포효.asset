@@ -16,7 +16,7 @@ MonoBehaviour:
   level: 0
   maxHP: 0
   currentHp: 0
-  currentExp: 0
+  currentExp: 800
   damage: 50
   defense: 10
   critical: -0.1

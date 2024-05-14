@@ -10,24 +10,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 122c419616f961d4ea369c09b9e4c4f1, type: 3}
-  m_Name: "\uC54C\uB9C8\uC774\uC2A4"
+  m_Name: "\uB4A4\uD2C0\uB9B0\uD0D0\uC695"
   m_EditorClassIdentifier: 
-  nickName: "\uC54C\uB9C8\uC774\uC2A4"
+  nickName: "\uB4A4\uD2C0\uB9B0 \uD0D0\uC695"
   level: 0
   maxHP: 0
   currentHp: 0
   currentExp: 800
-  damage: 18
+  damage: 22
   defense: 0
-  critical: 0.11
+  critical: 0.26
   moveSpeed: 0
   jumpPower: 0
   jumpCount: 0
   maxJump: 0
   dashDamage: 0
   strong: 0
-  criticalDamage: 0
-  attackSpeed: -0.2
+  criticalDamage: 0.3
+  attackSpeed: 0
   fixedDamage: 0
   defensePersent: 0
   avoidPersent: 0

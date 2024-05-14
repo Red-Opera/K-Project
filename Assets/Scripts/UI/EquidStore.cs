@@ -95,6 +95,9 @@ public class EquidStore : MonoBehaviour
         // 랜덤으로 상점에 전시할 아이템을 정함
         int itemIndex = Random.Range(0, selectables.Count);
 
+        while (selectables[itemIndex].level == EquidLevel.EQUIPMENT_LEVEL_LEGEND)
+            itemIndex = Random.Range(0, selectables.Count);
+
         // 선택한 이미지와 타입으로 바꿈
         newItem.GetComponent<InventableEquipment>().inventableEquipment = selectables[itemIndex].equipmentType;
         newItem.transform.GetChild(0).GetComponent<Image>().sprite = selectables[itemIndex].sprite;
@@ -111,7 +114,7 @@ public class EquidStore : MonoBehaviour
         // 선택한 세부정보 위치를 가져오고 모두 수정
         Transform changeDetail = details.transform.GetChild(selectedIndex);
 
-        changeDetail.GetChild(1).GetComponent<TextMeshProUGUI>().text = selectables[itemIndex].cost.ToString("#,##0");
+        changeDetail.GetChild(1).GetComponent<TextMeshProUGUI>().text = selectables[itemIndex].state.money.ToString("#,##0");
         changeDetail.GetChild(2).GetChild(0).GetComponent<Image>().sprite = selectables[itemIndex].sprite;
         changeDetail.GetChild(3).GetComponent<TextMeshProUGUI>().text = selectables[itemIndex].content;
     }
@@ -231,14 +234,23 @@ public class EquidStore : MonoBehaviour
     }
 }
 
+public enum EquidLevel
+{
+    EQUIPMENT_LEVEL_NORMAL = 0,         // 노말 장비
+    EQUIPMENT_LEVEL_RERE = 1,           // 레어 장비
+    EQUIPMENT_LEVEL_EPIC = 2,           // 에픽 장비
+    EQUIPMENT_LEVEL_UNIQUE = 3,         // 유니크 장비
+    EQUIPMENT_LEVEL_LEGEND = 4,         // 레전드 무기
+}
+
 // 전시할 수 있는 아이템의 정보
 [System.Serializable]
 public class SelectableItem
 {
     public Sprite sprite;                   // 이미지
     public string content;                  // 내용
-    public int cost;                        // 비용
     public EquipmentState equipmentType;    // 무기 타입
+    public EquidLevel level;                // 장비 등급
 
     public State state;                     // 무기 정보
 }

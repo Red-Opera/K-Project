@@ -3133,131 +3133,166 @@ MonoBehaviour:
   - sprite: {fileID: 1998334570, guid: 39caf47f5ecdfc543bb636fb7afc82ed, type: 3}
     content: The kunai is a versatile double-edged blade, optimized for rapid strikes
       in close combat.
-    cost: 75
     equipmentType: 15728640
+    level: 0
     state: {fileID: 11400000, guid: 31a0671780712e74ab3bd3c8a94da06c, type: 2}
   - sprite: {fileID: -664377214, guid: 39caf47f5ecdfc543bb636fb7afc82ed, type: 3}
     content: 'A simple yet sturdy one-handed sword, crafted for novice adventurers. '
-    cost: 100
     equipmentType: 15728640
+    level: 1
     state: {fileID: 11400000, guid: df597edc7dc23eb4690e986ebf81401e, type: 2}
   - sprite: {fileID: 21300000, guid: 4b3fbfa1bb1316a4cbd65d7462807685, type: 3}
     content: Unspecified
-    cost: 850
     equipmentType: 15728640
+    level: 1
     state: {fileID: 11400000, guid: c32bcea539b7c624bada217e0eb19693, type: 2}
   - sprite: {fileID: 21300000, guid: ee278f857bad993468faea1c4857bf57, type: 3}
     content: Unspecified
-    cost: 850
     equipmentType: 15728640
+    level: 2
     state: {fileID: 11400000, guid: 48fee228df213c543ab02ddda2efa4c7, type: 2}
   - sprite: {fileID: 21300000, guid: 3ffaab9c1e0d1724f8d8bd01a090e162, type: 3}
     content: Unspecified
-    cost: 850
     equipmentType: 15728640
+    level: 2
     state: {fileID: 11400000, guid: 4de4eaedb99b21348b476c41e7352303, type: 2}
   - sprite: {fileID: 21300000, guid: c935d0d654a444f45a7a84d85fa1ed57, type: 3}
     content: Unspecified
-    cost: 850
     equipmentType: 61440
+    level: 3
     state: {fileID: 11400000, guid: 3223b641e44dca640bbf16176e95f8bf, type: 2}
   - sprite: {fileID: 21300000, guid: b4cf43013267dc64eb6ff5775064392f, type: 3}
     content: Unspecified
-    cost: 850
     equipmentType: 61440
+    level: 3
     state: {fileID: 11400000, guid: 258568d05835200438251429b2603dc8, type: 2}
   - sprite: {fileID: 21300000, guid: 0b70528981d17b54bbd2df7b38153975, type: 3}
     content: Unspecified
-    cost: 850
     equipmentType: 61440
+    level: 3
     state: {fileID: 11400000, guid: 90a48a65df72d634581235a9a904ec97, type: 2}
   - sprite: {fileID: 21300000, guid: 3971d05e546fe3047bbeee3724067589, type: 3}
     content: Unspecified
-    cost: 850
     equipmentType: 61440
+    level: 2
     state: {fileID: 11400000, guid: 0aa8d10bbd4a1154aad3a33b3cbe4c9c, type: 2}
   - sprite: {fileID: 400821093, guid: 39caf47f5ecdfc543bb636fb7afc82ed, type: 3}
     content: Unspecified
-    cost: 0
     equipmentType: 4026531840
+    level: 0
     state: {fileID: 11400000, guid: 2f48f6bdfd6cd264bb87ac0e101a48a3, type: 2}
   - sprite: {fileID: 21300000, guid: e3ba8379a54e21043a37cb09770b9814, type: 3}
     content: Unspecified
-    cost: 850
     equipmentType: 4026531840
+    level: 1
     state: {fileID: 11400000, guid: 2e257d6c117f2754ea530ca48dbf5b2c, type: 2}
   - sprite: {fileID: 21300000, guid: 9cb5d67628be70a47bbd185ed24d1d7f, type: 3}
     content: Unspecified
-    cost: 850
     equipmentType: 4026531840
+    level: 1
     state: {fileID: 11400000, guid: 1c29001ba16989249aa33a59670bef64, type: 2}
   - sprite: {fileID: 21300000, guid: c8da7a9697c3bc2408d540df27d29cdd, type: 3}
     content: Unspecified
-    cost: 850
     equipmentType: 4026531840
+    level: 2
     state: {fileID: 11400000, guid: 052932b8db569264383585f636b8bea5, type: 2}
   - sprite: {fileID: 21300000, guid: 7cb1c849aaa36bf44b71c54431e99451, type: 3}
     content: Unspecified
-    cost: 850
     equipmentType: 4026531840
+    level: 2
     state: {fileID: 11400000, guid: c620dce48c24d004bbacb487c472aa86, type: 2}
   - sprite: {fileID: 21300000, guid: f93133752960a0f4fa1e6936fc91f05c, type: 3}
     content: Unspecified
-    cost: 850
     equipmentType: 4026531840
+    level: 3
     state: {fileID: 11400000, guid: 091de88d487e597428144bcbd7895d90, type: 2}
   - sprite: {fileID: 21300000, guid: 6986b84c218fa48408103e9310a603fc, type: 3}
     content: Unspecified
-    cost: 850
     equipmentType: 4026531840
+    level: 3
     state: {fileID: 11400000, guid: 4bf9ce1152326e74eae19a04d7f3ec5e, type: 2}
   - sprite: {fileID: 21300000, guid: caeca90b210f91043a9fb63ad93cb272, type: 3}
     content: Unspecified
-    cost: 850
     equipmentType: 4026531840
+    level: 3
     state: {fileID: 11400000, guid: 1454619217b440a40b2fb91d56a504d0, type: 2}
   - sprite: {fileID: 21300000, guid: ee2996aac3a499d49bee1be50be65765, type: 3}
     content: The metal ring, a timeless piece of jewelry, embodies both elegance
       and durability.
-    cost: 350
     equipmentType: 61440
+    level: 0
     state: {fileID: 11400000, guid: c89a8a7f9ba676547abb6eabfb703a72, type: 2}
   - sprite: {fileID: 21300000, guid: e02277e112cba2f42853e0f942c5fae6, type: 3}
     content: Crafted from the cherished precious metal renowned for its radiant beauty
       and timeless allure, the gold ring stands as a symbol of both opulence and
       lasting value.
-    cost: 400
     equipmentType: 61440
+    level: 2
     state: {fileID: 11400000, guid: 9707c289ac999d34fa4bf74bdfedfa1f, type: 2}
   - sprite: {fileID: 21300000, guid: 420c5226571944b4b82f2bbb750c2148, type: 3}
     content: ' Crafted to resemble the jagged path of a lightning bolt, this ring
       embodies power, energy, and unpredictability. '
-    cost: 400
     equipmentType: 61440
+    level: 2
     state: {fileID: 11400000, guid: 942bbe8f59eff0744b3c78d8b420db7e, type: 2}
   - sprite: {fileID: 21300000, guid: 03e720976307bd14aa07515bc3a1df38, type: 3}
     content: Thunder Rings are crafted with supernatural forces, imbued with the
       power of thunder itself. These mystical artifacts are believed to harness the
       raw energy of storms, resonating with the primal forces of nature.
-    cost: 650
     equipmentType: 61440
+    level: 0
     state: {fileID: 11400000, guid: a822860e611281d4288e3954e928189d, type: 2}
   - sprite: {fileID: 21300000, guid: 1bfa32e17f4bb224b9087771fb651801, type: 3}
     content: 'Forged from the fiery breath of legendary creatures, the Dragon Ring
       epitomizes strength, power, and mystique. Crafted from metals infused with
       ancient dragon scales or tempered by dragonfire, these rings are symbols of
       courage and resilience. '
-    cost: 500
     equipmentType: 61440
+    level: 2
     state: {fileID: 11400000, guid: 4eafd456bc1b3fc44b33d5b54ff662b1, type: 2}
   - sprite: {fileID: 21300000, guid: 3971d05e546fe3047bbeee3724067589, type: 3}
     content: The Hellfire Ring embodies the infernal fury of the underworld, a manifestation
       of darkness and power. Crafted from metals forged in the depths of the abyss
       and infused with the essence of hellfire, these rings exude an ominous energy
       that captivates and intimidates.
-    cost: 850
     equipmentType: 61440
+    level: 2
     state: {fileID: 11400000, guid: 0aa8d10bbd4a1154aad3a33b3cbe4c9c, type: 2}
+  - sprite: {fileID: 21300000, guid: b8647e6e35926f64096e3617192016cf, type: 3}
+    content: Unspecified
+    equipmentType: 251658240
+    level: 0
+    state: {fileID: 11400000, guid: 88c3e3edebcf2da4db2772a47be51b6c, type: 2}
+  - sprite: {fileID: 21300000, guid: 911cc3f35725d984a9b3cf326da099a3, type: 3}
+    content: Unspecified
+    equipmentType: 251658240
+    level: 1
+    state: {fileID: 11400000, guid: 37b65592e00f77d4aabea74080f4a092, type: 2}
+  - sprite: {fileID: 21300000, guid: be9bc6822bf1e40489cc13fdde89b297, type: 3}
+    content: Unspecified
+    equipmentType: 251658240
+    level: 2
+    state: {fileID: 11400000, guid: 3bd767f1d6c81484ba2d9ac6d156c56a, type: 2}
+  - sprite: {fileID: 21300000, guid: 694a4f1db0026204894857b80245e169, type: 3}
+    content: Unspecified
+    equipmentType: 251658240
+    level: 3
+    state: {fileID: 11400000, guid: f618fb426dbba784cadd06b761d893f8, type: 2}
+  - sprite: {fileID: 21300000, guid: a237ceca3eb259b4d8ea9c220b2223aa, type: 3}
+    content: Unspecified
+    equipmentType: 251658240
+    level: 4
+    state: {fileID: 11400000, guid: 155c1208cf4900942a68baa9ea577011, type: 2}
+  - sprite: {fileID: 21300000, guid: 96059f0f98521b641b4dc1287e004745, type: 3}
+    content: Unspecified
+    equipmentType: 4026531840
+    level: 4
+    state: {fileID: 11400000, guid: 08722af331ece764faed3f48e9110a58, type: 2}
+  - sprite: {fileID: 21300000, guid: d3e6a3dc78e999b409fa8f12f3958d4f, type: 3}
+    content: Unspecified
+    equipmentType: 15728640
+    level: 4
+    state: {fileID: 11400000, guid: f6df74b6eac155e43b29ecf09a33de4a, type: 2}
   inventory: {fileID: 0}
   inventslot: {fileID: 0}
   slots: {fileID: 2738860659071217140}
