@@ -3136,7 +3136,7 @@ MonoBehaviour:
     equipmentType: 15728640
     level: 0
     state: {fileID: 11400000, guid: 31a0671780712e74ab3bd3c8a94da06c, type: 2}
-  - sprite: {fileID: -664377214, guid: 39caf47f5ecdfc543bb636fb7afc82ed, type: 3}
+  - sprite: {fileID: 21300000, guid: 1e7d9aab88885ce4796c107cd87921bc, type: 3}
     content: 'A simple yet sturdy one-handed sword, crafted for novice adventurers. '
     equipmentType: 15728640
     level: 1

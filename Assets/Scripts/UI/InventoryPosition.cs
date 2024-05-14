@@ -7,6 +7,7 @@ public class InventroyPosition : MonoBehaviour
 {
     public static bool isChange = true;                 // 자리를 교환했는지 여부
     public static bool isAddSucceed = false;            // 구매 성공 여부
+    public static bool isAddItemable = false;           // AddItem 사용 가능 여부
 
     [SerializeField] private GameObject slots;          // 전시할 수 있는 오브젝트를 담는 슬롯
     [SerializeField] private GameObject itemDisplay;    // 아이템을 전시하기 위한 오브젝트
@@ -48,6 +49,7 @@ public class InventroyPosition : MonoBehaviour
         foreach (Sprite sprite in spriteData)
             sprites.Add(sprite.name, sprite);
 
+        isAddItemable = true;
         OnAddItem += AddItem;
     }
 
@@ -135,8 +137,18 @@ public class InventroyPosition : MonoBehaviour
     public void AddItem(string name, EquipmentState equipmentState, EquidState state = null)
     {
         Debug.Assert(sprites.ContainsKey(name), "해당 이름의 아이템은 존재하지 않습니다");
+        int i = 8;
 
-        for (int i = 8; i < displayPos.Length; i++)
+        if ((equipmentState & (EquipmentState.EQUIPMENT_WEAPON_TWOHANDED_LARGE_RANGE | EquipmentState.EQUIPMENT_WEAPON_TWOHANDED_SHORT_RANGE)) != 0)
+        {
+            if (displayPos[2].childCount <= 0)
+                i = 2;
+
+            else if (displayPos[0].childCount <= 0)
+                i = 0;
+        }
+
+        for (; i < displayPos.Length; i++)
         {
             // 슬롯을 찾음
             Transform slot = displayPos[i];

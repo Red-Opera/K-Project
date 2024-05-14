@@ -27,10 +27,15 @@ public class ResultUI : MonoBehaviour
     [SerializeField] private int startEXP;          // 2레벨로 가기위한 경험치
     [SerializeField] private int level1PerEXPUp;    // 1레벨 올라갈때 마다 필요 경험치 증가량
 
-    private static List<string> getItemList;    // 탐험 통안 획득한 아이템
+    private GameObject tempWeaphonState;            // 무기 상태 임시 객체
+
+    private static List<string> addItemList;        // 활성화시 추가될 아이템 리스트
+    private static List<string> getItemList;        // 탐험 통안 획득한 아이템
+    private static ResultUI staticResultUI;         // Result UI static 버전
     private static float playTime = 0.0f;           // 탐험 시간
     private static float getGold = 0;               // 탐험시 얻은 골드
     private static float getEXP = 0;                // 탐험시 얻은 경험치
+
 
     private bool isPlayTimeReset = false;
 
@@ -44,15 +49,24 @@ public class ResultUI : MonoBehaviour
 
         weaphonInfoEx = new Dictionary<string, SelectableItem>();
 
+        if (addItemList == null)
+            addItemList = new List<string>();
+
         for (int i = 0; i < equidStore.selectables.Count; i++)
             weaphonInfoEx.Add(equidStore.selectables[i].state.name, equidStore.selectables[i]);
 
-        //GetItem("기본링");
-        //GetItem("단검");
-        //GetItem("기본지팡이");
-        //GetItem("기본활");
-        //GetItem("단검");
-        //GetItem("양손도끼");
+        if (staticResultUI == null)
+            staticResultUI = this;
+
+        if (tempWeaphonState == null)
+        {
+            tempWeaphonState = new GameObject();
+            tempWeaphonState.name = "Equid State 임시 객체";
+
+            EquidState state = tempWeaphonState.AddComponent<EquidState>();
+        }
+
+        GetItem("단검");
 
         //Invoke("GameIsEnd", 2.0f);
     }
@@ -61,6 +75,14 @@ public class ResultUI : MonoBehaviour
     {
         if (isPlayTimeReset)
             playTime += Time.deltaTime;
+
+        if (InventroyPosition.isAddItemable && addItemList.Count != 0)
+        {
+            for (int i = 0; i < getItemList.Count; i++)
+                AddItem(getItemList[i]);
+
+            getItemList.Clear();
+        }
     }
 
     // 게임이 끝났을 경우 호출되는 메소드
@@ -107,6 +129,29 @@ public class ResultUI : MonoBehaviour
         Debug.Assert(getItemList != null, "얻은 아이템을 저장하는 리스트가 초기화되지 않았습니다.");
 
         getItemList.Add(weaphonName.Replace(" ", ""));
+
+        if (!InventroyPosition.isAddItemable)
+            addItemList.Add(weaphonName);
+
+        else
+            staticResultUI.AddItem(weaphonName);
+    }
+
+    private void AddItem(string name)
+    {
+        for (int i = 0; i < equidStore.selectables.Count; i++)
+        {
+            if (equidStore.selectables[i].state.name == name)
+            {
+                EquidState equidState = tempWeaphonState.GetComponent<EquidState>();
+                equidState.state = equidStore.selectables[i].state;
+
+                InventroyPosition.CallAddItem(name, equidStore.selectables[i].equipmentType, equidState);
+                return;
+            }
+        }
+
+        Debug.Assert(false, "해당 이름의 장비는 존재하지 않음");
     }
 
     // 현재 씬을 가져오는 메소드

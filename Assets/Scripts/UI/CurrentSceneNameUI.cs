@@ -110,6 +110,8 @@ public class CurrentSceneNameUI : MonoBehaviour
                     {
                         nameText.text += " BossStage";
                         BackgroundSound.StartBossClip();
+
+                        ResultUI.GetItem("µå·¡°ï¸µ");
                     }
 
                     break;

@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -111,7 +110,6 @@ public class UIOpen : MonoBehaviour
         statUI.SetActive(false);
         equidUI.SetActive(false);
         mapUI.SetActive(false);
-        resultUI.SetActive(false);
         customUI.SetActive(false);
     }
 }

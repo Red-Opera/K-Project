@@ -19622,6 +19622,294 @@ PrefabInstance:
       propertyPath: inventslot
       value: 
       objectReference: {fileID: 6731808131638525580}
+    - target: {fileID: 2012229073801385240, guid: 976840595b0bc45458bf844818631b7c, type: 3}
+      propertyPath: selectables.Array.size
+      value: 29
+      objectReference: {fileID: 0}
+    - target: {fileID: 2012229073801385240, guid: 976840595b0bc45458bf844818631b7c, type: 3}
+      propertyPath: selectables.Array.data[8].level
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2012229073801385240, guid: 976840595b0bc45458bf844818631b7c, type: 3}
+      propertyPath: selectables.Array.data[8].state
+      value: 
+      objectReference: {fileID: 11400000, guid: 2f48f6bdfd6cd264bb87ac0e101a48a3, type: 2}
+    - target: {fileID: 2012229073801385240, guid: 976840595b0bc45458bf844818631b7c, type: 3}
+      propertyPath: selectables.Array.data[9].level
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2012229073801385240, guid: 976840595b0bc45458bf844818631b7c, type: 3}
+      propertyPath: selectables.Array.data[9].state
+      value: 
+      objectReference: {fileID: 11400000, guid: 2e257d6c117f2754ea530ca48dbf5b2c, type: 2}
+    - target: {fileID: 2012229073801385240, guid: 976840595b0bc45458bf844818631b7c, type: 3}
+      propertyPath: selectables.Array.data[10].state
+      value: 
+      objectReference: {fileID: 11400000, guid: 1c29001ba16989249aa33a59670bef64, type: 2}
+    - target: {fileID: 2012229073801385240, guid: 976840595b0bc45458bf844818631b7c, type: 3}
+      propertyPath: selectables.Array.data[11].level
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2012229073801385240, guid: 976840595b0bc45458bf844818631b7c, type: 3}
+      propertyPath: selectables.Array.data[11].state
+      value: 
+      objectReference: {fileID: 11400000, guid: 052932b8db569264383585f636b8bea5, type: 2}
+    - target: {fileID: 2012229073801385240, guid: 976840595b0bc45458bf844818631b7c, type: 3}
+      propertyPath: selectables.Array.data[12].state
+      value: 
+      objectReference: {fileID: 11400000, guid: c620dce48c24d004bbacb487c472aa86, type: 2}
+    - target: {fileID: 2012229073801385240, guid: 976840595b0bc45458bf844818631b7c, type: 3}
+      propertyPath: selectables.Array.data[13].level
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2012229073801385240, guid: 976840595b0bc45458bf844818631b7c, type: 3}
+      propertyPath: selectables.Array.data[13].state
+      value: 
+      objectReference: {fileID: 11400000, guid: 091de88d487e597428144bcbd7895d90, type: 2}
+    - target: {fileID: 2012229073801385240, guid: 976840595b0bc45458bf844818631b7c, type: 3}
+      propertyPath: selectables.Array.data[14].state
+      value: 
+      objectReference: {fileID: 11400000, guid: 4bf9ce1152326e74eae19a04d7f3ec5e, type: 2}
+    - target: {fileID: 2012229073801385240, guid: 976840595b0bc45458bf844818631b7c, type: 3}
+      propertyPath: selectables.Array.data[15].state
+      value: 
+      objectReference: {fileID: 11400000, guid: 1454619217b440a40b2fb91d56a504d0, type: 2}
+    - target: {fileID: 2012229073801385240, guid: 976840595b0bc45458bf844818631b7c, type: 3}
+      propertyPath: selectables.Array.data[16].level
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2012229073801385240, guid: 976840595b0bc45458bf844818631b7c, type: 3}
+      propertyPath: selectables.Array.data[16].state
+      value: 
+      objectReference: {fileID: 11400000, guid: c89a8a7f9ba676547abb6eabfb703a72, type: 2}
+    - target: {fileID: 2012229073801385240, guid: 976840595b0bc45458bf844818631b7c, type: 3}
+      propertyPath: selectables.Array.data[17].level
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2012229073801385240, guid: 976840595b0bc45458bf844818631b7c, type: 3}
+      propertyPath: selectables.Array.data[17].state
+      value: 
+      objectReference: {fileID: 11400000, guid: 9707c289ac999d34fa4bf74bdfedfa1f, type: 2}
+    - target: {fileID: 2012229073801385240, guid: 976840595b0bc45458bf844818631b7c, type: 3}
+      propertyPath: selectables.Array.data[18].state
+      value: 
+      objectReference: {fileID: 11400000, guid: 942bbe8f59eff0744b3c78d8b420db7e, type: 2}
+    - target: {fileID: 2012229073801385240, guid: 976840595b0bc45458bf844818631b7c, type: 3}
+      propertyPath: selectables.Array.data[19].level
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2012229073801385240, guid: 976840595b0bc45458bf844818631b7c, type: 3}
+      propertyPath: selectables.Array.data[19].state
+      value: 
+      objectReference: {fileID: 11400000, guid: a822860e611281d4288e3954e928189d, type: 2}
+    - target: {fileID: 2012229073801385240, guid: 976840595b0bc45458bf844818631b7c, type: 3}
+      propertyPath: selectables.Array.data[20].level
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2012229073801385240, guid: 976840595b0bc45458bf844818631b7c, type: 3}
+      propertyPath: selectables.Array.data[20].state
+      value: 
+      objectReference: {fileID: 11400000, guid: 4eafd456bc1b3fc44b33d5b54ff662b1, type: 2}
+    - target: {fileID: 2012229073801385240, guid: 976840595b0bc45458bf844818631b7c, type: 3}
+      propertyPath: selectables.Array.data[21].state
+      value: 
+      objectReference: {fileID: 11400000, guid: 0aa8d10bbd4a1154aad3a33b3cbe4c9c, type: 2}
+    - target: {fileID: 2012229073801385240, guid: 976840595b0bc45458bf844818631b7c, type: 3}
+      propertyPath: selectables.Array.data[22].level
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2012229073801385240, guid: 976840595b0bc45458bf844818631b7c, type: 3}
+      propertyPath: selectables.Array.data[22].state
+      value: 
+      objectReference: {fileID: 11400000, guid: 88c3e3edebcf2da4db2772a47be51b6c, type: 2}
+    - target: {fileID: 2012229073801385240, guid: 976840595b0bc45458bf844818631b7c, type: 3}
+      propertyPath: selectables.Array.data[23].level
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2012229073801385240, guid: 976840595b0bc45458bf844818631b7c, type: 3}
+      propertyPath: selectables.Array.data[23].state
+      value: 
+      objectReference: {fileID: 11400000, guid: 37b65592e00f77d4aabea74080f4a092, type: 2}
+    - target: {fileID: 2012229073801385240, guid: 976840595b0bc45458bf844818631b7c, type: 3}
+      propertyPath: selectables.Array.data[24].level
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2012229073801385240, guid: 976840595b0bc45458bf844818631b7c, type: 3}
+      propertyPath: selectables.Array.data[24].state
+      value: 
+      objectReference: {fileID: 11400000, guid: 3bd767f1d6c81484ba2d9ac6d156c56a, type: 2}
+    - target: {fileID: 2012229073801385240, guid: 976840595b0bc45458bf844818631b7c, type: 3}
+      propertyPath: selectables.Array.data[25].level
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2012229073801385240, guid: 976840595b0bc45458bf844818631b7c, type: 3}
+      propertyPath: selectables.Array.data[25].state
+      value: 
+      objectReference: {fileID: 11400000, guid: f618fb426dbba784cadd06b761d893f8, type: 2}
+    - target: {fileID: 2012229073801385240, guid: 976840595b0bc45458bf844818631b7c, type: 3}
+      propertyPath: selectables.Array.data[26].level
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2012229073801385240, guid: 976840595b0bc45458bf844818631b7c, type: 3}
+      propertyPath: selectables.Array.data[26].state
+      value: 
+      objectReference: {fileID: 11400000, guid: 155c1208cf4900942a68baa9ea577011, type: 2}
+    - target: {fileID: 2012229073801385240, guid: 976840595b0bc45458bf844818631b7c, type: 3}
+      propertyPath: selectables.Array.data[27].state
+      value: 
+      objectReference: {fileID: 11400000, guid: 08722af331ece764faed3f48e9110a58, type: 2}
+    - target: {fileID: 2012229073801385240, guid: 976840595b0bc45458bf844818631b7c, type: 3}
+      propertyPath: selectables.Array.data[28].state
+      value: 
+      objectReference: {fileID: 11400000, guid: f6df74b6eac155e43b29ecf09a33de4a, type: 2}
+    - target: {fileID: 2012229073801385240, guid: 976840595b0bc45458bf844818631b7c, type: 3}
+      propertyPath: selectables.Array.data[8].sprite
+      value: 
+      objectReference: {fileID: 400821093, guid: 39caf47f5ecdfc543bb636fb7afc82ed, type: 3}
+    - target: {fileID: 2012229073801385240, guid: 976840595b0bc45458bf844818631b7c, type: 3}
+      propertyPath: selectables.Array.data[9].sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: e3ba8379a54e21043a37cb09770b9814, type: 3}
+    - target: {fileID: 2012229073801385240, guid: 976840595b0bc45458bf844818631b7c, type: 3}
+      propertyPath: selectables.Array.data[10].sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9cb5d67628be70a47bbd185ed24d1d7f, type: 3}
+    - target: {fileID: 2012229073801385240, guid: 976840595b0bc45458bf844818631b7c, type: 3}
+      propertyPath: selectables.Array.data[11].sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: c8da7a9697c3bc2408d540df27d29cdd, type: 3}
+    - target: {fileID: 2012229073801385240, guid: 976840595b0bc45458bf844818631b7c, type: 3}
+      propertyPath: selectables.Array.data[12].sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 7cb1c849aaa36bf44b71c54431e99451, type: 3}
+    - target: {fileID: 2012229073801385240, guid: 976840595b0bc45458bf844818631b7c, type: 3}
+      propertyPath: selectables.Array.data[13].sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: f93133752960a0f4fa1e6936fc91f05c, type: 3}
+    - target: {fileID: 2012229073801385240, guid: 976840595b0bc45458bf844818631b7c, type: 3}
+      propertyPath: selectables.Array.data[14].sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 6986b84c218fa48408103e9310a603fc, type: 3}
+    - target: {fileID: 2012229073801385240, guid: 976840595b0bc45458bf844818631b7c, type: 3}
+      propertyPath: selectables.Array.data[15].sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: caeca90b210f91043a9fb63ad93cb272, type: 3}
+    - target: {fileID: 2012229073801385240, guid: 976840595b0bc45458bf844818631b7c, type: 3}
+      propertyPath: selectables.Array.data[16].sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ee2996aac3a499d49bee1be50be65765, type: 3}
+    - target: {fileID: 2012229073801385240, guid: 976840595b0bc45458bf844818631b7c, type: 3}
+      propertyPath: selectables.Array.data[17].sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: e02277e112cba2f42853e0f942c5fae6, type: 3}
+    - target: {fileID: 2012229073801385240, guid: 976840595b0bc45458bf844818631b7c, type: 3}
+      propertyPath: selectables.Array.data[18].sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 420c5226571944b4b82f2bbb750c2148, type: 3}
+    - target: {fileID: 2012229073801385240, guid: 976840595b0bc45458bf844818631b7c, type: 3}
+      propertyPath: selectables.Array.data[19].sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 03e720976307bd14aa07515bc3a1df38, type: 3}
+    - target: {fileID: 2012229073801385240, guid: 976840595b0bc45458bf844818631b7c, type: 3}
+      propertyPath: selectables.Array.data[20].sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 1bfa32e17f4bb224b9087771fb651801, type: 3}
+    - target: {fileID: 2012229073801385240, guid: 976840595b0bc45458bf844818631b7c, type: 3}
+      propertyPath: selectables.Array.data[21].sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 3971d05e546fe3047bbeee3724067589, type: 3}
+    - target: {fileID: 2012229073801385240, guid: 976840595b0bc45458bf844818631b7c, type: 3}
+      propertyPath: selectables.Array.data[22].sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: b8647e6e35926f64096e3617192016cf, type: 3}
+    - target: {fileID: 2012229073801385240, guid: 976840595b0bc45458bf844818631b7c, type: 3}
+      propertyPath: selectables.Array.data[23].sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 911cc3f35725d984a9b3cf326da099a3, type: 3}
+    - target: {fileID: 2012229073801385240, guid: 976840595b0bc45458bf844818631b7c, type: 3}
+      propertyPath: selectables.Array.data[24].sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: be9bc6822bf1e40489cc13fdde89b297, type: 3}
+    - target: {fileID: 2012229073801385240, guid: 976840595b0bc45458bf844818631b7c, type: 3}
+      propertyPath: selectables.Array.data[25].sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 694a4f1db0026204894857b80245e169, type: 3}
+    - target: {fileID: 2012229073801385240, guid: 976840595b0bc45458bf844818631b7c, type: 3}
+      propertyPath: selectables.Array.data[26].sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: a237ceca3eb259b4d8ea9c220b2223aa, type: 3}
+    - target: {fileID: 2012229073801385240, guid: 976840595b0bc45458bf844818631b7c, type: 3}
+      propertyPath: selectables.Array.data[27].sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 96059f0f98521b641b4dc1287e004745, type: 3}
+    - target: {fileID: 2012229073801385240, guid: 976840595b0bc45458bf844818631b7c, type: 3}
+      propertyPath: selectables.Array.data[28].sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d3e6a3dc78e999b409fa8f12f3958d4f, type: 3}
+    - target: {fileID: 2012229073801385240, guid: 976840595b0bc45458bf844818631b7c, type: 3}
+      propertyPath: selectables.Array.data[16].content
+      value: The metal ring, a timeless piece of jewelry, embodies both elegance
+        and durability.
+      objectReference: {fileID: 0}
+    - target: {fileID: 2012229073801385240, guid: 976840595b0bc45458bf844818631b7c, type: 3}
+      propertyPath: selectables.Array.data[17].content
+      value: Crafted from the cherished precious metal renowned for its radiant beauty
+        and timeless allure, the gold ring stands as a symbol of both opulence and
+        lasting value.
+      objectReference: {fileID: 0}
+    - target: {fileID: 2012229073801385240, guid: 976840595b0bc45458bf844818631b7c, type: 3}
+      propertyPath: selectables.Array.data[18].content
+      value: ' Crafted to resemble the jagged path of a lightning bolt, this ring
+        embodies power, energy, and unpredictability. '
+      objectReference: {fileID: 0}
+    - target: {fileID: 2012229073801385240, guid: 976840595b0bc45458bf844818631b7c, type: 3}
+      propertyPath: selectables.Array.data[19].content
+      value: Thunder Rings are crafted with supernatural forces, imbued with the
+        power of thunder itself. These mystical artifacts are believed to harness
+        the raw energy of storms, resonating with the primal forces of nature.
+      objectReference: {fileID: 0}
+    - target: {fileID: 2012229073801385240, guid: 976840595b0bc45458bf844818631b7c, type: 3}
+      propertyPath: selectables.Array.data[20].content
+      value: 'Forged from the fiery breath of legendary creatures, the Dragon Ring
+        epitomizes strength, power, and mystique. Crafted from metals infused with
+        ancient dragon scales or tempered by dragonfire, these rings are symbols
+        of courage and resilience. '
+      objectReference: {fileID: 0}
+    - target: {fileID: 2012229073801385240, guid: 976840595b0bc45458bf844818631b7c, type: 3}
+      propertyPath: selectables.Array.data[21].content
+      value: The Hellfire Ring embodies the infernal fury of the underworld, a manifestation
+        of darkness and power. Crafted from metals forged in the depths of the abyss
+        and infused with the essence of hellfire, these rings exude an ominous energy
+        that captivates and intimidates.
+      objectReference: {fileID: 0}
+    - target: {fileID: 2012229073801385240, guid: 976840595b0bc45458bf844818631b7c, type: 3}
+      propertyPath: selectables.Array.data[22].content
+      value: Unspecified
+      objectReference: {fileID: 0}
+    - target: {fileID: 2012229073801385240, guid: 976840595b0bc45458bf844818631b7c, type: 3}
+      propertyPath: selectables.Array.data[8].equipmentType
+      value: 4026531840
+      objectReference: {fileID: 0}
+    - target: {fileID: 2012229073801385240, guid: 976840595b0bc45458bf844818631b7c, type: 3}
+      propertyPath: selectables.Array.data[16].equipmentType
+      value: 61440
+      objectReference: {fileID: 0}
+    - target: {fileID: 2012229073801385240, guid: 976840595b0bc45458bf844818631b7c, type: 3}
+      propertyPath: selectables.Array.data[22].equipmentType
+      value: 251658240
+      objectReference: {fileID: 0}
+    - target: {fileID: 2012229073801385240, guid: 976840595b0bc45458bf844818631b7c, type: 3}
+      propertyPath: selectables.Array.data[26].equipmentType
+      value: 251658240
+      objectReference: {fileID: 0}
+    - target: {fileID: 2012229073801385240, guid: 976840595b0bc45458bf844818631b7c, type: 3}
+      propertyPath: selectables.Array.data[27].equipmentType
+      value: 4026531840
+      objectReference: {fileID: 0}
+    - target: {fileID: 2012229073801385240, guid: 976840595b0bc45458bf844818631b7c, type: 3}
+      propertyPath: selectables.Array.data[28].equipmentType
+      value: 15728640
+      objectReference: {fileID: 0}
     - target: {fileID: 2379831536781660746, guid: 976840595b0bc45458bf844818631b7c, type: 3}
       propertyPath: m_fontSize
       value: 21.15
