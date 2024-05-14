@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class HpLevelManager : MonoBehaviour
 {
     [SerializeField] private State state;                       // 플레이어 상태
+    [SerializeField] private MonsterState BossState;
     [SerializeField] private TextMeshProUGUI maxHpText;         // 최대 체력 텍스트
     [SerializeField] private TextMeshProUGUI currentHpText;     // 현재 체력 테스트
     [SerializeField] private TextMeshProUGUI levelText;         // 레벨 텍스트
@@ -15,13 +16,17 @@ public class HpLevelManager : MonoBehaviour
 
     void Start()
     {
-        Debug.Assert(state != null, "플레이어 스텟이 없습니다.");
+        // Debug.Assert(state != null, "플레이어 스텟이 없습니다.");
         Debug.Assert(currentHpText != null, "현재 체력을 확인할 수 있는 UI가 없습니다.");
         Debug.Assert(maxHpText != null, "최대 체력을 확인할 수 있는 UI가 없습니다.");
         Debug.Assert(hpSlider != null, "체력 슬라이더가 존재하지 않습니다.");
-
-        SliderReset();
-        SetLevel();
+        if(BossState == null){
+            state = GameManager.info.allPlayerState;
+            SliderReset();
+            SetLevel();
+        }else{
+            BossSliderReset();
+        }
     }
 
     public void Update()
@@ -35,6 +40,17 @@ public class HpLevelManager : MonoBehaviour
         // 현재 상태를 가져옴
         currentHp = state.currentHp;
         maxHp = state.maxHP;
+
+        currentHpText.text = currentHp.ToString();
+        maxHpText.text = maxHp.ToString();
+
+        hpSlider.value = currentHp / (float)maxHp;
+    }
+    private void BossSliderReset()
+    {
+        // 현재 상태를 가져옴
+        currentHp = BossState.currentHp;
+        maxHp = BossState.maxHP;
 
         currentHpText.text = currentHp.ToString();
         maxHpText.text = maxHp.ToString();

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using JetBrains.Annotations;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,26 +10,27 @@ public class Goblin : MonoBehaviour
 {
     Rigidbody2D rigid;
     Transform trans;
-    public GameManager gameManager;
-    public HpLevelManager hpLevelManager;
     public SpriteRenderer[] childSpriterenderer;
-    //Animator anim;
+    Animator anim;
     public MonsterState state;
-    public int xSpeed;
+    int xSpeed;
     private float moveSpeed;
     public int Hp;
-    public int dir;
+    int dir;
+    bool isAtk;
+    float localScaleX;
     GameObject Coin;
+    AudioSource audioSource;
     // Start is called before the first frame update
     void Start()
     {
-        gameManager = FindObjectOfType<GameManager>();
-        hpLevelManager = FindObjectOfType<HpLevelManager>();
         childSpriterenderer = GetComponentsInChildren<SpriteRenderer>();
         rigid = GetComponent<Rigidbody2D>();
         trans = GetComponent<Transform>();
         Coin = Resources.Load<GameObject>("Prefab/Object/Coin");
-        // anim = GetComponent<Animator>();
+        anim = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
+        localScaleX = trans.localScale.x;
         SetState();
         SetSpeed();
     }
@@ -43,12 +45,16 @@ public class Goblin : MonoBehaviour
     void Idle(){
         rigid.velocity = new Vector2(xSpeed * moveSpeed, rigid.velocity.y);
         if(xSpeed > 0){
-            trans.localScale = new Vector3(-1.5f, 1.7f, 1); 
+            trans.localScale = new Vector3(-localScaleX, trans.localScale.y, 1);
+            anim.SetBool("isWalk",true);
             dir = 1;
         }
         else if(xSpeed < 0){
-            trans.localScale = new Vector3(1.5f, 1.7f, 1);
+            trans.localScale = new Vector3(localScaleX, trans.localScale.y, 1);
+            anim.SetBool("isWalk",true);
             dir = -1; 
+        }else{
+            anim.SetBool("isWalk",false);
         }
     }
      
@@ -60,23 +66,28 @@ public class Goblin : MonoBehaviour
     void SetState(){
         moveSpeed = state.moveSpeed;
         Hp = state.maxHP;
-        
     }
 
     public void Damaged(int dmg){
         Hp -= dmg;
         Debug.Log("Monster Damaged " + dmg + "dmg");
         StartCoroutine(setColor());
+        audioSource.Play();
         if(Hp <= 0){
-            Instantiate(Coin,transform.position + new Vector3(0, trans.localScale.y*.5f,0), Quaternion.identity);
-            Destroy(gameObject);
+            StartCoroutine(SpawnCoin());
         }
     }
-
+    IEnumerator SpawnCoin(){
+        for(int i = 0; i < (state.Stage*2)+2; i++){
+            Instantiate(Coin,transform.position + new Vector3(0, trans.localScale.y*.5f,0), Quaternion.identity);
+        }
+        yield return new WaitForSeconds(0.1f);
+        Destroy(gameObject);
+    }
     void OnCollisionEnter2D(Collision2D other){
         if(other.gameObject.layer == LayerMask.NameToLayer("Player")){
-            gameManager.playerState.currentHp -= state.damage;
-            hpLevelManager.Damage();
+            PMove pMove = other.gameObject.GetComponent<PMove>();
+            pMove.Damaged(state.damage);
         }
     }
     IEnumerator setColor(){
@@ -93,10 +104,24 @@ public class Goblin : MonoBehaviour
         }
     }
     void Detect(){
-        Vector2 detectRange = new Vector2(10*dir,5);
+        Vector2 detectRange = new Vector2(5*dir,5);
         var detectP = Physics2D.OverlapArea(rigid.position, rigid.position + detectRange, LayerMask.GetMask("Player"));
-        if(detectP != null){
-            Debug.Log("Find Player");
+        if(detectP != null && isAtk == false){
+            isAtk = true;
+            Attack();
         }
+    }
+    void Attack(){
+        GameObject range = Resources.Load<GameObject>("Prefab/Monster/MonsterAtkRange");
+        range.transform.localScale = new Vector3(2.5f,2.5f,0);
+        GameObject Atk = Instantiate(range, transform.position + new Vector3(1.5f,-0.5f,0)* dir, Quaternion.identity);
+        MonsterAttack atkSc = Atk.GetComponent<MonsterAttack>();
+        atkSc.setDamage(state.damage);
+        anim.SetTrigger("isAtk");
+        Invoke("AtkReset",3);
+    }
+
+    void AtkReset(){
+        isAtk = false;
     }
 }

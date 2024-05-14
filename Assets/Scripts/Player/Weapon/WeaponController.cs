@@ -12,6 +12,7 @@ public class WeaponController : MonoBehaviour
     public State playerState;
     SpriteRenderer spriteRenderer;
     Animator anim;
+    AudioSource audioSource;
     public Rigidbody2D rigid;
     bool isAtk = false;
     void Start()
@@ -22,15 +23,13 @@ public class WeaponController : MonoBehaviour
         anim = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         rigid = GetComponent<Rigidbody2D>();
+        audioSource = GetComponent<AudioSource>();
     }
     void Update()
     {
         if(lastWeapon != myWeapon){
             lastWeapon = myWeapon;
             myWeapon.InitSetting();
-        }
-        if(Input.GetKeyDown(KeyCode.L)){
-            Debug.Log(myWeapon.Weapon.coolTime);
         }
         if(Input.GetMouseButtonDown(0)||Input.GetKeyDown(KeyCode.LeftControl)){
             if(isAtk == false){
@@ -42,6 +41,7 @@ public class WeaponController : MonoBehaviour
                 CheckMousePos();
                 isAtk = true;
                 myWeapon.Using();
+                audioSource.Play();
                 Invoke("CoolTime",myWeapon.Weapon.coolTime);
                 anim.SetTrigger(myWeapon.Weapon.animName);
             }
@@ -59,11 +59,12 @@ public class WeaponController : MonoBehaviour
         } else{
             isMouse = (mousePos.x < rigid.position.x);
         }
-        Debug.Log("mouse Pos : " + mousePos.x + ", Player Pos : " + rigid.position.x);
         if(isMouse){
             Vector2 attackSpeed = mousePos - rigid.position;
-            myWeapon.Weapon.fowardSpeed = attackSpeed.normalized;
-            Debug.Log(myWeapon.Weapon.fowardSpeed);
+            myWeapon.Weapon.fowardSpeed = attackSpeed.normalized *2;
+        }
+        else{
+            myWeapon.Weapon.fowardSpeed = new Vector2(myWeapon.Weapon.dir * 2,0);
         }
     }
 }
