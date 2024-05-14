@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1049023302621363166}
   - component: {fileID: 6415775509517829051}
   - component: {fileID: -3406560676288422737}
+  - component: {fileID: -442163047561434587}
   m_Layer: 0
   m_Name: PF Village Props - Spike
   m_TagString: DamagedObject
@@ -144,3 +145,16 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.03125, y: 0.34375}
   m_EdgeRadius: 0
+--- !u!114 &-442163047561434587
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1049023302621363167}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdbf06fa68ad2374982c7e4e93d98433, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 20

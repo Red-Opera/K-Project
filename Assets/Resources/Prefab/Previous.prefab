@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 9065492740425516631}
   - component: {fileID: 156178225473910732}
   - component: {fileID: 5080937515546405881}
-  - component: {fileID: 5250407758038641053}
   m_Layer: 0
   m_Name: Previous
   m_TagString: PreviousStageTrigger
@@ -144,18 +143,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ffda1cde3afa5a4ca805e88b72ad65e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &5250407758038641053
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7381960235131978361}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7ff438d0af478d478d99f2c7d97256a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  imageToFade: {fileID: 0}
-  fadeDuration: 1
-  isFadeOut: 0

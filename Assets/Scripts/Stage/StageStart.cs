@@ -27,7 +27,6 @@ public class StageStart : MonoBehaviour
         // F 키를 누르면 씬 전환
         if (distanceToPortal < interactDistance && Input.GetKeyDown(KeyCode.F))
         {
-            player.transform.position = new Vector3(0, 0, 0);
             // 코루틴을 사용하여 페이드 인/아웃 효과를 적용하여 씬 전환
             StartCoroutine(TransitionToScene());
         }
@@ -35,6 +34,7 @@ public class StageStart : MonoBehaviour
 
     IEnumerator TransitionToScene()
     {
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
         isTransitioning = true;
 
         // 페이드 아웃 효과
@@ -46,6 +46,8 @@ public class StageStart : MonoBehaviour
             fadeImage.color = new Color(0f, 0f, 0f, alpha);
             yield return null;
         }
+
+        player.transform.position = new Vector3(0, 0, 0);
 
         // 씬 전환
         SceneManager.LoadScene("Stage1");
