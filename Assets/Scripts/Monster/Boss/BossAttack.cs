@@ -8,14 +8,12 @@ public class BossAttack : MonoBehaviour
     Rigidbody2D rigid;
     BossSetting boss;
     SpriteRenderer spriteRenderer;
-    public HpLevelManager hpLevelManager;
     public bool isAtk = false;
     // Start is called before the first frame update
     void Start()
     {
         rigid = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        hpLevelManager = FindObjectOfType<HpLevelManager>();
         Destroy(gameObject, boss.disapearTime);
         Invoke("OnAttack", 0.5f);
     }
@@ -36,8 +34,8 @@ public class BossAttack : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D other) {
         if(other.gameObject.layer == 8 && isAtk == true){
-            GameManager.info.playerState.currentHp -= boss.damage;
-            hpLevelManager.Damage();
+            PMove pMove = other.gameObject.GetComponent<PMove>();
+            pMove.Damaged(boss.damage);
             Destroy(gameObject);
         }
     }

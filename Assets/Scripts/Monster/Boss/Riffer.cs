@@ -12,7 +12,7 @@ public class Riffer : BossMonster
         boss.range = Resources.Load<GameObject>("Prefab/Boss/AttackRange");
         boss.bossState = Resources.Load<MonsterState>("Scriptable/Boss/Riffer");
         boss.pos = new Vector3(2,0,0);
-        boss.damage = 10;
+        boss.damage = boss.bossState.damage;
         boss.disapearTime = .8f;
         boss.attackCount = 4;
         anim = GetComponent<Animator>();
@@ -51,7 +51,7 @@ public class Riffer : BossMonster
         GameObject Atk = Instantiate(boss.range, findP.transform.position + boss.pos * boss.dir, Quaternion.identity);
         BossAttack atkSc = Atk.GetComponent<BossAttack> ();
         atkSc.setState(boss);
-        StartCoroutine(DelayedTrigger("telpo", 0.5f));
+        StartCoroutine(DelayedTrigger("telpo", 0.3f));
         StartCoroutine(DelayedTrigger("telpoE", 0.5f));
         Invoke("Telpo", 0.8f);
     }
@@ -70,9 +70,9 @@ public class Riffer : BossMonster
         Invoke("CastE",1.5f);
     }
     void Telpo(){
-        Rigidbody2D rigid = GetComponent<Rigidbody2D> ();
-        var findP = Physics2D.OverlapArea(rigid.position + new Vector2(10,5), rigid.position + new Vector2(-10,-5), LayerMask.GetMask("Player"));
-        rigid.transform.position = new Vector2(findP.transform.position.x - boss.dir * 3,findP.transform.position.y);
+        Rigidbody2D rigid = GetComponent<Rigidbody2D>();
+        var findP = Physics2D.OverlapArea(rigid.position + new Vector2(10,5), rigid.position + new Vector2(-10,-5), LayerMask.GetMask("Player","Dead"));
+        rigid.transform.position = new Vector2(findP.transform.position.x - boss.dir * 3,findP.transform.position.y+1);
     }
 
     void CastE(){

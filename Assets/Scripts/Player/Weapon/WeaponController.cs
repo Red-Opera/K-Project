@@ -12,6 +12,7 @@ public class WeaponController : MonoBehaviour
     public State playerState;
     SpriteRenderer spriteRenderer;
     Animator anim;
+    AudioSource audioSource;
     public Rigidbody2D rigid;
     bool isAtk = false;
     void Start()
@@ -22,6 +23,7 @@ public class WeaponController : MonoBehaviour
         anim = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         rigid = GetComponent<Rigidbody2D>();
+        audioSource = GetComponent<AudioSource>();
     }
     void Update()
     {
@@ -39,6 +41,7 @@ public class WeaponController : MonoBehaviour
                 CheckMousePos();
                 isAtk = true;
                 myWeapon.Using();
+                audioSource.Play();
                 Invoke("CoolTime",myWeapon.Weapon.coolTime);
                 anim.SetTrigger(myWeapon.Weapon.animName);
             }

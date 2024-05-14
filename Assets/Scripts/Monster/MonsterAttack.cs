@@ -21,8 +21,8 @@ public class MonsterAttack : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D other){
         if (other.gameObject.layer == 8){
-            GameManager.info.allPlayerState.currentHp -= damage;
-            hpLevelManager.Damage();
+            PMove pMove = other.gameObject.GetComponent<PMove>();
+            pMove.Damaged(damage);
             Destroy(gameObject);
         }
     }

@@ -13,6 +13,7 @@ public class PMove : MonoBehaviour
     CapsuleCollider2D PlayerCollider;
     SpriteRenderer spriteRenderer;
     Animator anim;
+    HpLevelManager hpLevelManager;
     public ResultUI result;
     public State playerState;
     public bool isJumping;
@@ -24,6 +25,8 @@ public class PMove : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
         result = FindObjectOfType<ResultUI>();
+        GameObject hpBar = GameObject.FindGameObjectWithTag("HP");
+        hpLevelManager = hpBar.GetComponent<HpLevelManager>();
         DontDestroyOnLoad(gameObject);
     }
     void Start(){
@@ -127,5 +130,11 @@ public class PMove : MonoBehaviour
         gameObject.layer = 12;
         ResultUI result = FindObjectOfType<ResultUI>();
         result.GameIsEnd();
+    }
+    public void Damaged(int dmg){
+        gameObject.layer = 12;
+        GameManager.info.allPlayerState.currentHp -= dmg;
+        hpLevelManager.Damage();
+        Invoke("DashEnd", 0.5f);
     }
 }

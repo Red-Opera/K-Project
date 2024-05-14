@@ -10,7 +10,7 @@ public class SkeletonKing : BossMonster
         boss.range = Resources.Load<GameObject>("Prefab/Boss/AttackRange");
         boss.bossState = Resources.Load<MonsterState>("Scriptable/Boss/SkeletonKing");
         boss.pos = new Vector3(2,0,0);
-        boss.damage = 10;
+        boss.damage = boss.bossState.damage;
         boss.disapearTime = .8f;
         boss.attackCount = 4;
         anim = GetComponent<Animator>();
@@ -51,7 +51,9 @@ public class SkeletonKing : BossMonster
 
     public override void SpecialAttack2()
     {
-        StartCoroutine(DelayedTrigger("Summon", 0.5f));   
+        StartCoroutine(DelayedTrigger("Summon", 0.5f));
+        GameObject Summon = Resources.Load<GameObject>("Prefab/Monster/Skeleton/TeamSkeleton3");
+        Instantiate(Summon, transform.position + new Vector3(boss.dir,-2,0), Quaternion.identity);
     }
 
     void ResetSpeed(){
