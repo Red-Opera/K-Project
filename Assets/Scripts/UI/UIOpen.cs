@@ -104,6 +104,9 @@ public class UIOpen : MonoBehaviour
 
     private void NonEssentialUI(Scene scene, LoadSceneMode scneeMode)
     {
+        if (statusUI == null)
+            return;
+
         statusUI.SetActive(false);
         inventoryUI.SetActive(false);
         getItemUI.SetActive(false);

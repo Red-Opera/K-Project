@@ -43,7 +43,7 @@ public class CustomMouseIndex : MonoBehaviour, IPointerEnterHandler, IPointerExi
             StartCoroutine(TurnOnOff(true));
 
         // 현재 선택한 프레임이 이 프레임이 아니고 이미 선택됐던 이미지일 경우 이 이 프레임을 비활성화
-        else if (selectedIndex != thisIndex && selectImageCompo.material.color.a >= 0.9 && !isChange)
+        else if (selectedIndex != thisIndex && selectImageCompo.color.a >= 0.9 && !isChange)
             StartCoroutine(TurnOnOff(false));
     }
 

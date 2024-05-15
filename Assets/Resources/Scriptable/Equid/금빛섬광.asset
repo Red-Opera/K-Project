@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 122c419616f961d4ea369c09b9e4c4f1, type: 3}
   m_Name: "\uAE08\uBE5B\uC12C\uAD11"
   m_EditorClassIdentifier: 
-  nickName: "\uD22C\uCC99\uC6A9\uB2E8\uAC80"
+  nickName: "\uAE08\uBE5B\uC12C\uAD11"
   level: 0
   maxHP: 0
   currentHp: 0

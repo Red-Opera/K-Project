@@ -9,6 +9,7 @@ using UnityEngine.UI;
 public class ResultUI : MonoBehaviour
 {
     [SerializeField] private EquidStore equidStore;                             // 무기 상점 UI 스크립트
+    [SerializeField] private Transform inventorySlots;                          // 장비 인벤토리
     [HideInInspector] public Dictionary<string, SelectableItem> weaphonInfoEx;  // 무기 추가 정보
 
     [SerializeField] private GameObject resultUI;                       // 결과 UI 오브젝트
@@ -28,6 +29,7 @@ public class ResultUI : MonoBehaviour
     [SerializeField] private int level1PerEXPUp;    // 1레벨 올라갈때 마다 필요 경험치 증가량
 
     private GameObject tempWeaphonState;            // 무기 상태 임시 객체
+    private FadeEffect fade;                        // 페이트 효과
 
     private static List<string> addItemList;        // 활성화시 추가될 아이템 리스트
     private static List<string> getItemList;        // 탐험 통안 획득한 아이템
@@ -36,8 +38,8 @@ public class ResultUI : MonoBehaviour
     private static float getGold = 0;               // 탐험시 얻은 골드
     private static float getEXP = 0;                // 탐험시 얻은 경험치
 
-
     private bool isPlayTimeReset = false;
+    private bool isShowEnd = false;         // Result UI 모든 결과 출력 여부
 
     private void Start()
     {
@@ -66,9 +68,11 @@ public class ResultUI : MonoBehaviour
             EquidState state = tempWeaphonState.AddComponent<EquidState>();
         }
 
+        fade = GameObject.Find("Fade").GetComponent<FadeEffect>();
+
         GetItem("단검");
 
-        //Invoke("GameIsEnd", 2.0f);
+        //Invoke("GameIsEnd", 1.0f);
     }
 
     public void Update()
@@ -76,6 +80,7 @@ public class ResultUI : MonoBehaviour
         if (isPlayTimeReset)
             playTime += Time.deltaTime;
 
+        // 인벤토리 한번 열려서 장비를 넣을 수 있을 경우
         if (InventroyPosition.isAddItemable && addItemList.Count != 0)
         {
             for (int i = 0; i < getItemList.Count; i++)
@@ -83,6 +88,10 @@ public class ResultUI : MonoBehaviour
 
             getItemList.Clear();
         }
+
+        // 모든 Result UI 출력 후 확인을 눌렸을 경우
+        if (isShowEnd && (Input.GetKeyUp(KeyCode.Space) || Input.GetKeyUp(KeyCode.KeypadEnter)))
+            StartCoroutine(ReStart());
     }
 
     // 게임이 끝났을 경우 호출되는 메소드
@@ -110,13 +119,13 @@ public class ResultUI : MonoBehaviour
         currentEXPPersentText.text = currentEXPPersent.ToString("#0.0%");
     }
 
-    // 탐험 중 경험치를 얻었을 때 호출되는 메소드
+    // 탐험 중 경험치를 얻었을 때 호출되는 메서드
     public static void GetEXP(int exp)
     {
         getEXP += exp;
     }
 
-    // 탐험 중 골드를 얻었을 때 호출되는 메소드
+    // 탐험 중 골드를 얻었을 때 호출되는 메서드
     public static void GetGold(int coin)
     {
         getGold += coin;
@@ -137,6 +146,7 @@ public class ResultUI : MonoBehaviour
             staticResultUI.AddItem(weaphonName);
     }
 
+    // 인벤토리를 연적이 있을 경우 아이템을 인벤토리에 추가하는 메서드
     private void AddItem(string name)
     {
         for (int i = 0; i < equidStore.selectables.Count; i++)
@@ -154,7 +164,7 @@ public class ResultUI : MonoBehaviour
         Debug.Assert(false, "해당 이름의 장비는 존재하지 않음");
     }
 
-    // 현재 씬을 가져오는 메소드
+    // 현재 씬을 가져오는 메서드
     private void GetCurrentStage()
     {
         string currentSceneName = SceneManager.GetActiveScene().name;
@@ -240,7 +250,8 @@ public class ResultUI : MonoBehaviour
                 initExp -= nextExp;
 
                 // 현재 경험치와 다음 경험치에 필요한 텍스트 초기화
-                nextEXPText.text = ((level1PerEXPUp * (GameManager.info.playerState.level - 1)) + startEXP).ToString("#,##0");
+                nextExp = (level1PerEXPUp * (GameManager.info.playerState.level - 1)) + startEXP;
+                nextEXPText.text = (nextExp).ToString("#,##0");
                 currentPlayerLevelText.text = GameManager.info.playerState.level.ToString("#,##0");
             }
 
@@ -258,6 +269,18 @@ public class ResultUI : MonoBehaviour
             yield return null;
         }
 
+        if (nextExp <= initExp + getEXP)
+        {
+            // 레벨 업하고 다음 레벨에 필요한 값 만큼 초기 경험치를 뺌
+            GameManager.info.playerState.level++;
+            initExp -= nextExp;
+
+            // 현재 경험치와 다음 경험치에 필요한 텍스트 초기화
+            nextExp = (level1PerEXPUp * (GameManager.info.playerState.level - 1)) + startEXP;
+            nextEXPText.text = (nextExp).ToString("#,##0");
+            currentPlayerLevelText.text = GameManager.info.playerState.level.ToString("#,##0");
+        }
+
         // 최종 결과 값을 출력함
         float finalEXPPersent = (float)(initExp + getEXP) / ((level1PerEXPUp * (GameManager.info.playerState.level - 1)) + startEXP); 
         currentEXPPersentSlider.value = finalEXPPersent;
@@ -267,6 +290,8 @@ public class ResultUI : MonoBehaviour
         GameManager.info.playerState.currentExp = int.Parse(currentEXPText.text.Replace(",", ""));
 
         getEXP = 0;
+
+        isShowEnd = true;
     }
 
     private void ShowItemList()
@@ -309,8 +334,8 @@ public class ResultUI : MonoBehaviour
                 else if (type == typeof(float) && ((float)returnValue > -0.001f && (float)returnValue < 0.001f))
                     continue;
 
-                // 최대 값 또는 돈 기본 값인 경우
-                if (stateName == "MaxHP" || stateName == "Money")
+                // 최대 값 또는 돈 기본 값, 경험치인 경우
+                if (stateName == "MaxHP" || stateName == "Money" || stateName == "CurrentExp")
                 {
                     if (stateName == "MaxHP")
                     {
@@ -321,6 +346,9 @@ public class ResultUI : MonoBehaviour
 
                     else if (stateName == "Money")
                         baseListValue.GetChild(1).GetComponent<TextMeshProUGUI>().text = ((int)returnValue * 0.8).ToString("#,##0");
+
+                    else if (stateName == "CurrentExp")
+                        GetEXP((int)returnValue);
 
                     continue;
                 }
@@ -340,6 +368,38 @@ public class ResultUI : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void DeleteWeaphon()
+    {
+        for (int i = 0; i < inventorySlots.childCount; i++)
+        {
+            Transform currentSlot = inventorySlots.GetChild(i);
+
+            if (currentSlot.childCount > 0)
+            {
+                if (currentSlot.GetChild(0).name == "Banned")
+                    continue;
+
+                Destroy(currentSlot.GetChild(0).gameObject);
+            }
+        }
+    }
+
+    // 게임을 다시 시작하는 코드
+    private IEnumerator ReStart()
+    {
+        resultUI.SetActive(false);
+        StartCoroutine(fade.FadeOut());
+
+        while (fade.isFadeOut)
+            yield return null;
+
+        DeleteWeaphon();
+        addItemList.Clear();
+        getItemList.Clear();
+
+        SceneManager.LoadScene("Map");
     }
 
     private void OnSceceLoaded(Scene scene, LoadSceneMode sceneMode)
