@@ -8,7 +8,7 @@ public class PortalActivation : MonoBehaviour
 
     void Awake()
     {
-        OnEnable();
+        OnEnable(); //ìŠ¤í…Œì´ì§€ ë„˜ì–´ê°”ì„ ë•Œ í˜ì´ë“œ ì¸ íš¨ê³¼
     }
     void Start()
     {
@@ -16,60 +16,51 @@ public class PortalActivation : MonoBehaviour
     }
     void Update()
     {
-        CheckForMonsters();
+        CheckForMonsters();//ìŠ¤í…Œì´ì§€ì— ëª¬ìŠ¤í„° í…Œê·¸ë¥¼ ê°€ì§„ ì˜¤ë¸Œì íŠ¸ê°€ ì¡´ì¬í•˜ëŠ”ì§€ ê²€ì‚¬
     }
 
     private void CheckForMonsters()
     {
-         // ¸ó½ºÅÍ¸¦ Ã£½À´Ï´Ù.
         GameObject[] monsters = GameObject.FindGameObjectsWithTag("Monster");
 
-        // ¸ó½ºÅÍ°¡ ÀÖ´ÂÁö È®ÀÎÇÏ°í Ã³¸®ÇÕ´Ï´Ù.
-        if (monsters.Length > 0)
+        if (monsters.Length > 0) //ëª¬ìŠ¤í„°ê°€ ìˆìœ¼ë©´ ë¹„í™œì„±í™”
         {
-            Debug.Log("¸ó½ºÅÍ°¡ ÀÖ½À´Ï´Ù");
-
-            // ÀÚ½Äµé Áß¿¡¼­ "Next" ¿ÀºêÁ§Æ®¸¦ Ã£À½
             Transform nextObject = transform.Find("Next");
             
-            // "Next" ¿ÀºêÁ§Æ®°¡ Á¸ÀçÇÏ°í È°¼ºÈ­µÇ¾î ÀÖ´ÂÁö È®ÀÎ
             if (nextObject != null && nextObject.gameObject.activeSelf)
             {
-                // "Next" ¿ÀºêÁ§Æ®¸¦ ºñÈ°¼ºÈ­
+                // "Next" ì˜¤ë¸Œì íŠ¸ë¥¼ ë¹„í™œì„±í™”
                 nextObject.gameObject.SetActive(false);
             }
 
-            // ÀÚ½Äµé Áß¿¡¼­ "Previous" ¿ÀºêÁ§Æ®¸¦ Ã£À½
+            // ìì‹ë“¤ ì¤‘ì—ì„œ "Previous" ì˜¤ë¸Œì íŠ¸ë¥¼ ì°¾ìŒ
             Transform previousObject = transform.Find("Previous");
-            
-            // "Previous" ¿ÀºêÁ§Æ®°¡ Á¸ÀçÇÏ°í È°¼ºÈ­µÇ¾î ÀÖ´ÂÁö È®ÀÎ
+            // "Previous" ì˜¤ë¸Œì íŠ¸ê°€ ì¡´ì¬í•˜ê³  í™œì„±í™”ë˜ì–´ ìˆëŠ”ì§€ í™•ì¸
             if (previousObject != null && previousObject.gameObject.activeSelf)
             {
-                // "Previous" ¿ÀºêÁ§Æ®¸¦ ºñÈ°¼ºÈ­
+                // "Previous" ì˜¤ë¸Œì íŠ¸ë¥¼ ë¹„í™œì„±í™”
                 previousObject.gameObject.SetActive(false);
             }
         }
-        else
+        else // ëª¬ìŠ¤í„°ê°€ ì—†ìœ¼ë©´ í™œì„±í™”
         {
-            Debug.Log("¸ó½ºÅÍ°¡ ¾ø½À´Ï´Ù");
-
-            // ÀÚ½Äµé Áß¿¡¼­ "Next" ¿ÀºêÁ§Æ®¸¦ Ã£À½
+            // ìì‹ë“¤ ì¤‘ì—ì„œ "Next" ì˜¤ë¸Œì íŠ¸ë¥¼ ì°¾ìŒ
             Transform nextObject = transform.Find("Next");
             
-            // "Next" ¿ÀºêÁ§Æ®°¡ Á¸ÀçÇÏ°í ºñÈ°¼ºÈ­µÇ¾î ÀÖ´ÂÁö È®ÀÎ
+            // "Next" ì˜¤ë¸Œì íŠ¸ê°€ ì¡´ì¬í•˜ê³  ë¹„í™œì„±í™”ë˜ì–´ ìˆëŠ”ì§€ í™•ì¸
             if (nextObject != null && !nextObject.gameObject.activeSelf)
             {
-                // "Next" ¿ÀºêÁ§Æ®¸¦ È°¼ºÈ­
+                // "Next" ì˜¤ë¸Œì íŠ¸ë¥¼ í™œì„±í™”
                 nextObject.gameObject.SetActive(true);
             }
 
-            // ÀÚ½Äµé Áß¿¡¼­ "Previous" ¿ÀºêÁ§Æ®¸¦ Ã£À½
+            // ìì‹ë“¤ ì¤‘ì—ì„œ "Previous" ì˜¤ë¸Œì íŠ¸ë¥¼ ì°¾ìŒ
             Transform previousObject = transform.Find("Previous");
             
-            // "Previous" ¿ÀºêÁ§Æ®°¡ Á¸ÀçÇÏ°í ºñÈ°¼ºÈ­µÇ¾î ÀÖ´ÂÁö È®ÀÎ
+            // "Previous" ì˜¤ë¸Œì íŠ¸ê°€ ì¡´ì¬í•˜ê³  ë¹„í™œì„±í™”ë˜ì–´ ìˆëŠ”ì§€ í™•ì¸
             if (previousObject != null && !previousObject.gameObject.activeSelf)
             {
-                // "Previous" ¿ÀºêÁ§Æ®¸¦ È°¼ºÈ­
+                // "Previous" ì˜¤ë¸Œì íŠ¸ë¥¼ í™œì„±í™”
                 previousObject.gameObject.SetActive(true);
             }
         }
