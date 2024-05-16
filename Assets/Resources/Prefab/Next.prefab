@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 6182660841639030868}
   - component: {fileID: 7114127215689044942}
   - component: {fileID: 1634385322858351707}
-  - component: {fileID: 6981223798323949681}
   m_Layer: 0
   m_Name: Next
   m_TagString: NextStageTrigger
@@ -144,18 +143,3 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &6981223798323949681
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5269691381801795581}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7ff438d0af478d478d99f2c7d97256a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  imageToFade: {fileID: 0}
-  fadeDuration: 1
-  isFadeOut: 0

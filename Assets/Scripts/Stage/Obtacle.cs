@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-/*public class Obtacle : MonoBehaviour
+public class Obtacle : MonoBehaviour
 {
     HpLevelManager hpLevelManager;
     State state;
@@ -13,9 +13,9 @@ using UnityEngine;
     {
         if (other.CompareTag("Player"))
         {
-            GameManager.info.playerState.currentHp -= damage;
-            //hpLevelManager.Damage();
+            GameManager.info.allPlayerState.currentHp -= damage;
+            hpLevelManager.Damage();
         }
     }
-}*/
+}
 

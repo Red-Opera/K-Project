@@ -3814,7 +3814,7 @@ GameObject:
   - component: {fileID: 3159515280092744463}
   m_Layer: 5
   m_Name: BlueOrc3
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

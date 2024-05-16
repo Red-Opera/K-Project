@@ -5,12 +5,14 @@ using Cainos.LucidEditor;
 
 namespace Cainos.PixelArtPlatformer_VillageProps
 {
+
     public class Chest : MonoBehaviour
     {
         [FoldoutGroup("Reference")]
         public Animator animator;
 
         [FoldoutGroup("Runtime"), ShowInInspector, DisableInEditMode]
+        
         public bool IsOpened
         {
             get { return isOpened; }
@@ -26,6 +28,8 @@ namespace Cainos.PixelArtPlatformer_VillageProps
         public void Open()
         {
             IsOpened = true;
+
+            ResultUI.GetItem("용의포효");
         }
 
         [FoldoutGroup("Runtime"), Button("Close"), HorizontalGroup("Runtime/Button")]

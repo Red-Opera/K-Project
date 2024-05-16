@@ -12,18 +12,18 @@ public class Platform : MonoBehaviour
         playerCheck = false;
         platformObject = GetComponent<PlatformEffector2D>();
     }
-    /*void Update()
+    void Update()
     {
         if(Input.GetKeyDown(KeyCode.S) && playerCheck)
         {
-            platformObject = RotationOffset = 180f;
+            platformObject.rotationalOffset= 180f;
         }
         if(Input.GetKeyDown(KeyCode.Space))
         {
-            platformObject = rotationalOffset = 0;
+            platformObject.rotationalOffset = 0;
         }
         
-    }*/
+    }
     private void OnCollisionEnter2D(Collision2D other)
     {
         playerCheck = true;

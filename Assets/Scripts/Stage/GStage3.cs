@@ -35,8 +35,8 @@ public class GStage3 : MonoBehaviour
 
     IEnumerator TransitionToScene()
     {
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
         isTransitioning = true;
-
         // 페이드 아웃 효과
         float timer = 0f;
         while (timer < fadeDuration)
@@ -46,10 +46,9 @@ public class GStage3 : MonoBehaviour
             fadeImage.color = new Color(0f, 0f, 0f, alpha);
             yield return null;
         }
-
-        // 씬 전환
+        player.transform.position = new Vector3(0, 0, 0);
+        
         SceneManager.LoadScene("Stage3");
-
         // 페이드 인 효과
         timer = 0f;
         while (timer < fadeDuration)
