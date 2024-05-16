@@ -137,8 +137,12 @@ public class PMove : MonoBehaviour
         enabled = false;
     }
     public void Damaged(int dmg){
+        Debug.Log(dmg);
         gameObject.layer = 12;
         int Damage = dmg - GameManager.info.allPlayerState.defense;
+        if(Damage <= 0 ){
+            Damage =1;
+        }
         GameManager.info.allPlayerState.currentHp -= Damage;
         hpLevelManager.Damage();
         Invoke("DashEnd", 0.5f);
