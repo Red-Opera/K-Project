@@ -15,6 +15,7 @@ public class UIOpen : MonoBehaviour
     public GameObject resultUI;
 
     private bool isDefualtOpen = true;
+    private static bool isSceneLoaded = false;
 
     private void OnEnable()
     {
@@ -27,8 +28,14 @@ public class UIOpen : MonoBehaviour
         Debug.Assert(statUI != null, "스탯 창 UI가 없습니다.");
         Debug.Assert(mapUI != null, "맵 UI가 없습니다.");
 
-        SceneManager.sceneLoaded += NonEssentialUI;
+        if (!isSceneLoaded)
+        {
+            SceneManager.sceneLoaded += NonEssentialUI;
+            isSceneLoaded = true;
+        }
 
+        inventoryUI.GetComponent<Inventory>().OnEnable();
+        inventoryUI.GetComponent<InventroyPosition>().Awake();
         customUI.transform.GetChild(1).GetChild(6).GetComponent<OverlayCamera>().AddCamera();
     }
 

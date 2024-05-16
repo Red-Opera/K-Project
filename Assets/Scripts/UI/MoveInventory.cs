@@ -16,7 +16,7 @@ public class MoveInventory : MonoBehaviour, IPointerDownHandler, IDragHandler, I
         canvas = GetComponent<Canvas>();
 
         // 모든 오브젝트가 실행할 함수를 입력
-        OnInventoryPositionChanged += transform.parent.parent.parent.GetComponent<InventroyPosition>().ChangePos;
+        OnInventoryPositionChanged = transform.parent.parent.parent.GetComponent<InventroyPosition>().ChangePos;
     }
 
     public void OnPointerDown(PointerEventData eventData)

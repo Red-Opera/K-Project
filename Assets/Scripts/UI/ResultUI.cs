@@ -70,7 +70,9 @@ public class ResultUI : MonoBehaviour
 
         fade = GameObject.Find("Fade").GetComponent<FadeEffect>();
 
-        GetItem("다인슬라이프");
+        // 게임 시작할 때는 단검으로 시작
+        if (SceneManager.GetActiveScene().name == "Map")
+            GetItem("단검");
 
         //Invoke("GameIsEnd", 1.0f);
     }
@@ -400,7 +402,9 @@ public class ResultUI : MonoBehaviour
         DeleteWeaphon();
         addItemList.Clear();
         getItemList.Clear();
-        
+        Inventory.inventorySlotItem = null;
+
+
         Destroy(GameObject.FindGameObjectWithTag("Player"));
 
         SceneManager.LoadScene("Map");

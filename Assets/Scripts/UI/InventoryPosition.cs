@@ -16,6 +16,7 @@ public class InventroyPosition : MonoBehaviour
     private Transform[] displayPos;                     // 아이템을 전시할 수 있는 오브젝트
 
     public static event System.Action<string, EquipmentState, EquidState> OnAddItem;        // 이 스크립트를 가지고 있는 모든 오브젝트가 실행할 이벤트
+
     public List<Sprite> spriteData = new List<Sprite>();                        // 추가할 아이템 이미지
     private Dictionary<string, Sprite> sprites;                                 // 추가할 아이템 이름과 이미지 배열
 
@@ -50,12 +51,16 @@ public class InventroyPosition : MonoBehaviour
             sprites.Add(sprite.name, sprite);
 
         isAddItemable = true;
-        OnAddItem += AddItem;
+        OnAddItem = AddItem;
     }
 
     // 아이템의 위치를 조정하는 메소드
     public void ChangePos(int displayIndex, int dragIndex)
     {
+        // 아직 초기화하지 않았다면 초기화
+        if (displayPos == null)
+            Awake();
+
         if (displayPos[displayIndex].childCount == 0)
             return;
 
@@ -148,13 +153,19 @@ public class InventroyPosition : MonoBehaviour
                 i = 0;
         }
 
+        else if ((equipmentState & (EquipmentState.EQUIPMENT_WEAPON_ONEHANDED_LARGE_RANGE | EquipmentState.EQUIPMENT_WEAPON_ONEHANDED_SHORT_RANGE)) != 0)
+        {
+            if (displayPos[2].childCount <= 0 && displayPos[3].childCount <= 0)
+                i = 2;
+
+            else if (displayPos[0].childCount <= 0 && displayPos[1].childCount <= 0)
+                i = 0;
+        }
+
         for (; i < displayPos.Length; i++)
         {
             // 슬롯을 찾음
             Transform slot = displayPos[i];
-
-            if (slot == null)
-                return;
 
             // 해당 슬롯에 아이템을 넣을 수 있는지 확인
             if (slot.childCount <= 0)

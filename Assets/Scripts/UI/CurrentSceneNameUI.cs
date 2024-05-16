@@ -90,7 +90,7 @@ public class CurrentSceneNameUI : MonoBehaviour
                     // 일반 스테이지인 경우
                     if (stageName.StartsWith("stage") || stageName.StartsWith("Stage"))
                     {
-                        nameText.text += stageName[stageName.Length - 1].ToString() + " Stage";
+                        nameText.text += stageName[5..].ToString() + " Stage";
                         BackgroundSound.NoBossClip();
                     }
 
@@ -105,13 +105,16 @@ public class CurrentSceneNameUI : MonoBehaviour
                             nameText.text += "Equid Store";
                     }    
 
+                    else if (stageName.StartsWith("BoxStage"))
+                    {
+                        nameText.text += "Box Stage";
+                    }
+
                     // 보스 스테이지인 경우
                     else
                     {
                         nameText.text += " BossStage";
                         BackgroundSound.StartBossClip();
-
-                        ResultUI.GetItem("드래곤링");
                     }
 
                     break;

@@ -159,7 +159,7 @@ public class GameManager : MonoBehaviour
             double food = Convert.ToDouble(State.datas[state].GetValue(addFoodState));
             double waphon = Convert.ToDouble(State.datas[state].GetValue(addWaphonState));
             double stat = Convert.ToDouble(State.datas[state].GetValue(addStatState));
-            double level = Convert.ToDouble(State.datas[state].GetValue(addLevelState)) * playerState.level;
+            double level = Convert.ToDouble(State.datas[state].GetValue(addLevelState)) * (playerState.level - 1);
 
             // 모두 더함
             object returnValue = Convert.ChangeType(defualtState + food + waphon + stat + level, Type.GetTypeCode(type));
