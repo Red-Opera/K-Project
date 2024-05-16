@@ -25,7 +25,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7908269083218046421
 Transform:
   m_ObjectHideFlags: 0
@@ -82,7 +82,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 99
   m_Sprite: {fileID: -1951967822, guid: 7761f5008572a8940b32d34b2e7bdaa4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -351,8 +351,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6068743709204499579}
   - component: {fileID: 915670814966819324}
-  - component: {fileID: 2986869039596538449}
   - component: {fileID: 6574370886832430127}
+  - component: {fileID: 2402143399684811989}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -426,14 +426,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &2986869039596538449
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9021183070034747220}
-  m_Enabled: 1
 --- !u!114 &6574370886832430127
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -478,3 +470,11 @@ MonoBehaviour:
     mipBias: 0
     varianceClampScale: 0.9
     contrastAdaptiveSharpening: 0
+--- !u!81 &2402143399684811989
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9021183070034747220}
+  m_Enabled: 1

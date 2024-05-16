@@ -43,6 +43,12 @@ public class AtkOb : MonoBehaviour
                 monster.Damaged(weapon.damage);
             }
         }
+        if(other.gameObject.layer==11){
+            BossController BossSc = other.gameObject.GetComponent<BossController>();
+            if(BossSc != null){
+                BossSc.Damaged(weapon.damage);
+            }
+        }
     }
     void SetDir(){
         var setDir = Physics2D.OverlapArea(transform.position - new Vector3(-5,5,0), transform.position - new Vector3(0,-5,0), LayerMask.GetMask("Player"));

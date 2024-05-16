@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions.Must;
 
 public class BossController : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class BossController : MonoBehaviour
     Animator anim;
     SpriteRenderer spriteRenderer;
     Rigidbody2D rigid;
+    public HpLevelManager hpLevelManager;
     int moveSpeed = 0;
     bool findP = false;
     public bool isAtk = false;
@@ -20,6 +22,8 @@ public class BossController : MonoBehaviour
         spriteRenderer =GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
         rigid = GetComponent<Rigidbody2D>();
+        Boss.boss.bossState.currentHp = Boss.boss.bossState.maxHP;
+        hpLevelManager = GetComponent<HpLevelManager>();
         SetSpeed();
         AttackEnd();
     }
@@ -96,5 +100,9 @@ public class BossController : MonoBehaviour
         isAtk =false;
         Boss.boss.bossState.dashcoaf = 1;
         attackType = Random.Range(0,Boss.boss.attackCount);
+    }
+
+    public void Damaged(int dmg){
+        Boss.boss.bossState.currentHp -= dmg;
     }
 }

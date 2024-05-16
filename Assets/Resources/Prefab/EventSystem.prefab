@@ -1831,7 +1831,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &554749106397726982
 Transform:
   m_ObjectHideFlags: 0
@@ -4432,7 +4432,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3498804515878300305
 Transform:
   m_ObjectHideFlags: 0
@@ -18848,6 +18848,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4847071919122005839, guid: fb073454304edd643a4a20742f388317, type: 3}
+      propertyPath: m_TagString
+      value: HP
+      objectReference: {fileID: 0}
+    - target: {fileID: 5529046900286633226, guid: fb073454304edd643a4a20742f388317, type: 3}
+      propertyPath: state
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 6055534938735989711, guid: fb073454304edd643a4a20742f388317, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -19540,6 +19548,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BossHPBar
       objectReference: {fileID: 0}
+    - target: {fileID: 6598734779992136484, guid: 33eb438bf87d3374aba877755c83c1b1, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7741880293733161634, guid: 33eb438bf87d3374aba877755c83c1b1, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -19620,6 +19632,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8662458940226849617, guid: 33eb438bf87d3374aba877755c83c1b1, type: 3}
+      propertyPath: BossState
+      value: 
+      objectReference: {fileID: 11400000, guid: 67c726e868eaa6b448457e0e60046be3, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
