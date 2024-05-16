@@ -3344,10 +3344,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   childSpriterenderer: []
   state: {fileID: 11400000, guid: 391b774a842917c4188832acbd3791c3, type: 2}
-  xSpeed: 0
   Hp: 0
-  dir: 0
-  isAtk: 0
 --- !u!50 &6748238612739275863
 Rigidbody2D:
   serializedVersion: 4
@@ -3820,7 +3817,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &4492321575184721425
 RectTransform:
   m_ObjectHideFlags: 0

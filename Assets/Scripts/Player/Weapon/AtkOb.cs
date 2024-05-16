@@ -37,6 +37,7 @@ public class AtkOb : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D other)
     {
+        int Damage = GameManager.info.allPlayerState.damage;
         if(other.gameObject.layer == 7){
             Goblin monster = other.gameObject.GetComponent<Goblin>();
             if(monster != null){

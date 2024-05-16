@@ -36,6 +36,9 @@ public class BossController : MonoBehaviour
         if(findP && !isAtk){
             Attack();
         }
+        if(Boss.boss.bossState.currentHp <= 0){
+            Die();
+        }
     }
 
     void Idle(){
@@ -105,5 +108,8 @@ public class BossController : MonoBehaviour
     public void Damaged(int dmg){
         Boss.boss.bossState.currentHp -= dmg;
         hpLevelManager.BossSliderReset();
+    }
+    public void Die(){
+        Destroy(gameObject);
     }
 }

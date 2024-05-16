@@ -33,6 +33,7 @@ public class WeaponController : MonoBehaviour
         }
         if(Input.GetMouseButtonDown(0)||Input.GetKeyDown(KeyCode.LeftControl)){
             if(isAtk == false){
+                myWeapon.InitSetting();
                 if(spriteRenderer.flipX){
                     myWeapon.Weapon.dir = -1;
                 }else{
