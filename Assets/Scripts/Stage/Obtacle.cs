@@ -13,8 +13,8 @@ public class Obtacle : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            GameManager.info.allPlayerState.currentHp -= damage;
-            hpLevelManager.Damage();
+            PMove pMove = other.gameObject.GetComponent<PMove>();
+            pMove.Damaged(damage);
         }
     }
 }

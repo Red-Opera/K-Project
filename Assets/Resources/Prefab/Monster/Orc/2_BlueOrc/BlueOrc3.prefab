@@ -3042,7 +3042,7 @@ GameObject:
   - component: {fileID: 5977217063675120160}
   m_Layer: 7
   m_Name: UnitRoot
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3814,11 +3814,11 @@ GameObject:
   - component: {fileID: 3159515280092744463}
   m_Layer: 5
   m_Name: BlueOrc3
-  m_TagString: Monster
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &3658239077785439130
 RectTransform:
   m_ObjectHideFlags: 0
