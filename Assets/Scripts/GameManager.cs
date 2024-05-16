@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public State addFoodState;    // 음식 추가 능력치가 있을 경우 추가      참조법 (GameManager.info.addFoodState)
     [HideInInspector] public State addWaphonState;  // 무기 추가 능력치가 있을 경우 추가      참조법 (GameManager.info.addWaphonState)
     [HideInInspector] public State addStatState;    // 스탯 추가 능력치가 있을 경우 추가      참조법 (GameManager.info.addStatState)
+    public State addLevelState;                     // 레벨 추가 능력치가 있을 경우 추가      참조법 (GameManager.info.addLevelState)
     [HideInInspector] public State allPlayerState;  // 총 플레이어 능력치                   참조법 (GameManager.info.allPlayerState)
 
     public State currentPlayerState { get { return allPlayerState; } }    // 총 플레이어 스탯을 반환하는 변수
@@ -158,9 +159,10 @@ public class GameManager : MonoBehaviour
             double food = Convert.ToDouble(State.datas[state].GetValue(addFoodState));
             double waphon = Convert.ToDouble(State.datas[state].GetValue(addWaphonState));
             double stat = Convert.ToDouble(State.datas[state].GetValue(addStatState));
+            double level = Convert.ToDouble(State.datas[state].GetValue(addLevelState)) * playerState.level;
 
             // 모두 더함
-            object returnValue = Convert.ChangeType(defualtState + food + waphon + stat, Type.GetTypeCode(type));
+            object returnValue = Convert.ChangeType(defualtState + food + waphon + stat + level, Type.GetTypeCode(type));
 
             // 합계를 저장함
             State.datas[state].SetValue(allPlayerState, returnValue);
