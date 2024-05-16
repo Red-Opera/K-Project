@@ -10,7 +10,7 @@ public class BossController : MonoBehaviour
     SpriteRenderer spriteRenderer;
     Rigidbody2D rigid;
     public HpLevelManager hpLevelManager;
-    int moveSpeed = 0;
+    public int moveSpeed = 0;
     bool findP = false;
     public bool isAtk = false;
     public bool isJump = false;

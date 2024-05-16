@@ -56,6 +56,7 @@ public class Goblin : MonoBehaviour
         }else{
             anim.SetBool("isWalk",false);
         }
+        CkhGround();
     }
      
     void SetSpeed(){
@@ -123,5 +124,11 @@ public class Goblin : MonoBehaviour
 
     void AtkReset(){
         isAtk = false;
+    }
+    void CkhGround(){
+        RaycastHit2D  platformHit = Physics2D.Raycast(new Vector2(rigid.position.x +moveSpeed*0.4f, rigid.position.y) ,Vector2.down * 0.5f,1, LayerMask.GetMask("Platform"));
+        if(platformHit.collider == null){
+            moveSpeed *= -1;
+        }
     }
 }

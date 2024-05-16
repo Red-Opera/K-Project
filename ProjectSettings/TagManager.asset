@@ -10,6 +10,9 @@ TagManager:
   - Boss
   - Monster
   - Chest
+  - HP
+  - Portal
+  - DamagedObject
   layers:
   - Default
   - TransparentFX
@@ -25,7 +28,7 @@ TagManager:
   - Boss
   - Dead
   - Item
-  - 
+  - Riffer
   - 
   - 
   - 

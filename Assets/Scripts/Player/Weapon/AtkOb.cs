@@ -44,7 +44,7 @@ public class AtkOb : MonoBehaviour
                 monster.Damaged(weapon.damage);
             }
         }
-        if(other.gameObject.layer==11){
+        if(other.gameObject.layer==11 || other.gameObject.layer==14){
             BossController BossSc = other.gameObject.GetComponent<BossController>();
             if(BossSc != null){
                 BossSc.Damaged(weapon.damage);
