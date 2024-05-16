@@ -153,6 +153,9 @@ public class InventroyPosition : MonoBehaviour
             // 슬롯을 찾음
             Transform slot = displayPos[i];
 
+            if (slot == null)
+                return;
+
             // 해당 슬롯에 아이템을 넣을 수 있는지 확인
             if (slot.childCount <= 0)
             {

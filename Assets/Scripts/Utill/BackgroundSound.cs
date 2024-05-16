@@ -13,9 +13,8 @@ public class BackgroundSound : MonoBehaviour
     private static AudioClip staticStartClip;       // 시작 부분 배경음악 Static 버전
     private static AudioClip staticStartBossClip;   // 보스전 시작 부분 배경 음악 Static 버전
     private static bool isBossStage = false;        // 현재 보스 스테이지인 경우 
-
     
-    void Start()
+    private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
         Debug.Assert(audioSource != null, "오디오가 없습니다.");
