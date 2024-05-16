@@ -1,4 +1,5 @@
 using TMPro;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -38,13 +39,14 @@ public class HpLevelManager : MonoBehaviour
     private void SliderReset()
     {
         // ���� ���¸� ������
-        currentHp = state.currentHp;
-        maxHp = state.maxHP;
+            currentHp = state.currentHp;
+            maxHp = state.maxHP;
+            Debug.Log("currentHP =" + currentHp + " MaxHP = " + maxHp);
 
-        currentHpText.text = currentHp.ToString();
-        maxHpText.text = maxHp.ToString();
+            currentHpText.text = currentHp.ToString();
+            maxHpText.text = maxHp.ToString();
 
-        hpSlider.value = currentHp / (float)maxHp;
+            hpSlider.value = currentHp / (float)maxHp;
     }
     public void BossSliderReset()
     {

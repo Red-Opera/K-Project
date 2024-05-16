@@ -5,6 +5,7 @@ using System.Globalization;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 public class PMove : MonoBehaviour
@@ -13,7 +14,7 @@ public class PMove : MonoBehaviour
     CapsuleCollider2D PlayerCollider;
     SpriteRenderer spriteRenderer;
     Animator anim;
-    HpLevelManager hpLevelManager;
+    public HpLevelManager hpLevelManager;
     public ResultUI result;
     public State playerState;
     public bool isJumping;
@@ -31,6 +32,7 @@ public class PMove : MonoBehaviour
     }
     void Start(){
         playerState = GameManager.info.allPlayerState;
+        SceneManager.sceneLoaded += reload;
     }
 
 
@@ -122,7 +124,7 @@ public class PMove : MonoBehaviour
             Invoke("DashEnd",0.8f);
         }
     }
-    void DashEnd(){
+        void DashEnd(){
         gameObject.layer = 8;
     }
     void Die(){
@@ -130,6 +132,9 @@ public class PMove : MonoBehaviour
         gameObject.layer = 12;
         ResultUI result = FindObjectOfType<ResultUI>();
         result.GameIsEnd();
+        WeaponController weaponController= FindObjectOfType<WeaponController>();
+        weaponController.enabled = false;
+        enabled = false;
     }
     public void Damaged(int dmg){
         gameObject.layer = 12;
@@ -137,5 +142,9 @@ public class PMove : MonoBehaviour
         GameManager.info.allPlayerState.currentHp -= Damage;
         hpLevelManager.Damage();
         Invoke("DashEnd", 0.5f);
+    }
+    void reload(Scene scene, LoadSceneMode mode)
+    {
+        Awake();
     }
 }
