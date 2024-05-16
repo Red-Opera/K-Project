@@ -708,7 +708,7 @@ GameObject:
   - component: {fileID: 1235484622070534722}
   m_Layer: 7
   m_Name: UnitRoot
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1692,11 +1692,11 @@ GameObject:
   - component: {fileID: 7147633387759611777}
   m_Layer: 7
   m_Name: Orc8
-  m_TagString: Monster
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &8803703657357930260
 RectTransform:
   m_ObjectHideFlags: 0
