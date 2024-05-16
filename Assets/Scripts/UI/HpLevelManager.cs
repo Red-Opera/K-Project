@@ -4,22 +4,22 @@ using UnityEngine.UI;
 
 public class HpLevelManager : MonoBehaviour
 {
-    [SerializeField] private State state;                       // ÇÃ·¹ÀÌ¾î »óÅÂ
+    [SerializeField] private State state;                       // ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½ï¿½ï¿½
     [SerializeField] private MonsterState BossState;
-    [SerializeField] private TextMeshProUGUI maxHpText;         // ÃÖ´ë Ã¼·Â ÅØ½ºÆ®
-    [SerializeField] private TextMeshProUGUI currentHpText;     // ÇöÀç Ã¼·Â Å×½ºÆ®
-    [SerializeField] private TextMeshProUGUI levelText;         // ·¹º§ ÅØ½ºÆ®
-    [SerializeField] private Slider hpSlider;                   // Ã¼·Â¹Ù ½½¶óÀÌ´õ
+    [SerializeField] private TextMeshProUGUI maxHpText;         // ï¿½Ö´ï¿½ Ã¼ï¿½ï¿½ ï¿½Ø½ï¿½Æ®
+    [SerializeField] private TextMeshProUGUI currentHpText;     // ï¿½ï¿½ï¿½ï¿½ Ã¼ï¿½ï¿½ ï¿½×½ï¿½Æ®
+    [SerializeField] private TextMeshProUGUI levelText;         // ï¿½ï¿½ï¿½ï¿½ ï¿½Ø½ï¿½Æ®
+    [SerializeField] private Slider hpSlider;                   // Ã¼ï¿½Â¹ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì´ï¿½
 
     private int currentHp;
     private int maxHp;
 
     void Start()
     {
-        // Debug.Assert(state != null, "ÇÃ·¹ÀÌ¾î ½ºÅÝÀÌ ¾ø½À´Ï´Ù.");
-        Debug.Assert(currentHpText != null, "ÇöÀç Ã¼·ÂÀ» È®ÀÎÇÒ ¼ö ÀÖ´Â UI°¡ ¾ø½À´Ï´Ù.");
-        Debug.Assert(maxHpText != null, "ÃÖ´ë Ã¼·ÂÀ» È®ÀÎÇÒ ¼ö ÀÖ´Â UI°¡ ¾ø½À´Ï´Ù.");
-        Debug.Assert(hpSlider != null, "Ã¼·Â ½½¶óÀÌ´õ°¡ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù.");
+        // Debug.Assert(state != null, "ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.");
+        Debug.Assert(currentHpText != null, "ï¿½ï¿½ï¿½ï¿½ Ã¼ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö´ï¿½ UIï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.");
+        Debug.Assert(maxHpText != null, "ï¿½Ö´ï¿½ Ã¼ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö´ï¿½ UIï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.");
+        Debug.Assert(hpSlider != null, "Ã¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì´ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê½ï¿½ï¿½Ï´ï¿½.");
         if(BossState == null){
             state = GameManager.info.allPlayerState;
             SliderReset();
@@ -34,10 +34,10 @@ public class HpLevelManager : MonoBehaviour
         
     }
 
-    // ½½¶óÀÌ´õ ¸®¼Â
+    // ï¿½ï¿½ï¿½ï¿½ï¿½Ì´ï¿½ ï¿½ï¿½ï¿½ï¿½
     private void SliderReset()
     {
-        // ÇöÀç »óÅÂ¸¦ °¡Á®¿È
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         currentHp = state.currentHp;
         maxHp = state.maxHP;
 
@@ -46,9 +46,9 @@ public class HpLevelManager : MonoBehaviour
 
         hpSlider.value = currentHp / (float)maxHp;
     }
-    private void BossSliderReset()
+    public void BossSliderReset()
     {
-        // ÇöÀç »óÅÂ¸¦ °¡Á®¿È
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         currentHp = BossState.currentHp;
         maxHp = BossState.maxHP;
 
@@ -58,20 +58,20 @@ public class HpLevelManager : MonoBehaviour
         hpSlider.value = currentHp / (float)maxHp;
     }
 
-    // ·¹º§À» µ¿±âÈ­ ½ÃÅ°´Â ¸Þ¼Òµå
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½È­ ï¿½ï¿½Å°ï¿½ï¿½ ï¿½Þ¼Òµï¿½
     private void SetLevel()
     {
         levelText.text = state.level.ToString();
     }
 
-    // HP ¹Ù¸¦ µ¿±âÈ­ ½ÃÅ°´Â ¸Þ¼Òµå
+    // HP ï¿½Ù¸ï¿½ ï¿½ï¿½ï¿½ï¿½È­ ï¿½ï¿½Å°ï¿½ï¿½ ï¿½Þ¼Òµï¿½
     public void GetState(State state)
     {
         this.state = state;
         SliderReset();
     }
 
-    // µ¥¹ÌÁö¸¦ Ã³¸®ÇÏ´Â ¸Þ¼Òµå
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Þ¼Òµï¿½
     public void Damage()
     {
         SliderReset();

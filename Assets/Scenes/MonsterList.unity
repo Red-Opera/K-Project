@@ -1778,10 +1778,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5756106933812211808, guid: a5deef1f2db4e0a4fa6c90beadc93546, type: 3}
-      propertyPath: m_SortingOrder
-      value: 99
-      objectReference: {fileID: 0}
     - target: {fileID: 8699221057430734424, guid: a5deef1f2db4e0a4fa6c90beadc93546, type: 3}
       propertyPath: m_Name
       value: Knight
@@ -2752,10 +2748,6 @@ PrefabInstance:
     - target: {fileID: 3217746875862875250, guid: 57d4385221eae83489ef5c1a118038ae, type: 3}
       propertyPath: m_IsActive
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4936321907807501329, guid: 57d4385221eae83489ef5c1a118038ae, type: 3}
-      propertyPath: m_SortingOrder
-      value: 99
       objectReference: {fileID: 0}
     - target: {fileID: 7908269083218046421, guid: 57d4385221eae83489ef5c1a118038ae, type: 3}
       propertyPath: m_LocalPosition.x

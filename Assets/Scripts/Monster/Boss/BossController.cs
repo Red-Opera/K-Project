@@ -23,7 +23,7 @@ public class BossController : MonoBehaviour
         anim = GetComponent<Animator>();
         rigid = GetComponent<Rigidbody2D>();
         Boss.boss.bossState.currentHp = Boss.boss.bossState.maxHP;
-        hpLevelManager = GetComponent<HpLevelManager>();
+        hpLevelManager = FindObjectOfType<HpLevelManager>();
         SetSpeed();
         AttackEnd();
     }
@@ -104,5 +104,6 @@ public class BossController : MonoBehaviour
 
     public void Damaged(int dmg){
         Boss.boss.bossState.currentHp -= dmg;
+        hpLevelManager.BossSliderReset();
     }
 }
