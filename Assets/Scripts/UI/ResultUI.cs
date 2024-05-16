@@ -70,7 +70,7 @@ public class ResultUI : MonoBehaviour
 
         fade = GameObject.Find("Fade").GetComponent<FadeEffect>();
 
-        GetItem("단검");
+        GetItem("다인슬라이프");
 
         //Invoke("GameIsEnd", 1.0f);
     }
@@ -253,6 +253,8 @@ public class ResultUI : MonoBehaviour
                 nextExp = (level1PerEXPUp * (GameManager.info.playerState.level - 1)) + startEXP;
                 nextEXPText.text = (nextExp).ToString("#,##0");
                 currentPlayerLevelText.text = GameManager.info.playerState.level.ToString("#,##0");
+
+                GameManager.info.UpdatePlayerState();
             }
 
             // 슬라이더에 출력할 퍼센트를 가져옴
@@ -398,6 +400,8 @@ public class ResultUI : MonoBehaviour
         DeleteWeaphon();
         addItemList.Clear();
         getItemList.Clear();
+        
+        Destroy(GameObject.FindGameObjectWithTag("Player"));
 
         SceneManager.LoadScene("Map");
     }
