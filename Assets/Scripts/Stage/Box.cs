@@ -3,8 +3,6 @@ using Cainos.PixelArtPlatformer_VillageProps;
 
 public class Box : MonoBehaviour
 {
-    public float interactionDistance = 2f; // Player가 상자와 상호작용할 수 있는 거리
-
     private Chest currentChest; // 현재 상자
 
     void Update()
@@ -25,7 +23,7 @@ public class Box : MonoBehaviour
             }
         else
             {
-                currentChest.Close();
+                return;
             }
     }
 
