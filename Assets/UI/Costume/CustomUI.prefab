@@ -666,8 +666,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 848424713416812352}
   m_HandleRect: {fileID: 6859534921592761468}
   m_Direction: 0
-  m_Value: -0.00000029560033
-  m_Size: 0.85710824
+  m_Value: -0.0000005102874
+  m_Size: 0.91722536
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1025,7 +1025,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7933157804033944125}
   - component: {fileID: 5373734746938566051}
-  - component: {fileID: 6602927982304155407}
   - component: {fileID: 5638668295800924646}
   - component: {fileID: 6661375500796578163}
   m_Layer: 5
@@ -1105,14 +1104,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &6602927982304155407
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1805235843740857554}
-  m_Enabled: 1
 --- !u!114 &5638668295800924646
 MonoBehaviour:
   m_ObjectHideFlags: 0
