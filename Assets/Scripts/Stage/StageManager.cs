@@ -53,13 +53,6 @@ public class StageManager : MonoBehaviour
         CurrentSceneNameUI.StartSceneNameAnimation();
         FoodManager.ReduceFoodState(5);
     }
-    //Map으로 이동
-    public void LoadMap()
-    {
-        Debug.Log("마을로 돌아갑니다.");
-
-        SceneManager.LoadScene("Map");
-    }
 
     //보스를 잡으면 상자와 다음 레벨로 넘어가는 포탈이 나옴
     public void BossClear()

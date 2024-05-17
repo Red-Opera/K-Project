@@ -38,9 +38,9 @@ public class PortalActivation : MonoBehaviour
             // "Previous" 오브젝트가 존재하고 활성화되어 있는지 확인
             if (previousObject != null && previousObject.gameObject.activeSelf)
             {
-                // "Previous" 오브젝트를 비활성화
                 previousObject.gameObject.SetActive(false);
             }
+            
         }
         else // 몬스터가 없으면 활성화
         {
@@ -54,13 +54,10 @@ public class PortalActivation : MonoBehaviour
                 nextObject.gameObject.SetActive(true);
             }
 
-            // 자식들 중에서 "Previous" 오브젝트를 찾음
             Transform previousObject = transform.Find("Previous");
             
-            // "Previous" 오브젝트가 존재하고 비활성화되어 있는지 확인
             if (previousObject != null && !previousObject.gameObject.activeSelf)
             {
-                // "Previous" 오브젝트를 활성화
                 previousObject.gameObject.SetActive(true);
             }
         }

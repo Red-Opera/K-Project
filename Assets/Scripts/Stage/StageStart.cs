@@ -36,7 +36,8 @@ public class StageStart : MonoBehaviour
     {
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         isTransitioning = true;
-
+        
+        Inventory.InventoryDataUpdate();
         // 페이드 아웃 효과
         float timer = 0f;
         while (timer < fadeDuration)
