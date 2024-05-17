@@ -7,10 +7,15 @@ public class Box : MonoBehaviour
 
     void Update()
     {
+        ItemSelector getI= GetComponent<ItemSelector>();
+
     // F 키를 누르면 상자를 열기
         if (Input.GetKeyDown(KeyCode.F) && currentChest != null)
-            {
+            {      
+                        
                 OpenCloseChest();
+                
+                ResultUI.GetItem(getI.getItem);
             }
     }
 
@@ -19,6 +24,7 @@ public class Box : MonoBehaviour
         // 현재 상자가 열려있는지 확인하고 열린 상태로 변경
         if (!currentChest.IsOpened)
             {
+
                 currentChest.Open();
             }
         else
@@ -48,5 +54,6 @@ public class Box : MonoBehaviour
                 currentChest = null;
         }
     }
+    
 }
 

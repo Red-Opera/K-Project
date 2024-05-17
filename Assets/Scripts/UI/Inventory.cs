@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -93,5 +94,10 @@ public class Inventory : MonoBehaviour
 
         // 모든 플레이어 상태를 동기화 함
         GameManager.info.UpdatePlayerState();
+    }
+
+    internal static void InventoryDataUpdate()
+    {
+        throw new NotImplementedException();
     }
 }
