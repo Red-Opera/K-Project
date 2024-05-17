@@ -126,9 +126,26 @@ public class Goblin : MonoBehaviour
         isAtk = false;
     }
     void CkhGround(){
-        RaycastHit2D  platformHit = Physics2D.Raycast(new Vector2(rigid.position.x +moveSpeed*0.4f, rigid.position.y) ,Vector2.down * 0.5f,1, LayerMask.GetMask("Platform"));
-        if(platformHit.collider == null){
+        RaycastHit2D platformHit = Physics2D.Raycast(
+            new Vector2(rigid.position.x + dir * 0.5f, rigid.position.y),
+            Vector2.down,
+            1,
+            LayerMask.GetMask("Platform")
+        );
+
+        RaycastHit2D groundHit = Physics2D.Raycast(
+            new Vector2(rigid.position.x, rigid.position.y),
+            Vector2.down,
+            1,
+            LayerMask.GetMask("Platform")
+        );
+
+        if (platformHit.collider == null || groundHit.collider == null)
+        {
             moveSpeed *= -1;
+            dir *= -1;
+            trans.localScale = new Vector3(localScaleX * dir, trans.localScale.y, 1);
+            Debug.Log("change");
         }
     }
 }
