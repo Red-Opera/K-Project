@@ -19,6 +19,8 @@ public class PMove : MonoBehaviour
     public State playerState;
     public bool isJumping;
     public bool isAttack = false;
+
+    private GameObject hpBar;
     void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
@@ -26,8 +28,9 @@ public class PMove : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
         result = FindObjectOfType<ResultUI>();
-        GameObject hpBar = GameObject.FindGameObjectWithTag("HP");
-        hpLevelManager = hpBar.GetComponent<HpLevelManager>();
+        hpBar = GameObject.FindGameObjectWithTag("HP");
+        if (hpBar != null)
+            hpLevelManager = hpBar.GetComponent<HpLevelManager>();
         DontDestroyOnLoad(gameObject);
     }
     void Start(){
@@ -38,6 +41,14 @@ public class PMove : MonoBehaviour
 
     void Update()
     {
+        // 추가 변경 예정
+        if (hpBar != null)
+        {
+            GameObject hpBar = GameObject.FindGameObjectWithTag("HP");
+            if (hpBar != null)
+                hpLevelManager = hpBar.GetComponent<HpLevelManager>();
+        }
+
         Move();
         Jump();
         Dash();
@@ -135,6 +146,8 @@ public class PMove : MonoBehaviour
         WeaponController weaponController= FindObjectOfType<WeaponController>();
         weaponController.enabled = false;
         enabled = false;
+
+        SceneManager.sceneLoaded -= reload;
     }
     public void Damaged(int dmg){
         Debug.Log(dmg);

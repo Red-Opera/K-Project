@@ -38,7 +38,7 @@ public class ResultUI : MonoBehaviour
     private static float getGold = 0;               // 탐험시 얻은 골드
     private static float getEXP = 0;                // 탐험시 얻은 경험치
 
-    private bool isPlayTimeReset = false;
+    private static bool isPlayTimeReset = false;
     private bool isShowEnd = false;         // Result UI 모든 결과 출력 여부
 
     private void Start()
