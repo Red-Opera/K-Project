@@ -498,6 +498,7 @@ MonoBehaviour:
   addFoodState: {fileID: 0}
   addWaphonState: {fileID: 0}
   addStatState: {fileID: 0}
+  addLevelState: {fileID: 0}
   allPlayerState: {fileID: 0}
 --- !u!4 &382677302
 Transform:
@@ -2727,10 +2728,6 @@ PrefabInstance:
     - target: {fileID: 7573831300888823078, guid: 09ea630f933b740cb8bc4e69f37da5e1, type: 3}
       propertyPath: m_Name
       value: TeamSkeleton5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7573831300888823078, guid: 09ea630f933b740cb8bc4e69f37da5e1, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
