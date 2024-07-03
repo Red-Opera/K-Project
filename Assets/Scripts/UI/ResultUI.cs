@@ -9,7 +9,6 @@ using UnityEngine.UI;
 public class ResultUI : MonoBehaviour
 {
     [SerializeField] private EquidStore equidStore;                             // 무기 상점 UI 스크립트
-    [SerializeField] private Transform inventorySlots;                          // 장비 인벤토리
     [HideInInspector] public Dictionary<string, SelectableItem> weaphonInfoEx;  // 무기 추가 정보
 
     [SerializeField] private GameObject resultUI;                       // 결과 UI 오브젝트
@@ -374,22 +373,6 @@ public class ResultUI : MonoBehaviour
         }
     }
 
-    private void DeleteWeaphon()
-    {
-        for (int i = 0; i < inventorySlots.childCount; i++)
-        {
-            Transform currentSlot = inventorySlots.GetChild(i);
-
-            if (currentSlot.childCount > 0)
-            {
-                if (currentSlot.GetChild(0).name == "Banned")
-                    continue;
-
-                Destroy(currentSlot.GetChild(0).gameObject);
-            }
-        }
-    }
-
     // 게임을 다시 시작하는 코드
     private IEnumerator ReStart()
     {
@@ -399,12 +382,11 @@ public class ResultUI : MonoBehaviour
         while (fade.isFadeOut)
             yield return null;
 
-        DeleteWeaphon();
         addItemList.Clear();
         getItemList.Clear();
         Inventory.inventorySlotItem = null;
 
-
+        GameObject.Find("EventSystemDonDestory").GetComponent<UINotDestroyOpen>().DestroyThis();
         Destroy(GameObject.FindGameObjectWithTag("Player"));
 
         SceneManager.LoadScene("Map");

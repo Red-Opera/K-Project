@@ -3158,24 +3158,19 @@ MonoBehaviour:
     state: {fileID: 11400000, guid: 4de4eaedb99b21348b476c41e7352303, type: 2}
   - sprite: {fileID: 21300000, guid: c935d0d654a444f45a7a84d85fa1ed57, type: 3}
     content: Unspecified
-    equipmentType: 61440
+    equipmentType: 15728640
     level: 3
     state: {fileID: 11400000, guid: 3223b641e44dca640bbf16176e95f8bf, type: 2}
   - sprite: {fileID: 21300000, guid: b4cf43013267dc64eb6ff5775064392f, type: 3}
     content: Unspecified
-    equipmentType: 61440
+    equipmentType: 15728640
     level: 3
     state: {fileID: 11400000, guid: 258568d05835200438251429b2603dc8, type: 2}
   - sprite: {fileID: 21300000, guid: 0b70528981d17b54bbd2df7b38153975, type: 3}
     content: Unspecified
-    equipmentType: 61440
+    equipmentType: 15728640
     level: 3
     state: {fileID: 11400000, guid: 90a48a65df72d634581235a9a904ec97, type: 2}
-  - sprite: {fileID: 21300000, guid: 3971d05e546fe3047bbeee3724067589, type: 3}
-    content: Unspecified
-    equipmentType: 61440
-    level: 2
-    state: {fileID: 11400000, guid: 0aa8d10bbd4a1154aad3a33b3cbe4c9c, type: 2}
   - sprite: {fileID: 400821093, guid: 39caf47f5ecdfc543bb636fb7afc82ed, type: 3}
     content: Unspecified
     equipmentType: 4026531840
@@ -3293,8 +3288,6 @@ MonoBehaviour:
     equipmentType: 15728640
     level: 4
     state: {fileID: 11400000, guid: f6df74b6eac155e43b29ecf09a33de4a, type: 2}
-  inventory: {fileID: 0}
-  inventslot: {fileID: 0}
   slots: {fileID: 2738860659071217140}
   details: {fileID: 3500487147056403161}
   item: {fileID: 99558342101081414, guid: 2bbe97b55d514214c81eec14b02569e2, type: 3}

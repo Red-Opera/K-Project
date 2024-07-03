@@ -20,7 +20,7 @@ public class InventroyPosition : MonoBehaviour
     public List<Sprite> spriteData = new List<Sprite>();                        // 추가할 아이템 이미지
     private Dictionary<string, Sprite> sprites;                                 // 추가할 아이템 이름과 이미지 배열
 
-    public void Awake()
+    private void Awake()
     {
         displayPos = new Transform[slots.transform.childCount];
         for (int i = 0; i < slots.transform.childCount; i++)
