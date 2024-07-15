@@ -1,13 +1,15 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class StartGame : MonoBehaviour
 {
-    [SerializeField] string nextScene;
+    [SerializeField] private GameObject loginObject;
     
-    void Update()
+    private void Update()
     {
-        if (Input.anyKeyDown)
-            SceneManager.LoadScene(nextScene);
+        if (Input.anyKeyDown && !loginObject.activeSelf)
+        {
+            loginObject.SetActive(true);
+            Login.GameLogin();
+        }
     }
 }
