@@ -5,6 +5,8 @@ using System.Reflection;
 
 public class InventroyPosition : MonoBehaviour
 {
+    public static GameObject inventory;
+
     public static bool isChange = true;                 // 자리를 교환했는지 여부
     public static bool isAddSucceed = false;            // 구매 성공 여부
     public static bool isAddItemable = false;           // AddItem 사용 가능 여부
@@ -49,6 +51,8 @@ public class InventroyPosition : MonoBehaviour
 
         foreach (Sprite sprite in spriteData)
             sprites.Add(sprite.name, sprite);
+
+        inventory = slots;
 
         isAddItemable = true;
         OnAddItem = AddItem;
