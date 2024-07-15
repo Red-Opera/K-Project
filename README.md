@@ -1,9 +1,9 @@
-# VR Defense
+# K Project
 
 <hr>
 <h2 id="Play">게임 영상</h2>
 <a href="https://youtu.be/x6g0A6ylepI">
-    <img src="https://img.youtube.com/vi/x6g0A6ylepI/0.jpg" width="100%" height="100%"/>
+    <img src="https://github.com/user-attachments/assets/2f1c0931-f9df-4022-97ce-af2057dd684e" width="100%" height="100%"/>
 </a>
 이미지를 클릭하면 영상이 재생됩니다.
 
