@@ -1,15 +1,34 @@
 using MySqlConnector;
 using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Reflection;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class SaveSystem : MonoBehaviour
 {
-    private void Start()
+    public static Dictionary<string, int> itemID;
+    private string[] filePaths;
+
+    private void Awake()
     {
+        filePaths = Directory.GetFiles("Assets/Resources/Scriptable/Equid", "*.asset", SearchOption.AllDirectories);
+        ItemID();
         DontDestroyOnLoad(gameObject);
+    }
+
+    private void ItemID()
+    {
+        itemID = new Dictionary<string, int>();
+
+        int id = 1;
+        foreach (string filePath in filePaths)
+        {
+            string fileName = Path.GetFileNameWithoutExtension(filePath);
+            itemID.Add(fileName, id);
+            id++;
+        }
     }
 
     private bool HasColumn(MySqlDataReader reader, string columnName)
@@ -59,15 +78,16 @@ public class SaveSystem : MonoBehaviour
     private void SaveItem()
     {
         // INSERT 쿼리 생성
-        string infoQuery = "INSERT INTO PlayerItem (ID, Name, ItemNum1, Count1, ItemNum2, Count2, ItemNum3, Count3, ItemNum4, Count4, ItemNum5, Count5) " +
-                           "VALUES(@ID, @Name, @ItemNum1, @Count1, @ItemNum2, @Count2, @ItemNum3, @Count3, @ItemNum4, @Count4, @ItemNum5, @Count5) " +
+        string infoQuery = "INSERT INTO PlayerItem (ID, Name, Item1, Item2, Item3, Item4, Item5, Item6, Item7, Item8, Item9, Item10, " +
+                                                             "Item11, Item12, Item13, Item14, Item15, Item16, Item17, Item18, Item19, Item20, Item21, Item22, Item23) " +
+                           "VALUES(@ID, @Name, @Item1, @Item2, @Item3, @Item4, @Item5, @Item6, @Item7, @Item8, @Item9, @Item10, " +
+                                              "@Item11, @Item12, @Item13, @Item14, @Item15, @Item16, @Item17, @Item18, @Item19, @Item20, @Item21, @Item22, @Item23) " +
                            "ON DUPLICATE KEY UPDATE " +
                            "Name = VALUES(Name), " +
-                           "ItemNum1 = VALUES(ItemNum1), " + "Count1 = VALUES(Count1), " +
-                           "ItemNum2 = VALUES(ItemNum2), " + "Count2 = VALUES(Count2), " +
-                           "ItemNum3 = VALUES(ItemNum3), " + "Count3 = VALUES(Count3), " +
-                           "ItemNum4 = VALUES(ItemNum4), " + "Count4 = VALUES(Count4), " +
-                           "ItemNum5 = VALUES(ItemNum5), " + "Count5 = VALUES(Count5);";
+                           "Item1 = VALUES(Item1), " + "Item2 = VALUES(Item2), " + "Item3 = VALUES(Item3), " + "Item4 = VALUES(Item4), " + "Item5 = VALUES(Item5), " + 
+                           "Item6 = VALUES(Item6), " + "Item7 = VALUES(Item7), " + "Item8 = VALUES(Item8), " + "Item9 = VALUES(Item9), " + "Item10 = VALUES(Item10), " +
+                           "Item11 = VALUES(Item11), " + "Item12 = VALUES(Item12), " + "Item13 = VALUES(Item13), " + "Item14 = VALUES(Item14), " + "Item15 = VALUES(Item15), " +
+                           "Item16 = VALUES(Item16), " + "Item17 = VALUES(Item17), " + "Item18 = VALUES(Item18), " + "Item19 = VALUES(Item19), " + "Item20 = VALUES(Item20), " + "Item21 = VALUES(Item21), " + "Item22 = VALUES(Item22), " + "Item23 = VALUES(Item23);";
 
         MySqlCommand cmd = new MySqlCommand(infoQuery, Login.conn);
         cmd.Parameters.AddWithValue("@ID", Login.currentLoginID);
@@ -77,32 +97,23 @@ public class SaveSystem : MonoBehaviour
             return;
 
         // 기본적으로 모든 아이템 번호와 수량을 NULL로 설정
-        for (int i = 1; i <= 5; i++)
-        {
-            cmd.Parameters.AddWithValue("@ItemNum" + i, DBNull.Value);
-            cmd.Parameters.AddWithValue("@Count" + i, DBNull.Value);
-        }
+        for (int i = 1; i <= 23; i++)
+            cmd.Parameters.AddWithValue("@Item" + i, DBNull.Value);
 
         // Reflection을 사용하여 필드를 파라미터로 추가
         for (int i = 0; i < InventroyPosition.inventory.transform.childCount; i++)
         {
             Transform slot = InventroyPosition.inventory.transform.GetChild(i);
 
-            if (slot.childCount <= 0)
+            if (slot.childCount <= 0 || slot.GetChild(0).childCount <= 0)
                 continue;
 
             string itemName = slot.GetChild(0).GetChild(0).GetComponent<Image>().sprite.name;
-            int itemCount = int.Parse(slot.GetChild(0).GetChild(1).GetComponent<TextMeshProUGUI>().text);
 
-            int itemID = -1;
-            if (itemName == "512x_beaker_red")
-                itemID = 1;
+            int setID = -1;
+            setID = itemID[itemName];
 
-            else if (itemName == "512x_beaker_blue")
-                itemID = 2;
-
-            cmd.Parameters["@ItemNum" + (i + 1)].Value = itemID;
-            cmd.Parameters["@Count" + (i + 1)].Value = itemCount;
+            cmd.Parameters["@Item" + (i + 1)].Value = setID;
         }
 
         try
@@ -128,7 +139,7 @@ public class SaveSystem : MonoBehaviour
             return;
 
         SaveDefault();
-        //SaveItem();
+        SaveItem();
     }
 
     private void OnDestroy()

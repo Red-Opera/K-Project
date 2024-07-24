@@ -2,6 +2,8 @@ using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using System.Reflection;
+using MySqlConnector;
+using System;
 
 public class InventroyPosition : MonoBehaviour
 {
@@ -10,6 +12,7 @@ public class InventroyPosition : MonoBehaviour
     public static bool isChange = true;                 // 자리를 교환했는지 여부
     public static bool isAddSucceed = false;            // 구매 성공 여부
     public static bool isAddItemable = false;           // AddItem 사용 가능 여부
+    public static bool isItemAdd = false;
 
     [SerializeField] private GameObject slots;          // 전시할 수 있는 오브젝트를 담는 슬롯
     [SerializeField] private GameObject itemDisplay;    // 아이템을 전시하기 위한 오브젝트
@@ -56,6 +59,77 @@ public class InventroyPosition : MonoBehaviour
 
         isAddItemable = true;
         OnAddItem = AddItem;
+    }
+
+    private void Start()
+    {
+        StartGameAddItem();
+    }
+
+    private void StartGameAddItem()
+    {
+        if (Login.currentLoginName == "" || isItemAdd)
+            return;
+
+        isItemAdd = true;
+
+        string query = "SELECT * FROM PlayerItem WHERE Name = @Name";   // SQL 쿼리 문자열을 작성하여 PlayerLogin 테이블에서 특정 ID를 검색
+        MySqlCommand cmd = new MySqlCommand(query, Login.conn);
+        cmd.Parameters.AddWithValue("@Name", Login.currentLoginName);
+
+        int[] itemNums = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+
+        try
+        {
+            Login.conn.Open();
+
+            // 쿼리를 실행하고 MySqlDataReader 객체를 생성하여 결과를 읽어옴
+            using MySqlDataReader dataReader = cmd.ExecuteReader();
+
+            if (dataReader.Read())
+            {
+                for (int i = 1; i <= 23; i++)
+                {
+                    if (dataReader["Item" + i] == DBNull.Value)
+                        continue;
+
+                    int itemNum = dataReader.GetInt32("Item" + i);
+
+                    itemNums[i] = itemNum;
+                }
+            }
+
+            else
+            {
+                Debug.LogWarning("No player item data found for current login name.");
+            }
+        }
+
+        catch (Exception ex)
+        {
+            Debug.LogError($"Failed to execute query for PlayerInfo: " + ex.Message);
+        }
+
+        finally
+        {
+            Login.conn.Close();
+        }
+
+        for (int i = 1; i <= 23; i++)
+        {
+            if (itemNums[i] == 0)
+                continue;
+
+            string itemName = "";
+
+            foreach (string name in SaveSystem.itemID.Keys)
+            {
+                if (SaveSystem.itemID[name] == itemNums[i])
+                    itemName = name;
+            }
+
+            ResultUI.GetItem(itemName);
+        }
     }
 
     // 아이템의 위치를 조정하는 메소드
