@@ -2482,7 +2482,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6697b5c33330154086e13b8a288ce10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loginUrl: Server=158.180.75.46;Port=12539;Database=PixelAdventure;Uid=super;Pwd=Ope#(GJG$(G@#JR@PRG;
   idText: {fileID: 614573351467943869}
   passWordText: {fileID: 6976894850068911831}
   playerState: {fileID: 11400000, guid: 25ddffad1fdeeb648bc15c243b8df474, type: 2}
