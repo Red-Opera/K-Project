@@ -150,6 +150,22 @@ public class InventroyPosition : MonoBehaviour
         if (displayIndex == dragIndex || isChange || ((displayEquipment & dragEquipment) == 0))
             return;
 
+        // 한손 장비를 왼쪽 슬롯에 넣을 경우
+        bool isPosOneHand = (displayEquipment & (EquipmentState.EQUIPMENT_WEAPON_ONEHANDED_LARGE_RANGE | EquipmentState.EQUIPMENT_WEAPON_ONEHANDED_SHORT_RANGE)) != 0;
+        if ((dragIndex == 0 || dragIndex == 2) && isPosOneHand && displayPos[dragIndex + 1].childCount > 0)
+            return;
+
+        // 한손 장비를 가지고 오른손에 장비를 작용할려고하는 경우
+        bool isPosTwoHand = (displayEquipment & (EquipmentState.EQUIPMENT_WEAPON_TWOHANDED_LARGE_RANGE | EquipmentState.EQUIPMENT_WEAPON_TWOHANDED_SHORT_RANGE)) != 0;
+        if ((dragIndex == 1 || dragIndex == 3) && displayPos[dragIndex - 1].childCount > 0)
+        {
+            EquipmentState leftEquidState = displayPos[dragIndex - 1].GetChild(0).GetComponent<InventableEquipment>().inventableEquipment;
+            bool isLeftEquidOneHand = (leftEquidState & (EquipmentState.EQUIPMENT_WEAPON_ONEHANDED_LARGE_RANGE | EquipmentState.EQUIPMENT_WEAPON_ONEHANDED_SHORT_RANGE)) != 0;
+
+            if (isPosTwoHand && isLeftEquidOneHand)
+                return;
+        }
+
         // 인벤토리의 범위를 넘긴 경우
         if (displayData == null || displayIndex < 0 || dragIndex < 0 || displayIndex >= displayPos.Length || dragIndex >= displayPos.Length)
         {
@@ -182,6 +198,11 @@ public class InventroyPosition : MonoBehaviour
 
             // 옮겼을 때 장비 위치를 바꿀 수 없는 경우 중지
             if ((displaySlotEquidState & dragState) == 0 || (dragSlotEquidState & displayState) == 0)
+                return;
+
+            // 교체 당하는 장비가 왼쪽 슬롯에 넣을 경우
+            bool isChangeOneHand = (dragSlotEquidState & (EquipmentState.EQUIPMENT_WEAPON_ONEHANDED_LARGE_RANGE | EquipmentState.EQUIPMENT_WEAPON_ONEHANDED_SHORT_RANGE)) != 0;
+            if ((displayIndex == 0 || displayIndex == 2) && isChangeOneHand && displayPos[displayIndex + 1].childCount > 0)
                 return;
 
             MoveInventory aMoveInventory = displayPos[displayIndex].GetChild(0).GetComponent<MoveInventory>();
@@ -222,24 +243,60 @@ public class InventroyPosition : MonoBehaviour
         Debug.Assert(sprites.ContainsKey(name), "해당 이름의 아이템은 존재하지 않습니다");
         int i = 8;
 
-        if ((equipmentState & (EquipmentState.EQUIPMENT_WEAPON_TWOHANDED_LARGE_RANGE | EquipmentState.EQUIPMENT_WEAPON_TWOHANDED_SHORT_RANGE)) != 0)
-        {
-            if (displayPos[2].childCount <= 0)
-                i = 2;
+        bool isOneHand = (equipmentState & (EquipmentState.EQUIPMENT_WEAPON_ONEHANDED_LARGE_RANGE | EquipmentState.EQUIPMENT_WEAPON_ONEHANDED_SHORT_RANGE)) != 0;
+        bool isTwoHand = (equipmentState & (EquipmentState.EQUIPMENT_WEAPON_TWOHANDED_LARGE_RANGE | EquipmentState.EQUIPMENT_WEAPON_TWOHANDED_SHORT_RANGE)) != 0;
 
-            else if (displayPos[0].childCount <= 0)
-                i = 0;
+        // 무기를 첫번째 슬롯에 장착할 수 있는 경우
+        if (isOneHand || isTwoHand)
+        {
+            // 오른쪽 슬롯이 비어 있거나 양손검인 경우
+            if (displayPos[1].childCount <= 0 || isTwoHand)
+            {
+                if (displayPos[0].childCount <= 0)
+                    i = 0;
+            }
+
+            else if (displayPos[3].childCount <= 0 || isTwoHand)
+            {
+                if (displayPos[2].childCount <= 0)
+                    i = 2;
+            }
         }
 
-        else if ((equipmentState & (EquipmentState.EQUIPMENT_WEAPON_ONEHANDED_LARGE_RANGE | EquipmentState.EQUIPMENT_WEAPON_ONEHANDED_SHORT_RANGE)) != 0)
+        // 검 두개를 장착할 수 있는 경우
+        if (i == 8 && isTwoHand)
         {
-            if (displayPos[2].childCount <= 0 && displayPos[3].childCount <= 0)
-                i = 2;
+            if (displayPos[0].childCount > 0)
+            {
+                EquipmentState firstWeaphon = displayPos[0].GetChild(0).GetComponent<InventableEquipment>().inventableEquipment;
+                bool isFirstSlotOneHand = (firstWeaphon & (EquipmentState.EQUIPMENT_WEAPON_ONEHANDED_LARGE_RANGE | EquipmentState.EQUIPMENT_WEAPON_ONEHANDED_SHORT_RANGE)) != 0;
 
-            else if (displayPos[0].childCount <= 0 && displayPos[1].childCount <= 0)
-                i = 0;
+                if (displayPos[1].childCount <= 0 && !isFirstSlotOneHand)
+                    i = 1;
+            }
+
+            else if (displayPos[2].childCount > 0)
+            {
+                EquipmentState thirdWeaphon = displayPos[2].GetChild(0).GetComponent<InventableEquipment>().inventableEquipment;
+                bool isThirdSlotOneHand = (thirdWeaphon & (EquipmentState.EQUIPMENT_WEAPON_ONEHANDED_LARGE_RANGE | EquipmentState.EQUIPMENT_WEAPON_ONEHANDED_SHORT_RANGE)) != 0;
+
+                if (displayPos[3].childCount <= 0 && !isThirdSlotOneHand)
+                    i = 3;
+            }
         }
 
+        // 반지일 경우
+        else if ((equipmentState & EquipmentState.EQUIPMENT_ACCESSORY) != 0)
+        {
+            i = 4;
+            for (; i <= 7; i++)
+            {
+                if (displayPos[i].childCount <= 0)
+                    break;
+            }
+        }
+
+        // 장비를 장착할 수 없어 인벤토리에 저장할 경우
         for (; i < displayPos.Length; i++)
         {
             // 슬롯을 찾음
