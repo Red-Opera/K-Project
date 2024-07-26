@@ -62,6 +62,8 @@ public class CustomUI : MonoBehaviour
                 for (int j = 0; j < defualtCameraStack.Count; j++)
                     toCameraStack.Add(defualtCameraStack[j]);
 
+                newPlayer.GetComponent<PMove>().FindHpBar();
+                
                 DontDestroyOnLoad(newPlayer);
                 Destroy(destroyPlayer);
             }

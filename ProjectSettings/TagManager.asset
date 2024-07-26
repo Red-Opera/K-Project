@@ -13,6 +13,7 @@ TagManager:
   - HP
   - Portal
   - DamagedObject
+  - Immovable
   layers:
   - Default
   - TransparentFX

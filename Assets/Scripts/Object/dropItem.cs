@@ -11,11 +11,17 @@ public class dropItem : MonoBehaviour
         rigid = GetComponent<Rigidbody2D>();
         rigid.AddForce(new Vector2(3, Random.Range(-1,2)),ForceMode2D.Impulse);
         Coin = Random.Range(8, 12);
+        Invoke("SelfDestroy",10);
     }
     void OnCollisionEnter2D(Collision2D collision){
         if(collision.gameObject.layer == 8){
             Destroy(gameObject);
-            ResultUI.GetGold(Coin);
+            ResultUI.GetGold(Mathf.FloorToInt(Coin*1.5f));
         }
+    }
+
+    void SelfDestroy(){
+        Destroy(gameObject);
+        ResultUI.GetGold(Coin);
     }
 }

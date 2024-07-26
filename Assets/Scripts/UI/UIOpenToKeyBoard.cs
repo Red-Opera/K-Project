@@ -17,6 +17,8 @@ public class UIOpenToKeyBoard : MonoBehaviour
     private float startTime;        // 동작 시작 시간
     private float reverseTime;      // 뒤로 가는 시간
 
+    private PMove pMove;
+
     public void Start()
     {
         Debug.Assert(pressedKeyImage != null, "눌러야 하는 키 UI가 없습니다.");
@@ -69,6 +71,7 @@ public class UIOpenToKeyBoard : MonoBehaviour
 
         if (isEnter && !openUI.activeSelf && Input.GetKeyDown(KeyCode.F))
         {
+            Debug.Log(pMove);
             if (chatNPC != null && !chatNPC.dialog.isChat)
             {
                 chatNPC.Chat("BlackSmith");
@@ -102,7 +105,9 @@ public class UIOpenToKeyBoard : MonoBehaviour
 
             targetHeight = pressedKeyImage.transform.position.y + speedCurve.keys[speedCurve.length - 1].value;   // 목표 높이 설정
             reverseTime = reverseTime + startTime - Time.time;          // 동작 시작 시간 저장
-            startTime = Time.time;                                      // 동작 시작 시간 저장
+            startTime = Time.time;     
+            
+            pMove = other.GetComponent<PMove>();                                 // 동작 시작 시간 저장
         }
     }
 

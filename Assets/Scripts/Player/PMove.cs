@@ -28,9 +28,9 @@ public class PMove : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
         result = FindObjectOfType<ResultUI>();
-        hpBar = GameObject.FindGameObjectWithTag("HP");
-        if (hpBar != null)
-            hpLevelManager = hpBar.GetComponent<HpLevelManager>();
+        
+        Debug.Log("awake");
+        Invoke("FindHpBar",0.1f);
         DontDestroyOnLoad(gameObject);
     }
     void Start(){
@@ -38,17 +38,17 @@ public class PMove : MonoBehaviour
         SceneManager.sceneLoaded += reload;
     }
 
-
+    public void FindHpBar(){
+        hpBar = GameObject.FindGameObjectWithTag("HP");
+        if (hpBar != null){
+            Debug.Log("hpBar is not null");
+            hpLevelManager = hpBar.GetComponent<HpLevelManager>();
+        }else{
+            Debug.Log("hpBar is null");
+        }
+    }
     void Update()
     {
-        // 추가 변경 예정
-        if (hpBar != null)
-        {
-            GameObject hpBar = GameObject.FindGameObjectWithTag("HP");
-            if (hpBar != null)
-                hpLevelManager = hpBar.GetComponent<HpLevelManager>();
-        }
-
         Move();
         Jump();
         Dash();
