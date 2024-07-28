@@ -27,10 +27,8 @@ public class PMove : MonoBehaviour
         PlayerCollider = GetComponent<CapsuleCollider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
-        result = FindObjectOfType<ResultUI>();
         
-        Debug.Log("awake");
-        Invoke("FindHpBar",0.1f);
+        Invoke("FindUI",0.1f);
         DontDestroyOnLoad(gameObject);
     }
     void Start(){
@@ -38,7 +36,8 @@ public class PMove : MonoBehaviour
         SceneManager.sceneLoaded += reload;
     }
 
-    public void FindHpBar(){
+    public void FindUI(){
+        Debug.Log("Find UI");
         hpBar = GameObject.FindGameObjectWithTag("HP");
         if (hpBar != null){
             Debug.Log("hpBar is not null");
@@ -46,6 +45,7 @@ public class PMove : MonoBehaviour
         }else{
             Debug.Log("hpBar is null");
         }
+        result = FindObjectOfType<ResultUI>();
     }
     void Update()
     {
@@ -162,6 +162,6 @@ public class PMove : MonoBehaviour
     }
     void reload(Scene scene, LoadSceneMode mode)
     {
-        Awake();
+        FindUI();
     }
 }

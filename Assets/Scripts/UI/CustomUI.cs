@@ -5,71 +5,71 @@ using UnityEngine.UI;
 
 public class CustomUI : MonoBehaviour
 {
-    [SerializeField] private List<GameObject> players;  // ÇÃ·¹ÀÌ¾î ¿ÀºêÁ§Æ®
-    [SerializeField] private Transform frames;          // Ä³¸¯ÅÍ ÇÁ·¹ÀÓÀ» ´ã´Â ¿ÀºêÁ§Æ®
+    [SerializeField] private List<GameObject> players;  // ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
+    [SerializeField] private Transform frames;          // Ä³ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
 
-    private static int currentPlayerIndex = 2;          // ÇöÀç ÇÃ·¹ÀÌ¾î ÀÎµ¦½º °ª
-    private bool isChange = false;                      // Ä³¸¯ÅÍ¸¦ ¹Ù²Û °æ¿ì
+    private static int currentPlayerIndex = 2;          // ï¿½ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½Îµï¿½ï¿½ï¿½ ï¿½ï¿½
+    private bool isChange = false;                      // Ä³ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½Ù²ï¿½ ï¿½ï¿½ï¿½
 
     private void Start()
     {
-        Debug.Assert(frames != null, "Ä³¸¯ÅÍ ÇÁ·¹ÀÓÀ» ´ã´Â ¿ÀºêÁ§Æ®°¡ ¾ø½À´Ï´Ù.");
+        Debug.Assert(frames != null, "Ä³ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.");
     }
 
     private void Update()
     {
-        // Ä³¸¯ÅÍ¸¦ ¼±ÅÃÇÑ °æ¿ì
+        // Ä³ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
         if (Input.GetKeyUp(KeyCode.Space) || Input.GetKeyUp(KeyCode.KeypadEnter))
             ChangePlayer();
     }
 
-    // ÇÃ·¹ÀÌ¾î¸¦ ±³Ã¼ÇØÁÖ´Â ¸Þ¼Òµå
+    // ï¿½Ã·ï¿½ï¿½Ì¾î¸¦ ï¿½ï¿½Ã¼ï¿½ï¿½ï¿½Ö´ï¿½ ï¿½Þ¼Òµï¿½
     private void ChangePlayer()
     {
         for (int i = 0; i < frames.childCount; i++)
         {
-            // ÇØ´ç ¹øÈ£ÀÇ ÇÁ·¹ÀÓ¿Í ÀÌ¹ÌÁö¸¦ °¡Á®¿È
+            // ï¿½Ø´ï¿½ ï¿½ï¿½È£ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ó¿ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             Transform frame = frames.GetChild(i).GetChild(0);
             Image frameImage = frame.GetComponent<Image>();
 
-            // ÇØ´ç ÀÌ¸§ÀÇ ÇÁ·¹ÀÓÀÌ ¼±ÅÃµÈ °æ¿ì
+            // ï¿½Ø´ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ãµï¿½ ï¿½ï¿½ï¿½
             if (frameImage.color.a >= 0.98)
             {
-                // ÀÌ¹Ì ¼±ÅÃÇÑ ÇÃ·¹ÀÌ¾îÀÎ °æ¿ì
+                // ï¿½Ì¹ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
                 if (i == currentPlayerIndex)
                     break;
 
-                // ÇöÀç ¼±ÅÃÇÑ ÇÃ·¹ÀÌ¾î ÀÎµ¦½º¸¦ ¹Ý¿µÇÏ°í ÇÃ·¹ÀÌ¾î°¡ ¹Ù²ñÀ» ¾Ë¸²
+                // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½Îµï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ý¿ï¿½ï¿½Ï°ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾î°¡ ï¿½Ù²ï¿½ï¿½ï¿½ ï¿½Ë¸ï¿½
                 currentPlayerIndex = i;
                 isChange = true;
 
-                // ±âÁ¸ ÇÃ·¹ÀÌ¾î¿Í Ä«¸Þ¶ó, À§Ä¡¸¦ °¡Á®¿È
+                // ï¿½ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ï¿½ Ä«ï¿½Þ¶ï¿½, ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
                 GameObject destroyPlayer = GameObject.FindGameObjectWithTag("Player");
                 Camera mainCamera = destroyPlayer.transform.GetChild(0).GetComponent<Camera>();
                 Vector2 defaultPlayerPos = new Vector2(destroyPlayer.transform.position.x, destroyPlayer.transform.localPosition.y);
 
-                // ¼±ÅÃÇÑ ÇÃ·¹ÀÌ¾î¸¦ ¸¸µé°í Ä«¸Þ¶ó¸¦ ¹Ù²Ù°í È°¼ºÈ­ ÈÄ ÇÃ·¹ÀÌ¾î À§Ä¡¸¦ ±âÁ¸ ÇÃ·¹ÀÌ¾î À§Ä¡·Î ¹Ù²Þ
+                // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾î¸¦ ï¿½ï¿½ï¿½ï¿½ï¿½ Ä«ï¿½Þ¶ï¿½ ï¿½Ù²Ù°ï¿½ È°ï¿½ï¿½È­ ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½Ù²ï¿½
                 GameObject newPlayer = Instantiate(players[i]);
                 Camera toCamera = newPlayer.transform.GetChild(0).GetComponent<Camera>();
                 newPlayer.SetActive(true);
                 newPlayer.transform.position = defaultPlayerPos;
 
-                // Ä«¸Þ¶ó ½ºÅÃÀ» °¢°¢ °¡Á®¿È
+                // Ä«ï¿½Þ¶ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
                 List<Camera> defualtCameraStack = mainCamera.GetUniversalAdditionalCameraData().cameraStack;
                 List<Camera> toCameraStack = toCamera.GetUniversalAdditionalCameraData().cameraStack;
 
-                // Ä«¸Þ¶ó ½ºÅÃÀ» º¹»çÇÔ
+                // Ä«ï¿½Þ¶ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
                 for (int j = 0; j < defualtCameraStack.Count; j++)
                     toCameraStack.Add(defualtCameraStack[j]);
 
-                newPlayer.GetComponent<PMove>().FindHpBar();
+                newPlayer.GetComponent<PMove>().FindUI();
                 
                 DontDestroyOnLoad(newPlayer);
                 Destroy(destroyPlayer);
             }
         }
 
-        // ¹Ù²î¾ú´Ù¸é UI¸¦ ²û
+        // ï¿½Ù²ï¿½ï¿½ï¿½Ù¸ï¿½ UIï¿½ï¿½ ï¿½ï¿½
         if (isChange)
             gameObject.SetActive(false);
     }
