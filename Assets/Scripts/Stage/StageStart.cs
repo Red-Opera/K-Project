@@ -50,7 +50,7 @@ public class StageStart : MonoBehaviour
         player.transform.position = new Vector3(0, 0, 0);
 
         // 씬 전환
-        SceneManager.LoadScene("Stage1");
+        Loading.LoadScene("Stage1");
 
         // 페이드 인 효과
         timer = 0f;

@@ -48,8 +48,9 @@ public class GStage3 : MonoBehaviour
             yield return null;
         }
         player.transform.position = new Vector3(0, 0, 0);
-        
-        SceneManager.LoadScene("Stage3");
+
+        Loading.LoadScene("Stage3");
+
         // 페이드 인 효과
         timer = 0f;
         while (timer < fadeDuration)
