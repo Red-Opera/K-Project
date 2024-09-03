@@ -1,6 +1,4 @@
 ﻿#include <iostream>
-#include <fstream>
-#include <string>
 #include <thread>
 #include <mutex>
 #include <vector>
@@ -8,36 +6,22 @@
 #include <netinet/in.h>
 #include <unistd.h>
 #include <cstring>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <csignal>
+#include <cerrno>
+
+#include "Log.h"
 
 // 전역 변수
 std::vector<int> clients;
 std::mutex clientsMutex;
 std::thread serverThread;
-std::ofstream logFile;
 
 int serverSocket;
 bool serverRunning = false;
 
-// 로그 파일 초기화
-void InitLogFile()
-{
-    logFile.open("logfile.txt", std::ios::out | std::ios::app);
-    if (!logFile.is_open())
-    {
-        std::cerr << "Failed to open log file." << std::endl;
-    }
-}
-
-// 로그 메시지 기록
-void LogMessage(const char* message)
-{
-    if (logFile.is_open())
-        logFile << message << std::endl;
-    else
-        std::cout << message << std::endl;
-}
-
-// 모든 클라이언트에게 데이터 브로드캐스트
 void BroadcastPosition(const char* data, int length)
 {
     std::lock_guard<std::mutex> guard(clientsMutex);
@@ -47,7 +31,6 @@ void BroadcastPosition(const char* data, int length)
     }
 }
 
-// 클라이언트 핸들링
 void HandleClient(int clientSocket)
 {
     {
@@ -74,13 +57,12 @@ void HandleClient(int clientSocket)
     close(clientSocket);
 }
 
-// 서버 루프
 void ServerLoop(int port)
 {
     serverSocket = socket(AF_INET, SOCK_STREAM, 0);
     if (serverSocket < 0)
     {
-        LogMessage("Failed to create server socket.");
+        Log::Message("Failed to create server socket.");
         return;
     }
 
@@ -92,14 +74,16 @@ void ServerLoop(int port)
 
     if (bind(serverSocket, (sockaddr*)&serverAddr, sizeof(serverAddr)) < 0)
     {
-        LogMessage("Failed to bind server socket.");
+        std::string errorMessage = "Failed to bind server socket. Error: " + std::string(strerror(errno));
+
+        Log::Message(errorMessage.c_str());
         close(serverSocket);
         return;
     }
 
     if (listen(serverSocket, 5) < 0)
     {
-        LogMessage("Failed to listen on server socket.");
+        Log::Message("Failed to listen on server socket.");
         close(serverSocket);
         return;
     }
@@ -107,7 +91,7 @@ void ServerLoop(int port)
     serverRunning = true;
 
     std::string logText = "Server started on port " + std::to_string(port);
-    LogMessage(logText.c_str());
+    Log::Message(logText.c_str());
 
     while (serverRunning)
     {
@@ -116,7 +100,7 @@ void ServerLoop(int port)
         int clientSocket = accept(serverSocket, (sockaddr*)&clientAddr, &clientAddrLen);
         if (clientSocket < 0)
         {
-            LogMessage("Failed to accept client connection.");
+            Log::Message("Failed to accept client connection.");
             continue;
         }
 
@@ -127,11 +111,13 @@ void ServerLoop(int port)
     close(serverSocket);
 }
 
-// 서버 시작
 int StartServer(int port)
 {
     if (serverRunning)
+    {
+        Log::Message("Server is already running.");
         return -1;
+    }
 
     serverThread = std::thread(ServerLoop, port);
     serverThread.detach();
@@ -139,7 +125,6 @@ int StartServer(int port)
     return 0;
 }
 
-// 서버 중지
 void StopServer()
 {
     serverRunning = false;
@@ -147,11 +132,63 @@ void StopServer()
     if (serverSocket >= 0)
         close(serverSocket);
 
-    if (logFile.is_open())
-        logFile.close();
+    Log::CloseLog();
 }
 
-// 메인 함수
+void Daemonize()
+{
+    Log::serverPID = getpid();  // 서버 PID를 저장
+
+    pid_t pid = fork();
+    if (pid < 0)
+    {
+        Log::Message("Failed to fork.");
+        exit(1);
+    }
+
+    // 부모 프로세스 종료
+    if (pid > 0)
+        exit(0); 
+
+    if (setsid() < 0)
+    {
+        Log::Message("Failed to create new session.");
+        exit(1);
+    }
+
+    pid = fork();
+    if (pid < 0)
+    {
+        Log::Message("Failed to fork.");
+        exit(1);
+    }
+
+    // 첫 번째 자식 프로세스 종료
+    if (pid > 0)
+        exit(0); 
+
+    umask(0);
+
+    int fd = open("/dev/null", O_RDWR);
+
+    if (fd != -1)
+    {
+        dup2(fd, STDIN_FILENO);
+        dup2(fd, STDOUT_FILENO);
+        dup2(fd, STDERR_FILENO);
+        close(fd);
+    }
+}
+
+void SignalHandler(int signal)
+{
+    if (signal == SIGTERM || signal == SIGINT)
+    {
+        StopServer();
+        exit(0);
+    }
+}
+
 int main(int argc, char* argv[])
 {
     if (argc < 2)
@@ -162,16 +199,25 @@ int main(int argc, char* argv[])
 
     int port = std::stoi(argv[1]);
 
-    InitLogFile();
+    Daemonize();
+    Log::FileOpen();
 
     if (StartServer(port) != 0)
     {
-        std::cerr << "Failed to start server." << std::endl;
+        Log::Message("Failed to start server.");
         return 1;
     }
 
-    std::cout << "Server is running. Press Enter to stop..." << std::endl;
-    std::cin.get();  // 서버가 계속 실행되도록 대기
+    Log::Message("Server is running in the background...");
+    std::this_thread::sleep_for(std::chrono::milliseconds(10));
+
+    // 신호 처리기 설정
+    signal(SIGTERM, SignalHandler);
+    signal(SIGINT, SignalHandler);
+
+    // 메인 스레드를 종료시키지 않도록 무한 루프 추가
+    while (serverRunning)
+        std::this_thread::sleep_for(std::chrono::minutes(5));
 
     StopServer();
     return 0;
