@@ -55,7 +55,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/home/ubuntu/Release/MultiPlaySystem/out/build/linux-debug"
+			"value" : "/home/ubuntu/.vs/MultiPlaySystem/out/build/linux-debug"
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -627,7 +627,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/home/ubuntu/Release/MultiPlaySystem"
+			"value" : "/home/ubuntu/.vs/MultiPlaySystem"
 		},
 		{
 			"name" : "CMAKE_INSTALL_PREFIX",
@@ -639,7 +639,7 @@
 				}
 			],
 			"type" : "PATH",
-			"value" : "/home/ubuntu/Release/MultiPlaySystem/out/install/linux-debug"
+			"value" : "/home/ubuntu/.vs/MultiPlaySystem/out/install/linux-debug"
 		},
 		{
 			"name" : "CMAKE_INSTALL_SO_NO_EXE",
@@ -1175,7 +1175,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/home/ubuntu/Release/MultiPlaySystem/out/build/linux-debug"
+			"value" : "/home/ubuntu/.vs/MultiPlaySystem/out/build/linux-debug"
 		},
 		{
 			"name" : "MultiPlaySystem_SOURCE_DIR",
@@ -1187,7 +1187,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/home/ubuntu/Release/MultiPlaySystem"
+			"value" : "/home/ubuntu/.vs/MultiPlaySystem"
 		}
 	],
 	"kind" : "cache",

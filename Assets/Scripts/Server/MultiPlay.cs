@@ -72,8 +72,9 @@ public class MultiPlay : MonoBehaviour
 
         try
         {
-            string positionString = $"{position.x},{position.y},{position.z}\n"; // Add newline to mark end of message
+            string positionString = $"({position.x},{position.y},{position.z})\n";
             byte[] data = Encoding.UTF8.GetBytes(positionString);
+
             stream.Write(data, 0, data.Length);
         }
 
@@ -93,6 +94,7 @@ public class MultiPlay : MonoBehaviour
             while (isConnected)
             {
                 int bytesRead = stream.Read(buffer, 0, buffer.Length);
+
                 if (bytesRead > 0)
                 {
                     string data = Encoding.UTF8.GetString(buffer, 0, bytesRead);
@@ -126,6 +128,7 @@ public class MultiPlay : MonoBehaviour
                 }
             }
         }
+
         catch (Exception e)
         {
             Debug.LogError("Server Receive Error: " + e.Message);
@@ -161,6 +164,7 @@ public class MultiPlay : MonoBehaviour
                 Vector3 receivedPosition = new Vector3(x, y, z);
                 Debug.Log("Received Position: " + receivedPosition);
             }
+
             catch (FormatException ex)
             {
                 Debug.LogError("Data format error: " + data + " - " + ex.Message);

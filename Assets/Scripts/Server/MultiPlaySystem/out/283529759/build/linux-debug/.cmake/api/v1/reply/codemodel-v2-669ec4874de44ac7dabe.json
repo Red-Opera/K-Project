@@ -38,7 +38,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "MultiPlaySystem::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-MultiPlaySystem-Debug-3be6dfb5dff9a62673e7.json",
+					"jsonFile" : "target-MultiPlaySystem-Debug-c1dab62221655f7377bb.json",
 					"name" : "MultiPlaySystem",
 					"projectIndex" : 0
 				}
@@ -48,8 +48,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "/home/ubuntu/Release/MultiPlaySystem/out/build/linux-debug",
-		"source" : "/home/ubuntu/Release/MultiPlaySystem"
+		"build" : "/home/ubuntu/.vs/MultiPlaySystem/out/build/linux-debug",
+		"source" : "/home/ubuntu/.vs/MultiPlaySystem"
 	},
 	"version" : 
 	{
