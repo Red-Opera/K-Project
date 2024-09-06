@@ -9,20 +9,32 @@
 #include <fcntl.h>
 #include <csignal>
 #include <cstring>
+#include <sstream>
 
 std::vector<int> MultiSystemAPP::clients;
 std::mutex MultiSystemAPP::clientsMutex;
 std::thread MultiSystemAPP::serverThread;
+std::unordered_map<std::string, Vector3> MultiSystemAPP::clientPosition;
 
 int MultiSystemAPP::serverSocket = 0;
 bool MultiSystemAPP::serverRunning = false;
 
-void MultiSystemAPP::BroadcastPosition(const char* data, int length)
+void MultiSystemAPP::BroadcastPosition()
 {
     std::lock_guard<std::mutex> guard(clientsMutex);
+    std::string clientPosText;
+
+    for (const auto& client : clientPosition)
+    {
+        std::string clientName = client.first;
+        Vector3 position = client.second;
+
+        clientPosText += "(" + clientName + "," + std::to_string(position.x) + "," + std::to_string(position.y) + "," + std::to_string(position.z) + ")\n";
+    }
+    clientPosText += "*";
 
     for (int client : clients)
-        send(client, data, length, 0);
+        send(client, clientPosText.c_str(), clientPosText.length(), 0);
 }
 
 void MultiSystemAPP::HandleClient(int clientSocket)
@@ -33,19 +45,44 @@ void MultiSystemAPP::HandleClient(int clientSocket)
     }
 
     char buffer[1024] = { 0 };
+    std::string clientName;  // 클라이언트 이름을 저장할 string
 
     while (serverRunning)
     {
         ssize_t received = recv(clientSocket, buffer, sizeof(buffer), 0);
+
         if (received <= 0)
             break;
 
-        BroadcastPosition(buffer, received);
+        std::string clientInfo(buffer, received);   // 버퍼를 string으로 변환함
+        Vector3 position;                           // 받은 클라이언트의 위치
+
+        std::istringstream stream(clientInfo); 
+        char discard;
+        stream >> discard;                      // 첫 번째 글자를 읽어서 무시 '('
+        std::getline(stream, clientName, ',');  // 첫 번째 값을 clientName에 저장
+        stream >> position.x;                   // 다음 값을 position.x에 저장
+        stream.ignore(1, ',');                  // 구분자 ','를 무시
+        stream >> position.y;                   // 다음 값을 position.y에 저장
+        stream.ignore(1, ',');                  // 구분자 ','를 무시
+        stream >> position.z;                   // 다음 값을 position.z에 저장
+
+        Log::Message(clientName.c_str());
+
+        if (stream)
+        {
+            std::lock_guard<std::mutex> guard(clientsMutex);
+            clientPosition[clientName] = { position.x, position.y, position.z };
+        }
+
+        BroadcastPosition();
     }
 
+    // 서버가 끊어졌을 때 
     {
         std::lock_guard<std::mutex> guard(clientsMutex);
         clients.erase(std::remove(clients.begin(), clients.end(), clientSocket), clients.end());
+        clientPosition.erase(clientName);
     }
 
     close(clientSocket);
@@ -116,6 +153,7 @@ void MultiSystemAPP::ServerLoop(int port)
         sockaddr_in clientAddr;
         socklen_t clientAddrLen = sizeof(clientAddr);
         int clientSocket = accept(serverSocket, (sockaddr*)&clientAddr, &clientAddrLen);
+
         if (clientSocket < 0)
         {
             Log::Message("Failed to accept client connection.");

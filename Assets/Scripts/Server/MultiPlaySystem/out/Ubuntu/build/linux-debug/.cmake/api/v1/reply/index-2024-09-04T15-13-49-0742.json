@@ -3,6 +3,7 @@
 	{
 		"generator" : 
 		{
+			"multiConfig" : false,
 			"name" : "Ninja"
 		},
 		"paths" : 
@@ -10,31 +11,31 @@
 			"cmake" : "/usr/bin/cmake",
 			"cpack" : "/usr/bin/cpack",
 			"ctest" : "/usr/bin/ctest",
-			"root" : "/usr/share/cmake-3.16"
+			"root" : "/usr/share/cmake-3.22"
 		},
 		"version" : 
 		{
 			"isDirty" : false,
 			"major" : 3,
-			"minor" : 16,
-			"patch" : 3,
-			"string" : "3.16.3",
+			"minor" : 22,
+			"patch" : 1,
+			"string" : "3.22.1",
 			"suffix" : ""
 		}
 	},
 	"objects" : 
 	[
 		{
-			"jsonFile" : "codemodel-v2-669ec4874de44ac7dabe.json",
+			"jsonFile" : "codemodel-v2-eae10e7b968a3dc73868.json",
 			"kind" : "codemodel",
 			"version" : 
 			{
 				"major" : 2,
-				"minor" : 0
+				"minor" : 3
 			}
 		},
 		{
-			"jsonFile" : "cache-v2-dbe794142df8a19d05aa.json",
+			"jsonFile" : "cache-v2-9008486a975eaca76952.json",
 			"kind" : "cache",
 			"version" : 
 			{
@@ -43,8 +44,17 @@
 			}
 		},
 		{
-			"jsonFile" : "cmakeFiles-v1-b71606afae7e963803a5.json",
+			"jsonFile" : "cmakeFiles-v1-0db8276fbaf4913b23e2.json",
 			"kind" : "cmakeFiles",
+			"version" : 
+			{
+				"major" : 1,
+				"minor" : 0
+			}
+		},
+		{
+			"jsonFile" : "toolchains-v1-99265b04de7ada3aac9e.json",
+			"kind" : "toolchains",
 			"version" : 
 			{
 				"major" : 1,
@@ -80,7 +90,7 @@
 				"responses" : 
 				[
 					{
-						"jsonFile" : "cache-v2-dbe794142df8a19d05aa.json",
+						"jsonFile" : "cache-v2-9008486a975eaca76952.json",
 						"kind" : "cache",
 						"version" : 
 						{
@@ -89,7 +99,7 @@
 						}
 					},
 					{
-						"jsonFile" : "cmakeFiles-v1-b71606afae7e963803a5.json",
+						"jsonFile" : "cmakeFiles-v1-0db8276fbaf4913b23e2.json",
 						"kind" : "cmakeFiles",
 						"version" : 
 						{
@@ -98,16 +108,22 @@
 						}
 					},
 					{
-						"jsonFile" : "codemodel-v2-669ec4874de44ac7dabe.json",
+						"jsonFile" : "codemodel-v2-eae10e7b968a3dc73868.json",
 						"kind" : "codemodel",
 						"version" : 
 						{
 							"major" : 2,
-							"minor" : 0
+							"minor" : 3
 						}
 					},
 					{
-						"error" : "unknown request kind 'toolchains'"
+						"jsonFile" : "toolchains-v1-99265b04de7ada3aac9e.json",
+						"kind" : "toolchains",
+						"version" : 
+						{
+							"major" : 1,
+							"minor" : 0
+						}
 					}
 				]
 			}

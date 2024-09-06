@@ -31,11 +31,6 @@ public class MultiPlay : MonoBehaviour
         }
     }
 
-    private static void LogMessage(string message)
-    {
-        Debug.Log(message);
-    }
-
     private void ConnectToServer(string ip, int port)
     {
         try
@@ -44,8 +39,7 @@ public class MultiPlay : MonoBehaviour
             stream = client.GetStream();
             isConnected = true;
 
-            receiveThread = new Thread(ReceiveData);
-            receiveThread.IsBackground = true;
+            receiveThread = new Thread(ReceiveData) { IsBackground = true };
             receiveThread.Start();
         }
 
@@ -72,7 +66,7 @@ public class MultiPlay : MonoBehaviour
 
         try
         {
-            string positionString = $"({position.x},{position.y},{position.z})\n";
+            string positionString = $"(aa,{position.x},{position.y},{position.z})";
             byte[] data = Encoding.UTF8.GetBytes(positionString);
 
             stream.Write(data, 0, data.Length);
@@ -89,7 +83,7 @@ public class MultiPlay : MonoBehaviour
         try
         {
             byte[] buffer = new byte[1024];
-            StringBuilder completeMessage = new StringBuilder();
+            StringBuilder completeMessage = new();
 
             while (isConnected)
             {
@@ -100,22 +94,19 @@ public class MultiPlay : MonoBehaviour
                     string data = Encoding.UTF8.GetString(buffer, 0, bytesRead);
                     completeMessage.Append(data);
 
-                    // 데이터가 여러 개 합쳐져 있을 수 있으므로 줄바꿈을 기준으로 나눔
+                    // '*' 문자를 기준으로 메시지 분리 및 처리
                     while (true)
                     {
                         string completeData = completeMessage.ToString();
-                        int newLineIndex = completeData.IndexOf('\n');
+                        int newLineIndex = completeData.IndexOf('*');
+
+                        Debug.Log("Get Data : " + completeData);
 
                         if (newLineIndex != -1)
                         {
                             // 줄바꿈 이전의 데이터를 완전한 메시지로 간주하고 처리
-                            string singleMessage = completeData.Substring(0, newLineIndex).Trim();
-
-                            if (!string.IsNullOrEmpty(singleMessage))
-                            {
-                                Debug.Log("Received complete data: " + singleMessage);
-                                UpdatePlayerPositions(singleMessage);
-                            }
+                            string singleMessage = completeData[..newLineIndex].Trim();
+                            UpdatePlayerPositions(singleMessage);
 
                             // 남아있는 데이터 처리
                             completeMessage.Remove(0, newLineIndex + 1);
@@ -137,43 +128,41 @@ public class MultiPlay : MonoBehaviour
 
     private void UpdatePlayerPositions(string data)
     {
-        // 데이터 앞뒤의 공백 제거
-        data = data.Trim();
+        // 각 메시지를 줄 단위로 나눔
+        string[] positions = data.Split('\n', StringSplitOptions.RemoveEmptyEntries);
 
-        // 데이터 유효성 검사: 빈 데이터인지 확인
-        if (string.IsNullOrEmpty(data))
+        foreach (string position in positions)
         {
-            Debug.LogError("Received empty data");
-            return;
-        }
+            // 이름, x, y, z 좌표를 문자열로 저장
+            string[] coords = position.Trim('(', ')').Split(',');
 
-        // 좌표를 쉼표로 분리
-        string[] coords = data.Split(',');
-
-        // 좌표의 수가 3개인지 확인
-        if (coords.Length == 3)
-        {
-            try
+            // 좌표의 수가 3개인지 확인
+            if (coords.Length == 4)
             {
-                // 각각의 좌표 문자열을 float로 변환
-                float x = float.Parse(coords[0].Trim());
-                float y = float.Parse(coords[1].Trim());
-                float z = float.Parse(coords[2].Trim());
+                try
+                {
+                    // 각각의 좌표 문자열을 float로 변환
+                    string clientName = coords[0];
+                    float x = float.Parse(coords[1].Trim());
+                    float y = float.Parse(coords[2].Trim());
+                    float z = float.Parse(coords[3].Trim());
 
-                // 변환된 좌표를 Vector3로 만듦
-                Vector3 receivedPosition = new Vector3(x, y, z);
-                Debug.Log("Received Position: " + receivedPosition);
+                    // 변환된 좌표를 Vector3로 만듦
+                    Vector3 receivedPosition = new(x, y, z);
+                    Debug.Log($"Received Position from {clientName}: {receivedPosition}");
+                }
+
+                catch (FormatException ex)
+                {
+                    Debug.LogError("Data format error: " + position + " - " + ex.Message);
+                }
             }
 
-            catch (FormatException ex)
-            {
-                Debug.LogError("Data format error: " + data + " - " + ex.Message);
-            }
-        }
+            // 좌표의 수가 3개가 아닌 경우 오류 처리
+            else
+                Debug.LogError("Incorrect position data format: " + position);
 
-        // 좌표의 수가 3개가 아닌 경우 오류 처리
-        else
-            Debug.LogError("Incorrect position data format: " + data);
+        }
     }
 
     private void OnApplicationQuit()

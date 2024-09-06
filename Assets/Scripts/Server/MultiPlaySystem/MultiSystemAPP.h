@@ -6,12 +6,15 @@
 #include <mutex>
 #include <vector>
 #include <thread>
+#include <unordered_map>
+
+struct Vector3 { float x, y, z; };
 
 class MultiSystemAPP
 {
 public:
-	static void BroadcastPosition(const char* data, int length);	// 플레이어 위치 전송하는 메소드
-	static void HandleClient(int clientSocket);						// 서버 데이터 전송, 수신 메소드
+	static void BroadcastPosition();			// 플레이어 위치 전송하는 메소드
+	static void HandleClient(int clientSocket);	// 서버 데이터 전송, 수신 메소드
 
 	static int StartServer(int port);		// 서버 시작 메소드
 	static void StopServer();				// 서버 종료 메소드
@@ -24,6 +27,8 @@ public:
 
 private:
 	static std::vector<int> clients;
+	static std::unordered_map<std::string, Vector3> clientPosition;
+
 	static std::mutex clientsMutex;
 	static std::thread serverThread;
 

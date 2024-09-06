@@ -1,3 +1,4 @@
+#if UNITY_EDITOR
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
@@ -17,3 +18,4 @@ public class AutoSave : MonoBehaviour
             EditorSceneManager.SaveScene(EditorSceneManager.GetActiveScene());
     }
 }
+#endif
