@@ -40,6 +40,15 @@ void Log::Message(const char* message)
         std::cout << "[" << serverPID << "] " << message << std::endl;
 }
 
+void Log::Message(const std::string message)
+{
+    if (logFile.is_open())
+        logFile << "[" << serverPID << "] " << message << std::endl;
+
+    else
+        std::cout << "[" << serverPID << "] " << message << std::endl;
+}
+
 void Log::CloseLog()
 {
     if (logFile.is_open())

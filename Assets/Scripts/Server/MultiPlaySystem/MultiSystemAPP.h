@@ -8,7 +8,31 @@
 #include <thread>
 #include <unordered_map>
 
+struct ClientIdenty 
+{ 
+	std::string name; 
+	int id;
+	
+	ClientIdenty() : name(""), id(0) {}
+	ClientIdenty(const std::string& name, int id) : name(name), id(id) {}
+
+	bool operator==(const ClientIdenty& other) const { return name == other.name && id == other.id; }
+};
+
 struct Vector3 { float x, y, z; };
+
+// 해시 함수 정의
+namespace std {
+	template <>
+	struct hash<ClientIdenty> {
+		size_t operator()(const ClientIdenty& client) const {
+			// 해시 함수의 간단한 구현
+			size_t hashName = hash<std::string>{}(client.name);
+			size_t hashId = hash<int>{}(client.id);
+			return hashName ^ (hashId << 1); // XOR와 bit shift를 사용하여 해시를 결합
+		}
+	};
+}
 
 class MultiSystemAPP
 {
@@ -27,7 +51,7 @@ public:
 
 private:
 	static std::vector<int> clients;
-	static std::unordered_map<std::string, Vector3> clientPosition;
+	static std::unordered_map<ClientIdenty, Vector3> clientPosition;
 
 	static std::mutex clientsMutex;
 	static std::thread serverThread;

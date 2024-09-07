@@ -14,7 +14,7 @@
 std::vector<int> MultiSystemAPP::clients;
 std::mutex MultiSystemAPP::clientsMutex;
 std::thread MultiSystemAPP::serverThread;
-std::unordered_map<std::string, Vector3> MultiSystemAPP::clientPosition;
+std::unordered_map<ClientIdenty, Vector3> MultiSystemAPP::clientPosition;
 
 int MultiSystemAPP::serverSocket = 0;
 bool MultiSystemAPP::serverRunning = false;
@@ -26,12 +26,15 @@ void MultiSystemAPP::BroadcastPosition()
 
     for (const auto& client : clientPosition)
     {
-        std::string clientName = client.first;
+        std::string clientName = client.first.name;
         Vector3 position = client.second;
 
+        Log::Message("[" + std::to_string(client.first.id) + "]");
         clientPosText += "(" + clientName + "," + std::to_string(position.x) + "," + std::to_string(position.y) + "," + std::to_string(position.z) + ")\n";
     }
     clientPosText += "*";
+
+    Log::Message(clientPosText);
 
     for (int client : clients)
         send(client, clientPosText.c_str(), clientPosText.length(), 0);
@@ -45,7 +48,7 @@ void MultiSystemAPP::HandleClient(int clientSocket)
     }
 
     char buffer[1024] = { 0 };
-    std::string clientName;  // 클라이언트 이름을 저장할 string
+    ClientIdenty clientIdenty = { "", clientSocket };  // 클라이언트 구분하기 위한 정보
 
     while (serverRunning)
     {
@@ -55,7 +58,9 @@ void MultiSystemAPP::HandleClient(int clientSocket)
             break;
 
         std::string clientInfo(buffer, received);   // 버퍼를 string으로 변환함
-        Vector3 position;                           // 받은 클라이언트의 위치
+        Vector3 position = { 0, 0, 0 };             // 받은 클라이언트의 위치
+
+        std::string clientName;
 
         std::istringstream stream(clientInfo); 
         char discard;
@@ -67,12 +72,19 @@ void MultiSystemAPP::HandleClient(int clientSocket)
         stream.ignore(1, ',');                  // 구분자 ','를 무시
         stream >> position.z;                   // 다음 값을 position.z에 저장
 
-        Log::Message(clientName.c_str());
-
-        if (stream)
+        // 클라이언트 이름이 비어있거나 다를 경우에만 업데이트
         {
             std::lock_guard<std::mutex> guard(clientsMutex);
-            clientPosition[clientName] = { position.x, position.y, position.z };
+
+            if (clientIdenty.name.empty())
+                clientIdenty.name = clientName;
+
+            // 클라이언트 이름이 다를 경우 처리
+            else if (clientIdenty.name != clientName)
+                continue;
+
+            // 클라이언트 이름과 ID로 클라이언트의 위치 업데이트
+            clientPosition[clientIdenty] = { position.x, position.y, position.z };
         }
 
         BroadcastPosition();
@@ -81,8 +93,12 @@ void MultiSystemAPP::HandleClient(int clientSocket)
     // 서버가 끊어졌을 때 
     {
         std::lock_guard<std::mutex> guard(clientsMutex);
-        clients.erase(std::remove(clients.begin(), clients.end(), clientSocket), clients.end());
-        clientPosition.erase(clientName);
+        auto it = std::find(clients.begin(), clients.end(), clientSocket);
+
+        if (it != clients.end())
+            clients.erase(it);
+
+        clientPosition.erase(clientIdenty);
     }
 
     close(clientSocket);

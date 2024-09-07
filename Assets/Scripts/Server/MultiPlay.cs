@@ -1,11 +1,17 @@
 using System;
+using System.Collections.Generic;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class MultiPlay : MonoBehaviour
 {
+    public static int currentServerFrame = 0;
+
+    [SerializeField] private GameObject otherPlayer;
+
     private TcpClient client;
     private NetworkStream stream;
     private Thread receiveThread;
@@ -14,21 +20,22 @@ public class MultiPlay : MonoBehaviour
     private static readonly int port = 0;
     private bool isConnected = false;
 
-    public Vector3 playerPosition;
+    private static Dictionary<string, GameObject> playerPositions; 
 
     private void Start()
     {
+        playerPositions ??= new Dictionary<string, GameObject>();
+
         ConnectToServer(IP, port);
         Debug.Log("Server started successfully on port " + port);
+
+        Application.runInBackground = true;
     }
 
     private void Update()
     {
         if (isConnected)
-        {
-            playerPosition = transform.position;
-            SendPosition(playerPosition);
-        }
+            SendPosition(transform.position);
     }
 
     private void ConnectToServer(string ip, int port)
@@ -66,7 +73,7 @@ public class MultiPlay : MonoBehaviour
 
         try
         {
-            string positionString = $"(aa,{position.x},{position.y},{position.z})";
+            string positionString = $"({System.Diagnostics.Process.GetCurrentProcess().Id},{position.x},{position.y},{position.z})";
             byte[] data = Encoding.UTF8.GetBytes(positionString);
 
             stream.Write(data, 0, data.Length);
@@ -78,7 +85,7 @@ public class MultiPlay : MonoBehaviour
         }
     }
 
-    private void ReceiveData()
+    private async void ReceiveData()
     {
         try
         {
@@ -87,6 +94,13 @@ public class MultiPlay : MonoBehaviour
 
             while (isConnected)
             {
+                // 데이터를 아직 보내지 않은 경우
+                if (!stream.DataAvailable)
+                {
+                    await Task.Delay(10);
+                    continue;
+                }
+
                 int bytesRead = stream.Read(buffer, 0, buffer.Length);
 
                 if (bytesRead > 0)
@@ -100,13 +114,13 @@ public class MultiPlay : MonoBehaviour
                         string completeData = completeMessage.ToString();
                         int newLineIndex = completeData.IndexOf('*');
 
-                        Debug.Log("Get Data : " + completeData);
-
                         if (newLineIndex != -1)
                         {
                             // 줄바꿈 이전의 데이터를 완전한 메시지로 간주하고 처리
                             string singleMessage = completeData[..newLineIndex].Trim();
                             UpdatePlayerPositions(singleMessage);
+                            currentServerFrame++;
+                            currentServerFrame %= 1000;
 
                             // 남아있는 데이터 처리
                             completeMessage.Remove(0, newLineIndex + 1);
@@ -122,7 +136,8 @@ public class MultiPlay : MonoBehaviour
 
         catch (Exception e)
         {
-            Debug.LogError("Server Receive Error: " + e.Message);
+            if (isConnected)
+                Debug.LogError("Server Receive Error: " + e.Message);
         }
     }
 
@@ -130,6 +145,9 @@ public class MultiPlay : MonoBehaviour
     {
         // 각 메시지를 줄 단위로 나눔
         string[] positions = data.Split('\n', StringSplitOptions.RemoveEmptyEntries);
+
+        // 서버로부터 위치를 받은 클라이언트 
+        HashSet<string> receivedClients = new HashSet<string>();
 
         foreach (string position in positions)
         {
@@ -149,7 +167,23 @@ public class MultiPlay : MonoBehaviour
 
                     // 변환된 좌표를 Vector3로 만듦
                     Vector3 receivedPosition = new(x, y, z);
+                    receivedClients.Add(clientName);
                     Debug.Log($"Received Position from {clientName}: {receivedPosition}");
+
+                    if (clientName != System.Diagnostics.Process.GetCurrentProcess().Id.ToString())
+                    {
+                        MainTheadAction.Enqueue(() =>
+                        {
+                            if (playerPositions.ContainsKey(clientName))
+                                playerPositions[clientName].transform.position = receivedPosition;
+
+                            else
+                            {
+                                GameObject newPlayer = Instantiate(otherPlayer, receivedPosition, Quaternion.identity);
+                                playerPositions[clientName] = newPlayer;
+                            }
+                        });
+                    }
                 }
 
                 catch (FormatException ex)
@@ -161,8 +195,26 @@ public class MultiPlay : MonoBehaviour
             // 좌표의 수가 3개가 아닌 경우 오류 처리
             else
                 Debug.LogError("Incorrect position data format: " + position);
-
         }
+
+        // 서버에서 받지 못한 플레이어 제거
+        List<string> playersToRemove = new List<string>();
+
+        foreach (var player in playerPositions.Keys)
+        {
+            if (!receivedClients.Contains(player))
+                playersToRemove.Add(player);
+        }
+
+        // 메인 스레드에서 객체 제거
+        MainTheadAction.Enqueue(() =>
+        {
+            foreach (var player in playersToRemove)
+            {
+                Destroy(playerPositions[player]);
+                playerPositions.Remove(player);
+            }
+        });
     }
 
     private void OnApplicationQuit()

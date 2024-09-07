@@ -35,7 +35,7 @@ int main(int argc, char* argv[])
 
     // 메인 스레드를 종료시키지 않도록 무한 루프 추가
     while (MultiSystemAPP::serverRunning)
-        std::this_thread::sleep_for(std::chrono::minutes(5));
+        std::this_thread::sleep_for(std::chrono::seconds(5));
 
     MultiSystemAPP::StopServer();
     return 0;

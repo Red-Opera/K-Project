@@ -1,12 +1,14 @@
 #pragma once
 
 #include <fstream>
+#include <string>
 
 class Log
 {
 public:
-	static void FileOpen();						// 로그 파일여는 메소드
-	static void Message(const char* message);	// 로그에 출력할 메세지를 받는 메소드
+	static void FileOpen();							// 로그 파일여는 메소드
+	static void Message(const char* message);		// 로그에 출력할 메세지를 받는 메소드
+	static void Message(const std::string message);	// 로그에 출력할 메세지를 받는 메소드
 
 	static void CloseLog();			// 로그 파일 닫는 메소드
 
