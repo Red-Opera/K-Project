@@ -16,8 +16,8 @@ public class MultiPlay : MonoBehaviour
     private NetworkStream stream;
     private Thread receiveThread;
 
-    private static readonly string IP = "";
-    private static readonly int port = 0;
+    private static readonly string IP = "e2ec3761d72ed8486148a959f79c4627";
+    private static readonly string port = "47ed4ff4f62e7248fedf65a9dd6f4654";
     private bool isConnected = false;
 
     private static Dictionary<string, GameObject> playerPositions; 
@@ -26,7 +26,7 @@ public class MultiPlay : MonoBehaviour
     {
         playerPositions ??= new Dictionary<string, GameObject>();
 
-        ConnectToServer(IP, port);
+        ConnectToServer(DecodeString.Revert(IP), int.Parse(DecodeString.Revert(port)));
         Debug.Log("Server started successfully on port " + port);
 
         Application.runInBackground = true;
