@@ -5,29 +5,58 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
+public class ClientData 
+{ 
+    public int isAttack;
+    public int isFilp;
+    public int frame;
+    public Vector3 position;
+    public string currentScene;
+    public string characterType;
+    public GameObject clientObject;
+}
 
 public class MultiPlay : MonoBehaviour
 {
     public static int currentServerFrame = 0;
+    public static List<string> currentClientAttack;
+    public static List<string> currentClientSpriteFlip;
+    public static Dictionary<string, ClientData> clients;
 
-    [SerializeField] private GameObject otherPlayer;
+    [SerializeField] private GameObject enchantressPlayer;
+    [SerializeField] private GameObject berserkPlayer;
+    [SerializeField] private GameObject knightPlayer;
 
-    private TcpClient client;
+    private TcpClient connectServer;
     private NetworkStream stream;
     private Thread receiveThread;
+    private SpriteRenderer spriteRenderer;
+    private Animator animator;
+    private Transform bossStage;
 
     private static readonly string IP = "e2ec3761d72ed8486148a959f79c4627";
     private static readonly string port = "47ed4ff4f62e7248fedf65a9dd6f4654";
+    private static int frame = 0;
     private bool isConnected = false;
-
-    private static Dictionary<string, GameObject> playerPositions; 
 
     private void Start()
     {
-        playerPositions ??= new Dictionary<string, GameObject>();
+        clients ??= new Dictionary<string, ClientData>();
+        currentClientAttack ??= new List<string>();
+        currentClientSpriteFlip ??= new List<string>();
+
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        Debug.Assert(spriteRenderer != null, "오브젝트에 Sprite Renderer가 없습니다.");
+
+        animator = GetComponent<Animator>();
+        Debug.Assert(animator != null, "오브젝트에 Animator가 없습니다.");
 
         ConnectToServer(DecodeString.Revert(IP), int.Parse(DecodeString.Revert(port)));
         Debug.Log("Server started successfully on port " + port);
+
+        SceneManager.sceneLoaded += GetBossStage;
 
         Application.runInBackground = true;
     }
@@ -35,15 +64,16 @@ public class MultiPlay : MonoBehaviour
     private void Update()
     {
         if (isConnected)
-            SendPosition(transform.position);
+            SendData(transform.position, (Input.GetMouseButtonDown(0) ? 1 : 0), (spriteRenderer.flipX ? 1 : 0), SceneManager.GetActiveScene().name);
+        frame++;
     }
 
     private void ConnectToServer(string ip, int port)
     {
         try
         {
-            client = new TcpClient(ip, port);
-            stream = client.GetStream();
+            connectServer = new TcpClient(ip, port);
+            stream = connectServer.GetStream();
             isConnected = true;
 
             receiveThread = new Thread(ReceiveData) { IsBackground = true };
@@ -62,18 +92,26 @@ public class MultiPlay : MonoBehaviour
         {
             isConnected = false;
             stream?.Close();
-            client?.Close();
+            connectServer?.Close();
         }
     }
 
-    private void SendPosition(Vector3 position)
+    private void SendData(Vector3 position, int isAttack, int isFilp, string currentScene)
     {
         if (!isConnected)
             return;
 
         try
         {
-            string positionString = $"({System.Diagnostics.Process.GetCurrentProcess().Id},{position.x},{position.y},{position.z})";
+            string positionString = $"(" +
+                $"{System.Diagnostics.Process.GetCurrentProcess().Id.ToString("D6")}," +
+                $"{isAttack}," +
+                $"{isFilp}," +
+                $"{frame}," +
+                $"{position.x},{position.y},{position.z}," +
+                $"{currentScene}, " +
+                $"{GetPlayerTypeName(animator.runtimeAnimatorController.name)})";
+
             byte[] data = Encoding.UTF8.GetBytes(positionString);
 
             stream.Write(data, 0, data.Length);
@@ -83,6 +121,108 @@ public class MultiPlay : MonoBehaviour
         {
             Debug.LogError("Send Error: " + e.Message);
         }
+    }
+
+    private void GetClientData(string singleMessage)
+    {
+        // 각 메시지를 줄 단위로 나눔
+        string[] clientDataStrings = singleMessage.Split('\n', StringSplitOptions.RemoveEmptyEntries);
+
+        // 서버로부터 위치를 받은 클라이언트 
+        HashSet<string> receivedClients = new HashSet<string>();
+
+        foreach (string clientDataString in clientDataStrings)
+        {
+            // 이름, x, y, z 좌표를 문자열로 저장
+            string[] clientInfo = clientDataString.Trim('(', ')').Split(',');
+
+            // 좌표의 수가 6개인지 확인
+            if (clientInfo.Length == 9)
+            {
+                try
+                {
+                    // 각각의 좌표 문자열을 float로 변환
+                    string clientName = clientInfo[0];
+                    ClientData clientData = new()
+                    {
+                        isAttack = int.Parse(clientInfo[1].Trim()),
+                        isFilp = int.Parse(clientInfo[2].Trim()),
+                        frame = int.Parse(clientInfo[3].Trim()),
+                        position = new Vector3(float.Parse(clientInfo[4].Trim(), System.Globalization.CultureInfo.InvariantCulture),
+                                               float.Parse(clientInfo[5].Trim(), System.Globalization.CultureInfo.InvariantCulture),
+                                               float.Parse(clientInfo[6].Trim(), System.Globalization.CultureInfo.InvariantCulture)),
+                        currentScene = clientInfo[7].Trim(),
+                        characterType = clientInfo[8].Trim()
+                    };
+
+                    if (!IsCorrectData(clientName, clientData))
+                        continue;
+
+                    receivedClients.Add(clientName);
+
+                    // 변환된 좌표를 Vector3로 만듬
+                    Debug.Log($"Received Position from {clientName}: {clientData.position.x:F6}, {clientData.position.y:F6}, {clientData.position.z:F6}, {clientData.currentScene}, {clientData.characterType}");
+
+                    // 자신을 제외한 다른 클라이언트의 정보를 업데이트
+                    if (clientName != System.Diagnostics.Process.GetCurrentProcess().Id.ToString("D6"))
+                    {
+                        MainTheadAction.Enqueue(() =>
+                        {
+                            if (clients.ContainsKey(clientName) && clients[clientName].characterType != clientData.characterType)
+                            {
+                                Destroy(clients[clientName].clientObject);
+                                clients.Remove(clientName);
+                            }
+
+                            if (!clients.ContainsKey(clientName))
+                            {
+                                clients.Add(clientName, clientData);
+                                clients[clientName].clientObject = Instantiate(GetInstancePlayer(clientData.characterType), clientData.position, Quaternion.identity);
+                                clients[clientName].clientObject.GetComponent<OnlinePlayer>().playerName = clientName.PadLeft(6, '0');
+                            }
+
+                            clients[clientName].isAttack = clientData.isAttack;
+                            clients[clientName].isFilp = clientData.isFilp;
+                            clients[clientName].frame = frame;
+                            clients[clientName].position = clientData.position;
+                            clients[clientName].currentScene = clientData.currentScene;
+                            clients[clientName].characterType = clientData.characterType;
+                        });
+                    }
+                }
+
+                catch (FormatException ex)
+                {
+                    Debug.LogError("Data format error: " + clientDataString + " - " + ex.Message);
+                }
+            }
+
+            // 좌표의 수가 6개가 아닌 경우 오류 처리
+            else
+                Debug.LogError("Incorrect client data format: " + clientDataString);
+        }
+
+        // 서버에서 받지 못한 플레이어를 제거할 배열
+        List<string> clientsToRemove = new List<string>();
+
+        foreach (var player in clients.Keys)
+        {
+            if (!receivedClients.Contains(player))
+                clientsToRemove.Add(player);
+        }
+
+        // 메인 스레드에서 객체 제거
+        MainTheadAction.Enqueue(() =>
+        {
+            foreach (var clientName in clientsToRemove)
+            {
+                if (clients.ContainsKey(clientName))
+                {
+                    Destroy(clients[clientName].clientObject);
+                    clients.Remove(clientName);
+                }
+            }
+        });
     }
 
     private async void ReceiveData()
@@ -118,9 +258,17 @@ public class MultiPlay : MonoBehaviour
                         {
                             // 줄바꿈 이전의 데이터를 완전한 메시지로 간주하고 처리
                             string singleMessage = completeData[..newLineIndex].Trim();
-                            UpdatePlayerPositions(singleMessage);
-                            currentServerFrame++;
-                            currentServerFrame %= 1000;
+
+                            // 메인 스레드에서 업데이트
+                            MainTheadAction.Enqueue(() =>
+                            {
+                                GetClientData(singleMessage);
+                                UpdatePlayerPositions();
+                                UpdatePlayerAttack();
+                                UpdatePlayerSpriteFlip();
+                                currentServerFrame++;
+                                currentServerFrame %= 1000;
+                            });
 
                             // 남아있는 데이터 처리
                             completeMessage.Remove(0, newLineIndex + 1);
@@ -141,80 +289,117 @@ public class MultiPlay : MonoBehaviour
         }
     }
 
-    private void UpdatePlayerPositions(string data)
+    private bool IsCorrectData(string clientName, ClientData receiveData)
     {
-        // 각 메시지를 줄 단위로 나눔
-        string[] positions = data.Split('\n', StringSplitOptions.RemoveEmptyEntries);
+        // 이름이 6글자가 아닌 경우
+        if (clientName.Length != 6)
+            return false;
 
-        // 서버로부터 위치를 받은 클라이언트 
-        HashSet<string> receivedClients = new HashSet<string>();
+        if (receiveData.isAttack != 0 && receiveData.isAttack != 1)
+            return false;
 
-        foreach (string position in positions)
+        if (receiveData.isFilp != 0 && receiveData.isFilp != 1)
+            return false;
+
+        if (receiveData.currentScene != SceneManager.GetActiveScene().name)
+            return false;
+
+        if (bossStage != null && bossStage.gameObject.activeSelf)
+            return false;
+
+        return true;
+    }
+
+    private void UpdatePlayerPositions()
+    {
+        foreach (var client in clients)
         {
-            // 이름, x, y, z 좌표를 문자열로 저장
-            string[] coords = position.Trim('(', ')').Split(',');
+            ClientData clientData = client.Value;
 
-            // 좌표의 수가 3개인지 확인
-            if (coords.Length == 4)
+            if (clientData.currentScene != SceneManager.GetActiveScene().name)
+                continue;
+
+            clientData.clientObject.transform.position = clientData.position;
+        }
+    }
+
+    private void UpdatePlayerAttack()
+    {
+        currentClientAttack.Clear();
+
+        foreach (var client in clients)
+        {
+            ClientData clientData = client.Value;
+
+            bool isAttack = clientData.isAttack == 1 ? true : false;
+
+            if (isAttack)
+                currentClientAttack.Add(client.Key);
+        }
+    }
+
+    private void UpdatePlayerSpriteFlip()
+    {
+        currentClientSpriteFlip.Clear();
+
+        foreach (var client in clients)
+        {
+            ClientData clientData = client.Value;
+
+            bool isAttack = clientData.isFilp == 1 ? true : false;
+
+            if (isAttack)
+                currentClientSpriteFlip.Add(client.Key);
+        }
+    }
+
+    private string GetPlayerTypeName(string typeName)
+    {
+        if (typeName.ToLower().Contains("enchantress"))
+            return "Enchantress";
+
+        else if (typeName.ToLower().Contains("berserk"))
+            return "Berserk";
+
+        else if (typeName.ToLower().Contains("knight"))
+            return "Knight";
+
+        return "";
+    }
+
+    private GameObject GetInstancePlayer(string name)
+    {
+        if (name.Contains("Enchantress"))
+            return enchantressPlayer;
+
+        else if (name.Contains("Berserk"))
+            return berserkPlayer;
+
+        else if (name.Contains("Knight"))
+            return knightPlayer;
+
+        return null;
+    }
+
+    private void GetBossStage(Scene scene, LoadSceneMode mode)
+    {
+        string currentSceneName = SceneManager.GetActiveScene().name;
+
+        GameObject stages = GameObject.Find(currentSceneName[5..] + "Stages");
+
+        if (stages != null)
+        {
+            for (int i = 0; i < stages.transform.childCount; i++)
             {
-                try
+                Transform currentStage = stages.transform.GetChild(i);
+
+                if (currentStage.name == "BoosRoom")
                 {
-                    // 각각의 좌표 문자열을 float로 변환
-                    string clientName = coords[0];
-                    float x = float.Parse(coords[1].Trim());
-                    float y = float.Parse(coords[2].Trim());
-                    float z = float.Parse(coords[3].Trim());
-
-                    // 변환된 좌표를 Vector3로 만듦
-                    Vector3 receivedPosition = new(x, y, z);
-                    receivedClients.Add(clientName);
-                    Debug.Log($"Received Position from {clientName}: {receivedPosition}");
-
-                    if (clientName != System.Diagnostics.Process.GetCurrentProcess().Id.ToString())
-                    {
-                        MainTheadAction.Enqueue(() =>
-                        {
-                            if (playerPositions.ContainsKey(clientName))
-                                playerPositions[clientName].transform.position = receivedPosition;
-
-                            else
-                            {
-                                GameObject newPlayer = Instantiate(otherPlayer, receivedPosition, Quaternion.identity);
-                                playerPositions[clientName] = newPlayer;
-                            }
-                        });
-                    }
-                }
-
-                catch (FormatException ex)
-                {
-                    Debug.LogError("Data format error: " + position + " - " + ex.Message);
+                    bossStage = currentStage;
+                    return;
                 }
             }
-
-            // 좌표의 수가 3개가 아닌 경우 오류 처리
-            else
-                Debug.LogError("Incorrect position data format: " + position);
         }
-
-        // 서버에서 받지 못한 플레이어 제거
-        List<string> playersToRemove = new List<string>();
-
-        foreach (var player in playerPositions.Keys)
-        {
-            if (!receivedClients.Contains(player))
-                playersToRemove.Add(player);
-        }
-
-        // 메인 스레드에서 객체 제거
-        MainTheadAction.Enqueue(() =>
-        {
-            foreach (var player in playersToRemove)
-            {
-                Destroy(playerPositions[player]);
-                playerPositions.Remove(player);
-            }
-        });
     }
 
     private void OnApplicationQuit()

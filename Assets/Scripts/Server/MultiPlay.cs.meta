@@ -4,7 +4,9 @@ MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences:
-  - otherPlayer: {fileID: 9094955460031638816, guid: 80ec83c9e6889574c9e08878bb4a39ad, type: 3}
+  - enchantressPlayer: {fileID: 9094955460031638816, guid: 80ec83c9e6889574c9e08878bb4a39ad, type: 3}
+  - berserkPlayer: {fileID: 3217746875862875250, guid: c9c03cb79b84b73409aa4d2d666dd084, type: 3}
+  - knightPlayer: {fileID: 8699221057430734424, guid: 9e781a80cec0b27499999bbf5579a703, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
