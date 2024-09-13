@@ -29,13 +29,18 @@ void MultiSystemAPP::BroadcastPosition()
         std::string clientName = client.first.name;
         ClientData clientData = client.second;
 
-        std::string isAttack = std::to_string(clientData.isAttack);
         std::string isFilp = std::to_string(clientData.isFilp);
-        std::string frame = std::to_string(clientData.frame);
+        std::string animationNormalizedTime = std::to_string(clientData.animationNormalizedTime);
         std::string x = std::to_string(clientData.position.x), y = std::to_string(clientData.position.y), z = std::to_string(clientData.position.z);
 
         Log::Message("[" + std::to_string(client.first.id) + "]");
-        clientPosText += "(" + clientName + "," + isAttack + "," + isFilp + "," + frame + "," + x + "," + y + "," + z + "," + clientData.currentScene + "," + clientData.characterType + ")\n";
+        clientPosText += "(" + clientName + "," + 
+                               isFilp + "," + 
+                               clientData.animationName + "," + 
+                               animationNormalizedTime + "," + 
+                               x + "," + y + "," + z + "," + 
+                               clientData.currentScene + "," + 
+                               clientData.characterType + ")\n";
     }
     clientPosText += "*";
 
@@ -67,22 +72,20 @@ void MultiSystemAPP::HandleClient(int clientSocket)
 
         std::istringstream stream(clientInfo); 
         char discard;
-        stream >> discard;                              // 첫 번째 글자를 읽어서 무시 '('
-        std::getline(stream, clientIdenty.name, ',');   // 첫 번째 값을 clientName에 저장
-        stream >> receiveData.isAttack;                 // 캐릭터가 공격하지는지 여부 저장
-        stream.ignore(1, ',');                          // 구분자 ','를 무시
-        stream >> receiveData.isFilp;                   // 캐릭터의 이미지를 뒤집는지 여부 저장
-        stream.ignore(1, ',');                          // 구분자 ','를 무시
-        stream >> receiveData.frame;                    // 클라이언트의 프레임
-        stream.ignore(1, ',');                          // 구분자 ','를 무시
-        stream >> receiveData.position.x;               // 다음 값을 position.x에 저장
-        stream.ignore(1, ',');                          // 구분자 ','를 무시
-        stream >> receiveData.position.y;               // 다음 값을 position.y에 저장
-        stream.ignore(1, ',');                          // 구분자 ','를 무시
-        stream >> receiveData.position.z;               // 다음 값을 position.z에 저장
-        stream.ignore(1, ',');                          // 구분자 ','를 무시
+        stream >> discard;                                      // 첫 번째 글자를 읽어서 무시 '('
+        std::getline(stream, clientIdenty.name, ',');           // 첫 번째 값을 clientName에 저장
+        stream >> receiveData.isFilp;                           // 캐릭터의 이미지를 뒤집는지 여부 저장
+        stream.ignore(1, ',');                           
+        std::getline(stream, receiveData.animationName, ',');   // 캐릭터의 애니메이션 이름을 가져옴
+        stream >> receiveData.animationNormalizedTime;          // 애니메이션의 진헹시간을 가져옴
+        stream.ignore(1, ',');
+        stream >> receiveData.position.x;                       // 다음 값을 position.x에 저장
+        stream.ignore(1, ',');                                
+        stream >> receiveData.position.y;                       // 다음 값을 position.y에 저장
+        stream.ignore(1, ',');                                  
+        stream >> receiveData.position.z;                       // 다음 값을 position.z에 저장
+        stream.ignore(1, ',');                                
         std::getline(stream, receiveData.currentScene, ',');    // 캐릭터의 씬 이름을 가져옴
-        stream.ignore(1, ',');                                  // 구분자 ','를 무시
         std::getline(stream, receiveData.characterType, ')');   // 캐릭터의 씬 이름을 가져옴
 
         // 클라이언트 이름이 비어있거나 다를 경우에만 업데이트

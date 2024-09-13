@@ -7,23 +7,38 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+// 서버에서 받을 클라이언트의 정보
 public class ClientData 
 { 
-    public int isAttack;
-    public int isFilp;
-    public int frame;
-    public Vector3 position;
-    public string currentScene;
-    public string characterType;
-    public GameObject clientObject;
+    public int isFilp;                      // 캐릭터 방향이 왼쪽인지 오른쪽인지 판별
+    public string animationName;            // 캐릭터가 실행하고 있는 애니메이션 이름
+    public float animationNormalizedTime;   // 그 애니메이션의 진행 시간
+    public Vector3 position;                // 캐릭터의 위치
+    public string currentScene;             // 캐릭터가 위치하는 씬 이름
+    public string characterType;            // 캐릭터 종류
+    public GameObject clientObject;         // 캐릭터 오브젝트
+}
+
+// 서버에서 받을 클라이언트의 애니메이션 정보
+public class AnimatorClientData
+{
+    public AnimatorClientData(string animationName, float animationNormalizedTime) 
+    {
+        this.animationName = animationName;
+        this.animationNormalizedTime = animationNormalizedTime;
+    }
+
+    public string animationName;            // 애니메이션의 이름
+    public float animationNormalizedTime;   // 애니메이션 진행도
 }
 
 public class MultiPlay : MonoBehaviour
 {
-    public static int currentServerFrame = 0;
-    public static List<string> currentClientAttack;
-    public static List<string> currentClientSpriteFlip;
-    public static Dictionary<string, ClientData> clients;
+    public static List<string> currentClientSpriteFlip;                                 // 이미지를 뒤집는 캐릭터 클라이언트 이름
+    public static Dictionary<string, AnimatorClientData> currentClientAnimationName;    // 클라이언트와 현재 실행하고 있는 애니메이션 정보
+    public static Dictionary<string, ClientData> clients;                               // 모든 클라이언트의 정보
+
+    public static int currentServerFrame = 0;                                           // 현재 서버 프레임
 
     [SerializeField] private GameObject enchantressPlayer;
     [SerializeField] private GameObject berserkPlayer;
@@ -38,13 +53,13 @@ public class MultiPlay : MonoBehaviour
 
     private static readonly string IP = "e2ec3761d72ed8486148a959f79c4627";
     private static readonly string port = "47ed4ff4f62e7248fedf65a9dd6f4654";
-    private static int frame = 0;
+    private string currentSceneName;
     private bool isConnected = false;
 
     private void Start()
     {
         clients ??= new Dictionary<string, ClientData>();
-        currentClientAttack ??= new List<string>();
+        currentClientAnimationName ??= new Dictionary<string, AnimatorClientData>();
         currentClientSpriteFlip ??= new List<string>();
 
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -63,9 +78,11 @@ public class MultiPlay : MonoBehaviour
 
     private void Update()
     {
+        currentSceneName = SceneManager.GetActiveScene().name;
+
+
         if (isConnected)
-            SendData(transform.position, (Input.GetMouseButtonDown(0) ? 1 : 0), (spriteRenderer.flipX ? 1 : 0), SceneManager.GetActiveScene().name);
-        frame++;
+            SendData(transform.position, (spriteRenderer.flipX ? 1 : 0));
     }
 
     private void ConnectToServer(string ip, int port)
@@ -82,6 +99,7 @@ public class MultiPlay : MonoBehaviour
 
         catch (Exception e)
         {
+            OnApplicationQuit();
             Debug.LogError("Online Server Connection Error: " + e.Message);
         }
     }
@@ -96,7 +114,7 @@ public class MultiPlay : MonoBehaviour
         }
     }
 
-    private void SendData(Vector3 position, int isAttack, int isFilp, string currentScene)
+    private void SendData(Vector3 position, int isFilp)
     {
         if (!isConnected)
             return;
@@ -104,12 +122,12 @@ public class MultiPlay : MonoBehaviour
         try
         {
             string positionString = $"(" +
-                $"{System.Diagnostics.Process.GetCurrentProcess().Id.ToString("D6")}," +
-                $"{isAttack}," +
+                $"{System.Diagnostics.Process.GetCurrentProcess().Id:D6}," +
                 $"{isFilp}," +
-                $"{frame}," +
+                $"{GetAnimattionName()}," +
+                $"{animator.GetCurrentAnimatorStateInfo(0).normalizedTime}," +
                 $"{position.x},{position.y},{position.z}," +
-                $"{currentScene}, " +
+                $"{currentSceneName}," +
                 $"{GetPlayerTypeName(animator.runtimeAnimatorController.name)})";
 
             byte[] data = Encoding.UTF8.GetBytes(positionString);
@@ -119,6 +137,7 @@ public class MultiPlay : MonoBehaviour
 
         catch (Exception e)
         {
+            OnApplicationQuit();
             Debug.LogError("Send Error: " + e.Message);
         }
     }
@@ -129,7 +148,7 @@ public class MultiPlay : MonoBehaviour
         string[] clientDataStrings = singleMessage.Split('\n', StringSplitOptions.RemoveEmptyEntries);
 
         // 서버로부터 위치를 받은 클라이언트 
-        HashSet<string> receivedClients = new HashSet<string>();
+        HashSet<string> receivedClients = new();
 
         foreach (string clientDataString in clientDataStrings)
         {
@@ -145,9 +164,9 @@ public class MultiPlay : MonoBehaviour
                     string clientName = clientInfo[0];
                     ClientData clientData = new()
                     {
-                        isAttack = int.Parse(clientInfo[1].Trim()),
-                        isFilp = int.Parse(clientInfo[2].Trim()),
-                        frame = int.Parse(clientInfo[3].Trim()),
+                        isFilp = int.Parse(clientInfo[1].Trim()),
+                        animationName = clientInfo[2].Trim(),
+                        animationNormalizedTime = float.Parse(clientInfo[3].Trim()),
                         position = new Vector3(float.Parse(clientInfo[4].Trim(), System.Globalization.CultureInfo.InvariantCulture),
                                                float.Parse(clientInfo[5].Trim(), System.Globalization.CultureInfo.InvariantCulture),
                                                float.Parse(clientInfo[6].Trim(), System.Globalization.CultureInfo.InvariantCulture)),
@@ -161,7 +180,7 @@ public class MultiPlay : MonoBehaviour
                     receivedClients.Add(clientName);
 
                     // 변환된 좌표를 Vector3로 만듬
-                    Debug.Log($"Received Position from {clientName}: {clientData.position.x:F6}, {clientData.position.y:F6}, {clientData.position.z:F6}, {clientData.currentScene}, {clientData.characterType}");
+                    //Debug.Log($"Received Position from {clientName}: {clientData.position.x:F6}, {clientData.position.y:F6}, {clientData.position.z:F6}, {clientData.characterType}, {clientData.animationNormalizedTime}");
 
                     // 자신을 제외한 다른 클라이언트의 정보를 업데이트
                     if (clientName != System.Diagnostics.Process.GetCurrentProcess().Id.ToString("D6"))
@@ -181,9 +200,9 @@ public class MultiPlay : MonoBehaviour
                                 clients[clientName].clientObject.GetComponent<OnlinePlayer>().playerName = clientName.PadLeft(6, '0');
                             }
 
-                            clients[clientName].isAttack = clientData.isAttack;
                             clients[clientName].isFilp = clientData.isFilp;
-                            clients[clientName].frame = frame;
+                            clients[clientName].animationName = clientData.animationName;
+                            clients[clientName].animationNormalizedTime = clientData.animationNormalizedTime;
                             clients[clientName].position = clientData.position;
                             clients[clientName].currentScene = clientData.currentScene;
                             clients[clientName].characterType = clientData.characterType;
@@ -203,7 +222,7 @@ public class MultiPlay : MonoBehaviour
         }
 
         // 서버에서 받지 못한 플레이어를 제거할 배열
-        List<string> clientsToRemove = new List<string>();
+        List<string> clientsToRemove = new();
 
         foreach (var player in clients.Keys)
         {
@@ -263,9 +282,9 @@ public class MultiPlay : MonoBehaviour
                             MainTheadAction.Enqueue(() =>
                             {
                                 GetClientData(singleMessage);
-                                UpdatePlayerPositions();
-                                UpdatePlayerAttack();
-                                UpdatePlayerSpriteFlip();
+                                UpdateClientCharacterPositions();
+                                UpdateClientCharacterFlip();
+                                UpdateClientAnimationName();
                                 currentServerFrame++;
                                 currentServerFrame %= 1000;
                             });
@@ -285,7 +304,10 @@ public class MultiPlay : MonoBehaviour
         catch (Exception e)
         {
             if (isConnected)
+            {
+                OnApplicationQuit();
                 Debug.LogError("Server Receive Error: " + e.Message);
+            }
         }
     }
 
@@ -295,13 +317,10 @@ public class MultiPlay : MonoBehaviour
         if (clientName.Length != 6)
             return false;
 
-        if (receiveData.isAttack != 0 && receiveData.isAttack != 1)
-            return false;
-
         if (receiveData.isFilp != 0 && receiveData.isFilp != 1)
             return false;
 
-        if (receiveData.currentScene != SceneManager.GetActiveScene().name)
+        if (receiveData.currentScene != currentSceneName)
             return false;
 
         if (bossStage != null && bossStage.gameObject.activeSelf)
@@ -310,35 +329,20 @@ public class MultiPlay : MonoBehaviour
         return true;
     }
 
-    private void UpdatePlayerPositions()
+    private void UpdateClientCharacterPositions()
     {
         foreach (var client in clients)
         {
             ClientData clientData = client.Value;
 
-            if (clientData.currentScene != SceneManager.GetActiveScene().name)
+            if (clientData.currentScene != currentSceneName)
                 continue;
 
             clientData.clientObject.transform.position = clientData.position;
         }
     }
 
-    private void UpdatePlayerAttack()
-    {
-        currentClientAttack.Clear();
-
-        foreach (var client in clients)
-        {
-            ClientData clientData = client.Value;
-
-            bool isAttack = clientData.isAttack == 1 ? true : false;
-
-            if (isAttack)
-                currentClientAttack.Add(client.Key);
-        }
-    }
-
-    private void UpdatePlayerSpriteFlip()
+    private void UpdateClientCharacterFlip()
     {
         currentClientSpriteFlip.Clear();
 
@@ -346,10 +350,23 @@ public class MultiPlay : MonoBehaviour
         {
             ClientData clientData = client.Value;
 
-            bool isAttack = clientData.isFilp == 1 ? true : false;
+            bool isFilp = clientData.isFilp == 1;
 
-            if (isAttack)
+            if (isFilp)
                 currentClientSpriteFlip.Add(client.Key);
+        }
+    }
+
+    private void UpdateClientAnimationName()
+    {
+        currentClientAnimationName.Clear();
+
+        foreach(var client in clients)
+        {
+            ClientData clientData = client.Value;
+            AnimatorClientData animatorInfo = new(clientData.animationName, clientData.animationNormalizedTime);
+
+            currentClientAnimationName.Add(client.Key, animatorInfo);
         }
     }
 
@@ -381,8 +398,18 @@ public class MultiPlay : MonoBehaviour
         return null;
     }
 
-    private void GetBossStage(Scene scene, LoadSceneMode mode)
+    private string GetAnimattionName()
     {
+        AnimatorStateInfo state = animator.GetCurrentAnimatorStateInfo(0);
+
+        // 현재 애니메이션 상태의 이름 가져오기
+        string currentAnimationName = state.shortNameHash.ToString();
+        
+        return currentAnimationName;
+    }
+
+    private void GetBossStage(Scene scene, LoadSceneMode mode)
+    {        
         string currentSceneName = SceneManager.GetActiveScene().name;
 
         GameObject stages = GameObject.Find(currentSceneName[5..] + "Stages");
@@ -393,7 +420,7 @@ public class MultiPlay : MonoBehaviour
             {
                 Transform currentStage = stages.transform.GetChild(i);
 
-                if (currentStage.name == "BoosRoom")
+                if (currentStage.name == "BossRoom")
                 {
                     bossStage = currentStage;
                     return;

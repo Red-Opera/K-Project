@@ -20,7 +20,15 @@ struct ClientIdenty
 };
 
 struct Vector3 { float x, y, z; };
-struct ClientData { int isAttack; int isFilp; int frame; Vector3 position; std::string currentScene; std::string characterType; };
+struct ClientData 
+{ 
+	int isFilp;
+	std::string animationName;
+	float animationNormalizedTime;
+	Vector3 position; 
+	std::string currentScene; 
+	std::string characterType; 
+};
 
 // 해시 함수 정의
 namespace std {
