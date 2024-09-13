@@ -2,20 +2,22 @@ using UnityEngine;
 
 public class OnlinePlayer : MonoBehaviour
 {
-    private Animator animator;
-    private SpriteRenderer spriteRenderer;
+    public string playerName = "";
 
-    private Vector3 beforePos;
-    private readonly float error = 0.01f;
-    private bool isFacingRight = true;
+    private Animator animator;              // 다른 캐릭터의 Animation
+    private SpriteRenderer spriteRenderer;  // 다른 캐릭터의 SpriteRenderer
 
-    private int processServerFrame = 0;
+    private Vector3 beforePos;              // 이전 위치
+
+    private int processServerFrame = 0;     // 처리한 프레임
 
     private void Start()
     {
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+
         beforePos = transform.position;
+        animator.updateMode = AnimatorUpdateMode.AnimatePhysics;
     }
 
     private void Update()
@@ -23,27 +25,26 @@ public class OnlinePlayer : MonoBehaviour
         if (processServerFrame == MultiPlay.currentServerFrame)
             return;
 
-        // 이동 여부 체크
-        bool isWalk = Mathf.Abs(transform.position.x - beforePos.x) > error;
-        animator.SetBool("isWalk", isWalk);
+        // Sprite의 방향을 정함
+        if (MultiPlay.currentClientSpriteFlip.IndexOf(playerName) != -1)
+            spriteRenderer.flipX = true;
 
-        // 현재 이동 방향 계산
-        float deltaX = transform.position.x - beforePos.x;
+        else
+            spriteRenderer.flipX = false;
 
-        // 이동 방향에 따라 스프라이트 방향 설정
-        if (deltaX > error && !isFacingRight)
-            Flip();
-
-        else if (deltaX < -error && isFacingRight)
-            Flip();
+        // 다른 클라이언트의 애니메이션이 변경된 경우
+        if (MultiPlay.currentClientAnimationName.ContainsKey(playerName))
+            SetPlayerAnimation();
 
         beforePos = transform.position;
         processServerFrame = MultiPlay.currentServerFrame;
     }
 
-    private void Flip()
+    private void SetPlayerAnimation()
     {
-        isFacingRight = !isFacingRight;
-        spriteRenderer.flipX = !spriteRenderer.flipX;
+        AnimatorClientData animationData = MultiPlay.currentClientAnimationName[playerName];
+
+        animator.Play(int.Parse(animationData.animationName), 0, animationData.animationNormalizedTime);
+        animator.StopPlayback();
     }
 }

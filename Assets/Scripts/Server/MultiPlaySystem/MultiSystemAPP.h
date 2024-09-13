@@ -20,6 +20,15 @@ struct ClientIdenty
 };
 
 struct Vector3 { float x, y, z; };
+struct ClientData 
+{ 
+	int isFilp;
+	std::string animationName;
+	float animationNormalizedTime;
+	Vector3 position; 
+	std::string currentScene; 
+	std::string characterType; 
+};
 
 // 해시 함수 정의
 namespace std {
@@ -37,8 +46,9 @@ namespace std {
 class MultiSystemAPP
 {
 public:
-	static void BroadcastPosition();			// 플레이어 위치 전송하는 메소드
-	static void HandleClient(int clientSocket);	// 서버 데이터 전송, 수신 메소드
+	static void BroadcastPosition();						// 플레이어 위치 전송하는 메소드
+	static void HandleClient(int clientSocket);				// 서버 데이터 전송, 수신 메소드
+	static void FindErrorClinet(ClientIdenty newClient);	// 해당 이름의 클라이언트가 존재하는지 확인하는 메소드
 
 	static int StartServer(int port);		// 서버 시작 메소드
 	static void StopServer();				// 서버 종료 메소드
@@ -51,7 +61,7 @@ public:
 
 private:
 	static std::vector<int> clients;
-	static std::unordered_map<ClientIdenty, Vector3> clientPosition;
+	static std::unordered_map<ClientIdenty, ClientData> clientData;
 
 	static std::mutex clientsMutex;
 	static std::thread serverThread;

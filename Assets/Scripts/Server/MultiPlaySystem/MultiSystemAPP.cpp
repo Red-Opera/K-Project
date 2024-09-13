@@ -14,7 +14,7 @@
 std::vector<int> MultiSystemAPP::clients;
 std::mutex MultiSystemAPP::clientsMutex;
 std::thread MultiSystemAPP::serverThread;
-std::unordered_map<ClientIdenty, Vector3> MultiSystemAPP::clientPosition;
+std::unordered_map<ClientIdenty, ClientData> MultiSystemAPP::clientData;
 
 int MultiSystemAPP::serverSocket = 0;
 bool MultiSystemAPP::serverRunning = false;
@@ -24,13 +24,23 @@ void MultiSystemAPP::BroadcastPosition()
     std::lock_guard<std::mutex> guard(clientsMutex);
     std::string clientPosText;
 
-    for (const auto& client : clientPosition)
+    for (const auto& client : clientData)
     {
         std::string clientName = client.first.name;
-        Vector3 position = client.second;
+        ClientData clientData = client.second;
+
+        std::string isFilp = std::to_string(clientData.isFilp);
+        std::string animationNormalizedTime = std::to_string(clientData.animationNormalizedTime);
+        std::string x = std::to_string(clientData.position.x), y = std::to_string(clientData.position.y), z = std::to_string(clientData.position.z);
 
         Log::Message("[" + std::to_string(client.first.id) + "]");
-        clientPosText += "(" + clientName + "," + std::to_string(position.x) + "," + std::to_string(position.y) + "," + std::to_string(position.z) + ")\n";
+        clientPosText += "(" + clientName + "," + 
+                               isFilp + "," + 
+                               clientData.animationName + "," + 
+                               animationNormalizedTime + "," + 
+                               x + "," + y + "," + z + "," + 
+                               clientData.currentScene + "," + 
+                               clientData.characterType + ")\n";
     }
     clientPosText += "*";
 
@@ -58,33 +68,33 @@ void MultiSystemAPP::HandleClient(int clientSocket)
             break;
 
         std::string clientInfo(buffer, received);   // 버퍼를 string으로 변환함
-        Vector3 position = { 0, 0, 0 };             // 받은 클라이언트의 위치
-
-        std::string clientName;
+        ClientData receiveData{};                   // 클라리언트에서 받을 데이터
 
         std::istringstream stream(clientInfo); 
         char discard;
-        stream >> discard;                      // 첫 번째 글자를 읽어서 무시 '('
-        std::getline(stream, clientName, ',');  // 첫 번째 값을 clientName에 저장
-        stream >> position.x;                   // 다음 값을 position.x에 저장
-        stream.ignore(1, ',');                  // 구분자 ','를 무시
-        stream >> position.y;                   // 다음 값을 position.y에 저장
-        stream.ignore(1, ',');                  // 구분자 ','를 무시
-        stream >> position.z;                   // 다음 값을 position.z에 저장
+        stream >> discard;                                      // 첫 번째 글자를 읽어서 무시 '('
+        std::getline(stream, clientIdenty.name, ',');           // 첫 번째 값을 clientName에 저장
+        stream >> receiveData.isFilp;                           // 캐릭터의 이미지를 뒤집는지 여부 저장
+        stream.ignore(1, ',');                           
+        std::getline(stream, receiveData.animationName, ',');   // 캐릭터의 애니메이션 이름을 가져옴
+        stream >> receiveData.animationNormalizedTime;          // 애니메이션의 진헹시간을 가져옴
+        stream.ignore(1, ',');
+        stream >> receiveData.position.x;                       // 다음 값을 position.x에 저장
+        stream.ignore(1, ',');                                
+        stream >> receiveData.position.y;                       // 다음 값을 position.y에 저장
+        stream.ignore(1, ',');                                  
+        stream >> receiveData.position.z;                       // 다음 값을 position.z에 저장
+        stream.ignore(1, ',');                                
+        std::getline(stream, receiveData.currentScene, ',');    // 캐릭터의 씬 이름을 가져옴
+        std::getline(stream, receiveData.characterType, ')');   // 캐릭터의 씬 이름을 가져옴
 
         // 클라이언트 이름이 비어있거나 다를 경우에만 업데이트
         {
             std::lock_guard<std::mutex> guard(clientsMutex);
+            FindErrorClinet(clientIdenty);
 
-            if (clientIdenty.name.empty())
-                clientIdenty.name = clientName;
-
-            // 클라이언트 이름이 다를 경우 처리
-            else if (clientIdenty.name != clientName)
-                continue;
-
-            // 클라이언트 이름과 ID로 클라이언트의 위치 업데이트
-            clientPosition[clientIdenty] = { position.x, position.y, position.z };
+            // 클라이언트 이름과 ID로 클라이언트의 위치 및 공격 여부 업데이트
+            clientData[clientIdenty] = receiveData;
         }
 
         BroadcastPosition();
@@ -98,10 +108,29 @@ void MultiSystemAPP::HandleClient(int clientSocket)
         if (it != clients.end())
             clients.erase(it);
 
-        clientPosition.erase(clientIdenty);
+        clientData.erase(clientIdenty);
     }
 
     close(clientSocket);
+}
+
+void MultiSystemAPP::FindErrorClinet(ClientIdenty newClient)
+{
+    std::vector<ClientIdenty> clientToRemove;
+
+    // 저장되어 있는 모든 클라이언트의 정보를 비교하여 ID 또는 이름이 바뀌는 경우를 찾음
+    for (const auto& client : clientData)
+    {
+        if (client.first.id == newClient.id && client.first.name != newClient.name)
+            clientToRemove.push_back(client.first);
+
+        else if (client.first.name == newClient.name && client.first.id != newClient.id)
+            clientToRemove.push_back(client.first);
+    }
+
+    // 잘못된 클라이언트를 제거함
+    for (const auto& clientID : clientToRemove)
+        clientData.erase(clientID);
 }
 
 int MultiSystemAPP::StartServer(int port)
