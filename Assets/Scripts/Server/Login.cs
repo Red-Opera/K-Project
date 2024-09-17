@@ -31,11 +31,11 @@ public class Login : MonoBehaviour
     private TextMeshProUGUI idHintText;                     // ID 힌트 텍스트
     private TextMeshProUGUI passwordHintText;               // PassWord 텍스트 배경
 
-    private readonly string loginUrl = "6a72ac4cda63c5b33e20a917774fa7460b51e6ed6ac73" +
-                                       "a23f3ddfcefcd327ea9dd40dcffbc30a9c27462d85df1" +
-                                       "b4c62b1f483ec4e8c69d5d7320d778d84ff6b5c62a88a" + 
-                                       "48ddee07d7f9f58b0a31898bb9b0901f4542ef148a2e1" +
-                                       "6596ddce46ce";
+    private readonly string loginUrl = "6a72ac4cda5bc5ca3" +
+        "e20a917ac4fa746d99765c4d6cd4ffbdc759da1a850e8422" +
+        "3fd2a491b419a7c5d9fe85d67b4d37ae5099a1de9c4c9c37" +
+        "f10e28c7b47ada9f4d5acf15bde320a042017aba65cf90c" +
+        "6e64c812b32e4748bbc62e1ddd12460e";
     private int newId = 0;                          // 다음에 추가될 ID 값
 
     private void OnEnable()

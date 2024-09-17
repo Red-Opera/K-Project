@@ -51,7 +51,7 @@ public class MultiPlay : MonoBehaviour
     private Animator animator;
     private Transform bossStage;
 
-    private static readonly string IP = "e2ec3761d72ed8486148a959f79c4627";
+    private static readonly string IP = "e20b3746d78ae348e9484b59a8e63a27";
     private static readonly string port = "47ed4ff4f62e7248fedf65a9dd6f4654";
     private string currentSceneName;
     private bool isConnected = false;
