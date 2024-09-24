@@ -8,16 +8,16 @@ using UnityEngine;
 public class WeaponController : MonoBehaviour
 {
     public MyWeapon myWeapon;
-    public MyWeapon lastWeapon;
     public State playerState;
+    public MyWeapon[] skillList;
     SpriteRenderer spriteRenderer;
     Animator anim;
     AudioSource audioSource;
     public Rigidbody2D rigid;
     bool isAtk = false;
+    int skillCount = 0;
     void Start()
     {
-        lastWeapon = myWeapon;
         myWeapon.InitSetting();
         playerState = Resources.Load<State>("Scriptable/Player");
         anim = GetComponent<Animator>();
@@ -27,10 +27,6 @@ public class WeaponController : MonoBehaviour
     }
     void Update()
     {
-        if(lastWeapon != myWeapon){
-            lastWeapon = myWeapon;
-            myWeapon.InitSetting();
-        }
         if(Input.GetMouseButtonDown(0)||Input.GetKeyDown(KeyCode.LeftControl)){
             if(isAtk == false){
                 myWeapon.InitSetting();
@@ -47,6 +43,7 @@ public class WeaponController : MonoBehaviour
                 anim.SetTrigger(myWeapon.Weapon.animName);
             }
         }
+        CheckSkillChange();
     }
 
     void CoolTime(){
@@ -66,6 +63,14 @@ public class WeaponController : MonoBehaviour
         }
         else{
             myWeapon.Weapon.fowardSpeed = new Vector2(myWeapon.Weapon.dir * 2,0);
+        }
+    }
+
+    void CheckSkillChange(){
+        if(Input.GetKeyDown(KeyCode.Tab)){
+            skillCount++;
+            myWeapon = skillList[skillCount%skillList.Length];
+            myWeapon.InitSetting();
         }
     }
 }

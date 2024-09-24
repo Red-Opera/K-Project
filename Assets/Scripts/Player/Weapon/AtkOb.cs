@@ -38,10 +38,12 @@ public class AtkOb : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
         int Damage = GameManager.info.allPlayerState.damage;
+        int LevelCoaf = GameManager.info.allPlayerState.level/5;
+        Debug.Log("LevelCoaf = " + LevelCoaf);
         if(other.gameObject.layer == 7){
             Goblin monster = other.gameObject.GetComponent<Goblin>();
             if(monster != null){
-                monster.Damaged(weapon.damage);
+                monster.Damaged((int)(weapon.damage* (1+ LevelCoaf*0.5f)));
             }
         }
         if(other.gameObject.layer==11 || other.gameObject.layer==14){

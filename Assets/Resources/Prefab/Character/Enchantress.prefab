@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4949410289790187918}
   - component: {fileID: 8222405733559147191}
   - component: {fileID: 8002359174957270194}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -156,6 +156,8 @@ GameObject:
   - component: {fileID: 4582293565559528343}
   - component: {fileID: 7939735675632028910}
   - component: {fileID: 2803419605674615329}
+  - component: {fileID: 9151646755892490135}
+  - component: {fileID: 3347712707706624341}
   m_Layer: 8
   m_Name: Enchantress
   m_TagString: Player
@@ -219,7 +221,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 99
+  m_SortingOrder: 10
   m_Sprite: {fileID: 1337866304, guid: 4836c5d3eefd5344998d645bc77ff3e6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -264,6 +266,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea90129d386ef394c84c61fcff29fcf4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hpLevelManager: {fileID: 0}
   result: {fileID: 0}
   playerState: {fileID: 0}
   isJumping: 0
@@ -342,9 +345,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afa296b3c9f86684e8699b3f7fc8a2d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myWeapon: {fileID: 4582293565559528343}
-  lastWeapon: {fileID: 0}
+  myWeapon: {fileID: 186166090188397616}
   playerState: {fileID: 0}
+  skillList:
+  - {fileID: 186166090188397616}
+  - {fileID: 4582293565559528343}
+  - {fileID: 7939735675632028910}
   rigid: {fileID: 0}
 --- !u!114 &186166090188397616
 MonoBehaviour:
@@ -478,3 +484,28 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &9151646755892490135
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9094955460031638816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af1d3681111c71f4b92dabc6d503abdb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  getItem: 
+--- !u!114 &3347712707706624341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9094955460031638816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 977306c594b273d428c233ab816a9136, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

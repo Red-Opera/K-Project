@@ -33,6 +33,7 @@ public class Goblin : MonoBehaviour
         localScaleX = trans.localScale.x;
         SetState();
         SetSpeed();
+        CkhGround();
     }
 
     // Update is called once per frame
@@ -56,7 +57,6 @@ public class Goblin : MonoBehaviour
         }else{
             anim.SetBool("isWalk",false);
         }
-        CkhGround();
     }
      
     void SetSpeed(){
@@ -126,26 +126,36 @@ public class Goblin : MonoBehaviour
         isAtk = false;
     }
     void CkhGround(){
-        RaycastHit2D platformHit = Physics2D.Raycast(
-            new Vector2(rigid.position.x + dir * 0.5f, rigid.position.y),
+        // 이동 방향에 따른 Raycast 위치 설정
+        Vector2 rayOriginFront = new Vector2(rigid.position.x + dir * 0.5f, rigid.position.y);
+        Vector2 rayOriginBottom = new Vector2(rigid.position.x, rigid.position.y);
+
+        // 전방에 platform이 있는지 확인
+        RaycastHit2D platformHitFront = Physics2D.Raycast(
+            rayOriginFront,
             Vector2.down,
             1,
             LayerMask.GetMask("Platform")
         );
 
+        // Goblin이 땅에 있는지 확인
         RaycastHit2D groundHit = Physics2D.Raycast(
-            new Vector2(rigid.position.x, rigid.position.y),
+            rayOriginBottom,
             Vector2.down,
             1,
             LayerMask.GetMask("Platform")
         );
 
-        if (platformHit.collider == null || groundHit.collider == null)
+        // 전방에 platform이 없거나 Goblin이 땅에 있지 않을 경우 방향 전환
+        if (platformHitFront.collider == null || groundHit.collider == null)
         {
-            moveSpeed *= -1;
+            xSpeed *= -1;
             dir *= -1;
             trans.localScale = new Vector3(localScaleX * dir, trans.localScale.y, 1);
-            //Debug.Log("change");
+            Debug.Log("change");
         }
+        Debug.DrawLine(rayOriginFront, rayOriginFront + Vector2.down, Color.red);
+        Debug.DrawLine(rayOriginBottom, rayOriginBottom + Vector2.down, Color.blue);
+        Invoke("CkhGround", 0.1f);
     }
 }

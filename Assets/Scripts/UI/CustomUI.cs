@@ -61,8 +61,6 @@ public class CustomUI : MonoBehaviour
                 // ī�޶� ������ ������
                 for (int j = 0; j < defualtCameraStack.Count; j++)
                     toCameraStack.Add(defualtCameraStack[j]);
-
-                newPlayer.GetComponent<PMove>().FindUI();
                 
                 DontDestroyOnLoad(newPlayer);
                 Destroy(destroyPlayer);

@@ -326,6 +326,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea90129d386ef394c84c61fcff29fcf4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hpLevelManager: {fileID: 0}
   result: {fileID: 0}
   playerState: {fileID: 0}
   isJumping: 0
@@ -343,8 +344,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myWeapon: {fileID: 2743045888845656711}
-  lastWeapon: {fileID: 0}
   playerState: {fileID: 0}
+  skillList:
+  - {fileID: 2743045888845656711}
+  - {fileID: 2266719115439866218}
+  - {fileID: 959636348733121163}
   rigid: {fileID: 0}
 --- !u!114 &2743045888845656711
 MonoBehaviour:
