@@ -1,8 +1,7 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
-public class Minimap : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class Minimap : MonoBehaviour
 {
     [SerializeField] GameObject camera;
     [SerializeField] private TextMeshProUGUI multiple;      // 배율을 표시할 텍스트
@@ -12,7 +11,6 @@ public class Minimap : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     [SerializeField] private float minDistance;             // 조절할 스케일 팩터
 
     private Camera cameraCompo;
-    private bool isMouseOver = false;
 
     void Start()
     {
@@ -51,16 +49,5 @@ public class Minimap : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
             multiple.text = multipleValue.ToString("X#0.#");
         }
-    }
-
-    // 마우스가 UI 요소 위에 있을 때에만 스크롤 처리
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        isMouseOver = true;
-    }
-
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        isMouseOver = false;
     }
 }

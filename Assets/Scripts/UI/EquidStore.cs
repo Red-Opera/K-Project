@@ -10,8 +10,6 @@ public class EquidStore : MonoBehaviour
 {
     [SerializeField] public List<SelectableItem> selectables;                   // 전시할 수 있는 아이템
 
-    [SerializeField] private GameObject inventory;                  // 인벤토리 오브젝트
-    [SerializeField] private GameObject inventslot;                 // 인벤토리 슬롯들을 저장하는 오브젝드
     [SerializeField] private GameObject slots;                      // 슬롯을 저장하는 오브젝트
     [SerializeField] private GameObject details;                    // 해당 아이템의 세부 정보들을 저장하는 오브젝트
     [SerializeField] private GameObject item;                       // 전시할 때 사용되는 프레임
@@ -24,15 +22,13 @@ public class EquidStore : MonoBehaviour
     [SerializeField] int contentprintPerSec;                        // 1초당 출력되는 글자 수
 
     private TextMeshProUGUI outText;// 세부내용을 출력할 위치
-    private AudioSource audio;      // 소리 출력 컴포넌트
+    private AudioSource playerAudio;      // 소리 출력 컴포넌트
     private string sceneName;       // 현재 씬 이름
     private string typeContent;     // 세부내용에 입력할 내용
     private bool isType = false;    // 현재 내용을 쓰고 있는지 여부
 
     public void Start()
     {
-        Debug.Assert(inventory != null, "인벤토리가 없습니다.");
-        Debug.Assert(inventslot != null, "인벤토리 슬롯이 없습니다.");
         Debug.Assert(slots != null, "장비 상점의 전시할 슬롯이 없습니다.");
         Debug.Assert(details != null, "세부적인 내용을 보여주는 프레임이 없습니다.");
         Debug.Assert(item != null, "전시할 때 사용되는 프레임이 없습니다.");
@@ -40,7 +36,6 @@ public class EquidStore : MonoBehaviour
         Debug.Assert(saleUI != null, "판매 UI가 없습니다.");
 
         buyButton.onClick.AddListener(() => EquidStoreItem.BuyItem());
-        
     }
 
     public void Update()
@@ -63,8 +58,8 @@ public class EquidStore : MonoBehaviour
         else if (!saleUI.activeSelf && Input.GetKeyDown(KeyCode.Escape))
             gameObject.SetActive(false);
 
-        if (!inventory.activeSelf)
-            inventory.SetActive(true);
+        if (!UINotDestroyOpen.inventory.activeSelf)
+            UINotDestroyOpen.inventory.SetActive(true);
     }
 
     // 아이템 전시 공간을 업데이트하는 메소드
@@ -184,10 +179,12 @@ public class EquidStore : MonoBehaviour
         GameObject getItem = selectFrame.GetChild(0).gameObject;
 
         // 해당 아이템을 인벤토리에 추가
-        InventroyPosition.CallAddItem(
-            getItem.transform.GetChild(0).GetComponent<Image>().sprite.name, 
-            getItem.GetComponent<InventableEquipment>().inventableEquipment,
-            getItem.GetComponent<EquidState>());
+        //InventroyPosition.CallAddItem(
+        //    getItem.transform.GetChild(0).GetComponent<Image>().sprite.name, 
+        //    getItem.GetComponent<InventableEquipment>().inventableEquipment,
+        //    getItem.GetComponent<EquidState>());
+
+        ResultUI.GetItem(getItem.transform.GetChild(0).GetComponent<Image>().sprite.name);
 
         // 현재돈 동기화
         GameManager.info.playerState.money -= cost;
@@ -197,25 +194,25 @@ public class EquidStore : MonoBehaviour
         GameObject newBuyEffect = Instantiate(buyEffect, buyEffectTransform);
         newBuyEffect.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = cost + "G";
 
-        audio.PlayOneShot(buySound);
+        playerAudio.PlayOneShot(buySound);
 
         Destroy(getItem);
     }
 
     public void OnEnable()
     {
-        if (audio == null)
+        if (playerAudio == null)
         {
-            audio = GetComponent<AudioSource>();
-            Debug.Assert(audio != null, "소리 컴포넌트가 없습니다.");
+            playerAudio = GetComponent<AudioSource>();
+            Debug.Assert(playerAudio != null, "소리 컴포넌트가 없습니다.");
         }
 
-        audio.PlayOneShot(openSound);
+        playerAudio.PlayOneShot(openSound);
 
         // 현재 씬을 가져옴
         string currentScene = SceneManager.GetActiveScene().name;
 
-        inventory.SetActive(true);
+        UINotDestroyOpen.inventory.SetActive(true);
         saleUI.SetActive(false);
 
         // 씬이 바뀌었을 경우에만 상점이 업데이트되도록 설정
@@ -229,7 +226,7 @@ public class EquidStore : MonoBehaviour
 
     public void OnDisable()
     {
-        inventory.SetActive(false);
+        UINotDestroyOpen.inventory.SetActive(false);
         saleUI.SetActive(false);
     }
 }

@@ -5,6 +5,8 @@ using System.Reflection;
 
 public class InventroyPosition : MonoBehaviour
 {
+    public static GameObject inventory;
+
     public static bool isChange = true;                 // 자리를 교환했는지 여부
     public static bool isAddSucceed = false;            // 구매 성공 여부
     public static bool isAddItemable = false;           // AddItem 사용 가능 여부
@@ -20,7 +22,7 @@ public class InventroyPosition : MonoBehaviour
     public List<Sprite> spriteData = new List<Sprite>();                        // 추가할 아이템 이미지
     private Dictionary<string, Sprite> sprites;                                 // 추가할 아이템 이름과 이미지 배열
 
-    public void Awake()
+    private void Awake()
     {
         displayPos = new Transform[slots.transform.childCount];
         for (int i = 0; i < slots.transform.childCount; i++)
@@ -49,6 +51,8 @@ public class InventroyPosition : MonoBehaviour
 
         foreach (Sprite sprite in spriteData)
             sprites.Add(sprite.name, sprite);
+
+        inventory = slots;
 
         isAddItemable = true;
         OnAddItem = AddItem;
