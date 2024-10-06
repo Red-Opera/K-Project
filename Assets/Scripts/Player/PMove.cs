@@ -17,9 +17,12 @@ public class PMove : MonoBehaviour
     public HpLevelManager hpLevelManager;
     public ResultUI result;
     public State playerState;
-    public bool isJumping;
-    public bool isAttack = false;
-
+    private bool isJumping;
+    private bool isAttack = false;
+    private bool usingUI = false;
+    private GameObject interactiveUi;
+    private Dialog dialog;
+    private Coroutine uiCheckCoroutine;
     private GameObject hpBar;
     void Awake()
     {
@@ -49,9 +52,12 @@ public class PMove : MonoBehaviour
     }
     void Update()
     {
-        Move();
-        Jump();
-        Dash();
+        if(usingUI == false){
+            Move();
+            Jump();
+            Dash();
+        }
+
         if(playerState.currentHp <= 0 && gameObject.layer != 12){
             Die();
         }
@@ -121,6 +127,9 @@ public class PMove : MonoBehaviour
             Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector2 dashDir = mousePos - rigid.position;
             rigid.velocity += dashDir.normalized* 8;
+            if(rigid.velocity.y >= playerState.jumpPower*5){
+                rigid.velocity = new Vector2(rigid.velocity.x, playerState.jumpPower*5);
+            }
             dashUI.DashUIApply();
 
             if(dashDir.x >0){
@@ -163,5 +172,45 @@ public class PMove : MonoBehaviour
     void reload(Scene scene, LoadSceneMode mode)
     {
         FindUI();
+    }
+
+    public void SendUI(GameObject openUI){
+        interactiveUi = openUI;
+        if (interactiveUi.tag == "Immovable"){
+            usingUI = true;
+            StopPlayerMovement();
+
+            uiCheckCoroutine = StartCoroutine(ChkUiState());
+        }
+    }
+    public void SendDialog(Dialog chat){
+        dialog = chat;
+        usingUI = true;
+        StopPlayerMovement();
+
+        uiCheckCoroutine = StartCoroutine(ChkDialogState());
+    }
+
+    IEnumerator ChkUiState(){
+        while(interactiveUi.activeSelf){
+            yield return null;
+        }
+
+        usingUI = false;
+    }
+
+    IEnumerator ChkDialogState(){
+        while(dialog.isActiveAndEnabled){
+            yield return null;
+        }
+
+        usingUI = false;
+    }
+
+    void StopPlayerMovement(){
+        anim.SetBool("isWalk", false);
+        anim.SetBool("isRun",false);
+        anim.SetBool("isJump",false);
+        rigid.velocity = new Vector2(rigid.velocity.x * 0.1f, rigid.velocity.y);
     }
 }

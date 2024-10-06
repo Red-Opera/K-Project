@@ -16,6 +16,11 @@ public class WeaponController : MonoBehaviour
     public Rigidbody2D rigid;
     bool isAtk = false;
     int skillCount = 0;
+
+    GameObject interactiveUi;
+    private bool usingUI = false;
+    private Coroutine uiCheckCoroutine;
+    private Dialog dialog;
     void Start()
     {
         myWeapon.InitSetting();
@@ -27,6 +32,12 @@ public class WeaponController : MonoBehaviour
     }
     void Update()
     {
+        if(usingUI == false){
+            Attack();
+            CheckSkillChange();
+        }
+    }
+    void Attack(){
         if(Input.GetMouseButtonDown(0)||Input.GetKeyDown(KeyCode.LeftControl)){
             if(isAtk == false){
                 myWeapon.InitSetting();
@@ -43,7 +54,6 @@ public class WeaponController : MonoBehaviour
                 anim.SetTrigger(myWeapon.Weapon.animName);
             }
         }
-        CheckSkillChange();
     }
 
     void CoolTime(){
@@ -72,5 +82,36 @@ public class WeaponController : MonoBehaviour
             myWeapon = skillList[skillCount%skillList.Length];
             myWeapon.InitSetting();
         }
+    }
+
+    public void SendUI(GameObject openUI){
+        interactiveUi = openUI;
+        if (interactiveUi.tag == "Immovable"){
+            usingUI = true;
+            
+            uiCheckCoroutine = StartCoroutine(ChkUiState());
+        }
+    }
+
+    public void SendDialog(Dialog chat){
+        dialog = chat;
+        usingUI = true;
+        uiCheckCoroutine = StartCoroutine(ChkDialogState());
+    }
+
+    IEnumerator ChkUiState(){
+        while(interactiveUi.activeSelf){
+            yield return null;
+        }
+
+        usingUI = false;
+    }
+
+    IEnumerator ChkDialogState(){
+        while(dialog.isActiveAndEnabled){
+            yield return null;
+        }
+
+        usingUI = false;
     }
 }
