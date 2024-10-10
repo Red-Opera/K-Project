@@ -17,7 +17,7 @@ MonoBehaviour:
   maxHP: 100
   currentHp: 100
   currentExp: 850
-  damage: 15
+  damage: 150000
   defense: 10
   critical: 0.05
   moveSpeed: 5
