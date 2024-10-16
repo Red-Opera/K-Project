@@ -40,7 +40,7 @@ public class ResultUI : MonoBehaviour
     private static bool isPlayTimeReset = false;
     private bool isShowEnd = false;         // Result UI 모든 결과 출력 여부
 
-    private void Start()
+    private void Awake()
     {
         SceneManager.sceneLoaded += OnSceceLoaded;
         OnSceceLoaded(SceneManager.GetActiveScene(), LoadSceneMode.Single);
@@ -69,11 +69,12 @@ public class ResultUI : MonoBehaviour
 
         fade = GameObject.Find("Fade").GetComponent<FadeEffect>();
 
-        // 게임 시작할 때는 단검으로 시작
-        if (SceneManager.GetActiveScene().name == "Map")
-            GetItem("단검");
-
         //Invoke("GameIsEnd", 1.0f);
+    }
+
+    public void Start()
+    {
+        StartCoroutine(StartGetItem());
     }
 
     public void Update()
@@ -93,6 +94,16 @@ public class ResultUI : MonoBehaviour
         // 모든 Result UI 출력 후 확인을 눌렸을 경우
         if (isShowEnd && (Input.GetKeyUp(KeyCode.Space) || Input.GetKeyUp(KeyCode.KeypadEnter)))
             StartCoroutine(ReStart());
+    }
+
+    private IEnumerator StartGetItem()
+    {
+        while (!InventroyPosition.isItemAdd && Login.currentLoginName != "")
+            yield return null;
+
+        // 게임 시작할 때는 단검으로 시작
+        if (SceneManager.GetActiveScene().name == "Map" && InventroyPosition.inventory.transform.GetChild(0).childCount <= 0)
+            GetItem("단검");
     }
 
     // 게임이 끝났을 경우 호출되는 메소드

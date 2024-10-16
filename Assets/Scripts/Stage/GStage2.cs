@@ -44,9 +44,9 @@ public class GStage2 : MonoBehaviour
             fadeImage.color = new Color(0f, 0f, 0f, alpha);
             yield return null;
         }
-        player.transform.position = new Vector3(0, 0, 0); 
+        player.transform.position = new Vector3(0, 0, 0);
         // 씬 전환
-        SceneManager.LoadScene("Stage2");
+        Loading.LoadScene("Stage2");
 
         // 페이드 인 효과
         timer = 0f;

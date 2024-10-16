@@ -1,0 +1,189 @@
+﻿  pch.cpp
+  dllmain.cpp
+  PriorityQueueDLL.cpp
+D:\Development\Game\UnityEditer\K-Project\Assets\Scripts\C++DLL\ReturnType.h(49,45): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  (소스 파일 'PriorityQueue/PriorityQueueDLL.cpp'을(를) 컴파일하는 중)
+  
+D:\Development\Game\UnityEditer\K-Project\Assets\Scripts\C++DLL\ReturnType.h(49,51): warning C4244: '초기화 중': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  (소스 파일 'PriorityQueue/PriorityQueueDLL.cpp'을(를) 컴파일하는 중)
+  
+D:\Development\Game\UnityEditer\K-Project\Assets\Scripts\C++DLL\PriorityQueue\PriorityQueueDLL.h(33,51): warning C4910: 'PriorityQueueDLL<int>': '__declspec(dllexport)' 및 'extern'이 명시적 인스턴스화에서 호환되지 않습니다.
+  (소스 파일 'PriorityQueue/PriorityQueueDLL.cpp'을(를) 컴파일하는 중)
+  
+D:\Development\Game\UnityEditer\K-Project\Assets\Scripts\C++DLL\PriorityQueue\PriorityQueueDLL.h(34,54): warning C4910: 'PriorityQueueDLL<double>': '__declspec(dllexport)' 및 'extern'이 명시적 인스턴스화에서 호환되지 않습니다.
+  (소스 파일 'PriorityQueue/PriorityQueueDLL.cpp'을(를) 컴파일하는 중)
+  
+D:\Development\Game\UnityEditer\K-Project\Assets\Scripts\C++DLL\PriorityQueue\PriorityQueueDLL.h(35,53): warning C4910: 'PriorityQueueDLL<float>': '__declspec(dllexport)' 및 'extern'이 명시적 인스턴스화에서 호환되지 않습니다.
+  (소스 파일 'PriorityQueue/PriorityQueueDLL.cpp'을(를) 컴파일하는 중)
+  
+D:\Development\Game\UnityEditer\K-Project\Assets\Scripts\C++DLL\PriorityQueue\PriorityQueueDLL.h(36,54): warning C4910: 'PriorityQueueDLL<IntInt>': '__declspec(dllexport)' 및 'extern'이 명시적 인스턴스화에서 호환되지 않습니다.
+  (소스 파일 'PriorityQueue/PriorityQueueDLL.cpp'을(를) 컴파일하는 중)
+  
+D:\Development\Game\UnityEditer\K-Project\Assets\Scripts\C++DLL\PriorityQueue\PriorityQueueDLL.h(37,56): warning C4910: 'PriorityQueueDLL<FloatInt>': '__declspec(dllexport)' 및 'extern'이 명시적 인스턴스화에서 호환되지 않습니다.
+  (소스 파일 'PriorityQueue/PriorityQueueDLL.cpp'을(를) 컴파일하는 중)
+  
+D:\Development\Game\UnityEditer\K-Project\Assets\Scripts\C++DLL\PriorityQueue\PriorityQueueDLL.h(38,62): warning C4910: 'PriorityQueueDLL<IntFloatChar32>': '__declspec(dllexport)' 및 'extern'이 명시적 인스턴스화에서 호환되지 않습니다.
+  (소스 파일 'PriorityQueue/PriorityQueueDLL.cpp'을(를) 컴파일하는 중)
+  
+D:\Development\Game\Visual Studio 2022\VC\Tools\MSVC\14.41.34120\include\xmemory(902,19): error C2338: static_assert failed: 'The C++ Standard forbids allocators for reference elements because of [allocator.requirements].'
+  (소스 파일 'PriorityQueue/PriorityQueueDLL.cpp'을(를) 컴파일하는 중)
+      D:\Development\Game\Visual Studio 2022\VC\Tools\MSVC\14.41.34120\include\xmemory(902,19):
+      템플릿 인스턴스화 컨텍스트(가장 오래된 인스턴스화 컨텍스트)가
+          D:\Development\Game\UnityEditer\K-Project\Assets\Scripts\C++DLL\PriorityQueue\PriorityQueueDLL.cpp(108,20):
+          컴파일되는 클래스 템플릿 인스턴스화 'PriorityQueueDLL<IntFloatChar32 &>'에 대한 참조를 확인하세요.
+          D:\Development\Game\Visual Studio 2022\VC\Tools\MSVC\14.41.34120\include\queue(222,104):
+          컴파일되는 클래스 템플릿 인스턴스화 'std::vector<T,std::allocator<T>>'에 대한 참조를 확인하세요.
+          with
+          [
+              T=IntFloatChar32 &
+          ]
+          D:\Development\Game\Visual Studio 2022\VC\Tools\MSVC\14.41.34120\include\vector(435,26):
+          컴파일되는 별칭 템플릿 인스턴스화 'std::_Rebind_alloc_t<_Alloc,_Ty>'에 대한 참조를 확인하세요.
+          with
+          [
+              _Alloc=std::allocator<IntFloatChar32 &>,
+              _Ty=IntFloatChar32 &
+          ]
+          D:\Development\Game\Visual Studio 2022\VC\Tools\MSVC\14.41.34120\include\xmemory(746,69):
+          컴파일되는 클래스 템플릿 인스턴스화 'std::allocator_traits<_Alloc>'에 대한 참조를 확인하세요.
+          with
+          [
+              _Alloc=std::allocator<IntFloatChar32 &>
+          ]
+          D:\Development\Game\Visual Studio 2022\VC\Tools\MSVC\14.41.34120\include\xmemory(723,27):
+          컴파일되는 클래스 템플릿 인스턴스화 'std::_Default_allocator_traits<_Alloc>'에 대한 참조를 확인하세요.
+          with
+          [
+              _Alloc=std::allocator<IntFloatChar32 &>
+          ]
+          D:\Development\Game\Visual Studio 2022\VC\Tools\MSVC\14.41.34120\include\xmemory(626,45):
+          컴파일되는 클래스 템플릿 인스턴스화 'std::allocator<T>'에 대한 참조를 확인하세요.
+          with
+          [
+              T=IntFloatChar32 &
+          ]
+  
+D:\Development\Game\Visual Studio 2022\VC\Tools\MSVC\14.41.34120\include\xmemory(910,69): error C2528: 'abstract declarator': 참조에 대한 포인터를 만들 수 없습니다.
+  (소스 파일 'PriorityQueue/PriorityQueueDLL.cpp'을(를) 컴파일하는 중)
+  
+D:\Development\Game\Visual Studio 2022\VC\Tools\MSVC\14.41.34120\include\xmemory(911,75): error C2528: 'abstract declarator': 참조에 대한 포인터를 만들 수 없습니다.
+  (소스 파일 'PriorityQueue/PriorityQueueDLL.cpp'을(를) 컴파일하는 중)
+  
+D:\Development\Game\Visual Studio 2022\VC\Tools\MSVC\14.41.34120\include\xmemory(929,60): error C2528: 'address': 참조에 대한 포인터를 만들 수 없습니다.
+  (소스 파일 'PriorityQueue/PriorityQueueDLL.cpp'을(를) 컴파일하는 중)
+  
+D:\Development\Game\Visual Studio 2022\VC\Tools\MSVC\14.41.34120\include\xmemory(933,66): error C2528: 'address': 참조에 대한 포인터를 만들 수 없습니다.
+  (소스 파일 'PriorityQueue/PriorityQueueDLL.cpp'을(를) 컴파일하는 중)
+  
+D:\Development\Game\Visual Studio 2022\VC\Tools\MSVC\14.41.34120\include\xmemory(946,45): error C2528: '_Ptr': 참조에 대한 포인터를 만들 수 없습니다.
+  (소스 파일 'PriorityQueue/PriorityQueueDLL.cpp'을(를) 컴파일하는 중)
+  
+D:\Development\Game\Visual Studio 2022\VC\Tools\MSVC\14.41.34120\include\xmemory(952,70): error C2528: 'allocate': 참조에 대한 포인터를 만들 수 없습니다.
+  (소스 파일 'PriorityQueue/PriorityQueueDLL.cpp'을(를) 컴파일하는 중)
+  
+D:\Development\Game\Visual Studio 2022\VC\Tools\MSVC\14.41.34120\include\xmemory(965,96): error C2528: 'allocate': 참조에 대한 포인터를 만들 수 없습니다.
+  (소스 파일 'PriorityQueue/PriorityQueueDLL.cpp'을(를) 컴파일하는 중)
+  
+D:\Development\Game\Visual Studio 2022\VC\Tools\MSVC\14.41.34120\include\xmemory(628,42): error C2528: 'abstract declarator': 참조에 대한 포인터를 만들 수 없습니다.
+  (소스 파일 'PriorityQueue/PriorityQueueDLL.cpp'을(를) 컴파일하는 중)
+  
+D:\Development\Game\Visual Studio 2022\VC\Tools\MSVC\14.41.34120\include\xmemory(629,48): error C2528: 'abstract declarator': 참조에 대한 포인터를 만들 수 없습니다.
+  (소스 파일 'PriorityQueue/PriorityQueueDLL.cpp'을(를) 컴파일하는 중)
+  
+D:\Development\Game\Visual Studio 2022\VC\Tools\MSVC\14.41.34120\include\xmemory(648,1): error C2528: '<template-parameter>': 참조에 대한 포인터를 만들 수 없습니다.
+  (소스 파일 'PriorityQueue/PriorityQueueDLL.cpp'을(를) 컴파일하는 중)
+  
+D:\Development\Game\Visual Studio 2022\VC\Tools\MSVC\14.41.34120\include\xmemory(662,1): error C2528: '<template-parameter>': 참조에 대한 포인터를 만들 수 없습니다.
+  (소스 파일 'PriorityQueue/PriorityQueueDLL.cpp'을(를) 컴파일하는 중)
+  
+D:\Development\Game\Visual Studio 2022\VC\Tools\MSVC\14.41.34120\include\vector(441,19): error C2338: static_assert failed: 'The C++ Standard forbids containers of non-object types because of [container.requirements].'
+  (소스 파일 'PriorityQueue/PriorityQueueDLL.cpp'을(를) 컴파일하는 중)
+  
+D:\Development\Game\Visual Studio 2022\VC\Tools\MSVC\14.41.34120\include\xmemory(759,89): error C2528: 'abstract declarator': 참조에 대한 포인터를 만들 수 없습니다.
+  (소스 파일 'PriorityQueue/PriorityQueueDLL.cpp'을(를) 컴파일하는 중)
+      D:\Development\Game\Visual Studio 2022\VC\Tools\MSVC\14.41.34120\include\xmemory(759,89):
+      템플릿 인스턴스화 컨텍스트(가장 오래된 인스턴스화 컨텍스트)가
+          D:\Development\Game\Visual Studio 2022\VC\Tools\MSVC\14.41.34120\include\vector(592,50):
+          컴파일되는 변수 템플릿 'const bool _Is_simple_alloc_v<std::allocator<IntFloatChar32 &> >'에 대한 참조를 확인하세요.
+  
+D:\Development\Game\Visual Studio 2022\VC\Tools\MSVC\14.41.34120\include\xmemory(756,1): error C2528: '<template-parameter>': 참조에 대한 포인터를 만들 수 없습니다.
+  (소스 파일 'PriorityQueue/PriorityQueueDLL.cpp'을(를) 컴파일하는 중)
+  
+D:\Development\Game\Visual Studio 2022\VC\Tools\MSVC\14.41.34120\include\xmemory(760,101): error C2528: 'abstract declarator': 참조에 대한 포인터를 만들 수 없습니다.
+  (소스 파일 'PriorityQueue/PriorityQueueDLL.cpp'을(를) 컴파일하는 중)
+  
+D:\Development\Game\Visual Studio 2022\VC\Tools\MSVC\14.41.34120\include\vector(593,67): error C2528: '<template-parameter>': 참조에 대한 포인터를 만들 수 없습니다.
+  (소스 파일 'PriorityQueue/PriorityQueueDLL.cpp'을(를) 컴파일하는 중)
+  
+D:\Development\Game\Visual Studio 2022\VC\Tools\MSVC\14.41.34120\include\vector(870,23): error C2535: 'void std::vector<T,std::allocator<T>>::push_back(_Ty)': 멤버 함수를 이미 정의했거나 선언했습니다.
+D:\Development\Game\Visual Studio 2022\VC\Tools\MSVC\14.41.34120\include\vector(870,23): error C2535:         with
+D:\Development\Game\Visual Studio 2022\VC\Tools\MSVC\14.41.34120\include\vector(870,23): error C2535:         [
+D:\Development\Game\Visual Studio 2022\VC\Tools\MSVC\14.41.34120\include\vector(870,23): error C2535:             T=IntFloatChar32 &,
+D:\Development\Game\Visual Studio 2022\VC\Tools\MSVC\14.41.34120\include\vector(870,23): error C2535:             _Ty=IntFloatChar32 &
+D:\Development\Game\Visual Studio 2022\VC\Tools\MSVC\14.41.34120\include\vector(870,23): error C2535:         ]
+  (소스 파일 'PriorityQueue/PriorityQueueDLL.cpp'을(를) 컴파일하는 중)
+      D:\Development\Game\Visual Studio 2022\VC\Tools\MSVC\14.41.34120\include\vector(866,23):
+      'std::vector<T,std::allocator<T>>::push_back' 선언을 참조하십시오.
+          with
+          [
+              T=IntFloatChar32 &
+          ]
+  
+D:\Development\Game\Visual Studio 2022\VC\Tools\MSVC\14.41.34120\include\vector(1000,27): error C2535: 'std::_Vector_iterator<std::_Vector_val<std::_Simple_types<_Ty>>> std::vector<_Ty,std::allocator<_Ty>>::insert(std::_Vector_const_iterator<std::_Vector_val<std::_Simple_types<_Ty>>>,_Ty)': 멤버 함수를 이미 정의했거나 선언했습니다.
+D:\Development\Game\Visual Studio 2022\VC\Tools\MSVC\14.41.34120\include\vector(1000,27): error C2535:         with
+D:\Development\Game\Visual Studio 2022\VC\Tools\MSVC\14.41.34120\include\vector(1000,27): error C2535:         [
+D:\Development\Game\Visual Studio 2022\VC\Tools\MSVC\14.41.34120\include\vector(1000,27): error C2535:             _Ty=IntFloatChar32 &
+D:\Development\Game\Visual Studio 2022\VC\Tools\MSVC\14.41.34120\include\vector(1000,27): error C2535:         ]
+  (소스 파일 'PriorityQueue/PriorityQueueDLL.cpp'을(를) 컴파일하는 중)
+      D:\Development\Game\Visual Studio 2022\VC\Tools\MSVC\14.41.34120\include\vector(996,27):
+      'std::vector<T,std::allocator<T>>::insert' 선언을 참조하십시오.
+          with
+          [
+              T=IntFloatChar32 &
+          ]
+  
+D:\Development\Game\Visual Studio 2022\VC\Tools\MSVC\14.41.34120\include\vector(1790,34): error C2528: 'data': 참조에 대한 포인터를 만들 수 없습니다.
+  (소스 파일 'PriorityQueue/PriorityQueueDLL.cpp'을(를) 컴파일하는 중)
+  
+D:\Development\Game\Visual Studio 2022\VC\Tools\MSVC\14.41.34120\include\vector(1794,40): error C2528: 'data': 참조에 대한 포인터를 만들 수 없습니다.
+  (소스 파일 'PriorityQueue/PriorityQueueDLL.cpp'을(를) 컴파일하는 중)
+  
+D:\Development\Game\Visual Studio 2022\VC\Tools\MSVC\14.41.34120\include\vector(1850,34): error C2528: '_Unchecked_begin': 참조에 대한 포인터를 만들 수 없습니다.
+  (소스 파일 'PriorityQueue/PriorityQueueDLL.cpp'을(를) 컴파일하는 중)
+  
+D:\Development\Game\Visual Studio 2022\VC\Tools\MSVC\14.41.34120\include\vector(1854,40): error C2528: '_Unchecked_begin': 참조에 대한 포인터를 만들 수 없습니다.
+  (소스 파일 'PriorityQueue/PriorityQueueDLL.cpp'을(를) 컴파일하는 중)
+  
+D:\Development\Game\Visual Studio 2022\VC\Tools\MSVC\14.41.34120\include\vector(1858,34): error C2528: '_Unchecked_end': 참조에 대한 포인터를 만들 수 없습니다.
+  (소스 파일 'PriorityQueue/PriorityQueueDLL.cpp'을(를) 컴파일하는 중)
+  
+D:\Development\Game\Visual Studio 2022\VC\Tools\MSVC\14.41.34120\include\vector(1862,40): error C2528: '_Unchecked_end': 참조에 대한 포인터를 만들 수 없습니다.
+  (소스 파일 'PriorityQueue/PriorityQueueDLL.cpp'을(를) 컴파일하는 중)
+  
+D:\Development\Game\Visual Studio 2022\VC\Tools\MSVC\14.41.34120\include\xmemory(768,39): error C2528: 'abstract declarator': 참조에 대한 포인터를 만들 수 없습니다.
+  (소스 파일 'PriorityQueue/PriorityQueueDLL.cpp'을(를) 컴파일하는 중)
+      D:\Development\Game\Visual Studio 2022\VC\Tools\MSVC\14.41.34120\include\xmemory(768,39):
+      템플릿 인스턴스화 컨텍스트(가장 오래된 인스턴스화 컨텍스트)가
+          D:\Development\Game\Visual Studio 2022\VC\Tools\MSVC\14.41.34120\include\vector(2201,41):
+          컴파일되는 클래스 템플릿 인스턴스화 'std::_Compressed_pair<std::allocator<T>,std::_Vector_val<std::_Simple_types<_Ty>>,true>'에 대한 참조를 확인하세요.
+          with
+          [
+              T=IntFloatChar32 &,
+              _Ty=IntFloatChar32 &
+          ]
+          D:\Development\Game\Visual Studio 2022\VC\Tools\MSVC\14.41.34120\include\xmemory(1488,10):
+          컴파일되는 클래스 템플릿 인스턴스화 'std::_Vector_val<std::_Simple_types<_Ty>>'에 대한 참조를 확인하세요.
+          with
+          [
+              _Ty=IntFloatChar32 &
+          ]
+          D:\Development\Game\Visual Studio 2022\VC\Tools\MSVC\14.41.34120\include\vector(392,50):
+          컴파일되는 클래스 템플릿 인스턴스화 'std::_Simple_types<_Ty>'에 대한 참조를 확인하세요.
+          with
+          [
+              _Ty=IntFloatChar32 &
+          ]
+  
+D:\Development\Game\Visual Studio 2022\VC\Tools\MSVC\14.41.34120\include\xmemory(769,45): error C2528: 'abstract declarator': 참조에 대한 포인터를 만들 수 없습니다.
+  (소스 파일 'PriorityQueue/PriorityQueueDLL.cpp'을(를) 컴파일하는 중)
+  

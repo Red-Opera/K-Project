@@ -36,6 +36,11 @@ public class GameManager : MonoBehaviour
         UpdatePlayerState();
     }
 
+    private void Update()
+    {
+        AudioListener.volume = Mathf.Min(AudioListener.volume, 0.35f);
+    }
+
     // 음식으로 인한 스탯 상승을 구하는 메소드
     public void AddFoodState(string stateName, double value)
     {

@@ -1,0 +1,8 @@
+﻿  StringEncypt.cpp
+D:\Development\Game\UnityEditer\K-Project\Assets\Scripts\StringEncrypt\StringEncypt.cpp(162,16): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  코드를 생성하고 있습니다.
+  68 of 272 functions (25.0%) were compiled, the rest were copied from previous compilation.
+    10 functions were new in current compilation
+    11 functions had inline decision re-evaluated but remain unchanged
+  코드를 생성했습니다.
+  StringEncrypt.vcxproj -> D:\Development\Game\UnityEditer\K-Project\Assets\Scripts\C++DLL\x64\Release\StringEncrypt.exe

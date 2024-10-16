@@ -2,6 +2,8 @@ using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using System.Reflection;
+using MySqlConnector;
+using System;
 
 public class InventroyPosition : MonoBehaviour
 {
@@ -10,6 +12,7 @@ public class InventroyPosition : MonoBehaviour
     public static bool isChange = true;                 // 자리를 교환했는지 여부
     public static bool isAddSucceed = false;            // 구매 성공 여부
     public static bool isAddItemable = false;           // AddItem 사용 가능 여부
+    public static bool isItemAdd = false;
 
     [SerializeField] private GameObject slots;          // 전시할 수 있는 오브젝트를 담는 슬롯
     [SerializeField] private GameObject itemDisplay;    // 아이템을 전시하기 위한 오브젝트
@@ -58,6 +61,77 @@ public class InventroyPosition : MonoBehaviour
         OnAddItem = AddItem;
     }
 
+    private void Start()
+    {
+        StartGameAddItem();
+    }
+
+    private void StartGameAddItem()
+    {
+        if (Login.currentLoginName == "" || isItemAdd)
+            return;
+
+        isItemAdd = true;
+
+        string query = "SELECT * FROM PlayerItem WHERE Name = @Name";   // SQL 쿼리 문자열을 작성하여 PlayerLogin 테이블에서 특정 ID를 검색
+        MySqlCommand cmd = new MySqlCommand(query, Login.conn);
+        cmd.Parameters.AddWithValue("@Name", Login.currentLoginName);
+
+        int[] itemNums = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+
+        try
+        {
+            Login.conn.Open();
+
+            // 쿼리를 실행하고 MySqlDataReader 객체를 생성하여 결과를 읽어옴
+            using MySqlDataReader dataReader = cmd.ExecuteReader();
+
+            if (dataReader.Read())
+            {
+                for (int i = 1; i <= 23; i++)
+                {
+                    if (dataReader["Item" + i] == DBNull.Value)
+                        continue;
+
+                    int itemNum = dataReader.GetInt32("Item" + i);
+
+                    itemNums[i] = itemNum;
+                }
+            }
+
+            else
+            {
+                Debug.LogWarning("No player item data found for current login name.");
+            }
+        }
+
+        catch (Exception ex)
+        {
+            Debug.LogError($"Failed to execute query for PlayerInfo: " + ex.Message);
+        }
+
+        finally
+        {
+            Login.conn.Close();
+        }
+
+        for (int i = 1; i <= 23; i++)
+        {
+            if (itemNums[i] == 0)
+                continue;
+
+            string itemName = "";
+
+            foreach (string name in SaveSystem.itemID.Keys)
+            {
+                if (SaveSystem.itemID[name] == itemNums[i])
+                    itemName = name;
+            }
+
+            ResultUI.GetItem(itemName);
+        }
+    }
+
     // 아이템의 위치를 조정하는 메소드
     public void ChangePos(int displayIndex, int dragIndex)
     {
@@ -75,6 +149,22 @@ public class InventroyPosition : MonoBehaviour
         // 같은 장소로 이동하거나 이미 바꿨거나 해당 타입의 장비를 해당 위치에 둘 수 없을 경우
         if (displayIndex == dragIndex || isChange || ((displayEquipment & dragEquipment) == 0))
             return;
+
+        // 한손 장비를 왼쪽 슬롯에 넣을 경우
+        bool isPosOneHand = (displayEquipment & (EquipmentState.EQUIPMENT_WEAPON_ONEHANDED_LARGE_RANGE | EquipmentState.EQUIPMENT_WEAPON_ONEHANDED_SHORT_RANGE)) != 0;
+        if ((dragIndex == 0 || dragIndex == 2) && isPosOneHand && displayPos[dragIndex + 1].childCount > 0)
+            return;
+
+        // 한손 장비를 가지고 오른손에 장비를 작용할려고하는 경우
+        bool isPosTwoHand = (displayEquipment & (EquipmentState.EQUIPMENT_WEAPON_TWOHANDED_LARGE_RANGE | EquipmentState.EQUIPMENT_WEAPON_TWOHANDED_SHORT_RANGE)) != 0;
+        if ((dragIndex == 1 || dragIndex == 3) && displayPos[dragIndex - 1].childCount > 0)
+        {
+            EquipmentState leftEquidState = displayPos[dragIndex - 1].GetChild(0).GetComponent<InventableEquipment>().inventableEquipment;
+            bool isLeftEquidOneHand = (leftEquidState & (EquipmentState.EQUIPMENT_WEAPON_ONEHANDED_LARGE_RANGE | EquipmentState.EQUIPMENT_WEAPON_ONEHANDED_SHORT_RANGE)) != 0;
+
+            if (isPosTwoHand && isLeftEquidOneHand)
+                return;
+        }
 
         // 인벤토리의 범위를 넘긴 경우
         if (displayData == null || displayIndex < 0 || dragIndex < 0 || displayIndex >= displayPos.Length || dragIndex >= displayPos.Length)
@@ -108,6 +198,11 @@ public class InventroyPosition : MonoBehaviour
 
             // 옮겼을 때 장비 위치를 바꿀 수 없는 경우 중지
             if ((displaySlotEquidState & dragState) == 0 || (dragSlotEquidState & displayState) == 0)
+                return;
+
+            // 교체 당하는 장비가 왼쪽 슬롯에 넣을 경우
+            bool isChangeOneHand = (dragSlotEquidState & (EquipmentState.EQUIPMENT_WEAPON_ONEHANDED_LARGE_RANGE | EquipmentState.EQUIPMENT_WEAPON_ONEHANDED_SHORT_RANGE)) != 0;
+            if ((displayIndex == 0 || displayIndex == 2) && isChangeOneHand && displayPos[displayIndex + 1].childCount > 0)
                 return;
 
             MoveInventory aMoveInventory = displayPos[displayIndex].GetChild(0).GetComponent<MoveInventory>();
@@ -148,24 +243,60 @@ public class InventroyPosition : MonoBehaviour
         Debug.Assert(sprites.ContainsKey(name), "해당 이름의 아이템은 존재하지 않습니다");
         int i = 8;
 
-        if ((equipmentState & (EquipmentState.EQUIPMENT_WEAPON_TWOHANDED_LARGE_RANGE | EquipmentState.EQUIPMENT_WEAPON_TWOHANDED_SHORT_RANGE)) != 0)
-        {
-            if (displayPos[2].childCount <= 0)
-                i = 2;
+        bool isOneHand = (equipmentState & (EquipmentState.EQUIPMENT_WEAPON_ONEHANDED_LARGE_RANGE | EquipmentState.EQUIPMENT_WEAPON_ONEHANDED_SHORT_RANGE)) != 0;
+        bool isTwoHand = (equipmentState & (EquipmentState.EQUIPMENT_WEAPON_TWOHANDED_LARGE_RANGE | EquipmentState.EQUIPMENT_WEAPON_TWOHANDED_SHORT_RANGE)) != 0;
 
-            else if (displayPos[0].childCount <= 0)
-                i = 0;
+        // 무기를 첫번째 슬롯에 장착할 수 있는 경우
+        if (isOneHand || isTwoHand)
+        {
+            // 오른쪽 슬롯이 비어 있거나 양손검인 경우
+            if (displayPos[1].childCount <= 0 || isTwoHand)
+            {
+                if (displayPos[0].childCount <= 0)
+                    i = 0;
+            }
+
+            else if (displayPos[3].childCount <= 0 || isTwoHand)
+            {
+                if (displayPos[2].childCount <= 0)
+                    i = 2;
+            }
         }
 
-        else if ((equipmentState & (EquipmentState.EQUIPMENT_WEAPON_ONEHANDED_LARGE_RANGE | EquipmentState.EQUIPMENT_WEAPON_ONEHANDED_SHORT_RANGE)) != 0)
+        // 검 두개를 장착할 수 있는 경우
+        if (i == 8 && isTwoHand)
         {
-            if (displayPos[2].childCount <= 0 && displayPos[3].childCount <= 0)
-                i = 2;
+            if (displayPos[0].childCount > 0)
+            {
+                EquipmentState firstWeaphon = displayPos[0].GetChild(0).GetComponent<InventableEquipment>().inventableEquipment;
+                bool isFirstSlotOneHand = (firstWeaphon & (EquipmentState.EQUIPMENT_WEAPON_ONEHANDED_LARGE_RANGE | EquipmentState.EQUIPMENT_WEAPON_ONEHANDED_SHORT_RANGE)) != 0;
 
-            else if (displayPos[0].childCount <= 0 && displayPos[1].childCount <= 0)
-                i = 0;
+                if (displayPos[1].childCount <= 0 && !isFirstSlotOneHand)
+                    i = 1;
+            }
+
+            else if (displayPos[2].childCount > 0)
+            {
+                EquipmentState thirdWeaphon = displayPos[2].GetChild(0).GetComponent<InventableEquipment>().inventableEquipment;
+                bool isThirdSlotOneHand = (thirdWeaphon & (EquipmentState.EQUIPMENT_WEAPON_ONEHANDED_LARGE_RANGE | EquipmentState.EQUIPMENT_WEAPON_ONEHANDED_SHORT_RANGE)) != 0;
+
+                if (displayPos[3].childCount <= 0 && !isThirdSlotOneHand)
+                    i = 3;
+            }
         }
 
+        // 반지일 경우
+        else if ((equipmentState & EquipmentState.EQUIPMENT_ACCESSORY) != 0)
+        {
+            i = 4;
+            for (; i <= 7; i++)
+            {
+                if (displayPos[i].childCount <= 0)
+                    break;
+            }
+        }
+
+        // 장비를 장착할 수 없어 인벤토리에 저장할 경우
         for (; i < displayPos.Length; i++)
         {
             // 슬롯을 찾음
