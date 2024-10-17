@@ -9,10 +9,12 @@ public class BackgroundSound : MonoBehaviour
 
     private AudioSource audioSource;                // 오디오 소스
 
+    private static BackgroundSound instance;        // 이 스크립트 인스턴스
     private static AudioSource staticAudioSource;   // 오디오 소스 Static 버전
     private static AudioClip staticStartClip;       // 시작 부분 배경음악 Static 버전
     private static AudioClip staticStartBossClip;   // 보스전 시작 부분 배경 음악 Static 버전
     private static bool isBossStage = false;        // 현재 보스 스테이지인 경우 
+    private static bool isOtherSound = false;       // 다른 배경음악인 경우
     
     private void Awake()
     {
@@ -24,7 +26,35 @@ public class BackgroundSound : MonoBehaviour
         if (startBossClip != null)
             staticStartBossClip = startBossClip;
 
+        instance = this;
+
+        StartBackground();
+    }
+
+    private void Update()
+    {
+        if (isOtherSound)
+            return;
+
+        else if (!audioSource.isPlaying && !isBossStage)
+        {
+            audioSource.clip = whileClip;
+            audioSource.Play();
+        }
+
+        else if (!audioSource.isPlaying && isBossStage)
+        {
+            audioSource.clip = whileBossClip;
+            audioSource.Play();
+        }
+    }
+
+    private void StartBackground()
+    {
         // 맨 처음에 배경음악의 처음 부분을 들려주고 반복 음악을 재생함
+        if (isOtherSound)
+            return;
+        
         if (startClip != null && !isBossStage)
         {
             audioSource.clip = startClip;
@@ -34,21 +64,6 @@ public class BackgroundSound : MonoBehaviour
         else if (startBossClip != null && isBossStage)
         {
             audioSource.clip = startBossClip;
-            audioSource.Play();
-        }
-    }
-
-    public void Update()
-    {
-        if (!audioSource.isPlaying && !isBossStage)
-        {
-            audioSource.clip = whileClip;
-            audioSource.Play();
-        }
-
-        else if (!audioSource.isPlaying && isBossStage)
-        {
-            audioSource.clip = whileBossClip;
             audioSource.Play();
         }
     }
@@ -75,5 +90,19 @@ public class BackgroundSound : MonoBehaviour
         if (staticStartBossClip != null)
             staticAudioSource.clip = staticStartClip;
         staticAudioSource.Play();
+    }
+
+    public static void StartOtherCilp()
+    {
+        isOtherSound = true;
+
+        staticAudioSource.Stop();
+    }
+
+    public static void StopOtherCilp()
+    {
+        isOtherSound = false;
+
+        instance.StartBackground();
     }
 }

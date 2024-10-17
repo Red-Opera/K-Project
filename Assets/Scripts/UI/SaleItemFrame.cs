@@ -5,7 +5,6 @@ public class SaleItemFrame : MonoBehaviour
 {
     [HideInInspector] public int saleItemIndex;             // 판매될 아이템 장비 인벤토리 인덱스
 
-    [SerializeField] private GameObject inventorySlot;      // 인벤토리 스롯
     [SerializeField] private TextMeshProUGUI cost;          // 판매 금액 텍스트
 
     public void SaleItem()
@@ -18,7 +17,7 @@ public class SaleItemFrame : MonoBehaviour
         GameManager.info.UpdatePlayerState();
 
         // 인벤토리 아이템 제거
-        Destroy(inventorySlot.transform.GetChild(saleItemIndex).GetChild(0).gameObject);
+        Destroy(InventroyPosition.inventory.transform.GetChild(saleItemIndex).GetChild(0).gameObject);
 
         gameObject.SetActive(false);
     }

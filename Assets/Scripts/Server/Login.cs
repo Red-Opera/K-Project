@@ -31,7 +31,11 @@ public class Login : MonoBehaviour
     private TextMeshProUGUI idHintText;                     // ID 힌트 텍스트
     private TextMeshProUGUI passwordHintText;               // PassWord 텍스트 배경
 
-    private string loginUrl = "";
+    private readonly string loginUrl = "6a72ac4cda5bc5ca3" +
+        "e20a917ac4fa746d99765c4d6cd4ffbdc759da1a850e8422" +
+        "3fd2a491b419a7c5d9fe85d67b4d37ae5099a1de9c4c9c37" +
+        "f10e28c7b47ada9f4d5acf15bde320a042017aba65cf90c" +
+        "6e64c812b32e4748bbc62e1ddd12460e";
     private int newId = 0;                          // 다음에 추가될 ID 값
 
     private void OnEnable()
@@ -50,7 +54,7 @@ public class Login : MonoBehaviour
 
     private void SQLConnect()
     {
-        conn = new MySqlConnection(loginUrl);
+        conn = new MySqlConnection(DecodeString.Revert(loginUrl));
 
         try
         {

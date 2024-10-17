@@ -1,9 +1,4 @@
 using UnityEngine;
-using System.Collections;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
-using UnityEditor.SceneManagement;
-
 
 public class StageManager : MonoBehaviour
 {
@@ -12,6 +7,7 @@ public class StageManager : MonoBehaviour
     public GameObject BossStageC;
     public GameObject BossStage;
     public GameObject Boss;
+    public GameObject BossHPBar; // 추가 
     private int currentStageIndex;
     public float fadeDuration = 1f; // 페이드 인/아웃에 걸리는 시간
 
@@ -59,16 +55,21 @@ public class StageManager : MonoBehaviour
     {
         GameObject boss = GameObject.FindGameObjectWithTag("Boss");
 
-        if (boss == null)
+        if (boss != null)
         {
-            if(BossStage.activeSelf)
+            // Boss가 활성화되어 있을 때 BossHPBar를 활성화
+            BossHPBar.SetActive(true);
+        }
+        else
+        {
+            if (BossStage.activeSelf)
             {
+                // Boss를 클리어했을 때 BossStage와 BossHPBar를 비활성화
                 BossStage.SetActive(false);
-
+                BossHPBar.SetActive(false);
                 BossStageC.SetActive(true);
             }
         }
     }
-
 }
 

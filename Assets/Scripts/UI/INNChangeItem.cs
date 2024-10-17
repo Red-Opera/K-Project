@@ -15,7 +15,7 @@ public class INNChangeItem : MonoBehaviour
     private AudioSource audio;      // 소리를 출력하는 컴포넌트
     private float addRange;
 
-    public void OnEnable()
+    private void OnEnable()
     {
         if (audio == null)
         {
@@ -30,6 +30,7 @@ public class INNChangeItem : MonoBehaviour
         }
 
         audio.PlayOneShot(openSound);
+        BackgroundSound.StartOtherCilp();
 
         // 모든 정보를 키고 감사 텍스트는 끔
         for (int i = 0; i < foodList.Length; i++)
@@ -44,6 +45,11 @@ public class INNChangeItem : MonoBehaviour
         }
 
         StartCoroutine(DefaultSetting());
+    }
+
+    private void OnDisable()
+    {
+        BackgroundSound.StopOtherCilp();
     }
 
     private IEnumerator DefaultSetting()
