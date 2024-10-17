@@ -14,7 +14,7 @@ public class AtkOb : MonoBehaviour
         SetDir();
         Destroy(gameObject, weapon.disapearTime);
         Invoke("endFollow", weapon.folloewTime);
-        transform.localScale *= (1 + (GameManager.info.allPlayerState.level-1)*0.1);
+        transform.localScale *= (1 + (GameManager.info.allPlayerState.level-1)*0.1f);
     }
     void Update()
     {
