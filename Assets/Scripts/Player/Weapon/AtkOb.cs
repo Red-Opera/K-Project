@@ -33,19 +33,28 @@ public class AtkOb : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D other)
     {
-        int Damage = GameManager.info.allPlayerState.damage;
         int LevelCoaf = GameManager.info.allPlayerState.level/5;
-        Debug.Log("LevelCoaf = " + LevelCoaf);
+
         if(other.gameObject.layer == 7){
             Goblin monster = other.gameObject.GetComponent<Goblin>();
+            Collider2D monsterCollider = monster.GetComponent<Collider2D>();
+            //충돌된 오브젝트의 x,y값 중간에 생성
+            Vector3 effectPosition = monsterCollider.bounds.center;
+            
             if(monster != null){
                 monster.Damaged((int)(weapon.damage* (1+ LevelCoaf*0.5f)));
+                Instantiate(weapon.AtkEffect,effectPosition, Quaternion.identity);
             }
         }
+
         if(other.gameObject.layer==11 || other.gameObject.layer==14){
             BossController BossSc = other.gameObject.GetComponent<BossController>();
+            Collider2D monsterCollider = BossSc.GetComponent<Collider2D>();
+            Vector3 effectPosition = monsterCollider.bounds.center;
+
             if(BossSc != null){
-                BossSc.Damaged(weapon.damage);
+                BossSc.Damaged((int)(weapon.damage* (1+ LevelCoaf*0.5f)));
+                Instantiate(weapon.AtkEffect,effectPosition, Quaternion.identity);
             }
         }
     }

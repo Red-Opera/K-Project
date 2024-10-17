@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public struct WeaponSetting{
     public GameObject AtkObject;
+    public GameObject AtkEffect;
     public Vector3 pos;
     public float coolTime;
     public int damage;
