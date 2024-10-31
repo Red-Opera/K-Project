@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public State addWaphonState;  // 무기 추가 능력치가 있을 경우 추가      참조법 (GameManager.info.addWaphonState)
     [HideInInspector] public State addStatState;    // 스탯 추가 능력치가 있을 경우 추가      참조법 (GameManager.info.addStatState)
     public State addLevelState;                     // 레벨 추가 능력치가 있을 경우 추가      참조법 (GameManager.info.addLevelState)
+    public  AbilityTempState abilityState;          // 현재 어빌리티 값 접근을 위해 사용
     [HideInInspector] public State allPlayerState;  // 총 플레이어 능력치                   참조법 (GameManager.info.allPlayerState)
 
     public State currentPlayerState { get { return allPlayerState; } }    // 총 플레이어 스탯을 반환하는 변수

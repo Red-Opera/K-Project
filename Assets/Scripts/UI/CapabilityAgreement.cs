@@ -9,6 +9,7 @@ public class CapabilityAgreement : MonoBehaviour
     [SerializeField] private GameObject signType;           // 능력치 종류를 담는 오브젝트
     [SerializeField] private AudioClip signSound;           // 사인 소리
     [SerializeField] private HpLevelManager hpLevelManager; // 체력 레벨 관련 컴포넌트
+    [SerializeField] private AbilityTempState AbilityStateData; // 어빌리티 레벨 값 저장 데이터
 
     [SerializeField] private SerializableDictionary<string, string> stateKoreaToEng;        // 추가 스탯의 한국어를 영어로 바꿔주는 배열
     [SerializeField] private List<AddAbilityKey> addAbilityKey;                             // 추가 능력치를 저장하는 리스트 Key
@@ -73,8 +74,22 @@ public class CapabilityAgreement : MonoBehaviour
 
             addAbilitys.Add(keyValue);
         }
+
+        InitializeAbilityLevels();
     }
 
+    private void InitializeAbilityLevels(){
+        if(GameManager.info.abilityState != null && AbilityStateData != null){
+            GameManager.info.abilityState.Anger = AbilityStateData.Anger;
+            GameManager.info.abilityState.Haste = AbilityStateData.Haste;
+            GameManager.info.abilityState.Patience = AbilityStateData.Patience;
+            GameManager.info.abilityState.Mystery = AbilityStateData.Mystery;
+            GameManager.info.abilityState.Greed = AbilityStateData.Greed;
+            GameManager.info.abilityState.Craving = AbilityStateData.Craving;
+
+            Debug.Log("능력치가 설정되었습니다.");
+        }
+    }
     public void Update()
     {
         

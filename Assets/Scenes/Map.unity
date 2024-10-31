@@ -64323,6 +64323,7 @@ MonoBehaviour:
   addWaphonState: {fileID: 0}
   addStatState: {fileID: 0}
   addLevelState: {fileID: 11400000, guid: 014383ea896c86f468a68eb03ed143fd, type: 2}
+  abilityState: {fileID: 11400000, guid: 085fa8bab34e3e646a70ba6123563532, type: 2}
   allPlayerState: {fileID: 0}
 --- !u!1 &1693202917
 GameObject:
