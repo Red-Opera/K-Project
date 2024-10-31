@@ -114,6 +114,10 @@ public class PMove : MonoBehaviour
                 playerState.jumpCount = 0;
             }
         }
+
+        if(rigid.velocity.y > playerState.jumpPower*3){
+            rigid.velocity = new Vector2(rigid.velocity.x, playerState.jumpPower*3);
+        }
         
     }
     void OnJump(){

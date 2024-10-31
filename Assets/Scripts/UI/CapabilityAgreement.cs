@@ -22,6 +22,7 @@ public class CapabilityAgreement : MonoBehaviour
     private AudioSource audioSource;                            // 오디오 소스
 
     private int ableRemain;
+    private const int MaxAbilityValue = 15;
 
     [System.Serializable] private class AddAbilityKey { [SerializeField] public List<string> key; }
     [System.Serializable] private class AddAbilityValue { [SerializeField] public List<double> value; }
@@ -87,6 +88,12 @@ public class CapabilityAgreement : MonoBehaviour
             return;
 
         TextMeshProUGUI upgradeTarget = abilityText[index];
+        int currentUpgrade = int.Parse(upgradeTarget.text); // ability의 최댓값 지정
+
+        if(currentUpgrade >= MaxAbilityValue){
+            Debug.Log("최대 능력치에 도달했습니다.");
+            return;
+        }
         upgradeTarget.text = (int.Parse(upgradeTarget.text) + 1).ToString();
         
         ableRemain--;
