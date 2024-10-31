@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: Player
   m_EditorClassIdentifier: 
   nickName: 
-  level: 7
+  level: 9
   maxHP: 20
   currentHp: 100
-  currentExp: 850
-  damage: 20
+  currentExp: 500
+  damage: 200
   defense: 10
   critical: 0.05
   moveSpeed: 5
@@ -34,4 +34,4 @@ MonoBehaviour:
   reloadTime: -0.3
   dashBarCount: 2
   food: 0
-  money: 978671
+  money: 953392
