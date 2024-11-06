@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class AtkOb : MonoBehaviour
@@ -7,6 +8,14 @@ public class AtkOb : MonoBehaviour
     SpriteRenderer spriteRenderer;
     bool isFollow = true;
     int dir = 1;
+    float AngerDamageCoaf;  //버서커 모드 공격력
+    float AngerHealthCoaf;  //버서커 모드 체력
+    float HasteProperty;    //Dobble Attack
+    float MysteryCoaf;  //크리티컬 계수
+    float CravingCoaf; //블록
+    void Awake(){
+        chkStatLevel();
+    }
     void Start()
     {
         rigid = GetComponent<Rigidbody2D>(); 
@@ -34,6 +43,8 @@ public class AtkOb : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
         int LevelCoaf = GameManager.info.allPlayerState.level/5;
+        int finalDamage =0;
+        float CriticalCoaf = GameManager.info.allPlayerState.criticalDamage + MysteryCoaf;
 
         if(other.gameObject.layer == 7){
             Goblin monster = other.gameObject.GetComponent<Goblin>();
@@ -42,7 +53,8 @@ public class AtkOb : MonoBehaviour
             Vector3 effectPosition = monsterCollider.bounds.center;
             
             if(monster != null){
-                monster.Damaged((int)(weapon.damage* (1+ LevelCoaf*0.5f)));
+                finalDamage = (int)(weapon.damage * (1+ LevelCoaf * 0.5f)* AngerDamageCoaf);
+                monster.Damaged(finalDamage);
                 Instantiate(weapon.AtkEffect,effectPosition, Quaternion.identity);
             }
         }
@@ -53,7 +65,8 @@ public class AtkOb : MonoBehaviour
             Vector3 effectPosition = monsterCollider.bounds.center;
 
             if(BossSc != null){
-                BossSc.Damaged((int)(weapon.damage* (1+ LevelCoaf*0.5f)));
+                finalDamage = (int)(weapon.damage * (1+ LevelCoaf * 0.5f)* AngerDamageCoaf);
+                BossSc.Damaged(finalDamage);
                 Instantiate(weapon.AtkEffect,effectPosition, Quaternion.identity);
             }
         }
@@ -70,5 +83,15 @@ public class AtkOb : MonoBehaviour
     }
     public void setState(WeaponSetting state){
         weapon = state;
+    }
+
+    void chkStatLevel(){
+        AngerDamageCoaf = 1+((GameManager.info.abilityState.Anger/5 )*GameManager.info.abilityState.AEffectD);
+        if(GameManager.info.abilityState.Anger >= 5){
+            AngerHealthCoaf = GameManager.info.abilityState.AEffectH;   
+        }else{
+            AngerHealthCoaf = 0;
+        }
+        MysteryCoaf = (GameManager.info.abilityState.Mystery/5) * GameManager.info.abilityState.MEffect;    
     }
 }
