@@ -16,6 +16,7 @@ public class WeaponController : MonoBehaviour
     public Rigidbody2D rigid;
     bool isAtk = false;
     int skillCount = 0;
+    float dobleShotProbability;
 
     GameObject interactiveUi;
     private bool usingUI = false;
@@ -40,6 +41,7 @@ public class WeaponController : MonoBehaviour
     void Attack(){
         if(Input.GetMouseButtonDown(0)||Input.GetKeyDown(KeyCode.LeftControl)){
             if(isAtk == false){
+                dobleShotProbability = (GameManager.info.abilityState.Haste/5) * GameManager.info.abilityState.HEffect;
                 myWeapon.InitSetting();
                 if(spriteRenderer.flipX){
                     myWeapon.Weapon.dir = -1;
@@ -50,6 +52,10 @@ public class WeaponController : MonoBehaviour
                 isAtk = true;
                 myWeapon.Using();
                 audioSource.Play();
+                if(Random.value < dobleShotProbability){
+                    myWeapon.Using();
+                    audioSource.Play();
+                }
                 Invoke("CoolTime",myWeapon.Weapon.coolTime);
                 anim.SetTrigger(myWeapon.Weapon.animName);
             }
