@@ -15,6 +15,7 @@ public class AtkOb : MonoBehaviour
     float CravingCoaf; //블록
     void Awake(){
         chkStatLevel();
+        AngerHealth();
     }
     void Start()
     {
@@ -93,5 +94,15 @@ public class AtkOb : MonoBehaviour
             AngerHealthCoaf = 0;
         }
         MysteryCoaf = (GameManager.info.abilityState.Mystery/5) * GameManager.info.abilityState.MEffect;    
+    }
+
+    void AngerHealth(){
+        int selfHarm = (int)(GameManager.info.allPlayerState.currentHp * GameManager.info.abilityState.AEffectH);
+        if(GameManager.info.allPlayerState.currentHp <= selfHarm){
+            GameManager.info.allPlayerState.currentHp = 1;
+        }
+        else{
+            GameManager.info.allPlayerState.currentHp -= selfHarm;
+        }
     }
 }
