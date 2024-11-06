@@ -38,6 +38,7 @@ public class PMove : MonoBehaviour
         playerState = GameManager.info.allPlayerState;
         ResetStat();
         SceneManager.sceneLoaded += reload;
+        Invoke("RefillShield", 10);
     }
 
     public void FindUI(){
@@ -164,7 +165,6 @@ public class PMove : MonoBehaviour
         SceneManager.sceneLoaded -= reload;
     }
     public void Damaged(int dmg){
-        Debug.Log(dmg);
         gameObject.layer = 12;
         int Damage = dmg - GameManager.info.allPlayerState.defense;
         if(Damage <= 0 ){
@@ -226,5 +226,17 @@ public class PMove : MonoBehaviour
         GameManager.info.abilityState.Mystery = 0;
         GameManager.info.abilityState.Greed = 0;
         GameManager.info.abilityState.Craving = 0;
+        GameManager.info.abilityState.shield = 0;
+    }
+
+    void RefillShield(){
+        int maxShield = (int)(GameManager.info.abilityState.PEffect * (GameManager.info.abilityState.Patience/5)*GameManager.info.allPlayerState.maxHP);
+        if(GameManager.info.abilityState.shield < maxShield){
+            if((maxShield - GameManager.info.abilityState.shield)<=(maxShield * 0.1)){
+                GameManager.info.abilityState.shield = maxShield;
+            }else{
+                GameManager.info.abilityState.shield += (int)(maxShield * 0.1);
+            }
+        }
     }
 }
