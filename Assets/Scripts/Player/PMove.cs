@@ -36,6 +36,7 @@ public class PMove : MonoBehaviour
     }
     void Start(){
         playerState = GameManager.info.allPlayerState;
+        ResetStat();
         SceneManager.sceneLoaded += reload;
     }
 
@@ -216,5 +217,14 @@ public class PMove : MonoBehaviour
         anim.SetBool("isRun",false);
         anim.SetBool("isJump",false);
         rigid.velocity = new Vector2(rigid.velocity.x * 0.1f, rigid.velocity.y);
+    }
+
+    void ResetStat(){
+        GameManager.info.abilityState.Anger = 0;
+        GameManager.info.abilityState.Haste = 0;
+        GameManager.info.abilityState.Patience = 0;
+        GameManager.info.abilityState.Mystery = 0;
+        GameManager.info.abilityState.Greed = 0;
+        GameManager.info.abilityState.Craving = 0;
     }
 }

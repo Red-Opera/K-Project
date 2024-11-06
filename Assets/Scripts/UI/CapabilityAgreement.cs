@@ -74,21 +74,6 @@ public class CapabilityAgreement : MonoBehaviour
 
             addAbilitys.Add(keyValue);
         }
-
-        InitializeAbilityLevels();
-    }
-
-    private void InitializeAbilityLevels(){
-        if(GameManager.info.abilityState != null && AbilityStateData != null){
-            GameManager.info.abilityState.Anger = AbilityStateData.Anger;
-            GameManager.info.abilityState.Haste = AbilityStateData.Haste;
-            GameManager.info.abilityState.Patience = AbilityStateData.Patience;
-            GameManager.info.abilityState.Mystery = AbilityStateData.Mystery;
-            GameManager.info.abilityState.Greed = AbilityStateData.Greed;
-            GameManager.info.abilityState.Craving = AbilityStateData.Craving;
-
-            Debug.Log("능력치가 설정되었습니다.");
-        }
     }
     public void Update()
     {
@@ -151,10 +136,44 @@ public class CapabilityAgreement : MonoBehaviour
 
             // 추가 능력치를 반영함
             GameManager.info.SetStatState(stateKoreaToEng[key[i]], resultValue);
+            int currentStatLevel = (int)(resultValue/value[i]);
+            UpdateStaLevel(currentStatLevel, key[i]);
         }
 
         // 체력바 업데이트
         GameManager.info.allPlayerState.currentHp = GameManager.info.allPlayerState.maxHP;
         hpLevelManager.GetState(GameManager.info.allPlayerState);
+    }
+
+    void UpdateStaLevel(int CSLevel, string key){
+        switch (key){
+            case "공격력":
+                GameManager.info.abilityState.Anger = CSLevel;
+                break;
+
+            case "이동 속도":
+            case "공격 속도":
+                GameManager.info.abilityState.Haste = CSLevel;
+                break;
+            case "방어력":
+                GameManager.info.abilityState.Patience = CSLevel;
+                break;
+
+            case "치명타 확률":
+            case "회피 확률":
+                GameManager.info.abilityState.Mystery = CSLevel;
+                break;
+
+            case "최대 체력":
+                GameManager.info.abilityState.Greed = CSLevel;
+                break;
+
+            case "강인함":
+                GameManager.info.abilityState.Craving = CSLevel;
+                break;
+
+            default:
+                break;
+            }
     }
 }

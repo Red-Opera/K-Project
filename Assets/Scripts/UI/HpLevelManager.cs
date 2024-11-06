@@ -40,7 +40,6 @@ public class HpLevelManager : MonoBehaviour
         // 현재 상태를 가져옴
             currentHp = state.currentHp;
             maxHp = state.maxHP;
-            Debug.Log("currentHP =" + currentHp + " MaxHP = " + maxHp);
 
             currentHpText.text = currentHp.ToString();
             maxHpText.text = maxHp.ToString();
