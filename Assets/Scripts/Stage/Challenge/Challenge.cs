@@ -2,16 +2,15 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 
-public class Challenger : MonoBehaviour
+public class Challenge : MonoBehaviour
 {
     public GameObject lobbyRoom;       // 로비 오브젝트
     public GameObject[] bossRooms;     // 보스룸 배열
-    public GameObject triggerObject;
     public Image fadeImage;            
     public float fadeDuration = 1.0f; 
 
+    private GameObject player;         // player 태그의 오브젝트를 자동으로 찾기
     private int currentBossRoomIndex = -1; // 현재 보스룸의 인덱스
-    private GameObject player;          // player 오브젝트
 
     void Start()
     {
@@ -63,7 +62,11 @@ public class Challenger : MonoBehaviour
         // 새로운 보스룸 활성화 및 플레이어 위치 이동
         currentBossRoomIndex = bossRoomIndex;
         bossRooms[currentBossRoomIndex].SetActive(true);
-        player.transform.position = new Vector3(0, 0, 0); // 새로운 보스룸 내 위치 설정
+
+        if (player != null)
+        {
+            player.transform.position = new Vector3(0, 0, 0); // 새로운 보스룸 내 위치 설정
+        }
 
         // 페이드인
         elapsedTime = 0;
