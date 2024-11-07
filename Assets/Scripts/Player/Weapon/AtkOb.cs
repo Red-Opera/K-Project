@@ -10,9 +10,7 @@ public class AtkOb : MonoBehaviour
     int dir = 1;
     float AngerDamageCoaf;  //버서커 모드 공격력
     float AngerHealthCoaf;  //버서커 모드 체력
-    float HasteProperty;    //Dobble Attack
     float MysteryCoaf;  //크리티컬 계수
-    float CravingCoaf; //블록
     void Awake(){
         chkStatLevel();
         AngerHealth();
@@ -56,6 +54,7 @@ public class AtkOb : MonoBehaviour
             if(monster != null){
                 finalDamage = (int)(weapon.damage * (1+ LevelCoaf * 0.5f)* AngerDamageCoaf);
                 monster.Damaged(finalDamage);
+                DrainHealth();
                 Instantiate(weapon.AtkEffect,effectPosition, Quaternion.identity);
             }
         }
@@ -68,6 +67,7 @@ public class AtkOb : MonoBehaviour
             if(BossSc != null){
                 finalDamage = (int)(weapon.damage * (1+ LevelCoaf * 0.5f)* AngerDamageCoaf);
                 BossSc.Damaged(finalDamage);
+                DrainHealth();
                 Instantiate(weapon.AtkEffect,effectPosition, Quaternion.identity);
             }
         }
@@ -97,12 +97,22 @@ public class AtkOb : MonoBehaviour
     }
 
     void AngerHealth(){
-        int selfHarm = (int)(GameManager.info.allPlayerState.currentHp * GameManager.info.abilityState.AEffectH);
+        int selfHarm = (int)(GameManager.info.allPlayerState.currentHp * AngerHealthCoaf);
         if(GameManager.info.allPlayerState.currentHp <= selfHarm){
             GameManager.info.allPlayerState.currentHp = 1;
         }
         else{
             GameManager.info.allPlayerState.currentHp -= selfHarm;
+        }
+    }
+
+    void DrainHealth(){
+        int restoreHP = (int)(GameManager.info.abilityState.GEffect * (GameManager.info.abilityState.Greed /5));
+        if((GameManager.info.allPlayerState.currentHp + restoreHP) >= GameManager.info.allPlayerState.maxHP){
+            GameManager.info.allPlayerState.currentHp = GameManager.info.allPlayerState.maxHP;
+        }
+        else{
+            GameManager.info.allPlayerState.currentExp += restoreHP;
         }
     }
 }
