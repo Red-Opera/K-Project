@@ -21,8 +21,9 @@ MonoBehaviour:
   Craving: 0
   AEffectD: 20
   AEffectH: 1
-  HEffect: 25
-  PEffect: 40
-  MEffect: 20
-  GEffect: 10
-  CEffect: 10
+  HEffect: 0.25
+  PEffect: 0.4
+  MEffect: 0.2
+  GEffect: 0.1
+  CEffect: 0.1
+  shield: 0
