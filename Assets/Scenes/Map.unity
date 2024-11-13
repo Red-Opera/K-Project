@@ -2171,6 +2171,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5998564709254243750, guid: e4ccfcaea3fa1a648a9f02bf66eab781, type: 3}
+      propertyPath: addAbilityValue.Array.data[1].value.Array.data[0]
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5998564709254243750, guid: e4ccfcaea3fa1a648a9f02bf66eab781, type: 3}
+      propertyPath: addAbilityValue.Array.data[1].value.Array.data[1]
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5998564709254243750, guid: e4ccfcaea3fa1a648a9f02bf66eab781, type: 3}
+      propertyPath: addAbilityValue.Array.data[3].value.Array.data[0]
+      value: 0.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 5998564709254243750, guid: e4ccfcaea3fa1a648a9f02bf66eab781, type: 3}
+      propertyPath: addAbilityValue.Array.data[3].value.Array.data[1]
+      value: 0.02
+      objectReference: {fileID: 0}
     - target: {fileID: 6258773169604641719, guid: e4ccfcaea3fa1a648a9f02bf66eab781, type: 3}
       propertyPath: m_Name
       value: EventSystem

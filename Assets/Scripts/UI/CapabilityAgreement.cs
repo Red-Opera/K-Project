@@ -124,16 +124,13 @@ public class CapabilityAgreement : MonoBehaviour
 
             // 기존 값을 가져옴
             TextMeshProUGUI defaultValue = addTarget.GetComponent<TextMeshProUGUI>();
+            double currentValue = double.Parse(defaultValue.text.Trim('+'));
 
-            // 최종 값을 구함
-            double resultValue = double.Parse(defaultValue.text) + value[i];
+            // 증가된 값을 누적합니다.
+            double resultValue = currentValue + value[i];
 
-            if (Math.Abs(resultValue) < 0.1)
-                defaultValue.text = "+" + resultValue.ToString("#,##0.##");
-
-            else
-                defaultValue.text = "+" + resultValue.ToString("#,##0.#");
-
+            // 결과값을 텍스트에 업데이트합니다.
+            defaultValue.text = "+" + resultValue.ToString("#,##0.##");
             // 추가 능력치를 반영함
             GameManager.info.SetStatState(stateKoreaToEng[key[i]], resultValue);
             int currentStatLevel = (int)(resultValue/value[i]);

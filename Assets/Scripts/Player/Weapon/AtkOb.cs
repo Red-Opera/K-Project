@@ -43,7 +43,13 @@ public class AtkOb : MonoBehaviour
     {
         int LevelCoaf = GameManager.info.allPlayerState.level/5;
         int finalDamage =0;
+        float CriticalPercent = GameManager.info.allPlayerState.critical;
         float CriticalCoaf = GameManager.info.allPlayerState.criticalDamage + MysteryCoaf;
+        if(Random.value <= CriticalPercent){
+            finalDamage = (int)(weapon.damage * (1+ LevelCoaf * 0.5f)* AngerDamageCoaf * CriticalCoaf);
+        }else{
+            finalDamage = (int)(weapon.damage * (1+ LevelCoaf * 0.5f)* AngerDamageCoaf);
+        }
 
         if(other.gameObject.layer == 7){
             Goblin monster = other.gameObject.GetComponent<Goblin>();
@@ -52,7 +58,6 @@ public class AtkOb : MonoBehaviour
             Vector3 effectPosition = monsterCollider.bounds.center;
             
             if(monster != null){
-                finalDamage = (int)(weapon.damage * (1+ LevelCoaf * 0.5f)* AngerDamageCoaf);
                 monster.Damaged(finalDamage);
                 DrainHealth();
                 Instantiate(weapon.AtkEffect,effectPosition, Quaternion.identity);
@@ -65,7 +70,6 @@ public class AtkOb : MonoBehaviour
             Vector3 effectPosition = monsterCollider.bounds.center;
 
             if(BossSc != null){
-                finalDamage = (int)(weapon.damage * (1+ LevelCoaf * 0.5f)* AngerDamageCoaf);
                 BossSc.Damaged(finalDamage);
                 DrainHealth();
                 Instantiate(weapon.AtkEffect,effectPosition, Quaternion.identity);
