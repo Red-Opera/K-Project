@@ -97,7 +97,10 @@ public class AtkOb : MonoBehaviour
         }else{
             AngerHealthCoaf = 0;
         }
-        MysteryCoaf = (GameManager.info.abilityState.Mystery/5) * GameManager.info.abilityState.MEffect;    
+        MysteryCoaf = (GameManager.info.abilityState.Mystery/5) * GameManager.info.abilityState.MEffect;  
+
+        Debug.Log(AngerDamageCoaf);
+        Debug.Log(AngerHealthCoaf);
     }
 
     void AngerHealth(){

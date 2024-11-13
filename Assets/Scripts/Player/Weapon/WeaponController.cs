@@ -56,7 +56,7 @@ public class WeaponController : MonoBehaviour
                     myWeapon.Using();
                     audioSource.Play();
                 }
-                Invoke("CoolTime",myWeapon.Weapon.coolTime);
+                Invoke("CoolTime",myWeapon.Weapon.coolTime / GameManager.info.allPlayerState.attackSpeed);
                 anim.SetTrigger(myWeapon.Weapon.animName);
             }
         }

@@ -24,6 +24,7 @@ public class PMove : MonoBehaviour
     private Dialog dialog;
     private Coroutine uiCheckCoroutine;
     private GameObject hpBar;
+    public bool isRevive = true;
     void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
@@ -59,9 +60,17 @@ public class PMove : MonoBehaviour
             Jump();
             Dash();
         }
-
         if(playerState.currentHp <= 0 && gameObject.layer != 12){
-            Die();
+            if(isRevive && (GameManager.info.abilityState.Craving/5) > 0){
+                float reviveHpCoaf = GameManager.info.abilityState.CEffect * ( GameManager.info.abilityState.Craving / 5);
+                GameManager.info.allPlayerState.currentHp = (int)(GameManager.info.allPlayerState.maxHP * reviveHpCoaf);
+                isRevive = false;
+                hpLevelManager.Damage();
+            }
+            else{
+                Die();
+                isRevive = true;
+            }
         }
     }
 
