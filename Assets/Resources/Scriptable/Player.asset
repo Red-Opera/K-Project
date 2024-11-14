@@ -15,7 +15,7 @@ MonoBehaviour:
   nickName: 
   level: 7
   maxHP: 20
-  currentHp: 100
+  currentHp: 20
   currentExp: 850
   damage: 20
   defense: 10

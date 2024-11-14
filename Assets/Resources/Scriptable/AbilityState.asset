@@ -13,14 +13,14 @@ MonoBehaviour:
   m_Name: AbilityState
   m_EditorClassIdentifier: 
   nickName: 
-  Anger: 0
+  Anger: 10
   Haste: 0
   Patience: 0
   Mystery: 0
-  Greed: 0
+  Greed: 7
   Craving: 0
-  AEffectD: 20
-  AEffectH: 1
+  AEffectD: 0.2
+  AEffectH: 0.03
   HEffect: 0.25
   PEffect: 0.4
   MEffect: 0.2

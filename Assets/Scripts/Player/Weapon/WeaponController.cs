@@ -50,11 +50,9 @@ public class WeaponController : MonoBehaviour
                 }
                 CheckMousePos();
                 isAtk = true;
-                myWeapon.Using();
-                audioSource.Play();
+                AttackStart();
                 if(Random.value < dobleShotProbability){
-                    myWeapon.Using();
-                    audioSource.Play();
+                    Invoke("AttackStart", 0.5f);
                 }
                 Invoke("CoolTime",myWeapon.Weapon.coolTime / GameManager.info.allPlayerState.attackSpeed);
                 anim.SetTrigger(myWeapon.Weapon.animName);
@@ -62,6 +60,10 @@ public class WeaponController : MonoBehaviour
         }
     }
 
+    void AttackStart(){
+        myWeapon.Using();
+        audioSource.Play();
+    }
     void CoolTime(){
         isAtk = false;
     }

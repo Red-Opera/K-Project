@@ -179,6 +179,13 @@ public class PMove : MonoBehaviour
         if(Damage <= 0 ){
             Damage =1;
         }
+        int finalDamage = Damage;
+        if(GameManager.info.abilityState.shield >= Damage){
+            GameManager.info.abilityState.shield -= Damage;
+            Damage = 0;
+        }else{
+            Damage -= GameManager.info.abilityState.shield;
+        }
         GameManager.info.allPlayerState.currentHp -= Damage;
         hpLevelManager.Damage();
         Invoke("DashEnd", 0.5f);

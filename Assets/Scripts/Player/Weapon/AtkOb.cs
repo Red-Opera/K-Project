@@ -11,8 +11,11 @@ public class AtkOb : MonoBehaviour
     float AngerDamageCoaf;  //버서커 모드 공격력
     float AngerHealthCoaf;  //버서커 모드 체력
     float MysteryCoaf;  //크리티컬 계수
+    HpLevelManager playerHP;
     void Awake(){
         chkStatLevel();
+        GameObject hpbar = GameObject.FindGameObjectWithTag("HP"); 
+        playerHP = hpbar.GetComponent<HpLevelManager>();
         AngerHealth();
     }
     void Start()
@@ -59,7 +62,7 @@ public class AtkOb : MonoBehaviour
             
             if(monster != null){
                 monster.Damaged(finalDamage);
-                DrainHealth();
+                DrainHealth(finalDamage);
                 Instantiate(weapon.AtkEffect,effectPosition, Quaternion.identity);
             }
         }
@@ -71,7 +74,7 @@ public class AtkOb : MonoBehaviour
 
             if(BossSc != null){
                 BossSc.Damaged(finalDamage);
-                DrainHealth();
+                DrainHealth(finalDamage);
                 Instantiate(weapon.AtkEffect,effectPosition, Quaternion.identity);
             }
         }
@@ -98,28 +101,34 @@ public class AtkOb : MonoBehaviour
             AngerHealthCoaf = 0;
         }
         MysteryCoaf = (GameManager.info.abilityState.Mystery/5) * GameManager.info.abilityState.MEffect;  
-
-        Debug.Log(AngerDamageCoaf);
-        Debug.Log(AngerHealthCoaf);
     }
 
     void AngerHealth(){
-        int selfHarm = (int)(GameManager.info.allPlayerState.currentHp * AngerHealthCoaf);
+        int selfHarm = (int)(GameManager.info.allPlayerState.maxHP * AngerHealthCoaf);
+        if(GameManager.info.abilityState.Anger >= 5 && selfHarm <1)
+            selfHarm =1;
+        
         if(GameManager.info.allPlayerState.currentHp <= selfHarm){
             GameManager.info.allPlayerState.currentHp = 1;
+            playerHP.Damage();
         }
         else{
             GameManager.info.allPlayerState.currentHp -= selfHarm;
+            playerHP.Damage();
         }
     }
 
-    void DrainHealth(){
-        int restoreHP = (int)(GameManager.info.abilityState.GEffect * (GameManager.info.abilityState.Greed /5));
+    void DrainHealth(int damage){
+        float drainCoaf = (GameManager.info.abilityState.GEffect * (GameManager.info.abilityState.Greed /5));
+        int restoreHP = (int)(damage * drainCoaf);
+        Debug.Log(restoreHP);
         if((GameManager.info.allPlayerState.currentHp + restoreHP) >= GameManager.info.allPlayerState.maxHP){
             GameManager.info.allPlayerState.currentHp = GameManager.info.allPlayerState.maxHP;
+            playerHP.Damage();
         }
         else{
             GameManager.info.allPlayerState.currentExp += restoreHP;
+            playerHP.Damage();
         }
     }
 }
