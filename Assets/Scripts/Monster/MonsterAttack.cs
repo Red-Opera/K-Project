@@ -20,10 +20,9 @@ public class MonsterAttack : MonoBehaviour
         
     }
     void OnTriggerEnter2D(Collider2D other){
-        float BlockProbability = GameManager.info.abilityState.CEffect * (GameManager.info.abilityState.Craving/5);
+        float AvoidProbability = GameManager.info.allPlayerState.avoidPersent;
         if (other.gameObject.layer == 8){
-            BlockProbability = 0;
-            if(Random.value < BlockProbability){
+            if(Random.value < AvoidProbability){
                 Debug.Log("Miss");
             }else{
                 PMove pMove = other.gameObject.GetComponent<PMove>();

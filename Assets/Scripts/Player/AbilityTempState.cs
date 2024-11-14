@@ -18,7 +18,7 @@ public class AbilityTempState : ScriptableObject
     public float PEffect; //Patience 효과 - 쉴드
     public float MEffect; // Mystery 효과 - 크리티컬 데미지
     public float GEffect; // Greed 효과 - 피흡
-    public float CEffect; // Craving 효과 - 블록
+    public float CEffect; // Craving 효과 - 부활
     public int shield;
     
 }
