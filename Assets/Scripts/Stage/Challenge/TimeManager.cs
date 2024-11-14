@@ -1,17 +1,19 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TimerManager : MonoBehaviour
 {
     private float startTime;
     private bool timerRunning = false;
+    public GameObject startObject; // 특정 시작 오브젝트 지정
+    public Text timerText; // 시간을 표시할 UI Text 컴포넌트
 
     void Update()
     {
         if (timerRunning)
         {
-            // 측정 중인 시간 출력
             float elapsedTime = Time.time - startTime;
-            Debug.Log("Elapsed Time: " + elapsedTime + " seconds");
+            timerText.text = "Elapsed Time: " + elapsedTime.ToString("F2") + " seconds";
         }
     }
 
@@ -31,25 +33,20 @@ public class TimerManager : MonoBehaviour
         return Time.time - startTime;
     }
 
-    public void TriggerStartTimer(Collider other)
+    public void TriggerStartTimer(Collider2D other)
     {
         if (other.CompareTag("Player") && !timerRunning)
         {
-            // 특정 오브젝트에 닿았을 때 시간 측정 시작
             StartTimer();
         }
     }
-}
 
-public class TimerTrigger : MonoBehaviour
-{
-    public TimerManager timerManager;
-
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if (timerManager != null)
+        // 지정된 startObject와 플레이어가 충돌했을 때만 타이머 시작
+        if (other.gameObject == startObject && other.CompareTag("Player"))
         {
-            timerManager.TriggerStartTimer(other);
+            TriggerStartTimer(other);
         }
     }
 }

@@ -64447,7 +64447,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1685785542}
   - component: {fileID: 1685785545}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: GameManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
