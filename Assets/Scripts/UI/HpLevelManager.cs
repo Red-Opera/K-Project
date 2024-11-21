@@ -13,6 +13,7 @@ public class HpLevelManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI currentHpText;     // 현재 체력 테스트
     [SerializeField] private TextMeshProUGUI levelText;         // 레벨 텍스트
     [SerializeField] private Slider hpSlider;                   // 체력바 슬라이더
+    [SerializeField] private Image ShieldSlider;
 
     void Start()
     {
@@ -22,6 +23,7 @@ public class HpLevelManager : MonoBehaviour
         Debug.Assert(hpSlider != null, "체력 슬라이더가 존재하지 않습니다.");
         if (BossState == null){
             state = GameManager.info.allPlayerState;
+            Debug.Assert(ShieldSlider != null, "보호막 슬라이더가 존재하지 않습니다.");
             SliderReset();
             SetLevel();
         }else{
@@ -41,10 +43,13 @@ public class HpLevelManager : MonoBehaviour
             currentHp = state.currentHp;
             maxHp = state.maxHP;
 
+            int currentShield = GameManager.info.abilityState.shield;
+
             currentHpText.text = currentHp.ToString();
             maxHpText.text = maxHp.ToString();
 
             hpSlider.value = currentHp / (float)maxHp;
+            ShieldSlider.fillAmount = (currentShield/(float)maxHp)+0.1f;
     }
     public void BossSliderReset()
     {
@@ -72,7 +77,7 @@ public class HpLevelManager : MonoBehaviour
     }
 
     // 데미지를 처리하는 메소드
-    public void Damage()
+    public void RenewalHp()
     {
         SliderReset();
     }

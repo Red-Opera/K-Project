@@ -33,13 +33,14 @@ public class PMove : MonoBehaviour
         anim = GetComponent<Animator>();
         
         Invoke("FindUI",0.1f);
+        Invoke("RefillShield", 0.2f);
         DontDestroyOnLoad(gameObject);
     }
     void Start(){
         playerState = GameManager.info.allPlayerState;
         ResetStat();
         SceneManager.sceneLoaded += reload;
-        Invoke("RefillShield", 10);
+        
     }
 
     public void FindUI(){
@@ -65,7 +66,7 @@ public class PMove : MonoBehaviour
                 float reviveHpCoaf = GameManager.info.abilityState.CEffect * ( GameManager.info.abilityState.Craving / 5);
                 GameManager.info.allPlayerState.currentHp = (int)(GameManager.info.allPlayerState.maxHP * reviveHpCoaf);
                 isRevive = false;
-                hpLevelManager.Damage();
+                hpLevelManager.RenewalHp();
             }
             else{
                 Die();
@@ -187,7 +188,7 @@ public class PMove : MonoBehaviour
             Damage -= GameManager.info.abilityState.shield;
         }
         GameManager.info.allPlayerState.currentHp -= Damage;
-        hpLevelManager.Damage();
+        hpLevelManager.RenewalHp();
         Invoke("DashEnd", 0.5f);
     }
     void reload(Scene scene, LoadSceneMode mode)
@@ -253,6 +254,8 @@ public class PMove : MonoBehaviour
             }else{
                 GameManager.info.abilityState.shield += (int)(maxShield * 0.1);
             }
+            hpLevelManager.RenewalHp();
         }
+        Invoke("RefillShield",10);
     }
 }

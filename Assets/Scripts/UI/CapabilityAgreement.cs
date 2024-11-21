@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CapabilityAgreement : MonoBehaviour
 {
@@ -107,6 +108,24 @@ public class CapabilityAgreement : MonoBehaviour
         StartCoroutine(signEffect[index].Play(false));
     }
 
+    public void AbilityRescission(int index){
+        TextMeshProUGUI downgradeTarget = abilityText[index];
+        int currentUpgrade = int.Parse(downgradeTarget.text);
+
+        if(currentUpgrade <= 0){
+            Debug.Log("더 이상 능력치를 내릴 수 없습니다.");
+            return;
+        }
+        downgradeTarget.text = (int.Parse(downgradeTarget.text)-1).ToString();
+
+        ableRemain++;
+        remainText.text = ableRemain.ToString();
+
+        audioSource.PlayOneShot(signSound);
+
+        DownGradeState(index);
+    }
+
     private void StateRefresh(int index)
     {
         Transform sign = signType.transform.GetChild(index);
@@ -142,6 +161,28 @@ public class CapabilityAgreement : MonoBehaviour
         hpLevelManager.GetState(GameManager.info.allPlayerState);
     }
 
+    private void DownGradeState(int index){
+        Transform rescission = signType.transform.GetChild(index);
+        Transform ability = rescission.Find("AddAbility");
+        Debug.Assert(ability != null, "추가 효과를 담는 오브젝트가 없습니다.");
+
+        for(int i = 0;i< addAbilitys[index].Key.Count; i++){
+            Transform desTarget = ability.GetChild(i).GetChild(1);
+
+            List<string> key = addAbilitys[index].Key;
+            List<double> value = addAbilitys[index].Value;
+
+            TextMeshProUGUI defaultValue = desTarget.GetComponent<TextMeshProUGUI>();
+            double currentValue = double.Parse(defaultValue.text.Trim('+'));
+
+            double resultValue = currentValue - value[i];
+
+            defaultValue.text = "+" + resultValue.ToString("#,##0.##");
+            GameManager.info.SetStatState(stateKoreaToEng[key[i]],resultValue);
+            int currentStatLevel = (int)(resultValue/value[i]);
+            UpdateStaLevel(currentStatLevel,key[i]);
+        }
+    }
     void UpdateStaLevel(int CSLevel, string key){
         switch (key){
             case "공격력":
