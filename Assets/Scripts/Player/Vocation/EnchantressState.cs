@@ -12,7 +12,5 @@ public class EnchantressState : MyVocation
         state.additionalAttackSpeed = 0.5f; //1
         state.additionalCritical=0.15f; //0.05f
         state.additionalCriticalDamage = 3f; //1.5f
-        state.weakeningCoaf = 0;
-        state.weakeningCoafDamage = 0;
     }
 }

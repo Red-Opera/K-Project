@@ -21,6 +21,8 @@ public class Goblin : MonoBehaviour
     float localScaleX;
     int Damage;
     float WC;
+    int BleedingTime =3;
+
     GameObject Coin;
     AudioSource audioSource;
     // Start is called before the first frame update
@@ -72,8 +74,9 @@ public class Goblin : MonoBehaviour
         Hp = state.maxHP;
     }
 
-    public void Damaged(int dmg, float WeakCoaf){
+    public void Damaged(int dmg, float WeakCoaf, float bleedCoaf){
         Hp -= dmg;
+        StartCoroutine(BleedingCoroutine(3, bleedCoaf));
         Debug.Log("Monster Damaged " + dmg + "dmg");
         StartCoroutine(setColor());
         audioSource.Play();
@@ -169,5 +172,20 @@ public class Goblin : MonoBehaviour
     }
     void WeakEnd(){
         state.damage += (int)(Damage*WC);
+    }
+
+    IEnumerator BleedingCoroutine(int bleedCount, float bleedCoaf){
+        if(bleedCount > 0){
+            state.currentHp -= (int)(state.maxHP * bleedCoaf);
+
+            if(state.currentHp <= 0){
+                state.damage = Damage;
+                StartCoroutine(SpawnCoin());
+                yield break;
+            }
+            yield return new WaitForSeconds(1);
+            StartCoroutine(BleedingCoroutine(bleedCount-1, bleedCoaf));
+        }
+        yield break;
     }
 }

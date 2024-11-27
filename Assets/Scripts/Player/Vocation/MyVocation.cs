@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,6 +13,8 @@ public struct VacationSetting{
     public float additionalCriticalDamage;
     public float weakeningCoaf;
     public float weakeningCoafDamage;
+    public float drainHP;
+    public float bleedingCoaf;
 }
 public abstract class MyVocation : MonoBehaviour
 {

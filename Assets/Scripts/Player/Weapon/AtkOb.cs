@@ -13,6 +13,8 @@ public class AtkOb : MonoBehaviour
     float MysteryCoaf;  //크리티컬 계수
     float WC; //약화 확률
     float WCD; //약화 데미지
+    float VDHC; // VacationDrainHealthCoaf
+    float Bleeding;
     HpLevelManager playerHP;
     void Awake(){
         chkStatLevel();
@@ -54,6 +56,7 @@ public class AtkOb : MonoBehaviour
             finalDamage = (int)(weapon.damage * (1+ LevelCoaf * 0.5f)* AngerDamageCoaf * CriticalCoaf);
         }else{
             finalDamage = (int)(weapon.damage * (1+ LevelCoaf * 0.5f)* AngerDamageCoaf);
+            Bleeding = 0;
         }
 
         ChkWeakMonster();
@@ -64,7 +67,7 @@ public class AtkOb : MonoBehaviour
             Vector3 effectPosition = monsterCollider.bounds.center;
             
             if(monster != null){
-                monster.Damaged(finalDamage,WCD);
+                monster.Damaged(finalDamage,WCD, Bleeding);
                 DrainHealth(finalDamage);
                 Instantiate(weapon.AtkEffect,effectPosition, Quaternion.identity);
             }
@@ -76,7 +79,7 @@ public class AtkOb : MonoBehaviour
             Vector3 effectPosition = monsterCollider.bounds.center;
 
             if(BossSc != null){
-                BossSc.Damaged(finalDamage,WCD);
+                BossSc.Damaged(finalDamage,WCD, Bleeding);
                 DrainHealth(finalDamage);
                 Instantiate(weapon.AtkEffect,effectPosition, Quaternion.identity);
             }
@@ -92,10 +95,12 @@ public class AtkOb : MonoBehaviour
     void endFollow(){
         isFollow = false;
     }
-    public void setState(WeaponSetting state, float WeakCoaf, float WeakCoafDmg){
+    public void setState(WeaponSetting state, float WeakCoaf, float WeakCoafDmg, float DrainHealthCoaf, float BleedingCoaf){
         weapon = state;
         WC = WeakCoaf;
         WCD = WeakCoafDmg;
+        VDHC = DrainHealthCoaf;
+        Bleeding = BleedingCoaf;
     }
 
     void chkStatLevel(){
@@ -125,6 +130,7 @@ public class AtkOb : MonoBehaviour
 
     void DrainHealth(int damage){
         float drainCoaf = (GameManager.info.abilityState.GEffect * (GameManager.info.abilityState.Greed /5));
+        drainCoaf += VDHC;
         int restoreHP = (int)(damage * drainCoaf);
         Debug.Log(restoreHP);
         if((GameManager.info.allPlayerState.currentHp + restoreHP) >= GameManager.info.allPlayerState.maxHP){

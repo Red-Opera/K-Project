@@ -12,8 +12,6 @@ public class VampireState : MyVocation
         state.additionalAttackSpeed = 1; //1
         state.additionalCritical=0.05f; //0.05f
         state.additionalCriticalDamage = 1.5f; //1.5f
-        state.weakeningCoaf = 0;
-        state.weakeningCoafDamage = 0;
-        //뱀파이어 피흡 추가
+        state.drainHP = 0.05f;
     }
 }

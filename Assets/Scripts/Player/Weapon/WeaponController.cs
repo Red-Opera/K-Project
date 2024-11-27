@@ -63,7 +63,7 @@ public class WeaponController : MonoBehaviour
     }
 
     void AttackStart(){
-        myWeapon.Using(vocationState.state.weakeningCoaf, vocationState.state.weakeningCoafDamage);
+        myWeapon.Using(vocationState.state.weakeningCoaf, vocationState.state.weakeningCoafDamage, vocationState.state.drainHP, vocationState.state.bleedingCoaf);
         audioSource.Play();
     }
     void CoolTime(){

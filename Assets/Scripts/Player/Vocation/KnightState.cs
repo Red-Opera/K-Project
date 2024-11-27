@@ -12,7 +12,5 @@ public class KnightState : MyVocation
         state.additionalAttackSpeed = 1; //1
         state.additionalCritical=0.05f; //0.05f
         state.additionalCriticalDamage = 1.5f; //1.5f
-        state.weakeningCoaf = 0;
-        state.weakeningCoafDamage = 0;
     }
 }

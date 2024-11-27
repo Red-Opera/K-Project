@@ -12,7 +12,5 @@ public class BerserkState : MyVocation
         state.additionalAttackSpeed = 1.2f; //1
         state.additionalCritical=0.25f; //0.05f
         state.additionalCriticalDamage = 2; //1.5f
-        state.weakeningCoaf = 0;
-        state.weakeningCoafDamage = 0;
     }
 }

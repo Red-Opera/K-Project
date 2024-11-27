@@ -105,8 +105,9 @@ public class BossController : MonoBehaviour
         attackType = Random.Range(0,Boss.boss.attackCount);
     }
 
-    public void Damaged(int dmg, float WeakCoaf){
+    public void Damaged(int dmg, float WeakCoaf, float bleedCoaf){
         Boss.boss.bossState.currentHp -= dmg;
+        StartCoroutine(BleedingCoroutine(3, bleedCoaf));
         hpLevelManager.BossSliderReset();
         if(Boss.boss.bossState.currentHp <= 0){
             Boss.boss.bossState.damage = Damage;
@@ -124,5 +125,19 @@ public class BossController : MonoBehaviour
 
     void WeakEnd(){
         Boss.boss.bossState.damage += (int)(Damage*WC);
+    }
+    IEnumerator BleedingCoroutine(int bleedCount, float bleedCoaf){
+        if(bleedCount > 0){
+            Boss.boss.bossState.currentHp -= (int)(Boss.boss.bossState.maxHP * bleedCoaf);
+            hpLevelManager.BossSliderReset();
+            if(Boss.boss.bossState.currentHp <= 0){
+                Boss.boss.bossState.damage = Damage;
+                Die();
+                yield break;
+            }
+            yield return new WaitForSeconds(1);
+            StartCoroutine(BleedingCoroutine(bleedCount-1, bleedCoaf));
+        }
+        yield break;
     }
 }

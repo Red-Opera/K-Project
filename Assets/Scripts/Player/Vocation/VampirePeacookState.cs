@@ -12,8 +12,7 @@ public class VampirePeacookState : MyVocation
         state.additionalAttackSpeed = 1.5f; //1
         state.additionalCritical=0.25f; //0.05f
         state.additionalCriticalDamage = 2f; //1.5f
-        state.weakeningCoaf = 0;
-        state.weakeningCoafDamage = 0;
-        //크리티컬시 피흡 추가
+        state.drainHP = 0.05f;
+        state.bleedingCoaf = 0.01f;
     }
 }

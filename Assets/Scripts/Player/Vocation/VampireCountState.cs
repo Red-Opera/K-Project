@@ -14,5 +14,6 @@ public class VampireCountState : MyVocation
         state.additionalCriticalDamage = 2.5f; //1.5f
         state.weakeningCoaf = 0.3f;
         state.weakeningCoafDamage = 0.1f;
+        state.drainHP = 0.05f;
     }
 }
