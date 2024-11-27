@@ -41,13 +41,15 @@ public class PMove : MonoBehaviour
     void Start(){
         playerState = GameManager.info.allPlayerState;
         ResetStat();
+        Invoke("SynchronizationVocation",0.2f);
+        SceneManager.sceneLoaded += reload;
+    }
+
+    void SynchronizationVocation(){
         characterState.InitSetting();
         characterState.UpdateVocationState();
         hpLevelManager.RenewalHp();
-        SceneManager.sceneLoaded += reload;
-        
     }
-
     public void FindUI(){
         Debug.Log("Find UI");
         hpBar = GameObject.FindGameObjectWithTag("HP");
