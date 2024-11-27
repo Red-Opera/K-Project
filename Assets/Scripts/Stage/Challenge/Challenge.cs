@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 
-public class Challenger : MonoBehaviour
+public class Challenge : MonoBehaviour
 {
     public GameObject lobbyRoom;             // 로비 오브젝트
     public GameObject[] bossRooms;           // 보스룸 배열
@@ -29,7 +29,7 @@ public class Challenger : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject == triggerObject && other.CompareTag("Player") && currentBossRoomIndex == -1)
         {
@@ -42,6 +42,7 @@ public class Challenger : MonoBehaviour
         float elapsedTime = 0;
         Color fadeColor = fadeImage.color;
         fadeColor.a = 0;
+        fadeImage.color = fadeColor; // 초기 알파값 설정
 
         while (elapsedTime < fadeDuration)
         {
@@ -64,6 +65,10 @@ public class Challenger : MonoBehaviour
         if (bossRoomStartPoint != null)
         {
             player.transform.position = bossRoomStartPoint.position;
+        }
+        else
+        {
+            Debug.LogWarning("StartPoint가 현재 보스룸에 없습니다.");
         }
 
         elapsedTime = 0;
