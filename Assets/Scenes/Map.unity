@@ -436,23 +436,6 @@ PrefabInstance:
       addedObject: {fileID: 36621196}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de570bfbf1a49ba4c9575930f7db6bae, type: 3}
---- !u!1 &94533929 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 9094955460031638816, guid: c556abd764f36af48a94d3b7a70af465, type: 3}
-  m_PrefabInstance: {fileID: 2064363302}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &94533979
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 94533929}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06b5a423cf04a6c42b7e8388a402d7fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &108089762
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -66375,14 +66358,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3277226748042234503, guid: c556abd764f36af48a94d3b7a70af465, type: 3}
-      propertyPath: characterState
-      value: 
-      objectReference: {fileID: 94533979}
-    - target: {fileID: 7555247546261187526, guid: c556abd764f36af48a94d3b7a70af465, type: 3}
-      propertyPath: vocationState
-      value: 
-      objectReference: {fileID: 94533979}
     - target: {fileID: 9094955460031638816, guid: c556abd764f36af48a94d3b7a70af465, type: 3}
       propertyPath: m_Name
       value: Enchantress
@@ -66390,10 +66365,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 9094955460031638816, guid: c556abd764f36af48a94d3b7a70af465, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 94533979}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c556abd764f36af48a94d3b7a70af465, type: 3}
 --- !u!1001 &2069784728
 PrefabInstance:

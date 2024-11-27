@@ -156,6 +156,7 @@ GameObject:
   - component: {fileID: 2266719115439866218}
   - component: {fileID: 959636348733121163}
   - component: {fileID: 259719763833152569}
+  - component: {fileID: -7055541171722534805}
   m_Layer: 8
   m_Name: Knight
   m_TagString: Player
@@ -326,11 +327,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea90129d386ef394c84c61fcff29fcf4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterState: {fileID: -7055541171722534805}
   hpLevelManager: {fileID: 0}
   result: {fileID: 0}
   playerState: {fileID: 0}
-  isJumping: 0
-  isAttack: 0
+  isRevive: 1
 --- !u!114 &1155754149441663403
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -344,6 +345,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myWeapon: {fileID: 2743045888845656711}
+  vocationState: {fileID: -7055541171722534805}
   playerState: {fileID: 0}
   skillList:
   - {fileID: 2743045888845656711}
@@ -482,3 +484,15 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &-7055541171722534805
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8699221057430734424}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea6752a87482b92409ce3d55f94fa641, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

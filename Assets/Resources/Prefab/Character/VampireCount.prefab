@@ -20,6 +20,7 @@ GameObject:
   - component: {fileID: 4664165540118990513}
   - component: {fileID: 5783155143951014207}
   - component: {fileID: 1696674893645435925}
+  - component: {fileID: 5082450222118816819}
   m_Layer: 8
   m_Name: VampireCount
   m_TagString: Player
@@ -189,9 +190,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea90129d386ef394c84c61fcff29fcf4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterState: {fileID: 5082450222118816819}
   hpLevelManager: {fileID: 0}
   result: {fileID: 0}
   playerState: {fileID: 0}
+  isRevive: 1
 --- !u!114 &31300343343048872
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -230,6 +233,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myWeapon: {fileID: 5783155143951014207}
+  vocationState: {fileID: 5082450222118816819}
   playerState: {fileID: 0}
   skillList:
   - {fileID: 5783155143951014207}
@@ -270,5 +274,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1d53416d8410d2f489770ca62f5da22d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5082450222118816819
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 467960580000034103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70576a60197d17e409534370a22a40f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
