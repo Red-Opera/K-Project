@@ -68,6 +68,9 @@ public class MultiPlay : MonoBehaviour
         animator = GetComponent<Animator>();
         Debug.Assert(animator != null, "오브젝트에 Animator가 없습니다.");
 
+        if (Login.currentLoginName == "")
+            return;
+
         ConnectToServer(DecodeString.Revert(IP), int.Parse(DecodeString.Revert(port)));
         Debug.Log("Server started successfully on port " + port);
 
