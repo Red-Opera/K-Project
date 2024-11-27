@@ -8,6 +8,7 @@ using UnityEngine;
 public class WeaponController : MonoBehaviour
 {
     public MyWeapon myWeapon;
+    public MyVocation vocationState;
     public State playerState;
     public MyWeapon[] skillList;
     SpriteRenderer spriteRenderer;
@@ -25,6 +26,7 @@ public class WeaponController : MonoBehaviour
     void Start()
     {
         myWeapon.InitSetting();
+        vocationState.InitSetting();
         playerState = Resources.Load<State>("Scriptable/Player");
         anim = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -61,7 +63,7 @@ public class WeaponController : MonoBehaviour
     }
 
     void AttackStart(){
-        myWeapon.Using();
+        myWeapon.Using(vocationState.state.weakeningCoaf, vocationState.state.weakeningCoafDamage);
         audioSource.Play();
     }
     void CoolTime(){

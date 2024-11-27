@@ -22,10 +22,10 @@ public abstract class MyWeapon : MonoBehaviour
 {
     public WeaponSetting Weapon;
     public abstract void InitSetting();
-    public virtual void Using(){
+    public virtual void Using(float WeakCoaf, float WeakCoafDmg){
         GameObject Atk = Instantiate(Weapon.AtkObject, transform.position + Weapon.pos * Weapon.dir, Quaternion.identity);
         Atk.transform.SetParent(transform);
         AtkOb AtkSc = Atk.GetComponent<AtkOb>();
-        AtkSc.setState(Weapon);
+        AtkSc.setState(Weapon, WeakCoaf, WeakCoafDmg);
     }
 }

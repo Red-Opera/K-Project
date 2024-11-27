@@ -11,6 +11,8 @@ public class AtkOb : MonoBehaviour
     float AngerDamageCoaf;  //버서커 모드 공격력
     float AngerHealthCoaf;  //버서커 모드 체력
     float MysteryCoaf;  //크리티컬 계수
+    float WC; //약화 확률
+    float WCD; //약화 데미지
     HpLevelManager playerHP;
     void Awake(){
         chkStatLevel();
@@ -54,6 +56,7 @@ public class AtkOb : MonoBehaviour
             finalDamage = (int)(weapon.damage * (1+ LevelCoaf * 0.5f)* AngerDamageCoaf);
         }
 
+        ChkWeakMonster();
         if(other.gameObject.layer == 7){
             Goblin monster = other.gameObject.GetComponent<Goblin>();
             Collider2D monsterCollider = monster.GetComponent<Collider2D>();
@@ -61,7 +64,7 @@ public class AtkOb : MonoBehaviour
             Vector3 effectPosition = monsterCollider.bounds.center;
             
             if(monster != null){
-                monster.Damaged(finalDamage);
+                monster.Damaged(finalDamage,WCD);
                 DrainHealth(finalDamage);
                 Instantiate(weapon.AtkEffect,effectPosition, Quaternion.identity);
             }
@@ -73,7 +76,7 @@ public class AtkOb : MonoBehaviour
             Vector3 effectPosition = monsterCollider.bounds.center;
 
             if(BossSc != null){
-                BossSc.Damaged(finalDamage);
+                BossSc.Damaged(finalDamage,WCD);
                 DrainHealth(finalDamage);
                 Instantiate(weapon.AtkEffect,effectPosition, Quaternion.identity);
             }
@@ -89,8 +92,10 @@ public class AtkOb : MonoBehaviour
     void endFollow(){
         isFollow = false;
     }
-    public void setState(WeaponSetting state){
+    public void setState(WeaponSetting state, float WeakCoaf, float WeakCoafDmg){
         weapon = state;
+        WC = WeakCoaf;
+        WCD = WeakCoafDmg;
     }
 
     void chkStatLevel(){
@@ -129,6 +134,13 @@ public class AtkOb : MonoBehaviour
         else{
             GameManager.info.allPlayerState.currentExp += restoreHP;
             playerHP.RenewalHp();
+        }
+    }
+
+    void ChkWeakMonster(){
+        // 확률 계산하여 몬스터 약화 여부 결정
+        if(Random.value > WC){
+            WCD = 0;
         }
     }
 }

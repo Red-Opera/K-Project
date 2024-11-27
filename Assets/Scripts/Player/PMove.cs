@@ -14,16 +14,18 @@ public class PMove : MonoBehaviour
     CapsuleCollider2D PlayerCollider;
     SpriteRenderer spriteRenderer;
     Animator anim;
+    public MyVocation characterState;
+
     public HpLevelManager hpLevelManager;
     public ResultUI result;
-    public State playerState;
-    private bool isJumping;
-    private bool isAttack = false;
-    private bool usingUI = false;
+    private GameObject hpBar;
     private GameObject interactiveUi;
     private Dialog dialog;
     private Coroutine uiCheckCoroutine;
-    private GameObject hpBar;
+    private bool usingUI = false;
+
+    private bool isJumping;
+    public State playerState;
     public bool isRevive = true;
     void Awake()
     {
@@ -39,6 +41,9 @@ public class PMove : MonoBehaviour
     void Start(){
         playerState = GameManager.info.allPlayerState;
         ResetStat();
+        characterState.InitSetting();
+        characterState.UpdateVocationState();
+        hpLevelManager.RenewalHp();
         SceneManager.sceneLoaded += reload;
         
     }

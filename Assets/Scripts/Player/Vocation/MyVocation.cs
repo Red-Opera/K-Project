@@ -10,24 +10,26 @@ public struct VacationSetting{
     public float additionalAttackSpeed;
     public float additionalCritical;
     public float additionalCriticalDamage;
+    public float weakeningCoaf;
+    public float weakeningCoafDamage;
 }
-public class MyVocation : MonoBehaviour
+public abstract class MyVocation : MonoBehaviour
 {
-    public VacationSetting myVacation;
-    void Start()
+    public VacationSetting state;
+    public abstract void InitSetting();
+    private void SetVacationState()
     {
-        UpdateVacationState();
+        GameManager.info.addLevelState.currentHp = state.levelUpHP;
+        GameManager.info.addLevelState.maxHP = state.levelUpHP;
+        GameManager.info.addLevelState.damage = state.levelUpDamage;
+        GameManager.info.addLevelState.defense = state.levelUpDefense;
+        GameManager.info.playerState.attackSpeed = state.additionalAttackSpeed;
+        GameManager.info.playerState.critical = state.additionalCritical;
+        GameManager.info.playerState.criticalDamage = state.additionalCriticalDamage;
     }
 
-    // Update is called once per frame
-    void UpdateVacationState()
-    {
-        GameManager.info.addLevelState.currentHp = myVacation.levelUpHP;
-        GameManager.info.addLevelState.maxHP = myVacation.levelUpHP;
-        GameManager.info.addLevelState.damage = myVacation.levelUpDamage;
-        GameManager.info.addLevelState.defense = myVacation.levelUpDefense;
-        GameManager.info.playerState.attackSpeed = myVacation.additionalAttackSpeed;
-        GameManager.info.playerState.critical = myVacation.additionalCritical;
-        GameManager.info.playerState.criticalDamage = myVacation.additionalCriticalDamage;
+    public void UpdateVocationState(){
+        SetVacationState();
+        GameManager.info.UpdatePlayerState();
     }
 }

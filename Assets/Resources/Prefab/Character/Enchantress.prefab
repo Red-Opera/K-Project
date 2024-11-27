@@ -158,6 +158,8 @@ GameObject:
   - component: {fileID: 2803419605674615329}
   - component: {fileID: 9151646755892490135}
   - component: {fileID: 3347712707706624341}
+  - component: {fileID: 781196973542782888}
+  - component: {fileID: 1355395999401536882}
   m_Layer: 8
   m_Name: Enchantress
   m_TagString: Player
@@ -269,8 +271,7 @@ MonoBehaviour:
   hpLevelManager: {fileID: 0}
   result: {fileID: 0}
   playerState: {fileID: 0}
-  isJumping: 0
-  isAttack: 0
+  isRevive: 1
 --- !u!70 &1702832230963721077
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -498,6 +499,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   getItem: 
 --- !u!114 &3347712707706624341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9094955460031638816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 977306c594b273d428c233ab816a9136, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &781196973542782888
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9094955460031638816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af1d3681111c71f4b92dabc6d503abdb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  getItem: 
+--- !u!114 &1355395999401536882
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

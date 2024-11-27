@@ -19,6 +19,8 @@ public class Goblin : MonoBehaviour
     int dir;
     bool isAtk;
     float localScaleX;
+    int Damage;
+    float WC;
     GameObject Coin;
     AudioSource audioSource;
     // Start is called before the first frame update
@@ -31,6 +33,7 @@ public class Goblin : MonoBehaviour
         anim = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
         localScaleX = trans.localScale.x;
+        Damage = state.damage;
         SetState();
         SetSpeed();
         CkhGround();
@@ -69,13 +72,19 @@ public class Goblin : MonoBehaviour
         Hp = state.maxHP;
     }
 
-    public void Damaged(int dmg){
+    public void Damaged(int dmg, float WeakCoaf){
         Hp -= dmg;
         Debug.Log("Monster Damaged " + dmg + "dmg");
         StartCoroutine(setColor());
         audioSource.Play();
         if(Hp <= 0){
+            state.damage = Damage;
             StartCoroutine(SpawnCoin());
+        }
+        if(WeakCoaf != 0){
+            WC = WeakCoaf;
+            state.damage -= (int)(Damage *WC);
+            Invoke("WeakEnd",5);
         }
     }
     IEnumerator SpawnCoin(){
@@ -157,5 +166,8 @@ public class Goblin : MonoBehaviour
         Debug.DrawLine(rayOriginFront, rayOriginFront + Vector2.down, Color.red);
         Debug.DrawLine(rayOriginBottom, rayOriginBottom + Vector2.down, Color.blue);
         Invoke("CkhGround", 0.1f);
+    }
+    void WeakEnd(){
+        state.damage += (int)(Damage*WC);
     }
 }
