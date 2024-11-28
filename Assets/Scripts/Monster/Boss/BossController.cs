@@ -107,7 +107,9 @@ public class BossController : MonoBehaviour
 
     public void Damaged(int dmg, float WeakCoaf, float bleedCoaf){
         Boss.boss.bossState.currentHp -= dmg;
-        StartCoroutine(BleedingCoroutine(3, bleedCoaf));
+        if(bleedCoaf != 0){
+            StartCoroutine(BleedingCoroutine(3, bleedCoaf));
+        }
         hpLevelManager.BossSliderReset();
         if(Boss.boss.bossState.currentHp <= 0){
             Boss.boss.bossState.damage = Damage;
