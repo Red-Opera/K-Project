@@ -76,7 +76,9 @@ public class Goblin : MonoBehaviour
 
     public void Damaged(int dmg, float WeakCoaf, float bleedCoaf){
         Hp -= dmg;
-        StartCoroutine(BleedingCoroutine(3, bleedCoaf));
+        if(bleedCoaf != 0){
+            StartCoroutine(BleedingCoroutine(3, bleedCoaf));
+        }
         Debug.Log("Monster Damaged " + dmg + "dmg");
         StartCoroutine(setColor());
         audioSource.Play();
