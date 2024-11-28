@@ -15,10 +15,13 @@ public class BossController : MonoBehaviour
     public bool isAtk = false;
     public bool isJump = false;
     public int attackType = 0;
+    public int Damage;
+    float WC = 0;
     // Start is called before the first frame update
     void Start()
     {
         Boss.InitSetting();
+        Damage = Boss.boss.damage;
         spriteRenderer =GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
         rigid = GetComponent<Rigidbody2D>();
@@ -35,9 +38,6 @@ public class BossController : MonoBehaviour
         DetectP();
         if(findP && !isAtk){
             Attack();
-        }
-        if(Boss.boss.bossState.currentHp <= 0){
-            Die();
         }
     }
 
@@ -105,11 +105,41 @@ public class BossController : MonoBehaviour
         attackType = Random.Range(0,Boss.boss.attackCount);
     }
 
-    public void Damaged(int dmg){
+    public void Damaged(int dmg, float WeakCoaf, float bleedCoaf){
         Boss.boss.bossState.currentHp -= dmg;
+        if(bleedCoaf != 0){
+            StartCoroutine(BleedingCoroutine(3, bleedCoaf));
+        }
         hpLevelManager.BossSliderReset();
+        if(Boss.boss.bossState.currentHp <= 0){
+            Boss.boss.bossState.damage = Damage;
+            Die();
+        }
+        if(WeakCoaf != 0){
+            WC = WeakCoaf;
+            Boss.boss.bossState.damage -= (int)(Damage *WeakCoaf);
+            Invoke("WeakEnd",5);
+        }
     }
     public void Die(){
         Destroy(gameObject);
+    }
+
+    void WeakEnd(){
+        Boss.boss.bossState.damage += (int)(Damage*WC);
+    }
+    IEnumerator BleedingCoroutine(int bleedCount, float bleedCoaf){
+        if(bleedCount > 0){
+            Boss.boss.bossState.currentHp -= (int)(Boss.boss.bossState.maxHP * bleedCoaf);
+            hpLevelManager.BossSliderReset();
+            if(Boss.boss.bossState.currentHp <= 0){
+                Boss.boss.bossState.damage = Damage;
+                Die();
+                yield break;
+            }
+            yield return new WaitForSeconds(1);
+            StartCoroutine(BleedingCoroutine(bleedCount-1, bleedCoaf));
+        }
+        yield break;
     }
 }

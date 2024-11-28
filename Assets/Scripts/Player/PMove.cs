@@ -14,16 +14,19 @@ public class PMove : MonoBehaviour
     CapsuleCollider2D PlayerCollider;
     SpriteRenderer spriteRenderer;
     Animator anim;
+    public MyVocation characterState;
+
     public HpLevelManager hpLevelManager;
     public ResultUI result;
-    public State playerState;
-    private bool isJumping;
-    private bool isAttack = false;
-    private bool usingUI = false;
+    private GameObject hpBar;
     private GameObject interactiveUi;
     private Dialog dialog;
     private Coroutine uiCheckCoroutine;
-    private GameObject hpBar;
+    private bool usingUI = false;
+
+    private bool isJumping;
+    public State playerState;
+    public bool isRevive = true;
     void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
@@ -32,13 +35,21 @@ public class PMove : MonoBehaviour
         anim = GetComponent<Animator>();
         
         Invoke("FindUI",0.1f);
+        Invoke("RefillShield", 0.2f);
         DontDestroyOnLoad(gameObject);
     }
     void Start(){
         playerState = GameManager.info.allPlayerState;
+        ResetStat();
+        Invoke("SynchronizationVocation",0.2f);
         SceneManager.sceneLoaded += reload;
     }
 
+    void SynchronizationVocation(){
+        characterState.InitSetting();
+        characterState.UpdateVocationState();
+        hpLevelManager.RenewalHp();
+    }
     public void FindUI(){
         Debug.Log("Find UI");
         hpBar = GameObject.FindGameObjectWithTag("HP");
@@ -57,9 +68,17 @@ public class PMove : MonoBehaviour
             Jump();
             Dash();
         }
-
         if(playerState.currentHp <= 0 && gameObject.layer != 12){
-            Die();
+            if(isRevive && (GameManager.info.abilityState.Craving/5) > 0){
+                float reviveHpCoaf = GameManager.info.abilityState.CEffect * ( GameManager.info.abilityState.Craving / 5);
+                GameManager.info.allPlayerState.currentHp = (int)(GameManager.info.allPlayerState.maxHP * reviveHpCoaf);
+                isRevive = false;
+                hpLevelManager.RenewalHp();
+            }
+            else{
+                Die();
+                isRevive = true;
+            }
         }
     }
 
@@ -114,6 +133,10 @@ public class PMove : MonoBehaviour
                 playerState.jumpCount = 0;
             }
         }
+
+        if(rigid.velocity.y > playerState.jumpPower*3){
+            rigid.velocity = new Vector2(rigid.velocity.x, playerState.jumpPower*3);
+        }
         
     }
     void OnJump(){
@@ -159,14 +182,20 @@ public class PMove : MonoBehaviour
         SceneManager.sceneLoaded -= reload;
     }
     public void Damaged(int dmg){
-        Debug.Log(dmg);
         gameObject.layer = 12;
         int Damage = dmg - GameManager.info.allPlayerState.defense;
         if(Damage <= 0 ){
             Damage =1;
         }
+        int finalDamage = Damage;
+        if(GameManager.info.abilityState.shield >= Damage){
+            GameManager.info.abilityState.shield -= Damage;
+            Damage = 0;
+        }else{
+            Damage -= GameManager.info.abilityState.shield;
+        }
         GameManager.info.allPlayerState.currentHp -= Damage;
-        hpLevelManager.Damage();
+        hpLevelManager.RenewalHp();
         Invoke("DashEnd", 0.5f);
     }
     void reload(Scene scene, LoadSceneMode mode)
@@ -212,5 +241,28 @@ public class PMove : MonoBehaviour
         anim.SetBool("isRun",false);
         anim.SetBool("isJump",false);
         rigid.velocity = new Vector2(rigid.velocity.x * 0.1f, rigid.velocity.y);
+    }
+
+    void ResetStat(){
+        GameManager.info.abilityState.Anger = 0;
+        GameManager.info.abilityState.Haste = 0;
+        GameManager.info.abilityState.Patience = 0;
+        GameManager.info.abilityState.Mystery = 0;
+        GameManager.info.abilityState.Greed = 0;
+        GameManager.info.abilityState.Craving = 0;
+        GameManager.info.abilityState.shield = 0;
+    }
+
+    void RefillShield(){
+        int maxShield = (int)(GameManager.info.abilityState.PEffect * (GameManager.info.abilityState.Patience/5)*GameManager.info.allPlayerState.maxHP);
+        if(GameManager.info.abilityState.shield < maxShield){
+            if((maxShield - GameManager.info.abilityState.shield)<=(maxShield * 0.1)){
+                GameManager.info.abilityState.shield = maxShield;
+            }else{
+                GameManager.info.abilityState.shield += (int)(maxShield * 0.1);
+            }
+            hpLevelManager.RenewalHp();
+        }
+        Invoke("RefillShield",10);
     }
 }

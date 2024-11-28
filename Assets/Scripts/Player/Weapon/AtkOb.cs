@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class AtkOb : MonoBehaviour
@@ -7,6 +8,20 @@ public class AtkOb : MonoBehaviour
     SpriteRenderer spriteRenderer;
     bool isFollow = true;
     int dir = 1;
+    float AngerDamageCoaf;  //버서커 모드 공격력
+    float AngerHealthCoaf;  //버서커 모드 체력
+    float MysteryCoaf;  //크리티컬 계수
+    float WC; //약화 확률
+    float WCD; //약화 데미지
+    float VDHC; // VacationDrainHealthCoaf
+    float Bleeding;
+    HpLevelManager playerHP;
+    void Awake(){
+        chkStatLevel();
+        GameObject hpbar = GameObject.FindGameObjectWithTag("HP"); 
+        playerHP = hpbar.GetComponent<HpLevelManager>();
+        AngerHealth();
+    }
     void Start()
     {
         rigid = GetComponent<Rigidbody2D>(); 
@@ -34,7 +49,17 @@ public class AtkOb : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
         int LevelCoaf = GameManager.info.allPlayerState.level/5;
+        int finalDamage =0;
+        float CriticalPercent = GameManager.info.allPlayerState.critical;
+        float CriticalCoaf = GameManager.info.allPlayerState.criticalDamage + MysteryCoaf;
+        if(Random.value <= CriticalPercent){
+            finalDamage = (int)(weapon.damage * (1+ LevelCoaf * 0.5f)* AngerDamageCoaf * CriticalCoaf);
+        }else{
+            finalDamage = (int)(weapon.damage * (1+ LevelCoaf * 0.5f)* AngerDamageCoaf);
+            Bleeding = 0;
+        }
 
+        ChkWeakMonster();
         if(other.gameObject.layer == 7){
             Goblin monster = other.gameObject.GetComponent<Goblin>();
             Collider2D monsterCollider = monster.GetComponent<Collider2D>();
@@ -42,7 +67,8 @@ public class AtkOb : MonoBehaviour
             Vector3 effectPosition = monsterCollider.bounds.center;
             
             if(monster != null){
-                monster.Damaged((int)(weapon.damage* (1+ LevelCoaf*0.5f)));
+                monster.Damaged(finalDamage,WCD, Bleeding);
+                DrainHealth(finalDamage);
                 Instantiate(weapon.AtkEffect,effectPosition, Quaternion.identity);
             }
         }
@@ -53,7 +79,8 @@ public class AtkOb : MonoBehaviour
             Vector3 effectPosition = monsterCollider.bounds.center;
 
             if(BossSc != null){
-                BossSc.Damaged((int)(weapon.damage* (1+ LevelCoaf*0.5f)));
+                BossSc.Damaged(finalDamage,WCD, Bleeding);
+                DrainHealth(finalDamage);
                 Instantiate(weapon.AtkEffect,effectPosition, Quaternion.identity);
             }
         }
@@ -68,7 +95,58 @@ public class AtkOb : MonoBehaviour
     void endFollow(){
         isFollow = false;
     }
-    public void setState(WeaponSetting state){
+    public void setState(WeaponSetting state, float WeakCoaf, float WeakCoafDmg, float DrainHealthCoaf, float BleedingCoaf){
         weapon = state;
+        WC = WeakCoaf;
+        WCD = WeakCoafDmg;
+        VDHC = DrainHealthCoaf;
+        Bleeding = BleedingCoaf;
+    }
+
+    void chkStatLevel(){
+        AngerDamageCoaf = 1+((GameManager.info.abilityState.Anger/5 )*GameManager.info.abilityState.AEffectD);
+        if(GameManager.info.abilityState.Anger >= 5){
+            AngerHealthCoaf = GameManager.info.abilityState.AEffectH;   
+        }else{
+            AngerHealthCoaf = 0;
+        }
+        MysteryCoaf = (GameManager.info.abilityState.Mystery/5) * GameManager.info.abilityState.MEffect;  
+    }
+
+    void AngerHealth(){
+        int selfHarm = (int)(GameManager.info.allPlayerState.maxHP * AngerHealthCoaf);
+        if(GameManager.info.abilityState.Anger >= 5 && selfHarm <1)
+            selfHarm =1;
+        
+        if(GameManager.info.allPlayerState.currentHp <= selfHarm){
+            GameManager.info.allPlayerState.currentHp = 1;
+            playerHP.RenewalHp();
+        }
+        else{
+            GameManager.info.allPlayerState.currentHp -= selfHarm;
+            playerHP.RenewalHp();
+        }
+    }
+
+    void DrainHealth(int damage){
+        float drainCoaf = (GameManager.info.abilityState.GEffect * (GameManager.info.abilityState.Greed /5));
+        drainCoaf += VDHC;
+        int restoreHP = (int)(damage * drainCoaf);
+        Debug.Log(restoreHP);
+        if((GameManager.info.allPlayerState.currentHp + restoreHP) >= GameManager.info.allPlayerState.maxHP){
+            GameManager.info.allPlayerState.currentHp = GameManager.info.allPlayerState.maxHP;
+            playerHP.RenewalHp();
+        }
+        else{
+            GameManager.info.allPlayerState.currentExp += restoreHP;
+            playerHP.RenewalHp();
+        }
+    }
+
+    void ChkWeakMonster(){
+        // 확률 계산하여 몬스터 약화 여부 결정
+        if(Random.value > WC){
+            WCD = 0;
+        }
     }
 }

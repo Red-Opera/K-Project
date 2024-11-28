@@ -8,6 +8,7 @@ using UnityEngine;
 public class WeaponController : MonoBehaviour
 {
     public MyWeapon myWeapon;
+    public MyVocation vocationState;
     public State playerState;
     public MyWeapon[] skillList;
     SpriteRenderer spriteRenderer;
@@ -16,6 +17,7 @@ public class WeaponController : MonoBehaviour
     public Rigidbody2D rigid;
     bool isAtk = false;
     int skillCount = 0;
+    float dobleShotProbability;
 
     GameObject interactiveUi;
     private bool usingUI = false;
@@ -24,6 +26,7 @@ public class WeaponController : MonoBehaviour
     void Start()
     {
         myWeapon.InitSetting();
+        vocationState.InitSetting();
         playerState = Resources.Load<State>("Scriptable/Player");
         anim = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -40,6 +43,7 @@ public class WeaponController : MonoBehaviour
     void Attack(){
         if(Input.GetMouseButtonDown(0)||Input.GetKeyDown(KeyCode.LeftControl)){
             if(isAtk == false){
+                dobleShotProbability = (GameManager.info.abilityState.Haste/5) * GameManager.info.abilityState.HEffect;
                 myWeapon.InitSetting();
                 if(spriteRenderer.flipX){
                     myWeapon.Weapon.dir = -1;
@@ -48,14 +52,20 @@ public class WeaponController : MonoBehaviour
                 }
                 CheckMousePos();
                 isAtk = true;
-                myWeapon.Using();
-                audioSource.Play();
-                Invoke("CoolTime",myWeapon.Weapon.coolTime);
+                AttackStart();
+                if(Random.value < dobleShotProbability){
+                    Invoke("AttackStart", 0.5f);
+                }
+                Invoke("CoolTime",myWeapon.Weapon.coolTime / GameManager.info.allPlayerState.attackSpeed);
                 anim.SetTrigger(myWeapon.Weapon.animName);
             }
         }
     }
 
+    void AttackStart(){
+        myWeapon.Using(vocationState.state.weakeningCoaf, vocationState.state.weakeningCoafDamage, vocationState.state.drainHP, vocationState.state.bleedingCoaf);
+        audioSource.Play();
+    }
     void CoolTime(){
         isAtk = false;
     }

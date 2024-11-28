@@ -20,9 +20,14 @@ public class MonsterAttack : MonoBehaviour
         
     }
     void OnTriggerEnter2D(Collider2D other){
+        float AvoidProbability = GameManager.info.allPlayerState.avoidPersent;
         if (other.gameObject.layer == 8){
-            PMove pMove = other.gameObject.GetComponent<PMove>();
-            pMove.Damaged(damage);
+            if(Random.value < AvoidProbability){
+                Debug.Log("Miss");
+            }else{
+                PMove pMove = other.gameObject.GetComponent<PMove>();
+                pMove.Damaged(damage);
+            }
             Destroy(gameObject);
         }
     }

@@ -84,7 +84,6 @@ public class UIOpenToKeyBoard : MonoBehaviour
                 openUI.SetActive(true);
                 pMove.SendUI(openUI);
                 weaponController.SendUI(openUI);
-                Debug.Log(openUI.tag);
             }
         }
     }

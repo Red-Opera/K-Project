@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 2725760337971555827}
   - component: {fileID: 3831094531963343106}
   - component: {fileID: 4456554002234038817}
+  - component: {fileID: 4452244652979621789}
   m_Layer: 8
   m_Name: Berserk
   m_TagString: Player
@@ -189,11 +190,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea90129d386ef394c84c61fcff29fcf4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterState: {fileID: 4452244652979621789}
   hpLevelManager: {fileID: 0}
   result: {fileID: 0}
   playerState: {fileID: 0}
-  isJumping: 0
-  isAttack: 0
+  isRevive: 1
 --- !u!114 &8538489512934591504
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -207,6 +208,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myWeapon: {fileID: 8841722781165605841}
+  vocationState: {fileID: 4452244652979621789}
   playerState: {fileID: 0}
   skillList:
   - {fileID: 8841722781165605841}
@@ -345,6 +347,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &4452244652979621789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3217746875862875250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa285d74079df854daf1178086928697, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &9021183070034747220
 GameObject:
   m_ObjectHideFlags: 0
