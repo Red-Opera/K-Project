@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Stage3.unity
     guid: 7a3221b72f9ff954d9b3a35b5755f1f7
+  - enabled: 1
+    path: Assets/Scenes/Challenger.unity
+    guid: 1425dc1ec23b1f54bb79ae91289b091e
   m_configObjects: {}
