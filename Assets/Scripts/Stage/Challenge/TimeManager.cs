@@ -1,5 +1,5 @@
 using UnityEngine;
-using UnityEngine.UI; // TMP를 사용하는 경우 TextMeshProUGUI로 변경
+using UnityEngine.UI;
 using System;
 using UnityEngine.SceneManagement;
 
@@ -10,12 +10,12 @@ public class TimerManager : MonoBehaviour
 
     private float elapsedTime = 0f; // 경과 시간
     private bool isTiming = false; // 타이머 상태
-
     private PMove playerMove;
+    private int totalBossCount = 3; // 총 보스 수
+    private int defeatedBossCount = 0; // 처치한 보스 수
 
     void Start()
     {
-        // PMove 스크립트를 가진 오브젝트 검색
         playerMove = FindObjectOfType<PMove>();
         if (playerMove == null)
         {
@@ -45,7 +45,6 @@ public class TimerManager : MonoBehaviour
         {
             Debug.Log("Player is dead, switching scene...");
             StopTimer();
-            Invoke("LoadGameOverScene", 2.0f); // 2초 후 씬 전환
         }
     }
 
@@ -67,8 +66,14 @@ public class TimerManager : MonoBehaviour
         timerText.text = string.Format("{0:D2}:{1:D2}:{2:D2}", timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds);
     }
 
-    void LoadGameOverScene()
+    public void BossDefeated()
     {
-        SceneManager.LoadScene("Map"); // 실제 전환할 씬 이름
+        defeatedBossCount++;
+        if (defeatedBossCount >= totalBossCount)
+        {
+            Debug.Log("All bosses defeated! Stopping timer.");
+            StopTimer();
+        }
     }
+
 }

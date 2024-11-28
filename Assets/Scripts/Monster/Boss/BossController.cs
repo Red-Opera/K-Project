@@ -109,7 +109,13 @@ public class BossController : MonoBehaviour
         Boss.boss.bossState.currentHp -= dmg;
         hpLevelManager.BossSliderReset();
     }
-    public void Die(){
+    public void Die()
+    {
+        TimerManager timerManager = FindObjectOfType<TimerManager>();
+        if (timerManager != null)
+        {
+            timerManager.BossDefeated();
+        }
         Destroy(gameObject);
     }
 }

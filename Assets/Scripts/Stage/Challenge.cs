@@ -1,46 +1,94 @@
 using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
 
 public class Challenger : MonoBehaviour
 {
-    public GameObject[] Stages;
-    public GameObject[] Boss;        // 보스룸 배열
-    public GameObject[] BossHPBar;
-    private int currentStageIndex;
+    public GameObject[] BossRooms;    // 보스룸 배열
+    public GameObject BossHPBar;      // 보스 HP 바
+    private int currentBossRoomIndex; // 현재 보스룸 인덱스
+    public Vector3 playerRespawnPosition = new Vector3(12, -4, 0); // 플레이어 위치
 
     void Start()
     {
-        // 초기 스테이지 설정
-        currentStageIndex = 0;
-        SetActiveStage(currentStageIndex);
+        // 초기 설정
+        currentBossRoomIndex = 0;
 
+        // 모든 보스룸 비활성화
+        foreach (var bossRoom in BossRooms)
+        {
+            bossRoom.SetActive(false);
+        }
+
+        // 첫 번째 보스룸 활성화
+        if (BossRooms.Length > 0)
+        {
+            BossRooms[currentBossRoomIndex].SetActive(true);
+        }
+
+        // 보스 HP 바 비활성화
+        if (BossHPBar != null)
+        {
+            BossHPBar.SetActive(false);
+        }
+
+        // 플레이어 초기 위치 설정
+        MovePlayerToRespawnPosition();
     }
 
-   public void ChangeStage(int direction)
+    void Update()
     {
-        
-         GameObject player = GameObject.FindGameObjectWithTag("Player");
+        CheckBossDefeated();
+    }
 
-        int newStageIndex = currentStageIndex + direction;
-
-        // 유효한 스테이지 인덱스인지 확인
-        if (newStageIndex >= 0 && newStageIndex < Stages.Length)
+    void CheckBossDefeated()
+    {
+        if (currentBossRoomIndex < BossRooms.Length && BossRooms[currentBossRoomIndex] != null)
         {
-            // 현재 스테이지 비활성화
-            Stages[currentStageIndex].SetActive(false);
-
-            // 새로운 스테이지 활성화
-            currentStageIndex = newStageIndex;
-            SetActiveStage(currentStageIndex);
+            // 현재 보스룸에 보스가 존재하는지 확인
+            GameObject boss = GameObject.FindWithTag("Boss");
+            if (boss == null) // 보스가 죽었으면
+            {
+                ActivateNextBossRoom();
+            }
         }
     }
 
-    void SetActiveStage(int index)
+    void ActivateNextBossRoom()
     {
-        Stages[index].SetActive(true);
-        CurrentSceneNameUI.StartSceneNameAnimation();
-        FoodManager.ReduceFoodState(5);
+        if (currentBossRoomIndex < BossRooms.Length - 1)
+        {
+            // 현재 보스룸 비활성화
+            BossRooms[currentBossRoomIndex].SetActive(false);
+
+            // 다음 보스룸 활성화
+            currentBossRoomIndex++;
+            BossRooms[currentBossRoomIndex].SetActive(true);
+
+            // 플레이어를 새 위치로 이동
+            MovePlayerToRespawnPosition();
+
+            // 보스 HP 바 활성화
+            if (BossHPBar != null)
+            {
+                BossHPBar.SetActive(true);
+            }
+        }
+        else
+        {
+            Debug.Log("모든 보스를 처치했습니다!"); // 모든 보스 처치 후 추가 로직 작성 가능
+        }
     }
 
+    void MovePlayerToRespawnPosition()
+    {
+        GameObject player = GameObject.FindWithTag("Player");
+        if (player != null)
+        {
+            player.transform.position = playerRespawnPosition;
+        }
+        else
+        {
+            Debug.LogError("Player를 찾을 수 없습니다. Player 태그가 올바른지 확인하세요.");
+        }
+    }
 }
