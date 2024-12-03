@@ -42,6 +42,8 @@ public class FoodItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     [SerializeField] private SerializableDictionary<string, string> stateKoreaToEng;       // 추가 스탯의 한국어를 영어로 바꿔주는 배열
 
+    private HpLevelManager hpLevelManager;
+
     public void Start()
     {
         displayImage = GetComponent<Image>();
@@ -70,6 +72,8 @@ public class FoodItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         currentFoodSlider.value = GameManager.info.playerState.food / 100.0f;
 
         foodStreamImage.SetActive(false);
+
+        hpLevelManager = transform.parent.parent.parent.parent.parent.GetChild(0).GetChild(0).GetComponent<HpLevelManager>();
     }
 
     public void Update()
@@ -128,6 +132,8 @@ public class FoodItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
         // 스탯 반영
         SetStat();
+
+        hpLevelManager.GetState(GameManager.info.allPlayerState);
 
         // 초기화
         selectedIndex = -1;

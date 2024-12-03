@@ -22,7 +22,7 @@ public abstract class MyVocation : MonoBehaviour
     public abstract void InitSetting();
     private void SetVacationState()
     {
-        GameManager.info.addLevelState.currentHp = state.levelUpHP;
+        GameManager.info.allPlayerState.currentHp = GameManager.info.allPlayerState.maxHP;
         GameManager.info.addLevelState.maxHP = state.levelUpHP;
         GameManager.info.addLevelState.damage = state.levelUpDamage;
         GameManager.info.addLevelState.defense = state.levelUpDefense;

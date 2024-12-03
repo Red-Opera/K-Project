@@ -29,28 +29,36 @@ public class HpLevelManager : MonoBehaviour
         }else{
             BossSliderReset();
         }
+
+        GameManager.info.allPlayerState.currentHp = GameManager.info.allPlayerState.maxHP;
+        SliderReset();
     }
 
     public void Update()
     {
-        
+        SliderReset();
     }
 
     // 슬라이더 리셋
     private void SliderReset()
     {
         // 현재 상태를 가져옴
-            currentHp = state.currentHp;
-            maxHp = state.maxHP;
+        maxHp = GameManager.info.allPlayerState.maxHP;
+        currentHp = GameManager.info.allPlayerState.currentHp;
 
-            int currentShield = GameManager.info.abilityState.shield;
+        if (state.currentHp >= state.maxHP)
+            state.currentHp = state.maxHP;
 
-            currentHpText.text = currentHp.ToString();
-            maxHpText.text = maxHp.ToString();
+        int currentShield = GameManager.info.abilityState.shield;
 
-            hpSlider.value = currentHp / (float)maxHp;
-            ShieldSlider.fillAmount = (currentShield/(float)maxHp)+0.1f;
+        currentHpText.text = currentHp.ToString();
+        maxHpText.text = maxHp.ToString();
+
+        hpSlider.value = currentHp / (float)maxHp;
+        ShieldSlider.fillAmount = (currentShield / (float)maxHp) + 0.1f;
     }
+
+
     public void BossSliderReset()
     {
         // ���� ���¸� ������
