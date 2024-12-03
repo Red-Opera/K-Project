@@ -434,6 +434,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 896919002}
     m_Modifications:
     - target: {fileID: 1881383986283712003, guid: aec0feb9ea98a1f4b82ce6b3e885ef3f, type: 3}
+      propertyPath: BossHp
+      value: 
+      objectReference: {fileID: 138875}
+    - target: {fileID: 1881383986283712003, guid: aec0feb9ea98a1f4b82ce6b3e885ef3f, type: 3}
       propertyPath: hpLevelManager
       value: 
       objectReference: {fileID: 138875}
@@ -71923,6 +71927,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3398436706019823917, guid: a9f91ea7f8eb03e4daa6214f0981cb9a, type: 3}
+      propertyPath: BossHp
+      value: 
+      objectReference: {fileID: 138875}
     - target: {fileID: 8357597898675405363, guid: a9f91ea7f8eb03e4daa6214f0981cb9a, type: 3}
       propertyPath: m_Name
       value: SkeletonKing
@@ -107429,6 +107437,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 632445379}
     m_Modifications:
+    - target: {fileID: 1101833457629864310, guid: a19be4906bcff624a935925171307f46, type: 3}
+      propertyPath: BossHp
+      value: 
+      objectReference: {fileID: 138875}
     - target: {fileID: 3608389065807509760, guid: a19be4906bcff624a935925171307f46, type: 3}
       propertyPath: m_LocalPosition.x
       value: 6.3523254

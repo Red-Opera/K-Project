@@ -58,17 +58,16 @@ public class StageManager : MonoBehaviour
         if (boss != null)
         {
             // Boss가 활성화되어 있을 때 BossHPBar를 활성화
+            Debug.Log("보스소환");
             BossHPBar.SetActive(true);
         }
         else
         {
-            if (BossStage.activeSelf)
-            {
+                Debug.Log("보스 죽음");
                 // Boss를 클리어했을 때 BossStage와 BossHPBar를 비활성화
                 BossStage.SetActive(false);
                 BossHPBar.SetActive(false);
                 BossStageC.SetActive(true);
-            }
         }
     }
 }

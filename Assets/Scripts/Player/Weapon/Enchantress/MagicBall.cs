@@ -13,7 +13,7 @@ public class MagicBall : MyWeapon
         Weapon.damage = GameManager.info.allPlayerState.damage;
         Weapon.disapearTime = 5;    
         Weapon.folloewTime = 0.8f;
-        Weapon.fowardSpeed = new Vector2(2.5f,0);
+        Weapon.fowardSpeed = new Vector2(8f,0);
         Weapon.animName = "mBall";
     }
 }
