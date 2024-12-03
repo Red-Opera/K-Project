@@ -121,7 +121,13 @@ public class BossController : MonoBehaviour
             Invoke("WeakEnd",5);
         }
     }
-    public void Die(){
+    public void Die()
+    {
+        TimerManager timerManager = FindObjectOfType<TimerManager>();
+        if (timerManager != null)
+        {
+            timerManager.BossDefeated();
+        }
         Destroy(gameObject);
     }
 
