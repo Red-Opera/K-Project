@@ -20,6 +20,7 @@ GameObject:
   - component: {fileID: 3831094531963343106}
   - component: {fileID: 4456554002234038817}
   - component: {fileID: 4452244652979621789}
+  - component: {fileID: -8243317750289544654}
   m_Layer: 8
   m_Name: Berserk
   m_TagString: Player
@@ -359,6 +360,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa285d74079df854daf1178086928697, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-8243317750289544654
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3217746875862875250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 037b2ba0a036aab46b453a74a2aa21a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enchantressPlayer: {fileID: 9094955460031638816, guid: 80ec83c9e6889574c9e08878bb4a39ad, type: 3}
+  berserkPlayer: {fileID: 3217746875862875250, guid: c9c03cb79b84b73409aa4d2d666dd084, type: 3}
+  knightPlayer: {fileID: 8699221057430734424, guid: 9e781a80cec0b27499999bbf5579a703, type: 3}
 --- !u!1 &9021183070034747220
 GameObject:
   m_ObjectHideFlags: 0
