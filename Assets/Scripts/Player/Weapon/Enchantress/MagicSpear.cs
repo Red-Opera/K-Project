@@ -13,7 +13,8 @@ public class MagicSpear : MyWeapon
         Weapon.damage = GameManager.info.allPlayerState.damage;
         Weapon.disapearTime = 5;    
         Weapon.folloewTime = 0.8f;
-        Weapon.fowardSpeed = new Vector2(10f,0);
+        Weapon.fowardSpeed = new Vector2(1,0);
+        Weapon.speedCap = 7;
         Weapon.animName = "mAttack";
     }
 }

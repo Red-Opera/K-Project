@@ -79,7 +79,7 @@ public class WeaponController : MonoBehaviour
         }
         if(isMouse){
             Vector2 attackSpeed = mousePos - rigid.position;
-            myWeapon.Weapon.fowardSpeed = attackSpeed.normalized *2;
+            myWeapon.Weapon.fowardSpeed = attackSpeed.normalized *myWeapon.Weapon.speedCap;
         }
         else{
             myWeapon.Weapon.fowardSpeed = new Vector2(myWeapon.Weapon.dir * 2,0);

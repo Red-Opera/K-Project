@@ -14,6 +14,7 @@ public struct WeaponSetting{
     public float disapearTime;
     public float folloewTime;
     public Vector2 fowardSpeed;
+    public float speedCap;
     public string animName;
     public int dir;
 }
