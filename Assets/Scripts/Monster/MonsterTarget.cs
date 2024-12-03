@@ -61,13 +61,13 @@ public class MonsterTarget : MonoBehaviour
 
                     if (bossController != null)
                     {
-                        if (bossController.hpLevelManager.currentHp <= 0)
-                            continue;
-
+                        //if (bossController.hpLevelManager.currentHp <= 0)
+                        //    continue;
+                        //
                         string objName = (obj.name.Length >= 5 ? obj.name[..5] : obj.name) + "(" + obj.GetInstanceID() + ")";
 
                         // 체력, 거리 순 큐로 입력
-                        findCloseMonster.push(new IntFloatChar32(-bossController.hpLevelManager.currentHp, -distanceToMonster, objName));
+                        //findCloseMonster.push(new IntFloatChar32(-bossController.hpLevelManager.currentHp, -distanceToMonster, objName));
                         monsterToName.Add(objName, obj.transform);
                     }
                 }
