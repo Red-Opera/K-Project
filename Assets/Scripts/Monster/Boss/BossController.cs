@@ -9,7 +9,7 @@ public class BossController : MonoBehaviour
     Animator anim;
     SpriteRenderer spriteRenderer;
     Rigidbody2D rigid;
-    public HpLevelManager hpLevelManager;
+    public HpLevelManager BossHp;
     public int moveSpeed = 0;
     bool findP = false;
     public bool isAtk = false;
@@ -26,7 +26,9 @@ public class BossController : MonoBehaviour
         anim = GetComponent<Animator>();
         rigid = GetComponent<Rigidbody2D>();
         Boss.boss.bossState.currentHp = Boss.boss.bossState.maxHP;
-        hpLevelManager = FindObjectOfType<HpLevelManager>();
+        GameObject hpbar = GameObject.FindGameObjectWithTag("HP");
+        BossHp = hpbar.GetComponent<HpLevelManager>();
+        //hpLevelManager = FindObjectOfType<HpLevelManager>();
         SetSpeed();
         AttackEnd();
     }
@@ -110,7 +112,7 @@ public class BossController : MonoBehaviour
         if(bleedCoaf != 0){
             StartCoroutine(BleedingCoroutine(3, bleedCoaf));
         }
-        hpLevelManager.BossSliderReset();
+        BossHp.BossSliderReset();
         if(Boss.boss.bossState.currentHp <= 0){
             Boss.boss.bossState.damage = Damage;
             Die();
@@ -137,7 +139,7 @@ public class BossController : MonoBehaviour
     IEnumerator BleedingCoroutine(int bleedCount, float bleedCoaf){
         if(bleedCount > 0){
             Boss.boss.bossState.currentHp -= (int)(Boss.boss.bossState.maxHP * bleedCoaf);
-            hpLevelManager.BossSliderReset();
+            BossHp.BossSliderReset();
             if(Boss.boss.bossState.currentHp <= 0){
                 Boss.boss.bossState.damage = Damage;
                 Die();

@@ -20481,6 +20481,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4242007502961322689, guid: 40ff3bfeb7a0ccf4c8a93c1d76319a87, type: 3}
+      propertyPath: m_TagString
+      value: Immovable
+      objectReference: {fileID: 0}
     - target: {fileID: 6106588132868152611, guid: 40ff3bfeb7a0ccf4c8a93c1d76319a87, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0.75
@@ -21439,6 +21443,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6598734779992136484, guid: 33eb438bf87d3374aba877755c83c1b1, type: 3}
+      propertyPath: m_TagString
+      value: Boss
+      objectReference: {fileID: 0}
     - target: {fileID: 7741880293733161634, guid: 33eb438bf87d3374aba877755c83c1b1, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -21746,6 +21754,10 @@ PrefabInstance:
     - target: {fileID: 7885193037962601019, guid: 976840595b0bc45458bf844818631b7c, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7885193037962601019, guid: 976840595b0bc45458bf844818631b7c, type: 3}
+      propertyPath: m_TagString
+      value: Immovable
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
