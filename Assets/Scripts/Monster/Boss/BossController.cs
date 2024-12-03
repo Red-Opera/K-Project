@@ -26,8 +26,6 @@ public class BossController : MonoBehaviour
         anim = GetComponent<Animator>();
         rigid = GetComponent<Rigidbody2D>();
         Boss.boss.bossState.currentHp = Boss.boss.bossState.maxHP;
-        GameObject hpbar = GameObject.FindGameObjectWithTag("HP");
-        BossHp = hpbar.GetComponent<HpLevelManager>();
         //hpLevelManager = FindObjectOfType<HpLevelManager>();
         SetSpeed();
         AttackEnd();
