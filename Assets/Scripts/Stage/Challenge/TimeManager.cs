@@ -41,9 +41,8 @@ public class TimerManager : MonoBehaviour
             UpdateTimerUI();
         }
 
-        if (playerMove != null && playerMove.gameObject.layer == 12) // PMove가 Die에서 레이어를 12로 변경
+        if (GameManager.info.allPlayerState.currentHp <= 0) // PMove가 Die에서 레이어를 12로 변경
         {
-            Debug.Log("Player is dead, switching scene...");
             StopTimer();
         }
     }

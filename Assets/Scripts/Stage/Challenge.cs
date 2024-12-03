@@ -4,6 +4,7 @@ using UnityEngine.UI;
 public class Challenger : MonoBehaviour
 {
     public GameObject[] BossRooms;    // 보스룸 배열
+    public MonsterState[] BossStates; 
     public GameObject BossHPBar;      // 보스 HP 바
     private int currentBossRoomIndex; // 현재 보스룸 인덱스
     public Vector3 playerRespawnPosition = new Vector3(12, -4, 0); // 플레이어 위치
@@ -67,15 +68,12 @@ public class Challenger : MonoBehaviour
             // 플레이어를 새 위치로 이동
             MovePlayerToRespawnPosition();
 
-            // 보스 HP 바 활성화
-            if (BossHPBar != null)
-            {
-                BossHPBar.SetActive(true);
-            }
+     
         }
         else
         {
-            Debug.Log("모든 보스를 처치했습니다!"); // 모든 보스 처치 후 추가 로직 작성 가능
+            Debug.Log("모든 보스를 처치했습니다!");
+
         }
     }
 

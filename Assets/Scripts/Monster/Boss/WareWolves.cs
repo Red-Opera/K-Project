@@ -10,7 +10,7 @@ public class WareWolves : BossMonster
         boss.range = Resources.Load<GameObject>("Prefab/Boss/AttackRange");
         boss.bossState = Resources.Load<MonsterState>("Scriptable/Boss/WareWolf");
         boss.pos = new Vector3(2, 0, 0);
-        boss.damage = 10;
+        boss.damage = 1000;
         boss.disapearTime = 0.8f;
         boss.attackCount = 3;
         anim = GetComponent<Animator>();

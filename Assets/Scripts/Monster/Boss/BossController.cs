@@ -17,6 +17,7 @@ public class BossController : MonoBehaviour
     public int attackType = 0;
     public int Damage;
     float WC = 0;
+    public StageManager stageManager;
     // Start is called before the first frame update
     void Start()
     {
@@ -128,6 +129,10 @@ public class BossController : MonoBehaviour
         {
             timerManager.BossDefeated();
         }
+        if(stageManager != null){
+            stageManager.rewardMap();
+        }
+
         Destroy(gameObject);
     }
 
