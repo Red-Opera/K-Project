@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6011868657975851441}
   - component: {fileID: 3398436706019823917}
   - component: {fileID: 9210994706002772273}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: SkeletonKing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -185,9 +185,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Boss: {fileID: 9210994706002772273}
+  BossHp: {fileID: 0}
+  moveSpeed: 0
   isAtk: 0
   isJump: 0
   attackType: 0
+  Damage: 0
+  stageManager: {fileID: 0}
 --- !u!114 &9210994706002772273
 MonoBehaviour:
   m_ObjectHideFlags: 0
