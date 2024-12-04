@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class Challenger : MonoBehaviour
 {
@@ -73,10 +74,7 @@ public class Challenger : MonoBehaviour
         }
         else
         {
-            GameObject.Find("EventSystemDonDestory").GetComponent<UINotDestroyOpen>().DestroyThis();
-            Destroy(GameObject.FindGameObjectWithTag("Player"));
-
-            SceneManager.LoadScene("Map");
+            StartCoroutine(Reset());
         }
     }
 
@@ -91,5 +89,15 @@ public class Challenger : MonoBehaviour
         {
             Debug.LogError("Player를 찾을 수 없습니다. Player 태그가 올바른지 확인하세요.");
         }
+    }
+    IEnumerator Reset()
+    {
+        yield return new WaitForSeconds(5);
+        Debug.Log("2초 후 실행");
+
+        GameObject.Find("EventSystemDonDestory").GetComponent<UINotDestroyOpen>().DestroyThis();
+        Destroy(GameObject.FindGameObjectWithTag("Player"));
+
+        SceneManager.LoadScene("Map");
     }
 }
