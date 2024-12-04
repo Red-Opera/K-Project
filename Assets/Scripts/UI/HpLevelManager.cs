@@ -8,7 +8,7 @@ public class HpLevelManager : MonoBehaviour
     public int currentHp;
 
     [SerializeField] private State state;                       // 플레이어 상태
-    [SerializeField] private MonsterState BossState;
+    [SerializeField] public MonsterState BossState;
     [SerializeField] private TextMeshProUGUI maxHpText;         // 최대 체력 텍스트
     [SerializeField] private TextMeshProUGUI currentHpText;     // 현재 체력 테스트
     [SerializeField] private TextMeshProUGUI levelText;         // 레벨 텍스트
@@ -31,12 +31,15 @@ public class HpLevelManager : MonoBehaviour
         }
 
         GameManager.info.allPlayerState.currentHp = GameManager.info.allPlayerState.maxHP;
-        SliderReset();
     }
 
     public void Update()
     {
-        SliderReset();
+        if(BossState == null){
+            SliderReset();
+        }else{
+            BossSliderReset();
+        }
     }
 
     // 슬라이더 리셋

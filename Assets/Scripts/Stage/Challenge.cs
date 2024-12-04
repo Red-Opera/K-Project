@@ -10,12 +10,15 @@ public class Challenger : MonoBehaviour
     public GameObject BossHPBar;      // 보스 HP 바
     private int currentBossRoomIndex; // 현재 보스룸 인덱스
     public Vector3 playerRespawnPosition = new Vector3(12, -4, 0); // 플레이어 위치
-
+    private HpLevelManager hpLevelManager;    
     void Start()
     {
         // 초기 설정
         currentBossRoomIndex = 0;
+        hpLevelManager = BossHPBar.GetComponent<HpLevelManager>();
+        hpLevelManager.BossState = BossStates[0];
 
+        BossHPBar.SetActive(true);
         // 모든 보스룸 비활성화
         foreach (var bossRoom in BossRooms)
         {
@@ -26,12 +29,6 @@ public class Challenger : MonoBehaviour
         if (BossRooms.Length > 0)
         {
             BossRooms[currentBossRoomIndex].SetActive(true);
-        }
-
-        // 보스 HP 바 비활성화
-        if (BossHPBar != null)
-        {
-            BossHPBar.SetActive(false);
         }
 
         // 플레이어 초기 위치 설정
@@ -49,6 +46,7 @@ public class Challenger : MonoBehaviour
         {
             // 현재 보스룸에 보스가 존재하는지 확인
             GameObject boss = GameObject.FindWithTag("Boss");
+            Debug.Log(boss);
             if (boss == null) // 보스가 죽었으면
             {
                 ActivateNextBossRoom();
@@ -66,6 +64,7 @@ public class Challenger : MonoBehaviour
             // 다음 보스룸 활성화
             currentBossRoomIndex++;
             BossRooms[currentBossRoomIndex].SetActive(true);
+            hpLevelManager.BossState = BossStates[currentBossRoomIndex];
 
             // 플레이어를 새 위치로 이동
             MovePlayerToRespawnPosition();
