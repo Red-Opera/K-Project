@@ -16,10 +16,14 @@ public class TimerManager : MonoBehaviour
 
     void Start()
     {
-        // PlayerPrefs에서 최단 시간을 불러옵니다.
+        // 최단 시간 불러오기
         if (PlayerPrefs.HasKey("BestTime"))
         {
             bestTime = PlayerPrefs.GetFloat("BestTime");
+        }
+        else
+        {
+            bestTime = float.MaxValue; // 초기 값
         }
 
         // 최단 시간을 UI에 업데이트
@@ -92,6 +96,10 @@ public class TimerManager : MonoBehaviour
             // UI 업데이트
             UpdateBestTimeUI();
             Debug.Log($"New Best Time: {FormatTime(bestTime)}");
+        }
+        else
+        {
+            Debug.Log($"Current Time: {FormatTime(elapsedTime)}, Best Time: {FormatTime(bestTime)}");
         }
     }
 

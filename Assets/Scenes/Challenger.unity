@@ -464,7 +464,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Time: 0.00'
+  m_Text: 'Best Time: --:--'
 --- !u!222 &80020700
 CanvasRenderer:
   m_ObjectHideFlags: 0
