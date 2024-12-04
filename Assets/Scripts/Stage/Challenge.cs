@@ -72,8 +72,10 @@ public class Challenger : MonoBehaviour
         }
         else
         {
-            Debug.Log("모든 보스를 처치했습니다!");
+            GameObject.Find("EventSystemDonDestory").GetComponent<UINotDestroyOpen>().DestroyThis();
+            Destroy(GameObject.FindGameObjectWithTag("Player"));
 
+            SceneManager.LoadScene("Map");
         }
     }
 

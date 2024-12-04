@@ -1,30 +1,33 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System;
-using UnityEngine.SceneManagement;
 
 public class TimerManager : MonoBehaviour
 {
     public GameObject bossRoom1; // BossRoom1을 드래그하여 연결
-    public Text timerText;
+    public Text timerText;       // 현재 시간 UI
+    public Text bestTimeText;    // 최단 시간 UI
 
-    private float elapsedTime = 0f; // 경과 시간
-    private bool isTiming = false; // 타이머 상태
-    private PMove playerMove;
-    private int totalBossCount = 3; // 총 보스 수
-    private int defeatedBossCount = 0; // 처치한 보스 수
+    private float elapsedTime = 0f;  // 경과 시간
+    private bool isTiming = false;  // 타이머 상태
+    private float bestTime = float.MaxValue; // 최단 시간
+    private int totalBossCount = 3;  // 총 보스 수
+    private int defeatedBossCount = 0; // 처치된 보스 수
 
     void Start()
     {
-        playerMove = FindObjectOfType<PMove>();
-        if (playerMove == null)
+        // PlayerPrefs에서 최단 시간을 불러옵니다.
+        if (PlayerPrefs.HasKey("BestTime"))
         {
-            Debug.LogError("PMove 스크립트를 찾을 수 없습니다.");
+            bestTime = PlayerPrefs.GetFloat("BestTime");
         }
 
-        if (timerText == null)
+        // 최단 시간을 UI에 업데이트
+        UpdateBestTimeUI();
+
+        if (timerText == null || bestTimeText == null)
         {
-            Debug.LogError("TimerText가 설정되지 않았습니다.");
+            Debug.LogError("UI Text가 설정되지 않았습니다.");
         }
     }
 
@@ -41,7 +44,7 @@ public class TimerManager : MonoBehaviour
             UpdateTimerUI();
         }
 
-        if (GameManager.info.allPlayerState.currentHp <= 0) // PMove가 Die에서 레이어를 12로 변경
+        if (GameManager.info.allPlayerState.currentHp <= 0) // 플레이어가 사망 시
         {
             StopTimer();
         }
@@ -56,23 +59,58 @@ public class TimerManager : MonoBehaviour
     private void StopTimer()
     {
         isTiming = false; // 타이머 정지
+        SaveBestTime();   // 최단 시간 저장
     }
 
     private void UpdateTimerUI()
     {
-        // 경과 시간을 시간, 분, 초로 변환
-        TimeSpan timeSpan = TimeSpan.FromSeconds(elapsedTime);
-        timerText.text = string.Format("{0:D2}:{1:D2}:{2:D2}", timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds);
+        // 경과 시간을 UI에 표시
+        timerText.text = FormatTime(elapsedTime);
+    }
+
+    private void UpdateBestTimeUI()
+    {
+        // 최단 시간을 UI에 표시
+        if (bestTime < float.MaxValue)
+        {
+            bestTimeText.text = "Best Time: " + FormatTime(bestTime);
+        }
+        else
+        {
+            bestTimeText.text = "Best Time: --:--"; // 초기 상태
+        }
+    }
+
+    private void SaveBestTime()
+    {
+        if (elapsedTime < bestTime)
+        {
+            bestTime = elapsedTime;
+            PlayerPrefs.SetFloat("BestTime", bestTime); // 최단 시간 저장
+            PlayerPrefs.Save(); // 변경 사항 저장
+
+            // UI 업데이트
+            UpdateBestTimeUI();
+            Debug.Log($"New Best Time: {FormatTime(bestTime)}");
+        }
+    }
+
+    private string FormatTime(float timeInSeconds)
+    {
+        // 시간 -> 분:초 형식으로 포맷
+        TimeSpan timeSpan = TimeSpan.FromSeconds(timeInSeconds);
+        return string.Format("{0:D2}:{1:D2}", timeSpan.Minutes, timeSpan.Seconds);
     }
 
     public void BossDefeated()
     {
         defeatedBossCount++;
-        if (defeatedBossCount >= totalBossCount)
+        Debug.Log($"Boss defeated! Total defeated: {defeatedBossCount}/{totalBossCount}");
+        
+        if (defeatedBossCount >= totalBossCount) // 모든 보스가 처치된 경우
         {
             Debug.Log("All bosses defeated! Stopping timer.");
             StopTimer();
         }
     }
-
 }
