@@ -1,14 +1,16 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Minimap : MonoBehaviour
 {
     [SerializeField] GameObject camera;
     [SerializeField] private TextMeshProUGUI multiple;      // 배율을 표시할 텍스트
+    [SerializeField] private TextMeshProUGUI sceneNameText; // 씬 이름을 표시할 텍스트
 
     [SerializeField] private float scaleFactor;             // 조절할 스케일 팩터
-    [SerializeField] private float maxDistance;             // 조절할 스케일 팩터
-    [SerializeField] private float minDistance;             // 조절할 스케일 팩터
+    [SerializeField] private float maxDistance;             // 최대로 조절가능한 거리
+    [SerializeField] private float minDistance;             // 최소로 조절가능한 거리
 
     private Camera cameraCompo;
 
@@ -19,7 +21,15 @@ public class Minimap : MonoBehaviour
         cameraCompo = camera.GetComponent<Camera>();
         Debug.Assert(cameraCompo != null, "카메라 컴포넌트가 존재하지 않습니다.");
 
-        multiple.text = (1 / cameraCompo.orthographicSize).ToString("X#0.#");
+        multiple.text = (20 / cameraCompo.orthographicSize).ToString("X#0.#");
+
+        string sceneName = SceneManager.GetActiveScene().name;
+
+        if (sceneName == "Challenger")
+            transform.parent.parent.gameObject.SetActive(false);
+
+        if (sceneName != "Map")
+            sceneNameText.text = sceneName;
     }
 
     void Update()

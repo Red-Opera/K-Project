@@ -11,6 +11,7 @@ public class UIOpen : MonoBehaviour
     public GameObject statUI;
     public GameObject equidUI;
     public GameObject mapUI;
+    public GameObject miniMap;
     public GameObject resultUI;
 
     private bool isDefualtOpen = true;
@@ -25,6 +26,7 @@ public class UIOpen : MonoBehaviour
         Debug.Assert(getItemUI != null, "획득 UI가 없습니다.");
         Debug.Assert(statUI != null, "스탯 창 UI가 없습니다.");
         Debug.Assert(mapUI != null, "맵 UI가 없습니다.");
+        Debug.Assert(miniMap != null, "미니 맵 UI가 없습니다.");
 
         if (!isSceneLoaded)
         {
@@ -94,6 +96,8 @@ public class UIOpen : MonoBehaviour
         for (int i = 0; i < 3; i++)
             transform.GetChild(i).gameObject.SetActive(false);
 
+        miniMap.SetActive(false);
+
         isDefualtOpen = false;
     }
 
@@ -101,6 +105,8 @@ public class UIOpen : MonoBehaviour
     {
         for (int i = 0; i < 3; i++)
             transform.GetChild(i).gameObject.SetActive(true);
+
+        miniMap.SetActive(true);
 
         isDefualtOpen = true;
     }

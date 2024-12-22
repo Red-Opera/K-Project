@@ -181,6 +181,10 @@ public class ResultUI : MonoBehaviour
     {
         string currentSceneName = SceneManager.GetActiveScene().name;
 
+        // ÇöÀç ¾ÀÀÌ Ã§¸°Àú ¸ÊÀÎ °æ¿ì
+        if (currentSceneName.Contains("Challenger"))
+            currentLevelText.text = "Ã§¸°Àú ¸Ê";
+
         // ÇöÀç ¾î¶² ¾ÀÀÎÁö °¡Á®¿È
         if (currentSceneName.StartsWith("Stage"))
         {

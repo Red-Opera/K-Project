@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1038481656062772533}
   - component: {fileID: 8970074389437860292}
-  m_Layer: 10
+  m_Layer: 5
   m_Name: Slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99,7 +99,7 @@ GameObject:
   m_Component:
   - component: {fileID: 655831548772148783}
   - component: {fileID: 7450788737316183255}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Loading
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -149,7 +149,7 @@ GameObject:
   - component: {fileID: 2218887815917340772}
   - component: {fileID: 2518176287014860203}
   - component: {fileID: 8885001821845493808}
-  m_Layer: 10
+  m_Layer: 5
   m_Name: NextSceneLabel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -284,7 +284,7 @@ GameObject:
   - component: {fileID: 4000414679729054506}
   - component: {fileID: 7453110776639736606}
   - component: {fileID: 5526383202521340401}
-  m_Layer: 10
+  m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -359,7 +359,7 @@ GameObject:
   - component: {fileID: 199051968392898848}
   - component: {fileID: 7205484219922897550}
   - component: {fileID: 6346382054080638289}
-  m_Layer: 10
+  m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -494,7 +494,7 @@ GameObject:
   - component: {fileID: 2585974869083189637}
   - component: {fileID: 7606460293356945851}
   - component: {fileID: 950210089534910162}
-  m_Layer: 10
+  m_Layer: 5
   m_Name: Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -555,7 +555,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 1024
+    m_Bits: 4294967295
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -587,7 +587,7 @@ MonoBehaviour:
   m_RendererIndex: -1
   m_VolumeLayerMask:
     serializedVersion: 2
-    m_Bits: 1024
+    m_Bits: 4294967295
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
   m_RenderPostProcessing: 1
@@ -623,7 +623,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cac543a8c799a1e4ea79f599fab67aaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventSystem: {fileID: 0}
 --- !u!1 &4437703891530054890
 GameObject:
   m_ObjectHideFlags: 0
@@ -636,7 +635,7 @@ GameObject:
   - component: {fileID: 8559255886430819582}
   - component: {fileID: 9189573749210765910}
   - component: {fileID: 6675387932294235194}
-  m_Layer: 10
+  m_Layer: 5
   m_Name: UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -742,7 +741,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7238183853438306909}
   - component: {fileID: 4894478177764666304}
-  m_Layer: 10
+  m_Layer: 5
   m_Name: Global Volume
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -792,7 +791,7 @@ GameObject:
   - component: {fileID: 8784089249288083592}
   - component: {fileID: 6420491921474174893}
   - component: {fileID: 7298869937800462128}
-  m_Layer: 10
+  m_Layer: 5
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -867,7 +866,7 @@ GameObject:
   - component: {fileID: 5239687776247716279}
   - component: {fileID: 4105257003317395755}
   - component: {fileID: 202220080016237016}
-  m_Layer: 10
+  m_Layer: 5
   m_Name: PersentText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1001,7 +1000,7 @@ GameObject:
   - component: {fileID: 163327495225264340}
   - component: {fileID: 986235993501537854}
   - component: {fileID: 698891105658224203}
-  m_Layer: 10
+  m_Layer: 5
   m_Name: Loading Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1133,7 +1132,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8739305988853234785}
-  m_Layer: 10
+  m_Layer: 5
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1171,7 +1170,7 @@ GameObject:
   - component: {fileID: 369270016447417233}
   - component: {fileID: 5181840998204199582}
   - component: {fileID: 1596817442276661719}
-  m_Layer: 10
+  m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
