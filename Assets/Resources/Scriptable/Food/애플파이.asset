@@ -15,7 +15,7 @@ MonoBehaviour:
   foodName: "\uC560\uD50C\uD30C\uC774"
   addState:
   - stateName: "\uD604\uC7AC \uCCB4\uB825"
-    value: 100
+    value: 50
   baseState:
   - stateName: "\uCD5C\uB300 \uCD5C\uB825"
     value: 0

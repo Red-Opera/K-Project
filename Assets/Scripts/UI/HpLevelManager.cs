@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class HpLevelManager : MonoBehaviour
@@ -21,25 +22,27 @@ public class HpLevelManager : MonoBehaviour
         Debug.Assert(currentHpText != null, "현재 체력을 확인할 수 있는 UI가 없습니다.");
         Debug.Assert(maxHpText != null, "최대 체력을 확인할 수 있는 UI가 없습니다.");
         Debug.Assert(hpSlider != null, "체력 슬라이더가 존재하지 않습니다.");
-        if (BossState == null){
+
+        if (BossState == null)
+        {
+            if (SceneManager.GetActiveScene().name == "Map")
+                GameManager.info.allPlayerState.currentHp = GameManager.info.allPlayerState.maxHP;
+
             state = GameManager.info.allPlayerState;
             Debug.Assert(ShieldSlider != null, "보호막 슬라이더가 존재하지 않습니다.");
+
             SliderReset();
             SetLevel();
-        }else{
-            BossSliderReset();
         }
 
-        GameManager.info.allPlayerState.currentHp = GameManager.info.allPlayerState.maxHP;
+        else
+            BossSliderReset();
     }
 
     public void Update()
     {
-        if(BossState == null){
-            SliderReset();
-        }else{
+        if(BossState != null)
             BossSliderReset();
-        }
     }
 
     // 슬라이더 리셋

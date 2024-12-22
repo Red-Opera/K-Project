@@ -161,6 +161,17 @@ public class FoodItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             string name = addStatName.transform.GetChild(i).GetComponent<TextMeshProUGUI>().text;
             double value = double.Parse(addStatValue.transform.GetChild(i).GetComponent<TextMeshProUGUI>().text);
 
+            if (stateKoreaToEng[name] == "CurrentHp")
+            {
+                int resultHp = GameManager.info.allPlayerState.currentHp + (int)value;
+
+                if (resultHp > GameManager.info.allPlayerState.maxHP)
+                    resultHp = GameManager.info.allPlayerState.maxHP;
+
+                GameManager.info.allPlayerState.currentHp = resultHp;
+                continue;
+            }
+
             GameManager.info.AddFoodState(stateKoreaToEng[name], value);
         }
     }

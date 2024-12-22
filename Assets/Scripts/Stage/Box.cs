@@ -7,30 +7,27 @@ public class Box : MonoBehaviour
 
     void Update()
     {
-        ItemSelector getI= GetComponent<ItemSelector>();
+        ItemSelector getI = GetComponent<ItemSelector>();
 
-    // F 키를 누르면 상자를 열기
-        if (Input.GetKeyDown(KeyCode.F) && currentChest != null)
-            {      
-                        
-                OpenCloseChest();
-                
-                ResultUI.GetItem(getI.getItem);
-            }
+        // F 키를 누르면 상자를 열기
+        if (Input.GetKeyDown(KeyCode.F) && currentChest != null && !currentChest.IsOpened)
+        {
+            OpenCloseChest();
+
+            ResultUI.GetItem(getI.getItem);
+            Debug.Log(gameObject.name);
+        }
     }
 
     void OpenCloseChest()
     {
         // 현재 상자가 열려있는지 확인하고 열린 상태로 변경
         if (!currentChest.IsOpened)
-            {
 
-                currentChest.Open();
-            }
+            currentChest.Open();
+
         else
-            {
-                return;
-            }
+            return;
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -51,9 +48,8 @@ public class Box : MonoBehaviour
         // 상자에서 벗어나면 현재 상자를 null로 설정
         if (other.CompareTag("Chest"))
         {
-                currentChest = null;
+            currentChest = null;
         }
     }
-    
 }
 

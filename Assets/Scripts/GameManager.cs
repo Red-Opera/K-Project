@@ -154,7 +154,7 @@ public class GameManager : MonoBehaviour
     {
         foreach (string state in State.datas.Keys)
         {
-            if (state == "NickName")
+            if (state == "NickName" || state == "CurrentHp")
                 continue;
 
             // 해당 능력치의 타입
