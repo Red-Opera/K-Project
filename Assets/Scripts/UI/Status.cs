@@ -3,12 +3,10 @@ using UnityEngine;
 
 public class Status : MonoBehaviour
 {
-    [SerializeField] private State state;       // 플레이어 상태
     [SerializeField] private GameObject states; // 상태를 저장할 수 있는 UI 모음
 
     void Start()
     {
-        Debug.Assert(state != null, "플레이어 상태가 없습니다.");
         Debug.Assert(states != null, "상태를 출력할 창이 없습니다.");
     }
 
@@ -25,7 +23,7 @@ public class Status : MonoBehaviour
 
             // 그 상태가 존재하는지 찾아봄
             object fieldValue = null;
-            try { fieldValue = State.datas[stateName].GetValue(state); }
+            try { fieldValue = State.datas[stateName].GetValue(GameManager.info.allPlayerState); }
 
             catch { continue; }
 
@@ -43,7 +41,7 @@ public class Status : MonoBehaviour
     private void AddWork(string stateName, ref object fieldValue)
     {
         // 위 이름들은 퍼센트로 바꿈
-        if (stateName == "Critical" || stateName == "CriticalDamage" || stateName == "AvoidPersent" || stateName == "DefensePersent")
+        if (stateName == "Critical" || stateName == "DashDamage" || stateName == "AvoidPersent" || stateName == "DefensePersent" || stateName == "AttackSpeed")
         {
             float value = (float)fieldValue * 100;
             string valueString = value.ToString() + "%";
