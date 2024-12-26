@@ -14,24 +14,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nickName: 
   level: 1
-  maxHP: 100
-  currentHp: 100
+  maxHP: 20
+  currentHp: 20
   currentExp: 0
-  damage: 15
+  damage: 20
   defense: 10
   critical: 0.05
   moveSpeed: 5
   jumpPower: 8
   jumpCount: 0
   maxJump: 2
-  dashDamage: 0
+  dashDamage: 0.5
   strong: 0
-  criticalDamage: 0
-  attackSpeed: 0
+  criticalDamage: 1.5
+  attackSpeed: 1
   fixedDamage: 0
   defensePersent: 0
   avoidPersent: 0
-  reloadTime: 0
+  reloadTime: -0.3
   dashBarCount: 2
   food: 0
   money: 0

@@ -1,12 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Data.Common;
-using System.Globalization;
-using Unity.Mathematics;
 using UnityEngine;
-using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
-using UnityEngine.UIElements;
 
 public class PMove : MonoBehaviour
 {
@@ -48,7 +42,8 @@ public class PMove : MonoBehaviour
     void SynchronizationVocation(){
         characterState.InitSetting();
         characterState.UpdateVocationState();
-        hpLevelManager.RenewalHp();
+        GameManager.info.allPlayerState.currentHp = GameManager.info.allPlayerState.maxHP;
+        hpLevelManager.UpdatePlayerHP();
     }
     public void FindUI(){
         Debug.Log("Find UI");
@@ -73,7 +68,7 @@ public class PMove : MonoBehaviour
                 float reviveHpCoaf = GameManager.info.abilityState.CEffect * ( GameManager.info.abilityState.Craving / 5);
                 GameManager.info.allPlayerState.currentHp = (int)(GameManager.info.allPlayerState.maxHP * reviveHpCoaf);
                 isRevive = false;
-                hpLevelManager.RenewalHp();
+                hpLevelManager.UpdatePlayerHP();
             }
             else{
                 Die();
@@ -195,7 +190,7 @@ public class PMove : MonoBehaviour
             Damage -= GameManager.info.abilityState.shield;
         }
         GameManager.info.allPlayerState.currentHp -= Damage;
-        hpLevelManager.RenewalHp();
+        hpLevelManager.UpdatePlayerHP();
         Invoke("DashEnd", 0.5f);
     }
     void reload(Scene scene, LoadSceneMode mode)
@@ -261,7 +256,7 @@ public class PMove : MonoBehaviour
             }else{
                 GameManager.info.abilityState.shield += (int)(maxShield * 0.1);
             }
-            hpLevelManager.RenewalHp();
+            hpLevelManager.UpdatePlayerHP();
         }
         Invoke("RefillShield",10);
     }

@@ -1,15 +1,13 @@
-using System;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class CapabilityAgreement : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI remainText;    // 남은 능력치 업그레이드 양을 확인할 수 있는 텍스트
     [SerializeField] private GameObject signType;           // 능력치 종류를 담는 오브젝트
     [SerializeField] private AudioClip signSound;           // 사인 소리
-    [SerializeField] private HpLevelManager hpLevelManager; // 체력 레벨 관련 컴포넌트
     [SerializeField] private AbilityTempState AbilityStateData; // 어빌리티 레벨 값 저장 데이터
 
     [SerializeField] private SerializableDictionary<string, string> stateKoreaToEng;        // 추가 스탯의 한국어를 영어로 바꿔주는 배열
@@ -33,7 +31,6 @@ public class CapabilityAgreement : MonoBehaviour
     {
         Debug.Assert(remainText != null, "남은 비용 텍스트 UI가 없습니다.");
         Debug.Assert(signType != null, "능력치 종류를 담는 오브젝트가 없습니다.");
-        Debug.Assert(hpLevelManager != null, "체력, 레벨바 관련 컴포넌트가 존재하지 않습니다.");
         
         abilityText = new List<TextMeshProUGUI>();
         buyEffect = new List<ParticleSystem>();
@@ -91,12 +88,11 @@ public class CapabilityAgreement : MonoBehaviour
         TextMeshProUGUI upgradeTarget = abilityText[index];
         int currentUpgrade = int.Parse(upgradeTarget.text); // ability의 최댓값 지정
 
-        if(currentUpgrade >= MaxAbilityValue){
-            Debug.Log("최대 능력치에 도달했습니다.");
+        if (currentUpgrade >= MaxAbilityValue)
             return;
-        }
+
         upgradeTarget.text = (int.Parse(upgradeTarget.text) + 1).ToString();
-        
+
         ableRemain--;
         remainText.text = ableRemain.ToString();
 
@@ -108,15 +104,15 @@ public class CapabilityAgreement : MonoBehaviour
         StartCoroutine(signEffect[index].Play(false));
     }
 
-    public void AbilityRescission(int index){
+    public void AbilityRescission(int index)
+    {
         TextMeshProUGUI downgradeTarget = abilityText[index];
         int currentUpgrade = int.Parse(downgradeTarget.text);
 
-        if(currentUpgrade <= 0){
-            Debug.Log("더 이상 능력치를 내릴 수 없습니다.");
+        if (currentUpgrade <= 0)
             return;
-        }
-        downgradeTarget.text = (int.Parse(downgradeTarget.text)-1).ToString();
+
+        downgradeTarget.text = (int.Parse(downgradeTarget.text) - 1).ToString();
 
         ableRemain++;
         remainText.text = ableRemain.ToString();
@@ -157,16 +153,17 @@ public class CapabilityAgreement : MonoBehaviour
         }
 
         // 체력바 업데이트
-        GameManager.info.allPlayerState.currentHp = GameManager.info.allPlayerState.maxHP;
-        hpLevelManager.GetState(GameManager.info.allPlayerState);
+        UIOpen.ui.hpLevelBar.GetOrAddComponent<HpLevelManager>().UpdatePlayerHP();
     }
 
-    private void DownGradeState(int index){
+    private void DownGradeState(int index)
+    {
         Transform rescission = signType.transform.GetChild(index);
         Transform ability = rescission.Find("AddAbility");
         Debug.Assert(ability != null, "추가 효과를 담는 오브젝트가 없습니다.");
 
-        for(int i = 0;i< addAbilitys[index].Key.Count; i++){
+        for (int i = 0; i < addAbilitys[index].Key.Count; i++)
+        {
             Transform desTarget = ability.GetChild(i).GetChild(1);
 
             List<string> key = addAbilitys[index].Key;
@@ -178,13 +175,19 @@ public class CapabilityAgreement : MonoBehaviour
             double resultValue = currentValue - value[i];
 
             defaultValue.text = "+" + resultValue.ToString("#,##0.##");
-            GameManager.info.SetStatState(stateKoreaToEng[key[i]],resultValue);
-            int currentStatLevel = (int)(resultValue/value[i]);
-            UpdateStaLevel(currentStatLevel,key[i]);
+            GameManager.info.SetStatState(stateKoreaToEng[key[i]], resultValue);
+            int currentStatLevel = (int)(resultValue / value[i]);
+            UpdateStaLevel(currentStatLevel, key[i]);
         }
+
+        // 체력바 업데이트
+        UIOpen.ui.hpLevelBar.GetOrAddComponent<HpLevelManager>().UpdatePlayerHP();
     }
-    void UpdateStaLevel(int CSLevel, string key){
-        switch (key){
+
+    void UpdateStaLevel(int CSLevel, string key)
+    {
+        switch (key)
+        {
             case "공격력":
                 GameManager.info.abilityState.Anger = CSLevel;
                 break;
@@ -212,6 +215,6 @@ public class CapabilityAgreement : MonoBehaviour
 
             default:
                 break;
-            }
+        }
     }
 }

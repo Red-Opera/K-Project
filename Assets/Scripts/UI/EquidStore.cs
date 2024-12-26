@@ -195,6 +195,7 @@ public class EquidStore : MonoBehaviour
         newBuyEffect.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = cost + "G";
 
         playerAudio.PlayOneShot(buySound);
+        Inventory.EquidSlotStateUpdate();
 
         Destroy(getItem);
     }

@@ -4,7 +4,9 @@ using UnityEngine.SceneManagement;
 public class UIOpen : MonoBehaviour
 {
     public static bool isUIOpen { get; private set; } = false;
+    public static UIOpen ui;
 
+    public GameObject hpLevelBar;
     public GameObject statusUI;
     public GameObject getItemUI;
     public GameObject customUI;
@@ -21,6 +23,7 @@ public class UIOpen : MonoBehaviour
     {
         ScriptableObject.CreateInstance<State>();
 
+        Debug.Assert(hpLevelBar != null, "체력 바가 없습니다.");
         Debug.Assert(statusUI != null, "스테이터스 창이 없습니다.");
         Debug.Assert(customUI != null, "커스텀 UI가 없습니다.");
         Debug.Assert(getItemUI != null, "획득 UI가 없습니다.");
@@ -35,6 +38,8 @@ public class UIOpen : MonoBehaviour
         }
 
         customUI.transform.GetChild(1).GetChild(6).GetComponent<OverlayCamera>().AddCamera();
+
+        ui = this;
     }
 
     private void Update()

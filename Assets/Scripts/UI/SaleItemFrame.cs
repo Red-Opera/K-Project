@@ -16,6 +16,10 @@ public class SaleItemFrame : MonoBehaviour
         GameManager.info.playerState.money = nowMoney;
         GameManager.info.UpdatePlayerState();
 
+        string removeItemName = Inventory.staticSlots.GetChild(saleItemIndex).GetChild(0).GetComponent<EquidState>().state.nickName;
+        removeItemName = removeItemName.Replace(" ", "");
+        ResultUI.getItemList.Remove(removeItemName);
+
         // 인벤토리 아이템 제거
         Destroy(InventroyPosition.inventory.transform.GetChild(saleItemIndex).GetChild(0).gameObject);
 

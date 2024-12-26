@@ -2887,6 +2887,7 @@ GameObject:
   m_Component:
   - component: {fileID: 630523504}
   - component: {fileID: 630523503}
+  - component: {fileID: 630523505}
   m_Layer: 0
   m_Name: Global Volume
   m_TagString: Untagged
@@ -2927,6 +2928,18 @@ Transform:
   - {fileID: 1761043390}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &630523505
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 630523502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac9e58ef5d5cc0349906bbf10401f6b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &648518329 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8110126698356207188, guid: 924118ea6eca18f459f67d54f8640858, type: 3}
@@ -64440,8 +64453,8 @@ MonoBehaviour:
   addWaphonState: {fileID: 0}
   addStatState: {fileID: 0}
   addLevelState: {fileID: 11400000, guid: 014383ea896c86f468a68eb03ed143fd, type: 2}
-  abilityState: {fileID: 11400000, guid: 085fa8bab34e3e646a70ba6123563532, type: 2}
   allPlayerState: {fileID: 0}
+  abilityState: {fileID: 11400000, guid: 085fa8bab34e3e646a70ba6123563532, type: 2}
 --- !u!1 &1693202917
 GameObject:
   m_ObjectHideFlags: 0

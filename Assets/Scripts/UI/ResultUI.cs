@@ -31,7 +31,7 @@ public class ResultUI : MonoBehaviour
     private FadeEffect fade;                        // 페이트 효과
 
     private static List<string> addItemList;        // 활성화시 추가될 아이템 리스트
-    private static List<string> getItemList;        // 탐험 통안 획득한 아이템
+    public static List<string> getItemList;         // 탐험 통안 획득한 아이템
     private static ResultUI staticResultUI;         // Result UI static 버전
     private static float playTime = 0.0f;           // 탐험 시간
     private static float getGold = 0;               // 탐험시 얻은 골드
@@ -314,6 +314,8 @@ public class ResultUI : MonoBehaviour
 
     private void ShowItemList()
     {
+        List<string> inventoryItemNames = new List<string>();
+
         for (int i = 0; i < getItemList.Count; i++)
         {
             // 해당 이름 무기의 추가 정보를 가져옴
@@ -373,8 +375,11 @@ public class ResultUI : MonoBehaviour
 
                 else
                 {
+                    Transform currentAddText;
+
                     // addList의 처리할 위치를 가져옴
-                    Transform currentAddText = addList.GetChild(addListCount);
+                    try { currentAddText = addList.GetChild(addListCount); }
+                    catch(Exception e) { continue; }
 
                     // 해당 추가 텍스트를 킴
                     currentAddText.gameObject.SetActive(true);
@@ -403,6 +408,7 @@ public class ResultUI : MonoBehaviour
 
         GameObject.Find("EventSystemDonDestory").GetComponent<UINotDestroyOpen>().DestroyThis();
         Destroy(GameObject.FindGameObjectWithTag("Player"));
+        Destroy(GameObject.Find("GameManager"));
 
         SceneManager.LoadScene("Map");
     }

@@ -120,11 +120,11 @@ public class AtkOb : MonoBehaviour
         
         if(GameManager.info.allPlayerState.currentHp <= selfHarm){
             GameManager.info.allPlayerState.currentHp = 1;
-            playerHP.RenewalHp();
+            playerHP.UpdatePlayerHP();
         }
         else{
             GameManager.info.allPlayerState.currentHp -= selfHarm;
-            playerHP.RenewalHp();
+            playerHP.UpdatePlayerHP();
         }
     }
 
@@ -135,11 +135,11 @@ public class AtkOb : MonoBehaviour
         Debug.Log(restoreHP);
         if((GameManager.info.allPlayerState.currentHp + restoreHP) >= GameManager.info.allPlayerState.maxHP){
             GameManager.info.allPlayerState.currentHp = GameManager.info.allPlayerState.maxHP;
-            playerHP.RenewalHp();
+            playerHP.UpdatePlayerHP();
         }
         else{
             GameManager.info.allPlayerState.currentExp += restoreHP;
-            playerHP.RenewalHp();
+            playerHP.UpdatePlayerHP();
         }
     }
 

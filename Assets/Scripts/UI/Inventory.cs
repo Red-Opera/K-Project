@@ -10,7 +10,7 @@ public class Inventory : MonoBehaviour
     [SerializeField] private Transform slots;           // 슬롯 오브젝트
 
     public static Dictionary<int, GameObject> inventorySlotItem;    // 장비 인벤토리 슬롯 아이템
-    private static Transform staticSlots;                           // 슬롯 오브젝트 (Static 버전)
+    public static Transform staticSlots;                           // 슬롯 오브젝트 (Static 버전)
     private static bool isLeft = true;                              // 현재 왼쪽 장비 슬롯을 사용하는 여부
 
     private void Awake()

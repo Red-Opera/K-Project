@@ -1,6 +1,7 @@
 using System;
 using System.Reflection;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -12,11 +13,13 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public State addFoodState;    // 음식 추가 능력치가 있을 경우 추가      참조법 (GameManager.info.addFoodState)
     [HideInInspector] public State addWaphonState;  // 무기 추가 능력치가 있을 경우 추가      참조법 (GameManager.info.addWaphonState)
     [HideInInspector] public State addStatState;    // 스탯 추가 능력치가 있을 경우 추가      참조법 (GameManager.info.addStatState)
-    public State addLevelState;                     // 레벨 추가 능력치가 있을 경우 추가      참조법 (GameManager.info.addLevelState)
-    public  AbilityTempState abilityState;          // 현재 어빌리티 값 접근을 위해 사용
+    [HideInInspector] public State addLevelState;   // 레벨 추가 능력치가 있을 경우 추가      참조법 (GameManager.info.addLevelState)
     [HideInInspector] public State allPlayerState;  // 총 플레이어 능력치                   참조법 (GameManager.info.allPlayerState)
 
-    public State currentPlayerState { get { return allPlayerState; } }    // 총 플레이어 스탯을 반환하는 변수
+    public AbilityTempState abilityState;                              // 현재 어빌리티 값 접근을 위해 사용
+    public State currentPlayerState { get { return allPlayerState; } }  // 총 플레이어 스탯을 반환하는 변수
+
+    private HpLevelManager hpLevelManager;      // 플레이어 체력바 컨포넌트
 
     public void Awake()
     {
@@ -173,5 +176,31 @@ public class GameManager : MonoBehaviour
             // 합계를 저장함
             State.datas[state].SetValue(allPlayerState, returnValue);
         }
+
+        HpManager();
+    }
+
+    // allPlayerState의 체력을 관리하는 메소드
+    private void HpManager()
+    {
+        TownCurrentHPMax();
+
+        // 현재 체력이 최대 체력보다 높을 경우 최대 체력으로 설정
+        if (allPlayerState.currentHp > allPlayerState.maxHP)
+            allPlayerState.currentHp = allPlayerState.maxHP;
+
+        if (hpLevelManager == null)
+            hpLevelManager = UIOpen.ui.hpLevelBar.GetComponent<HpLevelManager>();
+
+        hpLevelManager.UpdatePlayerHP();
+    }
+
+    // 마을에서의 체력을 최대로 만드는 메소드
+    private void TownCurrentHPMax()
+    {
+        string mapName = SceneManager.GetActiveScene().name;
+
+        if (mapName == "Map")
+          allPlayerState.currentHp = allPlayerState.maxHP;
     }
 }

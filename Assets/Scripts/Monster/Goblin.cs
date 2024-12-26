@@ -1,10 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
-using JetBrains.Annotations;
-using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Goblin : MonoBehaviour
 {

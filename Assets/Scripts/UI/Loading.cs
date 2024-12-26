@@ -1,6 +1,7 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -12,6 +13,8 @@ public class Loading : MonoBehaviour
     [SerializeField] private TextMeshProUGUI nextMapName;
     [SerializeField] private TextMeshProUGUI persentText;
     [SerializeField] private Slider persentSlider;
+
+    private Volume postprocessVolume;
 
     private void Start()
     {
@@ -45,6 +48,8 @@ public class Loading : MonoBehaviour
         operation.allowSceneActivation = false; // 씬 자동 전환 비활성화
 
         loadingUI.SetActive(true);
+        postprocessVolume = GameObject.Find("Global Volume").GetComponent<Volume>();
+        postprocessVolume.weight = 0;
 
         // 이동 씬 이름을 재조정
         sceneName = sceneName.Replace("Stage", "");
@@ -80,5 +85,7 @@ public class Loading : MonoBehaviour
 
             yield return null;
         }
+
+        postprocessVolume.weight = 1;
     }
 }
