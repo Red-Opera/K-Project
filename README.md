@@ -1,6 +1,11 @@
 # K Project
 
 <hr>
+<h2 id="Play">UI, 서버 관련 포트폴리오 영상 (서정현)</h2>
+<a href="https://youtu.be/VTeiq-TKQ-U">
+    <img src="https://github.com/user-attachments/assets/227717b2-655e-4200-ad6e-26017b03e531" width="100%" height="100%"/>
+</a>
+
 <h2 id="Play">게임 영상</h2>
 <a href="https://youtu.be/AeKhgAqV17Q">
     <img src="https://github.com/user-attachments/assets/73d45cb0-9713-4532-be29-79781d5437ad" width="100%" height="100%"/>
