@@ -7679,6 +7679,9 @@ MonoBehaviour:
   - {fileID: 3217746875862875250, guid: 57d4385221eae83489ef5c1a118038ae, type: 3}
   - {fileID: 8699221057430734424, guid: a5deef1f2db4e0a4fa6c90beadc93546, type: 3}
   - {fileID: 9094955460031638816, guid: c556abd764f36af48a94d3b7a70af465, type: 3}
+  - {fileID: 3317110816604534701, guid: def6c78537e66664491794d3a3e3b26b, type: 3}
+  - {fileID: 467960580000034103, guid: a33afe4e33441a1488d2debcd398d203, type: 3}
+  - {fileID: 5994107426321348812, guid: 928ca623eb6193e479f02c4748f2102a, type: 3}
   frames: {fileID: 5876467329917401661}
 --- !u!1 &2817534110109119648
 GameObject:
@@ -23732,7 +23735,7 @@ PrefabInstance:
     - target: {fileID: 3655271287879553309, guid: 1e7ad1694c3032541938413e436d6be6, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: 1d8b02dd852568d41af938410d5a3426, type: 2}
+      objectReference: {fileID: 9100000, guid: 43ccaee0de4e69c48b1de67148185c8b, type: 2}
     - target: {fileID: 3655506896635450248, guid: 1e7ad1694c3032541938413e436d6be6, type: 3}
       propertyPath: m_Layer
       value: 5
@@ -24078,7 +24081,7 @@ PrefabInstance:
     - target: {fileID: 8437536287208592422, guid: 1e7ad1694c3032541938413e436d6be6, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: 43ccaee0de4e69c48b1de67148185c8b, type: 2}
+      objectReference: {fileID: 9100000, guid: 1d8b02dd852568d41af938410d5a3426, type: 2}
     - target: {fileID: 8455598253171963647, guid: 1e7ad1694c3032541938413e436d6be6, type: 3}
       propertyPath: m_AnchorMax.x
       value: 1
