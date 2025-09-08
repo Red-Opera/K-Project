@@ -7,7 +7,6 @@ public class Challenger : MonoBehaviour
 {
     public GameObject[] BossRooms;    // 보스룸 배열
     public MonsterState[] BossStates; 
-    public GameObject BossHPBar;      // 보스 HP 바
     private int currentBossRoomIndex; // 현재 보스룸 인덱스
     public Vector3 playerRespawnPosition = new Vector3(12, -4, 0); // 플레이어 위치
     private HpLevelManager hpLevelManager;    
@@ -15,10 +14,7 @@ public class Challenger : MonoBehaviour
     {
         // 초기 설정
         currentBossRoomIndex = 0;
-        hpLevelManager = BossHPBar.GetComponent<HpLevelManager>();
-        hpLevelManager.BossState = BossStates[0];
-
-        BossHPBar.SetActive(true);
+       
         // 모든 보스룸 비활성화
         foreach (var bossRoom in BossRooms)
         {
