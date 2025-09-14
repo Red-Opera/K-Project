@@ -28,7 +28,7 @@ public class AtkOb : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         SetDir();
         Destroy(gameObject, weapon.disapearTime);
-        Invoke("endFollow", weapon.folloewTime);
+        Invoke("endFollow", weapon.followTime);
         transform.localScale *= (1 + (GameManager.info.allPlayerState.level-1)*0.1f);
     }
     void Update()
@@ -41,8 +41,8 @@ public class AtkOb : MonoBehaviour
             rigid.position = parentPos + weapon.pos *dir;
         }
         else{
-            rigid.velocity = weapon.fowardSpeed;
-            float angle = Mathf.Atan2(weapon.fowardSpeed.y, weapon.fowardSpeed.x) * Mathf.Rad2Deg;
+            rigid.velocity = weapon.forwardSpeed;
+            float angle = Mathf.Atan2(weapon.forwardSpeed.y, weapon.forwardSpeed.x) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.Euler(0, 0,angle);
         }
     }

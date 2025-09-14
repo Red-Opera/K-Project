@@ -12,8 +12,8 @@ public class BerserkRightPunch : MyWeapon
         Weapon.coolTime = 0.8f;
         Weapon.damage = GameManager.info.allPlayerState.damage;
         Weapon.disapearTime = 0.5f;    
-        Weapon.folloewTime = 0.5f;
-        Weapon.fowardSpeed = new Vector2(0,0);
+        Weapon.followTime = 0.5f;
+        Weapon.forwardSpeed = new Vector2(0,0);
         Weapon.animName = "Kick";
     }
 }

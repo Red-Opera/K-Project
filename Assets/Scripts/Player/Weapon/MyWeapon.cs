@@ -9,11 +9,12 @@ public struct WeaponSetting{
     public GameObject AtkObject;
     public GameObject AtkEffect;
     public Vector3 pos;
+    public Vector3 ObjectSize;
     public float coolTime;
     public int damage;
     public float disapearTime;
-    public float folloewTime;
-    public Vector2 fowardSpeed;
+    public float followTime;
+    public Vector2 forwardSpeed;
     public float speedCap;
     public string animName;
     public int dir;

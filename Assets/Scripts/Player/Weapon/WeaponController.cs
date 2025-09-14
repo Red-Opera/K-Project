@@ -62,14 +62,14 @@ public class WeaponController : MonoBehaviour
         }
     }
 
-    void AttackStart(){
+    private void AttackStart(){
         myWeapon.Using(vocationState.state.weakeningCoaf, vocationState.state.weakeningCoafDamage, vocationState.state.drainHP, vocationState.state.bleedingCoaf);
         audioSource.Play();
     }
-    void CoolTime(){
+    private void CoolTime(){
         isAtk = false;
     }
-    void CheckMousePos(){
+    private void CheckMousePos(){
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         bool isMouse = false;
         if(myWeapon.Weapon.dir ==1){
@@ -79,10 +79,10 @@ public class WeaponController : MonoBehaviour
         }
         if(isMouse){
             Vector2 attackSpeed = mousePos - rigid.position;
-            myWeapon.Weapon.fowardSpeed = attackSpeed.normalized *myWeapon.Weapon.speedCap;
+            myWeapon.Weapon.forwardSpeed = attackSpeed.normalized *myWeapon.Weapon.speedCap;
         }
         else{
-            myWeapon.Weapon.fowardSpeed = new Vector2(myWeapon.Weapon.dir * 2,0);
+            myWeapon.Weapon.forwardSpeed = new Vector2(myWeapon.Weapon.dir * 2,0);
         }
     }
 
