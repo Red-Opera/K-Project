@@ -7,7 +7,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager info { get { return instance; } }
 
-    private static GameManager instance;
+    public static GameManager instance;
+    public bool challenge = false;
 
     [SerializeField] public State playerState;      // 플레이어 기본 스탯 및 정보            참조법 (GameManager.info.playerState)
     [HideInInspector] public State addFoodState;    // 음식 추가 능력치가 있을 경우 추가      참조법 (GameManager.info.addFoodState)
@@ -27,6 +28,8 @@ public class GameManager : MonoBehaviour
         {
             instance = this;
             DontDestroyOnLoad(this);
+            // 씬 전환 시 이벤트 구독
+            SceneManager.sceneLoaded += OnSceneLoaded;
         }
 
         else
@@ -201,6 +204,19 @@ public class GameManager : MonoBehaviour
         string mapName = SceneManager.GetActiveScene().name;
 
         if (mapName == "Map")
-          allPlayerState.currentHp = allPlayerState.maxHP;
+            allPlayerState.currentHp = allPlayerState.maxHP;
+    }
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.name == "Map") // 마을 씬 이름
+        {
+            challenge = false;
+            Debug.Log("마을 씬 진입 → 챌린지 모드 초기화");
+        }
+    }
+
+    private void OnDestroy()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 }
