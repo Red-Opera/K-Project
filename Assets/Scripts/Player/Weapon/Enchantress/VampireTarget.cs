@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class VampireTarget : MyWeapon
 {
-    [SerializeField] private float detectionRadius = 50.0f;     // ¸ó½ºÅÍ Å½»ö ¹İ°æ
+    [SerializeField] private float detectionRadius = 50.0f;     // ëª¬ìŠ¤í„° íƒìƒ‰ ë°˜ê²½
 
     public override void InitSetting()
     {
@@ -13,31 +13,31 @@ public class VampireTarget : MyWeapon
         Weapon.coolTime = 0.75f;
         Weapon.damage = GameManager.info.allPlayerState.damage;
         Weapon.disapearTime = 5;    
-        Weapon.folloewTime = 0.0f;
-        Weapon.fowardSpeed = Vector3.zero;
+        Weapon.followTime = 0.0f;
+        Weapon.forwardSpeed = Vector3.zero;
         Weapon.animName = "NULL";
     }
 
     private Vector2 FindClosestMonster()
     {
-        // Å½»ö ¹İ°æ ³»ÀÇ ¸ğµç °´Ã¼¸¦ °¡Á®¿È
+        // íƒìƒ‰ ë°˜ê²½ ë‚´ì˜ ëª¨ë“  ê°ì²´ë¥¼ ê°€ì ¸ì˜´
         Collider[] objectsInRange = Physics.OverlapSphere(transform.position, detectionRadius);
-        Transform closestMonster = null;        // °¡Àå °¡±î¿î ¸ó½ºÅÍÀÇ Transform
+        Transform closestMonster = null;        // ê°€ì¥ ê°€ê¹Œìš´ ëª¬ìŠ¤í„°ì˜ Transform
 
-        // Ã¼·Â ³·Àº ¼ø, °Å¸® °¡±î¿î ¼øÀ¸·Î ¹İÇÑÇÏ´Â ¿ì¼± ¼øÀ§ Å¥
+        // ì²´ë ¥ ë‚®ì€ ìˆœ, ê±°ë¦¬ ê°€ê¹Œìš´ ìˆœìœ¼ë¡œ ë°˜í•œí•˜ëŠ” ìš°ì„  ìˆœìœ„ í
         PriorityQueue<IntFloatChar32> findCloseMonster = PriorityQueue<IntFloatChar32>.Create();
         Dictionary<string, Transform> monsterToName = new Dictionary<string, Transform>();
 
-        // Å½»ö ¹İ°æ ³»ÀÇ °¢ °´Ã¼¸¦ °Ë»ç
+        // íƒìƒ‰ ë°˜ê²½ ë‚´ì˜ ê° ê°ì²´ë¥¼ ê²€ì‚¬
         foreach (Collider obj in objectsInRange)
         {
             if (obj.CompareTag("Monster"))
             {
-                // °´Ã¼¿ÍÀÇ ¹æÇâ º¤ÅÍ¸¦ °è»êÇÏ°í ÇÃ·¹ÀÌ¾î ¾Õ ¹æÇâ°ú °´Ã¼¿ÍÀÇ °¢µµ¸¦ °è»ê
+                // ê°ì²´ì™€ì˜ ë°©í–¥ ë²¡í„°ë¥¼ ê³„ì‚°í•˜ê³  í”Œë ˆì´ì–´ ì• ë°©í–¥ê³¼ ê°ì²´ì™€ì˜ ê°ë„ë¥¼ ê³„ì‚°
                 Vector3 directionToMonster = (obj.transform.position - transform.position).normalized;
                 float angleToMonster = Vector3.Angle(transform.forward, directionToMonster);
 
-                // °´Ã¼¿ÍÀÇ °Å¸®¸¦ °è»ê
+                // ê°ì²´ì™€ì˜ ê±°ë¦¬ë¥¼ ê³„ì‚°
                 float distanceToMonster = Vector3.Distance(transform.position, obj.transform.position);
 
                 Goblin monster = obj.GetComponent<Goblin>();
@@ -51,23 +51,23 @@ public class VampireTarget : MyWeapon
 
                     string objName = (obj.name.Length >= 5 ? obj.name[..5] : obj.name) + "(" + obj.GetInstanceID() + ")";
 
-                    // Ã¼·Â, °Å¸® ¼ø Å¥·Î ÀÔ·Â
+                    // ì²´ë ¥, ê±°ë¦¬ ìˆœ íë¡œ ì…ë ¥
                     findCloseMonster.push(new IntFloatChar32(-hp, -distanceToMonster, objName));
                     monsterToName.Add(objName, obj.transform);
                 }
             }
         }
 
-        // Ã¼·Â, °Å¸® ¼øÀ¸·Î ÀÛÀº ¸ó½ºÅÍ Á¤º¸¸¦ °¡Á®¿È
+        // ì²´ë ¥, ê±°ë¦¬ ìˆœìœ¼ë¡œ ì‘ì€ ëª¬ìŠ¤í„° ì •ë³´ë¥¼ ê°€ì ¸ì˜´
         IntFloatChar32 clostMonsterInfo = findCloseMonster.top();
 
         if (clostMonsterInfo.c == "")
             return Vector2.zero;
 
-        // ÇØ´ç ÀÌ¸§ÀÇ ¸ó½ºÅÍ¸¦ ¹İÈ¯ÇÔ
+        // í•´ë‹¹ ì´ë¦„ì˜ ëª¬ìŠ¤í„°ë¥¼ ë°˜í™˜í•¨
         closestMonster = monsterToName[clostMonsterInfo.c];
 
-        // °¡Àå °¡±î¿î ¸ó½ºÅÍÀÇ À§Ä¡¸¦ ¹İÈ¯
+        // ê°€ì¥ ê°€ê¹Œìš´ ëª¬ìŠ¤í„°ì˜ ìœ„ì¹˜ë¥¼ ë°˜í™˜
         Vector2 closestMonsterPos = closestMonster.position;
         Vector2 playerPos = transform.position;
 

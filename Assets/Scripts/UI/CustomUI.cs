@@ -26,6 +26,7 @@ public class CustomUI : MonoBehaviour
     // 플레이어를 교체해주는 메소드
     private void ChangePlayer()
     {
+        Debug.Log(frames.childCount);
         for (int i = 0; i < frames.childCount; i++)
         {
             // 해당 번호의 프레임와 이미지를 가져옴
@@ -61,7 +62,7 @@ public class CustomUI : MonoBehaviour
                 // 카메라 스택을 복사함
                 for (int j = 0; j < defualtCameraStack.Count; j++)
                     toCameraStack.Add(defualtCameraStack[j]);
-                
+
                 DontDestroyOnLoad(newPlayer);
                 Destroy(destroyPlayer);
             }
