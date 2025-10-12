@@ -42,6 +42,7 @@ public class StageManager : MonoBehaviour
         }
         else
         {
+            player.transform.position = new Vector3(0, 0, 0.17f); // 플레이어 시작 위치 설정
             // 기본 스테이지 설정
             currentStageIndex = 0;
             SetActiveStage(currentStageIndex);
