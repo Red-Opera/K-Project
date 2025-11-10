@@ -53,8 +53,13 @@ public class WeaponController : MonoBehaviour
                 CheckMousePos();
                 isAtk = true;
                 AttackStart();
-                if(Random.value < dobleShotProbability){
+                if (Random.value < dobleShotProbability)
+                {
                     Invoke("AttackStart", 0.5f);
+                }
+                if(myWeapon.Weapon.dashPower > 0)
+                {
+                    rigid.AddForce(new Vector2(myWeapon.Weapon.dir * myWeapon.Weapon.dashPower, 0), ForceMode2D.Impulse);
                 }
                 Invoke("CoolTime",myWeapon.Weapon.coolTime / GameManager.info.allPlayerState.attackSpeed);
                 anim.SetTrigger(myWeapon.Weapon.animName);
@@ -68,6 +73,7 @@ public class WeaponController : MonoBehaviour
     }
     private void CoolTime(){
         isAtk = false;
+        rigid.velocity = new Vector2(0, rigid.velocity.y);
     }
     private void CheckMousePos(){
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);

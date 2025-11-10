@@ -18,6 +18,7 @@ public struct WeaponSetting{
     public float speedCap;
     public string animName;
     public int dir;
+    public float dashPower;
 }
 
 public abstract class MyWeapon : MonoBehaviour

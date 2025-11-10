@@ -15,5 +15,6 @@ public class VamPecock_RedPrick : MyWeapon
         Weapon.followTime = 0.5f;
         Weapon.forwardSpeed = new Vector2(0,0);
         Weapon.animName = "RPrick";
+        Weapon.dashPower = 7f;
     }
 }

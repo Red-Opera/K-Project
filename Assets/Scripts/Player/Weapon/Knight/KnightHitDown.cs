@@ -15,5 +15,6 @@ public class KnightHitDown : MyWeapon
         Weapon.followTime = 0.5f;
         Weapon.forwardSpeed = new Vector2(0,0);
         Weapon.animName = "HitDown";
+        Weapon.dashPower = 4f;
     }
 }

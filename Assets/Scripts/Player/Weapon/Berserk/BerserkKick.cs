@@ -14,6 +14,7 @@ public class BerserkKick : MyWeapon
         Weapon.disapearTime = 0.5f;    
         Weapon.followTime = 0.5f;
         Weapon.forwardSpeed = new Vector2(0,0);
-        Weapon.animName = "LPunch";
+        Weapon.animName = "Kick";
+        Weapon.dashPower = 3f;
     }
 }

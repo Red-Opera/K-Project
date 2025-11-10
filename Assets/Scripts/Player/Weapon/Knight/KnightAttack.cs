@@ -15,5 +15,6 @@ public class KnightAttack : MyWeapon
         Weapon.followTime = 0.5f;
         Weapon.forwardSpeed = new Vector2(0,0);
         Weapon.animName = "nAttack";
+        Weapon.dashPower = 6f;
     }
 }
