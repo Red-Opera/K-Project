@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nickName: 
   level: 1
-  maxHP: 20
-  currentHp: 20
+  maxHP: 200
+  currentHp: 200
   currentExp: 0
-  damage: 20
+  damage: 50
   defense: 10
   critical: 0.05
   moveSpeed: 5

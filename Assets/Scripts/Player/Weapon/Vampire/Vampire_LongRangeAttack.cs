@@ -9,7 +9,7 @@ public class Vampire_LongRangeAttack : MyWeapon
         Weapon.AtkObject = Resources.Load<GameObject>("Prefab/Character/VampireAttack");
         Weapon.AtkEffect = Resources.Load<GameObject>("Prefab/SkillEffect/impactbluemedium");
         Weapon.pos = new Vector3(1, 0, 0);
-        Weapon.ObjectSize = new Vector3(3,1,1);
+        Weapon.ObjectSize = new Vector3(5,2,2);
         Weapon.coolTime = 0.8f;
         Weapon.damage = GameManager.info.allPlayerState.damage;
         Weapon.disapearTime = 0.5f;    

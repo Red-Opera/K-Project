@@ -161,7 +161,6 @@ public class Goblin : MonoBehaviour
             xSpeed *= -1;
             dir *= -1;
             trans.localScale = new Vector3(localScaleX * dir, trans.localScale.y, 1);
-            Debug.Log("change");
         }
         Debug.DrawLine(rayOriginFront, rayOriginFront + Vector2.down, Color.red);
         Debug.DrawLine(rayOriginBottom, rayOriginBottom + Vector2.down, Color.blue);

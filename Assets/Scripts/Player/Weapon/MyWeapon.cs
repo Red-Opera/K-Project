@@ -28,6 +28,7 @@ public abstract class MyWeapon : MonoBehaviour
     public virtual void Using(float WeakCoaf, float WeakCoafDmg, float DrainHealth, float BleedingCoaf){
         GameObject Atk = Instantiate(Weapon.AtkObject, transform.position + Weapon.pos * Weapon.dir, Quaternion.identity);
         Atk.transform.SetParent(transform);
+        Atk.transform.localScale = Weapon.ObjectSize;
         AtkOb AtkSc = Atk.GetComponent<AtkOb>();
         AtkSc.setState(Weapon, WeakCoaf, WeakCoafDmg, DrainHealth, BleedingCoaf);
     }

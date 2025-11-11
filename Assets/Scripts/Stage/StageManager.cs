@@ -79,9 +79,8 @@ public class StageManager : MonoBehaviour
     {
         GameObject boss = GameObject.FindGameObjectWithTag("Boss");
 
-        if (boss != null)
+        if (boss != null && !BossHPBar.activeSelf)
         {
-            Debug.Log("보스소환");
             BossHPBar.SetActive(true);
         }
     }

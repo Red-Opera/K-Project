@@ -8,7 +8,8 @@ public class Vampire_TransitionAttack : MyWeapon
     {
         Weapon.AtkObject = Resources.Load<GameObject>("Prefab/Character/VampireAttack");
         Weapon.AtkEffect = Resources.Load<GameObject>("Prefab/SkillEffect/impactbluemedium");
-        Weapon.pos = new Vector3(1,0,0);
+        Weapon.pos = new Vector3(1, 0, 0);
+        Weapon.ObjectSize = new Vector3(4f, 2f, 2f);
         Weapon.coolTime = 0.8f;
         Weapon.damage = GameManager.info.allPlayerState.damage;
         Weapon.disapearTime = 0.5f;    

@@ -9,7 +9,7 @@ public class EnchantressState : MyVocation
         state.levelUpHP = 6; //5
         state.levelUpDamage = 5; //2
         state.levelUpDefense =0; //0
-        state.additionalAttackSpeed = 0.25f; //1
+        state.additionalAttackSpeed = 0.5f; //1
         state.additionalCritical=0.15f; //0.05f
         state.additionalCriticalDamage = 3f; //1.5f
     }

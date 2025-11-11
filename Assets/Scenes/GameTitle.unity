@@ -1207,7 +1207,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 150}
+  m_AnchoredPosition: {x: 0, y: 90}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1898069939
@@ -1230,7 +1230,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Retro Lift
+  m_text: 'White
+
+    Horizon'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 69f880c513cc5b04689dfc982744ea4b, type: 2}
   m_sharedMaterial: {fileID: -7392196714741715834, guid: 69f880c513cc5b04689dfc982744ea4b, type: 2}
