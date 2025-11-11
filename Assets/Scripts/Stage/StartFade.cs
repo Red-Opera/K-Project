@@ -14,7 +14,7 @@ public class StartFade : MonoBehaviour
     {
         image = GetComponent<Image>();
 
-        StartCoroutine(Fade(1, 0));
+        StartCoroutine(Fade(0, 0));
 
     }
 
