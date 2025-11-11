@@ -5,34 +5,17 @@ using UnityEngine.SceneManagement;
 
 public class GameClear : MonoBehaviour
 {
-    public float delayTime = 60f;  // 자동 이동까지 시간(초)
-    private float timer;
+    public ResultUI resultUIManager; // Inspector에서 연결
 
-    void OnEnable()
+    private void OnEnable()
     {
-        timer = 0f; // 활성화될 때 타이머 초기화
-    }
-
-    void Update()
-    {
-        // 특정 키 입력 체크
-        if (Input.GetKeyDown(KeyCode.F))
+        if (resultUIManager != null)
         {
-            LoadNextScene();
-            return;
+            resultUIManager.GameIsEnd();
         }
-
-        // 시간 체크
-        timer += Time.deltaTime;
-        if (timer >= delayTime)
+        else
         {
-            LoadNextScene();
+            Debug.LogWarning("ResultUI Manager가 연결되지 않았습니다.");
         }
-    }
-
-    private void LoadNextScene()
-    {
-        // 씬 이동
-        SceneManager.LoadScene("Map");
     }
 }
